@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="SnakeGame.cpp" />
+    <ClCompile Include="Part.cpp">
+      <Filter>contents</Filter>
+    </ClCompile>
+    <ClCompile Include="Head.cpp">
+      <Filter>contents</Filter>
+    </ClCompile>
+    <ClCompile Include="Body.cpp">
+      <Filter>contents</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="contents">
+      <UniqueIdentifier>{45a24328-7022-458a-a1fc-86e90d31535a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Part.h">
+      <Filter>contents</Filter>
+    </ClInclude>
+    <ClInclude Include="Head.h">
+      <Filter>contents</Filter>
+    </ClInclude>
+    <ClInclude Include="Body.h">
+      <Filter>contents</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

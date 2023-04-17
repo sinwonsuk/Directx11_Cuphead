@@ -1,3 +1,4 @@
+#include "PrecompileHeader.h"
 #include "Player.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineLevel.h>
@@ -16,7 +17,7 @@ Player::~Player()
 
 void Player::Update(float _DeltaTime)
 {
-	
+
 		float RotSpeed = 180.0f;
 
 		float Speed = 200.0f;
@@ -106,13 +107,13 @@ void Player::Update(float _DeltaTime)
 
 		// Render1->GetTransform()->SetWorldPosition({ 0.0f, 0.0f, 0.0f });
 
-		Render1->GetTransform()->SetWorldRotation({0.0f, 0.0f, 0.0f});
+
+
+		Render1->GetTransform()->SetLocalRotation(-GetTransform()->GetWorldRotation());
 }
 
 void Player::Start()
 {
-
-	
 	if (false == GameEngineInput::IsKey("PlayerMoveLeft"))
 	{
 		GameEngineInput::CreateKey("PlayerMoveLeft", 'A');
@@ -139,17 +140,19 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerSpeedBoost", VK_LSHIFT);
 	}
 
-	GetTransform()->SetWorldPosition({ 100,100 });
 
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
 	Render0 = CreateComponent<GameEngineRenderer>();
+	Render0->SetPipeLine("2DTexture");
 	Render1 = CreateComponent<GameEngineRenderer>();
+	Render1->SetPipeLine("2DTexture");
 	Render2 = CreateComponent<GameEngineRenderer>();
+	Render2->SetPipeLine("2DTexture");
 
 	Render1->GetTransform()->DebugOn();
 
-	Render0->GetTransform()->SetWorldPosition({0.0f, 0.0f, 0.0f});
-	Render2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+	Render0->GetTransform()->SetLocalPosition({-200.0f, 0.0f, 0.0f});
+	Render2->GetTransform()->SetLocalPosition({ 200.0f, 0.0f, 0.0f });
 }
 
 // 이건 디버깅용도나 

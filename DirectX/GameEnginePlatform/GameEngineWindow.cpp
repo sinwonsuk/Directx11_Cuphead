@@ -1,3 +1,4 @@
+#include "PrecompileHeader.h"
 #include "GameEngineWindow.h"
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEnginePlatform/GameEngineImage.h>
@@ -156,7 +157,7 @@ int GameEngineWindow::WindowLoop(
         _Start();
     }
 
-1    MSG msg = {};
+    MSG msg = {};
 
     while (IsWindowUpdate)
     {

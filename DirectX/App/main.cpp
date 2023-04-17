@@ -1,3 +1,4 @@
+#include "PrecompileHeader.h"
 #include <Windows.h>
 #include <GameEngineBase\GameEngineFile.h>
 #include <GameEngineBase\GameEngineDirectory.h>
@@ -35,8 +36,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	GameEngineCore::Start(hInstance, 
 		ContentsCore::GameStart, 
 		ContentsCore::GameEnd,
-		{0, 0}
+		{2000, 0}
 	);
 }
-
-

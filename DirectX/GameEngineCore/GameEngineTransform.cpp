@@ -1,3 +1,4 @@
+#include "PrecompileHeader.h"
 #include "GameEngineTransform.h"
 #include "GameEngineObject.h"
 
@@ -15,9 +16,8 @@ void GameEngineTransform::TransformUpdate()
 	LocalScaleMatrix.Scale(LocalScale);
 
 	LocalRotation.w = 0.0f;
-
-	// LocalRotationMatrix.RotationDeg(LocalRotation);
-	LocalRotationMatrix.RotationDegToXYZ(LocalRotation);
+	LocalQuaternion = LocalRotation.EulerDegToQuaternion();
+	LocalRotationMatrix = LocalQuaternion.QuaternionToRotationMatrix();
 	LocalPositionMatrix.Pos(LocalPosition);
 
 	LocalWorldMatrix = LocalScaleMatrix * LocalRotationMatrix * LocalPositionMatrix;
@@ -30,7 +30,6 @@ void GameEngineTransform::TransformUpdate()
 	{
 		WorldMatrix = LocalWorldMatrix * Parent->GetWorldMatrixRef();
 	}
-
 }
 
 void GameEngineTransform::SetParent(GameEngineTransform* _Parent)

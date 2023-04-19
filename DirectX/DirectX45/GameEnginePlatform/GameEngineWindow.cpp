@@ -1,3 +1,4 @@
+#include "PrecompileHeader.h"
 #include "GameEngineWindow.h"
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEnginePlatform/GameEngineImage.h>
@@ -155,6 +156,7 @@ int GameEngineWindow::WindowLoop(
     {
         _Start();
     }
+
 
     MSG msg = {};
 

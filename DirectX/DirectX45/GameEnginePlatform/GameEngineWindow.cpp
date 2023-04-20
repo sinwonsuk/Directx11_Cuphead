@@ -157,7 +157,6 @@ int GameEngineWindow::WindowLoop(
         _Start();
     }
 
-
     MSG msg = {};
 
     while (IsWindowUpdate)

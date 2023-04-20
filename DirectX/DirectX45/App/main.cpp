@@ -33,9 +33,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	//float4 WorldScaleValue = LocalScale * Parent;
 
 
-	GameEngineCore::Start(hInstance, 
+	    GameEngineCore::Start(hInstance,
 		ContentsCore::GameStart, 
 		ContentsCore::GameEnd,
-		{2000, 0}
+		{0, 0}
 	);
 }

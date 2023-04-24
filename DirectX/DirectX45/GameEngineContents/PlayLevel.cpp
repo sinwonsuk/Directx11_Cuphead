@@ -19,7 +19,7 @@ void PlayLevel::Start()
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("ContentResources");
 		NewDir.Move("ContentResources");
-		//NewDir.Move("Texture");
+
 		std::vector<GameEngineFile> File = NewDir.GetAllFile({ ".Png", });
 
 
@@ -29,7 +29,6 @@ void PlayLevel::Start()
 		}
 
 		int a = 0;
-
 	}
 
 

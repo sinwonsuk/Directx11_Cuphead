@@ -4,6 +4,7 @@
 #include <GameEnginePlatform\GameEngineWindow.h>
 #include <GameEnginePlatform\GameEngineSound.h>
 #include "GameEngineResource.h"
+#include "GameEngineShaderResHelper.h"
 
 #include "GameEngineVertex.h"
 
@@ -22,9 +23,25 @@
 
 void GameEngineCore::CoreResourcesInit()
 {
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("EngineResources");
+		NewDir.Move("EngineResources");
+
+		std::vector<GameEngineFile> File = NewDir.GetAllFile({ ".Png", });
+
+
+		for (size_t i = 0; i < File.size(); i++)
+		{
+			GameEngineTexture::Load(File[i].GetFullPath());
+		}
+	}
+
+
 	// 버텍스 버퍼의 내용과 인풋 레이아웃의 내용이 더 중요하다.
 	GameEngineVertex::LayOut.AddInputLayOut("POSITION", DXGI_FORMAT_R32G32B32A32_FLOAT);
-	GameEngineVertex::LayOut.AddInputLayOut("COLOR", DXGI_FORMAT_R32G32B32A32_FLOAT);
+	GameEngineVertex::LayOut.AddInputLayOut("TEXCOORD", DXGI_FORMAT_R32G32B32A32_FLOAT);
+	GameEngineVertex::LayOut.AddInputLayOut("NORMAL", DXGI_FORMAT_R32G32B32A32_FLOAT);
 
 	//typedef struct D3D11_INPUT_ELEMENT_DESC
 	//{
@@ -45,13 +62,54 @@ void GameEngineCore::CoreResourcesInit()
 	//ID3D11InputLayout** ppInputLayout // 만들어져 나오는 포인터
 
 	{
+		D3D11_SAMPLER_DESC SamperData = {};
+
+		// 
+
+		SamperData.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+		SamperData.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+		SamperData.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+		// 텍스처가 멀리있을때 뭉갤꺼냐
+		// 안뭉갠다.
+		SamperData.MipLODBias = 0.0f;
+		SamperData.MaxAnisotropy = 1;
+		SamperData.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+		SamperData.MinLOD = -FLT_MAX;
+		SamperData.MaxLOD = FLT_MAX;
+
+		GameEngineSampler::Create("CLAMPSAMPLER", SamperData);
+	}
+
+	{
+		D3D11_SAMPLER_DESC SamperData = {};
+
+		// 
+
+		SamperData.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+		SamperData.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+		SamperData.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+		// 텍스처가 멀리있을때 뭉갤꺼냐
+		// 안뭉갠다.
+		SamperData.MipLODBias = 0.0f;
+		SamperData.MaxAnisotropy = 1;
+		SamperData.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+		SamperData.MinLOD = -FLT_MAX;
+		SamperData.MaxLOD = FLT_MAX;
+
+		GameEngineSampler::Create("WRAPSAMPLER", SamperData);
+	}
+
+	{
 		std::vector<GameEngineVertex> ArrVertex;
 		ArrVertex.resize(4);
+
+		// 0   1
+		// 3   2
 		// 앞면
-		ArrVertex[0] = { { -0.5f, 0.5f, 0.0f }, float4::Red };
-		ArrVertex[1] = { { 0.5f, 0.5f, 0.0f }, float4::Green };
-		ArrVertex[2] = { { 0.5f, -0.5f, 0.0f }, float4::Black };
-		ArrVertex[3] = { { -0.5f, -0.5f, 0.0f }, float4::White };
+		ArrVertex[0] = { { -0.5f, 0.5f, 0.0f }, {0.0f, 0.0f} };
+		ArrVertex[1] = { { 0.5f, 0.5f, 0.0f }, {1.0f, 0.0f} };
+		ArrVertex[2] = { { 0.5f, -0.5f, 0.0f }, {1.0f, 1.0f} };
+		ArrVertex[3] = { { -0.5f, -0.5f, 0.0f }, {0.0f, 1.0f} };
 
 		std::vector<UINT> ArrIndex = {0, 1, 2, 0, 2, 3};
 
@@ -109,7 +167,9 @@ void GameEngineCore::CoreResourcesInit()
 
 		std::vector<GameEngineFile> Files = NewDir.GetAllFile({ ".hlsl", ".fx"});
 
-		GameEngineVertexShader::Load(Files[0].GetFullPath(), "Texture_VS");
+		std::shared_ptr<GameEngineVertexShader> VertexShader = GameEngineVertexShader::Load(Files[0].GetFullPath(), "Texture_VS");
+
+
 		GameEnginePixelShader::Load(Files[0].GetFullPath(), "Texture_PS");
 
 		//for (size_t i = 0; i < Files.size(); i++)
@@ -155,7 +215,7 @@ void GameEngineCore::CoreResourcesInit()
 		// FALSE 인 경우에만 적용됩니다 . 이 멤버에 대한 자세한 내용은 비고를 참조하세요.
 
 		// 와이어 프레임은 선으로 표현하는 겁니다. 
-		Desc.FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
+		// Desc.FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
 		Desc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 		Desc.FrontCounterClockwise = FALSE;
 
@@ -172,7 +232,6 @@ void GameEngineCore::CoreResourcesInit()
 			Pipe->SetVertexShader("TextureShader.hlsl");
 			Pipe->SetRasterizer("EngineBase");
 			Pipe->SetPixelShader("TextureShader.hlsl");
-			// Pipe->SetFILL_MODE(D3D11_FILL_WIREFRAME);
 		}
 	}
 }

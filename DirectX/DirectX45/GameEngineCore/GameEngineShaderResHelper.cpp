@@ -200,7 +200,7 @@ void GameEngineShaderResHelper::SetTexture(const std::string_view& _SettingName,
 		return;
 	}
 
- 	for (; NameStartIter != NameEndIter; ++NameStartIter)
+	for (; NameStartIter != NameEndIter; ++NameStartIter)
 	{
 		GameEngineTextureSetter& Setter = NameStartIter->second;
 		Setter.Res = FindTex;

@@ -374,7 +374,7 @@ GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixel
 	{
 		// 컬러1개에 4바이트인 100 * 100
 		// 10, 10
-		int Index = _Y * static_cast<int>(GetWidth()) + _X-1;
+		int Index = _Y * static_cast<int>(GetWidth()) + _X;
 		ColorPtr = ColorPtr + (Index * 4);
 		GameEnginePixelColor Return;
 		Return.r = ColorPtr[2];

@@ -23,6 +23,7 @@ void Player::Update(float _DeltaTime)
 
 	GameEnginePixelColor Pixel = Ptr->GetPixel(356, 329);
 	GameEnginePixelColor Pixel1 = Ptr->GetPixel(330, 327);
+
 	if (Pixel == Pixel1)
 	{
 		int a = 0;

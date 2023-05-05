@@ -57,17 +57,10 @@ void PlayLevel::Start()
 		}
 
 		Window->Test = std::bind(&PlayLevel::PlayerCreate, this);
-
-		// std::shared_ptr<Player> Object = CreateActor<Player>(0);
 	}
 
 
-	{
-		std::shared_ptr<TestObject> Object = CreateActor<TestObject>(-20);
-		Object->GetTransform()->SetLocalScale({ 1000, 1000, 1000 });
-		Object->GetTransform()->SetLocalPosition({ 0, 0, 100.0f });
-	}
-
+	
 
 }
 void PlayLevel::LevelChangeStart()

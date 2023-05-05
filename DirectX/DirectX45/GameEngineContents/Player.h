@@ -27,6 +27,6 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Render0;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
-
+	bool test = false;
 };
 

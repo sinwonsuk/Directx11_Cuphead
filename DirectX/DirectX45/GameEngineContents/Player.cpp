@@ -22,6 +22,13 @@ void Player::Update(float _DeltaTime)
 	std::shared_ptr<GameEngineTexture> Ptr = GameEngineTexture::Find("AAAA.png");
 
 	GameEnginePixelColor Pixel = Ptr->GetPixel(356, 329);
+	GameEnginePixelColor Pixel1 = Ptr->GetPixel(330, 327);
+	if (Pixel == Pixel1)
+	{
+		int a = 0;
+	}
+
+
 
 	float RotSpeed = 180.0f;
 
@@ -34,27 +41,7 @@ void Player::Update(float _DeltaTime)
 		Speed = 500.0f;
 	}
 
-	if (true == GameEngineInput::IsDown("PlayerMoveLeft"))
-	{
-
-		//{
-		//	GameEngineDirectory NewDir;
-		//	NewDir.MoveParentToDirectory("ContentResources");
-		//	NewDir.Move("ContentResources");
-
-		//	std::vector<GameEngineFile> File = NewDir.GetAllFile({ ".avi", });
-
-		//	for (size_t i = 0; i < File.size(); i++)
-		//	{
-		//		GameEngineVideo::Load(File[i].GetFullPath());
-		//	}
-
-		//	std::shared_ptr<GameEngineVideo> Video = GameEngineVideo::Find("TestVideo.avi");
-		//	Video->Play();
-		//}
-
-		// Render0->GetTransform()->SetLocalNegativeScaleX();
-	}
+	
 	else if (true == GameEngineInput::IsDown("PlayerMoveRight"))
 	{
 		// Render0->GetTransform()->SetLocalPositiveScaleX();
@@ -141,20 +128,28 @@ void Player::Update(float _DeltaTime)
 	float4 GetLocalScale = Render0->GetTransform()->GetLocalScale();
 	float4 GetWorldScale = Render0->GetTransform()->GetWorldScale();
 
-	float4 GetLocalRotation = Render0->GetTransform()->GetLocalRotation();
-	float4 GetWorldRotation = Render0->GetTransform()->GetWorldRotation();
-
-	float4 GetLocalPosition = Render0->GetTransform()->GetLocalPosition();
-	float4 GetWorldPosition = Render0->GetTransform()->GetWorldPosition();
+	
 
 	float4 LocalPostion = GetTransform()->GetLocalPosition();
 
-	GetLevel()->GetMainCamera()->GetTransform()->SetLocalPosition(LocalPostion + (float4::Back * 100.0f));
+	if (GetTransform()->GetLocalRotation().y == 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		{
+			GetTransform()->SetLocalRotation({ 0,-180,0 });
+		}
 
-	//if (5.0f <= Render0->GetLiveTime())
-	//{
-	//	Render0->Off();
-	//}
+	}
+
+	if (GetTransform()->GetLocalRotation().y != 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		{
+			GetTransform()->SetLocalRotation({ 0,0,0 });
+		}
+	}
+
+
 }
 
 void Player::Start()
@@ -189,7 +184,7 @@ void Player::Start()
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
 	Render0 = CreateComponent<GameEngineSpriteRenderer>();
 	// Render0->SetOrder(5);
-	Render0->SetScaleToTexture("Test.png");
+	Render0->SetScaleToTexture("cuphead_idle_0001.png");
 
 	TestColor = { 0.0f, 0.0f, 0.0f, 1.0f };
 }

@@ -19,21 +19,79 @@ Player::~Player()
 
 void Player::Update(float _DeltaTime)
 {
-	std::shared_ptr<GameEngineTexture> Ptr = GameEngineTexture::Find("AAAA.png");
-
-	GameEnginePixelColor Pixel = Ptr->GetPixel(356, 329);
-	GameEnginePixelColor Pixel1 = Ptr->GetPixel(330, 327);
-
-	if (Pixel == Pixel1)
+	if (Gravity == false)
 	{
-		int a = 0;
+		GetTransform()->AddLocalPosition({ 0,-1 });
+	}
+	
+	float RotSpeed = 180.0f;
+
+	float Speed = 200.0f;
+
+	
+	
+
+
+	std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("TestMap.png");
+	GameEnginePixelColor Pixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x, -GetTransform()->GetLocalPosition().y+65);
+	GameEnginePixelColor RightPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+40, -GetTransform()->GetLocalPosition().y+55);
+	GameEnginePixelColor LeftPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x -40, -GetTransform()->GetLocalPosition().y + 55);
+	// 마젠타색 임시 변수 
+	unsigned char ColorChar[4] = {255,0,255,255};
+
+	
+	for (size_t i = 0; i < 4; i++)
+	{
+		if(ColorChar[i] == Pixel.ColorChar[i])
+		{
+			++GravityCheck;			
+		}		
+
+		if (ColorChar[i] == RightPixel.ColorChar[i])
+		{
+			++RightCheck;
+		}
+
+		if (ColorChar[i] == LeftPixel.ColorChar[i])
+		{
+			++LeftCheck;
+		}
+
+	}
+	
+
+	
+	if (RightCheck == 4)
+	{
+		RightMove = false;
+	}
+	if (RightCheck != 4)
+	{
+		RightMove = true;
+	}
+	if (LeftCheck == 4)
+	{
+		LeftMove = false;
+	}
+	if (LeftCheck != 4)
+	{
+		LeftMove = true;
 	}
 
 
 
-	float RotSpeed = 180.0f;
 
-	float Speed = 200.0f;
+	if (GravityCheck == 4)
+	{
+		Gravity = true;
+	}
+	if (GravityCheck != 4)
+	{
+		Gravity = false;
+	}
+	GravityCheck = 0;
+	RightCheck = 0;
+	LeftCheck = 0;
 
 	// Render0->GetTransform()->SetWorldRotation(float4::Zero);
 
@@ -48,11 +106,11 @@ void Player::Update(float _DeltaTime)
 		// Render0->GetTransform()->SetLocalPositiveScaleX();
 	}
 
-	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+	if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove  == true)
 	{
 		GetTransform()->AddLocalPosition(float4::Left * Speed * _DeltaTime);
 	}
-	if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+	if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
 	{
 		GetTransform()->AddLocalPosition(float4::Right * Speed * _DeltaTime);
 	}
@@ -186,7 +244,7 @@ void Player::Start()
 	Render0 = CreateComponent<GameEngineSpriteRenderer>();
 	// Render0->SetOrder(5);
 	Render0->SetScaleToTexture("cuphead_idle_0001.png");
-
+	
 	TestColor = { 0.0f, 0.0f, 0.0f, 1.0f };
 }
 

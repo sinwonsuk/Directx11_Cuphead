@@ -15,6 +15,9 @@
     <ClInclude Include="TestObject.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialMap.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="PrecompileHeader.cpp" />
     <ClCompile Include="TestObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialMap.cpp">
       <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>

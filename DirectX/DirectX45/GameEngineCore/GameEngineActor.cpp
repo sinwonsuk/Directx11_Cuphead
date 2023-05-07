@@ -43,6 +43,7 @@ void GameEngineActor::ComponentsRender(float _DeltaTime)
 		}
 
 		Component->Render(_DeltaTime);
+		Component->Render(_DeltaTime);
 	}
 }
 

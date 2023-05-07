@@ -16,7 +16,7 @@ public:
 			unsigned char b;
 			unsigned char a;
 		};
-
+		
 		unsigned char ColorChar[4];
 		int Color;
 	};

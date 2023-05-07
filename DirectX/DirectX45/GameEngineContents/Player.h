@@ -27,6 +27,13 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Render0;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
-	bool test = false;
+
+	int GravityCheck = 0; 
+	int RightCheck = 0;
+	int LeftCheck = 0;
+
+	bool Gravity = false;
+	bool RightMove = true;
+	bool LeftMove = true;
 };
 

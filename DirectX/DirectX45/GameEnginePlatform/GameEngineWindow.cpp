@@ -190,7 +190,7 @@ int GameEngineWindow::WindowLoop(
 
 void GameEngineWindow::SettingWindowSize(float4 _Size)
 {
-
+   
     // 그 타이틀바와 프레임까지 고려해서 크기를 설정해줘야 한다.
 
     //          위치      크기

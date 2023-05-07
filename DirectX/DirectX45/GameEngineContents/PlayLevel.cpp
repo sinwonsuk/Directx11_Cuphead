@@ -2,6 +2,7 @@
 #include "PlayLevel.h"
 #include "Player.h"
 #include "TestObject.h"
+#include "TutorialMap.h"
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineVideo.h>
@@ -23,6 +24,7 @@ void PlayLevel::Update(float _DeltaTime)
 void PlayLevel::PlayerCreate(/*Playlevel* this*/)
 {
 	std::shared_ptr<Player> Object = CreateActor<Player>(0);
+	//Object->GetTransform()->SetLocalPosition({ 0,500 });
 }
 
 void PlayLevel::Start()
@@ -44,8 +46,8 @@ void PlayLevel::Start()
 
 
 
-	GetMainCamera()->SetProjectionType(CameraType::Perspective);
-	GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -1000.0f});
+	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
+	//GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -1000.0f});
 
 
 	std::shared_ptr<GameEngineCoreWindow> Window = GameEngineGUI::FindGUIWindowConvert<GameEngineCoreWindow>("CoreWindow");
@@ -59,7 +61,7 @@ void PlayLevel::Start()
 		Window->Test = std::bind(&PlayLevel::PlayerCreate, this);
 	}
 
-
+	std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>(0);
 	
 
 }

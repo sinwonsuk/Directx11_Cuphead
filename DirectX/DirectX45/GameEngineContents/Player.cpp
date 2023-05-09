@@ -21,21 +21,24 @@ void Player::Update(float _DeltaTime)
 {
 	if (Gravity == false)
 	{
-		GetTransform()->AddLocalPosition({ 0,-1 });
+		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
 	}
 	
+	
+
 	float RotSpeed = 180.0f;
 
 	float Speed = 200.0f;
 
+	float ScaleSpeed = 10.0f;
 	
-	
-
-
 	std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("TestMap.png");
 	GameEnginePixelColor Pixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x, -GetTransform()->GetLocalPosition().y+65);
 	GameEnginePixelColor RightPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+40, -GetTransform()->GetLocalPosition().y+55);
 	GameEnginePixelColor LeftPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x -40, -GetTransform()->GetLocalPosition().y + 55);
+
+
+
 	// 마젠타색 임시 변수 
 	unsigned char ColorChar[4] = {255,0,255,255};
 
@@ -58,9 +61,7 @@ void Player::Update(float _DeltaTime)
 		}
 
 	}
-	
 
-	
 	if (RightCheck == 4)
 	{
 		RightMove = false;
@@ -78,9 +79,6 @@ void Player::Update(float _DeltaTime)
 		LeftMove = true;
 	}
 
-
-
-
 	if (GravityCheck == 4)
 	{
 		Gravity = true;
@@ -89,11 +87,17 @@ void Player::Update(float _DeltaTime)
 	{
 		Gravity = false;
 	}
+
+
+
 	GravityCheck = 0;
 	RightCheck = 0;
 	LeftCheck = 0;
 
+
 	// Render0->GetTransform()->SetWorldRotation(float4::Zero);
+
+
 
 	if (true == GameEngineInput::IsPress("PlayerSpeedBoost"))
 	{
@@ -114,82 +118,39 @@ void Player::Update(float _DeltaTime)
 	{
 		GetTransform()->AddLocalPosition(float4::Right * Speed * _DeltaTime);
 	}
-	if (true == GameEngineInput::IsPress("PlayerMoveUp"))
+	if (true == GameEngineInput::IsDown("PlayerJump") && JumpCheck ==false)
 	{
-		GetTransform()->AddLocalPosition(float4::Up * Speed * _DeltaTime);
+		ResetLiveTime();
+		JumpCheck = true;	
 	}
-	if (true == GameEngineInput::IsPress("PlayerMoveDown"))
+	if (JumpCheck == true)
 	{
-		GetTransform()->AddLocalPosition(float4::Down * Speed * _DeltaTime);
-	}
-	if (true == GameEngineInput::IsPress("PlayerMoveForward"))
-	{
-		GetTransform()->AddLocalPosition(GetTransform()->GetLocalForwardVector() * Speed * _DeltaTime);
-		// GetTransform()->AddLocalPosition(float4::Forward * Speed * _DeltaTime);
-	}
-	if (true == GameEngineInput::IsPress("PlayerMoveBack"))
-	{
-		GetTransform()->AddLocalPosition(float4::Back * Speed * _DeltaTime);
+		AccLiveTime(_DeltaTime);
 	}
 
-	if (true == GameEngineInput::IsPress("PlayerRotY+"))
+	if (GetLiveTime() < 0.4 && JumpCheck ==true)
 	{
-		GetTransform()->AddLocalRotation({ 0.0f, RotSpeed * _DeltaTime, 0.0f });
+		GetTransform()->AddLocalPosition(float4::Up * JumpSpeed * _DeltaTime);	
 	}
-	if (true == GameEngineInput::IsPress("PlayerRotY-"))
+	if (GetLiveTime() > 0.4)
 	{
-		GetTransform()->AddLocalRotation({ 0.0f, -RotSpeed * _DeltaTime, 0.0f });
-	}
-	if (true == GameEngineInput::IsPress("PlayerRotZ+"))
-	{
-		GetTransform()->AddLocalRotation({ 0.0f, 0.0f, RotSpeed * _DeltaTime });
-	}
-	if (true == GameEngineInput::IsPress("PlayerRotZ-"))
-	{
-		GetTransform()->AddLocalRotation({ 0.0f, 0.0f, -RotSpeed * _DeltaTime });
-	}
-	if (true == GameEngineInput::IsPress("PlayerRotX+"))
-	{
-		GetTransform()->AddLocalRotation({ RotSpeed * _DeltaTime, 0.0f, 0.0f });
-	}
-	if (true == GameEngineInput::IsPress("PlayerRotX-"))
-	{
-		GetTransform()->AddLocalRotation({ -RotSpeed * _DeltaTime, 0.0f, 0.0f });
-	}
-
-	float ScaleSpeed = 10.0f;
-
-	if (true == GameEngineInput::IsPress("PlayerScaleY+"))
-	{
-		GetTransform()->AddLocalScale({ 0.0f, ScaleSpeed * _DeltaTime, 0.0f });
-	}
-	if (true == GameEngineInput::IsPress("PlayerScaleY-"))
-	{
-		GetTransform()->AddLocalScale({ 0.0f, -ScaleSpeed * _DeltaTime, 0.0f });
-	}
-	if (true == GameEngineInput::IsPress("PlayerScaleZ+"))
-	{
-		GetTransform()->AddLocalScale({ 0.0f, 0.0f, ScaleSpeed * _DeltaTime });
-	}
-	if (true == GameEngineInput::IsPress("PlayerScaleZ-"))
-	{
-		GetTransform()->AddLocalScale({ 0.0f, 0.0f, -ScaleSpeed * _DeltaTime });
-	}
-	if (true == GameEngineInput::IsPress("PlayerScaleX+"))
-	{
-		GetTransform()->AddLocalScale({ ScaleSpeed * _DeltaTime, 0.0f, 0.0f });
-	}
-	if (true == GameEngineInput::IsPress("PlayerScaleX-"))
-	{
-		GetTransform()->AddLocalScale({ -ScaleSpeed * _DeltaTime, 0.0f, 0.0f });
+		JumpCheck = false;
 	}
 
 	float4 GetLocalScale = Render0->GetTransform()->GetLocalScale();
 	float4 GetWorldScale = Render0->GetTransform()->GetWorldScale();
 
 	
-
 	float4 LocalPostion = GetTransform()->GetLocalPosition();
+
+	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+	{
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left* Speed* _DeltaTime);
+	}
+	if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+	{
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right* Speed* _DeltaTime);
+	}
 
 	if (GetTransform()->GetLocalRotation().y == 0)
 	{
@@ -197,7 +158,6 @@ void Player::Update(float _DeltaTime)
 		{
 			GetTransform()->SetLocalRotation({ 0,-180,0 });
 		}
-
 	}
 
 	if (GetTransform()->GetLocalRotation().y != 0)
@@ -221,6 +181,7 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerMoveDown", 'E');
 		GameEngineInput::CreateKey("PlayerMoveForward", 'W');
 		GameEngineInput::CreateKey("PlayerMoveBack", 'S');
+		GameEngineInput::CreateKey("PlayerJump", 'J');
 
 		GameEngineInput::CreateKey("PlayerScaleY+", 'Y');
 		GameEngineInput::CreateKey("PlayerScaleY-", 'U');

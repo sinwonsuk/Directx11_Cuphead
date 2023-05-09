@@ -23,7 +23,7 @@ void PlayLevel::Update(float _DeltaTime)
 
 void PlayLevel::PlayerCreate(/*Playlevel* this*/)
 {
-	std::shared_ptr<Player> Object = CreateActor<Player>(0);
+	std::shared_ptr<Player> Object = CreateActor<Player>(3);
 	//Object->GetTransform()->SetLocalPosition({ 0,500 });
 }
 
@@ -61,8 +61,8 @@ void PlayLevel::Start()
 		Window->Test = std::bind(&PlayLevel::PlayerCreate, this);
 	}
 
-	std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>(0);
-	
+	std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>(2);
+	std::shared_ptr<TestObject> Object1 = CreateActor<TestObject>(1);
 
 }
 void PlayLevel::LevelChangeStart()

@@ -1,6 +1,6 @@
 #include "PrecompileHeader.h"
 #include "GameEngineTexture.h"
-#include <GameEnginePlatform/GameEngineWindow.h>
+
 #ifdef _DEBUG
 #pragma comment(lib, "..\\GameEngineCore\\ThirdParty\\DirectXTex\\lib\\x64\\Debug\\DirectXTex.lib")
 #else
@@ -160,14 +160,6 @@ void GameEngineTexture::ResCreate(const D3D11_TEXTURE2D_DESC& _Value)
 // 바깥에 나갔다면 무슨색깔 리턴할지에 대한 컬러도 넣어줘야 한다.
 GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixelColor DefaultColor)
 {
-	_X += GameEngineWindow::GetScreenSize().hix();
-
-	_Y += GameEngineWindow::GetScreenSize().hiy();
-
-
-
-
-
 	if (0 > _X)
 	{
 		return DefaultColor;
@@ -253,16 +245,7 @@ GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixel
 	case DXGI_FORMAT_R8G8B8A8_TYPELESS:
 		break;
 	case DXGI_FORMAT_R8G8B8A8_UNORM:
-	{
-		int Index = _Y * static_cast<int>(GetWidth()) + _X;
-		ColorPtr = ColorPtr + (Index * 4);
-		GameEnginePixelColor Return;
-		Return.r = ColorPtr[2];
-		Return.g = ColorPtr[1];
-		Return.b = ColorPtr[0];
-		Return.a = ColorPtr[3];
-		return Return;
-	}
+		break;
 	case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
 		break;
 	case DXGI_FORMAT_R8G8B8A8_UINT:
@@ -380,6 +363,8 @@ GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixel
 	case DXGI_FORMAT_B5G5R5A1_UNORM:
 		break;
 	case DXGI_FORMAT_B8G8R8A8_UNORM:
+		break;
+	case DXGI_FORMAT_B8G8R8X8_UNORM:
 	{
 		// 컬러1개에 4바이트인 100 * 100
 		// 10, 10
@@ -392,9 +377,6 @@ GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixel
 		Return.a = ColorPtr[3];
 		return Return;
 	}
-
-	case DXGI_FORMAT_B8G8R8X8_UNORM:
-		break;
 	case DXGI_FORMAT_R10G10B10_XR_BIAS_A2_UNORM:
 		break;
 	case DXGI_FORMAT_B8G8R8A8_TYPELESS:

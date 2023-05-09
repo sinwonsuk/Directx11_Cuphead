@@ -31,9 +31,11 @@ private:
 	int GravityCheck = 0; 
 	int RightCheck = 0;
 	int LeftCheck = 0;
-
+	float GravitySpeed = 400;
+	float JumpSpeed = 1200;
 	bool Gravity = false;
 	bool RightMove = true;
 	bool LeftMove = true;
+	bool JumpCheck = false;
 };
 

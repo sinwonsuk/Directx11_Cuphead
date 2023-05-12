@@ -167,7 +167,6 @@ GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixel
 	_Y += GameEngineWindow::GetScreenSize().hiy();
 
 
-
 	if (0 > _X)
 	{
 		return DefaultColor;
@@ -254,6 +253,8 @@ GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixel
 		break;
 	case DXGI_FORMAT_R8G8B8A8_UNORM:
 	{
+		// 컬러1개에 4바이트인 100 * 100
+		// 10, 10
 		int Index = _Y * static_cast<int>(GetWidth()) + _X;
 		ColorPtr = ColorPtr + (Index * 4);
 		GameEnginePixelColor Return;
@@ -263,6 +264,8 @@ GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixel
 		Return.a = ColorPtr[3];
 		return Return;
 	}
+
+		break;
 	case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
 		break;
 	case DXGI_FORMAT_R8G8B8A8_UINT:

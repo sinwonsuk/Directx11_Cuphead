@@ -24,7 +24,24 @@ void Player::Update(float _DeltaTime)
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
 	}
 	
-	
+	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+	{
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _DeltaTime);
+	}
+	if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+	{
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _DeltaTime);
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
+	{
+		GetTransform()->AddLocalPosition(float4::Left * Speed * _DeltaTime);
+	}
+	if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
+	{
+		GetTransform()->AddLocalPosition(float4::Right * Speed * _DeltaTime);
+	}
+
 
 	float RotSpeed = 180.0f;
 
@@ -33,9 +50,9 @@ void Player::Update(float _DeltaTime)
 	float ScaleSpeed = 10.0f;
 	
 	std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("TestMap.png");
-	GameEnginePixelColor Pixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x, -GetTransform()->GetLocalPosition().y+65);
-	GameEnginePixelColor RightPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+40, -GetTransform()->GetLocalPosition().y+55);
-	GameEnginePixelColor LeftPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x -40, -GetTransform()->GetLocalPosition().y + 55);
+	GameEnginePixelColor Pixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x, -GetTransform()->GetLocalPosition().y+65.0f);
+	GameEnginePixelColor RightPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+40.0f, -GetTransform()->GetLocalPosition().y+55.0f);
+	GameEnginePixelColor LeftPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x -40.0f, -GetTransform()->GetLocalPosition().y + 55.0f);
 
 
 
@@ -99,26 +116,16 @@ void Player::Update(float _DeltaTime)
 
 
 
-	if (true == GameEngineInput::IsPress("PlayerSpeedBoost"))
-	{
-		Speed = 500.0f;
-	}
-
 	
-	else if (true == GameEngineInput::IsDown("PlayerMoveRight"))
+	
+	if (true == GameEngineInput::IsDown("PlayerMoveRight"))
 	{
 		// Render0->GetTransform()->SetLocalPositiveScaleX();
 	}
 
-	if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove  == true)
-	{
-		GetTransform()->AddLocalPosition(float4::Left * Speed * _DeltaTime);
-	}
-	if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
-	{
-		GetTransform()->AddLocalPosition(float4::Right * Speed * _DeltaTime);
-	}
-	if (true == GameEngineInput::IsDown("PlayerJump") && JumpCheck ==false)
+	
+	
+	/*if (true == GameEngineInput::IsDown("PlayerJump") && JumpCheck ==false)
 	{
 		ResetLiveTime();
 		JumpCheck = true;	
@@ -141,17 +148,9 @@ void Player::Update(float _DeltaTime)
 	float4 GetWorldScale = Render0->GetTransform()->GetWorldScale();
 
 	
-	float4 LocalPostion = GetTransform()->GetLocalPosition();
+	float4 LocalPostion = GetTransform()->GetLocalPosition();*/
 
-	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
-	{
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left* Speed* _DeltaTime);
-	}
-	if (true == GameEngineInput::IsPress("PlayerMoveRight"))
-	{
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right* Speed* _DeltaTime);
-	}
-
+	
 	if (GetTransform()->GetLocalRotation().y == 0)
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
@@ -168,20 +167,20 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
-
+	UpdateState(_DeltaTime);
 }
 
 void Player::Start()
 {
 	if (false == GameEngineInput::IsKey("PlayerMoveLeft"))
 	{
-		GameEngineInput::CreateKey("PlayerMoveLeft", 'A');
-		GameEngineInput::CreateKey("PlayerMoveRight", 'D');
-		GameEngineInput::CreateKey("PlayerMoveUp", 'Q');
-		GameEngineInput::CreateKey("PlayerMoveDown", 'E');
+		GameEngineInput::CreateKey("PlayerMoveLeft", VK_LEFT);
+		GameEngineInput::CreateKey("PlayerMoveRight", VK_RIGHT);
+		GameEngineInput::CreateKey("PlayerMoveUp", VK_UP);
+		GameEngineInput::CreateKey("PlayerMoveDown", VK_DOWN);
 		GameEngineInput::CreateKey("PlayerMoveForward", 'W');
 		GameEngineInput::CreateKey("PlayerMoveBack", 'S');
-		GameEngineInput::CreateKey("PlayerJump", 'J');
+		GameEngineInput::CreateKey("PlayerJump", 'Z');
 
 		GameEngineInput::CreateKey("PlayerScaleY+", 'Y');
 		GameEngineInput::CreateKey("PlayerScaleY-", 'U');
@@ -200,14 +199,37 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerSpeedBoost", VK_LSHIFT);
 	}
 
+	if (nullptr == GameEngineSprite::Find("Idle"))
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Texture");
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Idle").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Run").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Jump").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Duck").GetFullPath());
+	}
 
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
 	Render0 = CreateComponent<GameEngineSpriteRenderer>();
-	// Render0->SetOrder(5);
-	Render0->SetScaleToTexture("cuphead_idle_0001.png");
 	
-	TestColor = { 0.0f, 0.0f, 0.0f, 1.0f };
+	Render0->CreateAnimation({ .AnimationName = "Idle", .SpriteName = "Idle", .FrameInter = 0.1f, .ScaleToTexture =true,});
+	Render0->CreateAnimation({ .AnimationName = "Run", .SpriteName = "Run",. FrameInter = 0.1f, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Jump", .SpriteName = "Jump",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Duck", .SpriteName = "Duck",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->ChangeAnimation("Idle");
+
+	
 }
+
+void Player::AnimationCheck(const std::string_view& _AnimationName)
+{
+	Render0->ChangeAnimation(_AnimationName);
+}
+
+
 
 // 이건 디버깅용도나 
 void Player::Render(float _Delta)

@@ -37,6 +37,9 @@
     <ClCompile Include="TutorialMap.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

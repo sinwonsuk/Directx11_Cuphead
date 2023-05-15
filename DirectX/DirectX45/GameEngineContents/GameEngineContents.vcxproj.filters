@@ -18,6 +18,7 @@
     <ClInclude Include="TutorialMap.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerRunEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -40,6 +41,7 @@
     <ClCompile Include="PlayerState.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerRunEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

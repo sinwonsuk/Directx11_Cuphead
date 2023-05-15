@@ -171,6 +171,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="PlayerRunEffect.h" />
     <ClInclude Include="PlayLevel.h">
       <SubType>
       </SubType>
@@ -192,6 +193,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="PlayerRunEffect.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="PlayLevel.cpp">
       <SubType>

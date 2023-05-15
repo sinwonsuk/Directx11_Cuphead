@@ -24,23 +24,7 @@ void Player::Update(float _DeltaTime)
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
 	}
 	
-	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
-	{
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _DeltaTime);
-	}
-	if (true == GameEngineInput::IsPress("PlayerMoveRight"))
-	{
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _DeltaTime);
-	}
-
-	if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
-	{
-		GetTransform()->AddLocalPosition(float4::Left * Speed * _DeltaTime);
-	}
-	if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
-	{
-		GetTransform()->AddLocalPosition(float4::Right * Speed * _DeltaTime);
-	}
+	
 
 
 	float RotSpeed = 180.0f;
@@ -112,8 +96,7 @@ void Player::Update(float _DeltaTime)
 	LeftCheck = 0;
 
 
-	// Render0->GetTransform()->SetWorldRotation(float4::Zero);
-
+	
 
 
 	
@@ -166,7 +149,7 @@ void Player::Update(float _DeltaTime)
 			GetTransform()->SetLocalRotation({ 0,0,0 });
 		}
 	}
-
+	
 	UpdateState(_DeltaTime);
 }
 
@@ -181,6 +164,10 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerMoveForward", 'W');
 		GameEngineInput::CreateKey("PlayerMoveBack", 'S');
 		GameEngineInput::CreateKey("PlayerJump", 'Z');
+		GameEngineInput::CreateKey("PlayerRock", 'C');
+		GameEngineInput::CreateKey("PlayerAttack", 'X');
+		GameEngineInput::CreateKey("PlayerDash", VK_LSHIFT);
+
 
 		GameEngineInput::CreateKey("PlayerScaleY+", 'Y');
 		GameEngineInput::CreateKey("PlayerScaleY-", 'U');
@@ -196,7 +183,7 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerRotZ-", VK_NUMPAD5);
 		GameEngineInput::CreateKey("PlayerRotX+", VK_NUMPAD7);
 		GameEngineInput::CreateKey("PlayerRotX-", VK_NUMPAD8);
-		GameEngineInput::CreateKey("PlayerSpeedBoost", VK_LSHIFT);
+		//GameEngineInput::CreateKey("PlayerSpeedBoost", VK_LSHIFT);
 	}
 
 	if (nullptr == GameEngineSprite::Find("Idle"))
@@ -210,16 +197,42 @@ void Player::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Run").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Jump").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Duck").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Parry").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAim").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DiagonalDownAim").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DiagonalUpAim").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DownAim").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAim").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("GroundDash").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAttack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAttackPre").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("RunAttack").GetFullPath());
 	}
 
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
 	Render0 = CreateComponent<GameEngineSpriteRenderer>();
 	
-	Render0->CreateAnimation({ .AnimationName = "Idle", .SpriteName = "Idle", .FrameInter = 0.1f, .ScaleToTexture =true,});
-	Render0->CreateAnimation({ .AnimationName = "Run", .SpriteName = "Run",. FrameInter = 0.1f, .ScaleToTexture = true });
+
+
+	
+
+	Render0->CreateAnimation({ .AnimationName = "Idle", .SpriteName = "Idle", .FrameInter =0.1f,.Loop = true, .ScaleToTexture = true,});
+	Render0->CreateAnimation({ .AnimationName = "Run", .SpriteName = "Run",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "Jump", .SpriteName = "Jump",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "Duck", .SpriteName = "Duck",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Parry", .SpriteName = "Parry",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "IdleAim", .SpriteName = "IdleAim",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DiagonalDownAim", .SpriteName = "DiagonalDownAim",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DiagonalUpAim", .SpriteName = "DiagonalUpAim",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DownAim", .SpriteName = "DownAim",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "UpAim", .SpriteName = "UpAim",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "GroundDash", .SpriteName = "GroundDash",. FrameInter = 0.1f, .Loop = false, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "IdleAttack", .SpriteName = "IdleAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "IdleAttackPre", .SpriteName = "IdleAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "RunAttack", .SpriteName = "RunAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
 	Render0->ChangeAnimation("Idle");
+	
 
 	
 }

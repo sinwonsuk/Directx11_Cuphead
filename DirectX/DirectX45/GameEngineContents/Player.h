@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+
 enum class PlayerState
 {
 	Idle,
@@ -7,6 +8,17 @@ enum class PlayerState
 	Jump,
 	Attack,
 	Duck,
+	Parry,
+	IdleAim,
+	UpAim, 
+	DownAim, 
+	DiagonalUpAim,
+	DiagonalDownAim,
+	Dash,
+	IdleAttackPre,
+	Idleattack,
+	RunAttack, 
+	
 };
 // Ό³Έν :
 class Player : public GameEngineActor
@@ -30,6 +42,16 @@ public:
 	void RunUpdate(float _Time);
 	void JumpUpdate(float _Time);
 	void DuckUpdate(float _Time);
+	void ParryUpdate(float _Time);
+	void UpAimUpdate(float _Time);
+	void DownAimUpdate(float _Time);
+	void IdleAimUpdate(float _Time);
+	void DiagonalUpAimUpdate(float _Time);
+	void DiagonalDownAimUpdate(float _Time);
+	void DashUpdate(float _Time);
+	void IdleAttackUpdate(float _Time);
+	void IdleAttackPreUpdate(float _Time);
+	void RunAttackUpdate(float _Time);
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -54,5 +76,8 @@ private:
 	bool RightMove = true;
 	bool LeftMove = true;
 	bool JumpCheck = false;
+
+	bool DashCheck = true;
+	int EffectCheck = 0; 
 };
 

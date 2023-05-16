@@ -4,6 +4,7 @@
 enum class PlayerState
 {
 	Idle,
+	Up,
 	Run,
 	Jump,
 	Attack,
@@ -18,7 +19,11 @@ enum class PlayerState
 	IdleAttackPre,
 	Idleattack,
 	RunAttack, 
-	
+	DiagonalUpAttack,
+	DiagonalDownAttack,
+	UpAttack, 
+	UpAttackPre, 
+	DiagonalUpRunAttack,
 };
 // Ό³Έν :
 class Player : public GameEngineActor
@@ -37,6 +42,7 @@ public:
 	void ChangeState(PlayerState _State);
 	void UpdateState(float _Time);
 	void AnimationCheck(const std::string_view& _AnimationName);
+	void AnimationCheck(const std::string_view& _AnimationName,bool Force, int Frame);
 
 	void IdleUpdate(float _Time);
 	void RunUpdate(float _Time);
@@ -52,6 +58,12 @@ public:
 	void IdleAttackUpdate(float _Time);
 	void IdleAttackPreUpdate(float _Time);
 	void RunAttackUpdate(float _Time);
+	void DiagonalUpAttackUpdate(float _Time);
+	void DiagonalDownAttackUpdate(float _Time);
+	void DiagonalUpRunAttackUpdate(float _Time);
+	void UpUpdate(float _Time);
+	void UpAttackUpdate(float _Time);
+	void UpAttackPre(float _Time);
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -77,7 +89,11 @@ private:
 	bool LeftMove = true;
 	bool JumpCheck = false;
 
+	bool test = false;
 	bool DashCheck = true;
+
+	bool DashEffectCheck = false;
 	int EffectCheck = 0; 
+	int Frame = 0;
 };
 

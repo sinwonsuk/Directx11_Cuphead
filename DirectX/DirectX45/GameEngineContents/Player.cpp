@@ -134,19 +134,19 @@ void Player::Update(float _DeltaTime)
 	float4 LocalPostion = GetTransform()->GetLocalPosition();*/
 
 	
-	if (GetTransform()->GetLocalRotation().y == 0)
+	if (GetTransform()->GetLocalScale().x > 0)
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 		{
-			GetTransform()->SetLocalRotation({ 0,-180,0 });
+			GetTransform()->SetLocalNegativeScaleX();
 		}
 	}
 
-	if (GetTransform()->GetLocalRotation().y != 0)
+	if (GetTransform()->GetLocalScale().x < 0)
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
 		{
-			GetTransform()->SetLocalRotation({ 0,0,0 });
+			GetTransform()->SetLocalPositiveScaleX();		
 		}
 	}
 	
@@ -183,7 +183,7 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerRotZ-", VK_NUMPAD5);
 		GameEngineInput::CreateKey("PlayerRotX+", VK_NUMPAD7);
 		GameEngineInput::CreateKey("PlayerRotX-", VK_NUMPAD8);
-		//GameEngineInput::CreateKey("PlayerSpeedBoost", VK_LSHIFT);
+		
 	}
 
 	if (nullptr == GameEngineSprite::Find("Idle"))
@@ -208,8 +208,14 @@ void Player::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAttack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAttackPre").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("RunAttack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DiagonalUpAttack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DiagonalDownAttack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAttack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Up").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DiagonalUpRunAttack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAttackPre").GetFullPath());
 	}
-
+		
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
 	Render0 = CreateComponent<GameEngineSpriteRenderer>();
 	
@@ -231,8 +237,14 @@ void Player::Start()
 	Render0->CreateAnimation({ .AnimationName = "IdleAttack", .SpriteName = "IdleAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "IdleAttackPre", .SpriteName = "IdleAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "RunAttack", .SpriteName = "RunAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DiagonalUpAttack", .SpriteName = "DiagonalUpAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DiagonalDownAttack", .SpriteName = "DiagonalDownAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Up", .SpriteName = "Up",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "UpAttack", .SpriteName = "UpAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DiagonalUpRunAttack", .SpriteName = "DiagonalUpRunAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "UpAttackPre", .SpriteName = "UpAttackPre",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
 	Render0->ChangeAnimation("Idle");
-	
+
 
 	
 }
@@ -242,6 +254,10 @@ void Player::AnimationCheck(const std::string_view& _AnimationName)
 	Render0->ChangeAnimation(_AnimationName);
 }
 
+void Player::AnimationCheck(const std::string_view& _AnimationName, bool Force, int Frame)
+{
+	Render0->ChangeAnimation(_AnimationName, Force , Frame);
+}
 
 
 // 이건 디버깅용도나 

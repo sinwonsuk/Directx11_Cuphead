@@ -19,6 +19,7 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRunEffect.h" />
+    <ClInclude Include="IdleWeapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -42,6 +43,7 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="PlayerRunEffect.cpp" />
+    <ClCompile Include="IdleWeapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

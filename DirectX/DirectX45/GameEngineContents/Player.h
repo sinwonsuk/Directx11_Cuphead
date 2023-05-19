@@ -13,6 +13,10 @@ enum class PlayerState
 	IdleAim,
 	UpAim, 
 	DownAim, 
+	UpAimAttack,
+	UpAimAttackPre,
+	IdleAimAttackPre,
+	IdleAimAttack, 
 	DiagonalUpAim,
 	DiagonalDownAim,
 	Dash,
@@ -20,10 +24,16 @@ enum class PlayerState
 	Idleattack,
 	RunAttack, 
 	DiagonalUpAttack,
+	DiagonalUpAttackPre,
 	DiagonalDownAttack,
+	DiagonalDownAttackPre,
 	UpAttack, 
 	UpAttackPre, 
 	DiagonalUpRunAttack,
+	DuckAttack, 
+	DuckAttackPre, 
+	DownAttack,
+	DownAttackPre,
 };
 // Ό³Έν :
 class Player : public GameEngineActor
@@ -64,6 +74,16 @@ public:
 	void UpUpdate(float _Time);
 	void UpAttackUpdate(float _Time);
 	void UpAttackPre(float _Time);
+	void DuckAttackUpdate(float _Time);
+	void DuckAttackPreUpdate(float _Time);
+	void DiagonalDownAttackPreUpdate(float _Time); 
+	void DiagonalUpAttackPreUpdate(float _Time);
+	void IdleAimAttackUpdate(float _Time);
+	void IdleAimAttackPreUpdate(float _Time);
+	void UpAimAttackUpdate(float _Time);
+	void UpAimAttackPreUpdate(float _Time);
+	void DownAttackUpdate(float _Time);
+	void DownAttackPreUpdate(float _Time);
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -81,7 +101,7 @@ private:
 	int GravityCheck = 0; 
 	int RightCheck = 0;
 	int LeftCheck = 0;
-	float Speed = 200;
+	float Speed = 300;
 	float GravitySpeed = 400;
 	float JumpSpeed = 1200;
 	bool Gravity = false;
@@ -95,5 +115,6 @@ private:
 	bool DashEffectCheck = false;
 	int EffectCheck = 0; 
 	int Frame = 0;
+	float BulletTime = 0;
 };
 

@@ -20,7 +20,7 @@ void PlayerRunEffect::Start()
 		NewDir.MoveParentToDirectory("ContentResources");
 		NewDir.Move("ContentResources");
 		NewDir.Move("Texture");
-
+		NewDir.Move("Character");
 	
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("RunDust").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("JumpDust").GetFullPath());

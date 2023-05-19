@@ -167,6 +167,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="IdleWeapon.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -189,6 +190,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="IdleWeapon.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>

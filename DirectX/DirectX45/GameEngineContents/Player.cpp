@@ -7,7 +7,7 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineVideo.h>
-
+#include "IdleWeapon.h"
 Player::Player()
 {
 }
@@ -19,12 +19,12 @@ Player::~Player()
 
 void Player::Update(float _DeltaTime)
 {
-	if (Gravity == false)
+	if (Gravity == false && StateValue != PlayerState::Dash)
 	{
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
 	}
 	
-	
+	BulletTime += _DeltaTime;
 
 
 	float RotSpeed = 180.0f;
@@ -101,40 +101,9 @@ void Player::Update(float _DeltaTime)
 
 	
 	
-	if (true == GameEngineInput::IsDown("PlayerMoveRight"))
-	{
-		// Render0->GetTransform()->SetLocalPositiveScaleX();
-	}
-
 	
 	
-	/*if (true == GameEngineInput::IsDown("PlayerJump") && JumpCheck ==false)
-	{
-		ResetLiveTime();
-		JumpCheck = true;	
-	}
-	if (JumpCheck == true)
-	{
-		AccLiveTime(_DeltaTime);
-	}
-
-	if (GetLiveTime() < 0.4 && JumpCheck ==true)
-	{
-		GetTransform()->AddLocalPosition(float4::Up * JumpSpeed * _DeltaTime);	
-	}
-	if (GetLiveTime() > 0.4)
-	{
-		JumpCheck = false;
-	}
-
-	float4 GetLocalScale = Render0->GetTransform()->GetLocalScale();
-	float4 GetWorldScale = Render0->GetTransform()->GetWorldScale();
-
-	
-	float4 LocalPostion = GetTransform()->GetLocalPosition();*/
-
-	
-	if (GetTransform()->GetLocalScale().x > 0)
+	if (GetTransform()->GetLocalScale().x > 0 && StateValue != PlayerState::Dash)
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 		{
@@ -142,7 +111,7 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
-	if (GetTransform()->GetLocalScale().x < 0)
+	if (GetTransform()->GetLocalScale().x < 0 && StateValue != PlayerState::Dash)
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
 		{
@@ -150,6 +119,12 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 	
+	
+	
+
+
+
+
 	UpdateState(_DeltaTime);
 }
 
@@ -192,7 +167,7 @@ void Player::Start()
 		NewDir.MoveParentToDirectory("ContentResources");
 		NewDir.Move("ContentResources");
 		NewDir.Move("Texture");
-
+		NewDir.Move("Character");
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Idle").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Run").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Jump").GetFullPath());
@@ -214,6 +189,17 @@ void Player::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Up").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DiagonalUpRunAttack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAttackPre").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DuckAttack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DuckAttackPre").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DiagonalUpAttackPre").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DiagonalDownAttackPre").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DownAttack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DownAttackPre").GetFullPath());
+
+		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttackPre").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAimAttack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAimAttackPre").GetFullPath());*/
 	}
 		
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
@@ -223,26 +209,37 @@ void Player::Start()
 
 	
 
-	Render0->CreateAnimation({ .AnimationName = "Idle", .SpriteName = "Idle", .FrameInter =0.1f,.Loop = true, .ScaleToTexture = true,});
-	Render0->CreateAnimation({ .AnimationName = "Run", .SpriteName = "Run",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
-	Render0->CreateAnimation({ .AnimationName = "Jump", .SpriteName = "Jump",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
-	Render0->CreateAnimation({ .AnimationName = "Duck", .SpriteName = "Duck",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Idle", .SpriteName = "Idle", .FrameInter =0.06f,.Loop = true, .ScaleToTexture = true,});
+	Render0->CreateAnimation({ .AnimationName = "Run", .SpriteName = "Run",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Jump", .SpriteName = "Jump",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Duck", .SpriteName = "Duck",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "Parry", .SpriteName = "Parry",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "IdleAim", .SpriteName = "IdleAim",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "DiagonalDownAim", .SpriteName = "DiagonalDownAim",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "DiagonalUpAim", .SpriteName = "DiagonalUpAim",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "DownAim", .SpriteName = "DownAim",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "UpAim", .SpriteName = "UpAim",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
-	Render0->CreateAnimation({ .AnimationName = "GroundDash", .SpriteName = "GroundDash",. FrameInter = 0.1f, .Loop = false, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "GroundDash", .SpriteName = "GroundDash",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "IdleAttack", .SpriteName = "IdleAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "IdleAttackPre", .SpriteName = "IdleAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
-	Render0->CreateAnimation({ .AnimationName = "RunAttack", .SpriteName = "RunAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
-	Render0->CreateAnimation({ .AnimationName = "DiagonalUpAttack", .SpriteName = "DiagonalUpAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
-	Render0->CreateAnimation({ .AnimationName = "DiagonalDownAttack", .SpriteName = "DiagonalDownAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
-	Render0->CreateAnimation({ .AnimationName = "Up", .SpriteName = "Up",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
-	Render0->CreateAnimation({ .AnimationName = "UpAttack", .SpriteName = "UpAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
-	Render0->CreateAnimation({ .AnimationName = "DiagonalUpRunAttack", .SpriteName = "DiagonalUpRunAttack",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
-	Render0->CreateAnimation({ .AnimationName = "UpAttackPre", .SpriteName = "UpAttackPre",. FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "RunAttack", .SpriteName = "RunAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DiagonalUpAttack", .SpriteName = "DiagonalUpAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DiagonalDownAttack", .SpriteName = "DiagonalDownAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Up", .SpriteName = "Up",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "UpAttack", .SpriteName = "UpAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DiagonalUpRunAttack", .SpriteName = "DiagonalUpRunAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "UpAttackPre", .SpriteName = "UpAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DuckAttack", .SpriteName = "DuckAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DuckAttackPre", .SpriteName = "DuckAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DiagonalDownAttackPre", .SpriteName = "DiagonalDownAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DiagonalUpAttackPre", .SpriteName = "DiagonalUpAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "IdleAimAttack", .SpriteName = "IdleAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "IdleAimAttackPre", .SpriteName = "IdleAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "UpAimAttack", .SpriteName = "UpAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "UpAimAttackPre", .SpriteName = "UpAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DownAttack", .SpriteName = "DownAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "DownAttackPre", .SpriteName = "DownAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+
 	Render0->ChangeAnimation("Idle");
 
 

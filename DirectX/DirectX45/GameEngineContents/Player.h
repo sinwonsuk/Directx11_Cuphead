@@ -116,5 +116,11 @@ private:
 	int EffectCheck = 0; 
 	int Frame = 0;
 	float BulletTime = 0;
+	float RunTime = 0;
+	int Bulletlocation = 0;
+
+		
+
+
 };
 

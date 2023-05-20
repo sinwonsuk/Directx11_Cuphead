@@ -312,21 +312,21 @@ void Player::RunUpdate(float _Time)
 
 
 
-	if (GetLiveTime() > 0.5)
+	if (RunTime > 0.5)
 	{
 		std::shared_ptr<PlayerRunEffect> Object =GetLevel()->CreateActor<PlayerRunEffect>(3);
 		Object->SetState(EffectState::RunEffect);
 		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
-		ResetLiveTime();
+		RunTime = 0;
 		++EffectCheck;
 	}
 	
-	if (EffectCheck == 1 && GetLiveTime() > 0.3)
+	if (EffectCheck == 1 && RunTime > 0.3)
 	{
 		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
 		Object->SetState(EffectState::RunEffect);
 		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
-		ResetLiveTime();
+		RunTime = 0;
 		EffectCheck = 0;
 	}
 
@@ -368,9 +368,9 @@ void Player::RunUpdate(float _Time)
 	}
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
-		ChangeState(PlayerState::Jump);		
 		ResetLiveTime();
 		JumpCheck = true;
+		ChangeState(PlayerState::Jump);		
 		return;
 	}
 
@@ -379,6 +379,7 @@ void Player::RunUpdate(float _Time)
 
 void Player::JumpUpdate(float _Time)
 {
+	
 
 	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
@@ -418,16 +419,161 @@ void Player::JumpUpdate(float _Time)
 		}
 		if (GetLiveTime() > 0.25)
 		{
-			ResetLiveTime();
-		
-
 			JumpCheck = false;
 			test = true;
+			ResetLiveTime();
+
 		}
 	}
-	
-	
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveRight") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
 
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y + 25 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y + 0 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,45 });
+			Object->SetMoveDir({ 1,1 });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y + 25 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });
+			Object->SetMoveDir({ -1,1 });
+		}
+		BulletTime = 0;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveLeft") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y + 25 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y + 0 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,45 });
+			Object->SetMoveDir({ 1,1 });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y + 25 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });
+			Object->SetMoveDir({ -1,1 });
+		}
+		BulletTime = 0;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack")&& true == GameEngineInput::IsPress("PlayerMoveDown") && true == GameEngineInput::IsPress("PlayerMoveRight") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,315 });
+			Object->SetMoveDir({ 1,-1 });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,225 });
+			Object->SetMoveDir({ -1,-1 });
+		}
+		BulletTime = 0;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveDown") && true == GameEngineInput::IsPress("PlayerMoveLeft") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,315 });
+			Object->SetMoveDir({ 1,-1 });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,225 });
+			Object->SetMoveDir({ -1,-1 });
+		}
+		BulletTime = 0;
+	}
+
+
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.15)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y + 2 });
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->SetMoveDir(float4::Right);
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->SetMoveDir(float4::Left);
+		}
+		BulletTime = 0;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveDown") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 25 ,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 25,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,270 });
+			Object->SetMoveDir({ float4::Down });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 25 ,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 25,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,270 });
+			Object->SetMoveDir({ float4::Down });
+		}
+		BulletTime = 0;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveUp") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		BulletTime = 0;
+	}
+
+	
+		
+
+	
+	
 	if (Gravity == true && test == true)
 	{
 
@@ -435,7 +581,8 @@ void Player::JumpUpdate(float _Time)
 		Object->SetState(EffectState::JumpEffect);
 		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
 		test = false;
-		DashCheck = true; 
+		DashCheck = true;
+		RunTime = 0;
 		ChangeState(PlayerState::Idle);
 		return;
 	}
@@ -465,6 +612,27 @@ void Player::DuckUpdate(float _Time)
 
 void Player::ParryUpdate(float _Time)
 {
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.15)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y + 2 });
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->SetMoveDir(float4::Right);
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->SetMoveDir(float4::Left);
+		}
+		BulletTime = 0;
+		BulletTime = 0;
+	}
+
+
 	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
@@ -498,11 +666,156 @@ void Player::ParryUpdate(float _Time)
 		}
 	}
 
+
 	if (true == GameEngineInput::IsPress("PlayerDash") && DashCheck == true)
 	{
 		DashCheck = false;
 		ChangeState(PlayerState::Dash);
 		return;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveRight") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y + 25 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y + 0 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,45 });
+			Object->SetMoveDir({ 1,1 });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y + 25 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });
+			Object->SetMoveDir({ -1,1 });
+		}
+		BulletTime = 0;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveLeft") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y + 25 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y + 0 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,45 });
+			Object->SetMoveDir({ 1,1 });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y + 25 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });
+			Object->SetMoveDir({ -1,1 });
+		}
+		BulletTime = 0;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveDown") && true == GameEngineInput::IsPress("PlayerMoveRight") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,315 });
+			Object->SetMoveDir({ 1,-1 });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,225 });
+			Object->SetMoveDir({ -1,-1 });
+		}
+		BulletTime = 0;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveDown") && true == GameEngineInput::IsPress("PlayerMoveLeft") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,315 });
+			Object->SetMoveDir({ 1,-1 });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y - 45 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,225 });
+			Object->SetMoveDir({ -1,-1 });
+		}
+		BulletTime = 0;
+	}
+
+
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.15)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y + 2 });
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->SetMoveDir(float4::Right);
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->SetMoveDir(float4::Left);
+		}
+		BulletTime = 0;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveDown") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 25 ,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 25,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,270 });
+			Object->SetMoveDir({ float4::Down });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 25 ,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 25,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,270 });
+			Object->SetMoveDir({ float4::Down });
+		}
+		BulletTime = 0;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveUp") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		BulletTime = 0;
 	}
 
 
@@ -551,7 +864,7 @@ void Player::UpAimUpdate(float _Time)
 	}
 	if (true == GameEngineInput::IsPress("PlayerAttack"))
 	{
-		ChangeState(PlayerState::UpAttackPre);
+		ChangeState(PlayerState::UpAimAttackPre);
 		return;
 	}
 
@@ -764,22 +1077,76 @@ void Player::DashUpdate(float _Time)
 void Player::IdleAttackUpdate(float _Time)
 {
 
-	
-	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.15)
+	switch (Bulletlocation)
 	{
-		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
-		Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x+50,GetTransform()->GetLocalPosition().y+7 });
-		Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 10 });
-		if (GetTransform()->GetLocalScale().x > 0)
+	case 0:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
 		{
-			Object->SetMoveDir(float4::Right);
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y + 20 });
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 10 });
+				Object->SetMoveDir(float4::Right);
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+				Object->SetMoveDir(float4::Left);
+			}
+			BulletTime = 0;
 		}
-		if (GetTransform()->GetLocalScale().x < 0)
-		{
-			Object->SetMoveDir(float4::Left);
-		}
-		BulletTime = 0;
+		++Bulletlocation;
 	}
+	break;
+	case 1:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y  });
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 10 });
+				Object->SetMoveDir(float4::Right);
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+				Object->SetMoveDir(float4::Left);
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 2:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y -20 });
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 10 });
+				Object->SetMoveDir(float4::Right);
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+				Object->SetMoveDir(float4::Left);
+			}
+			BulletTime = 0;
+		}
+		Bulletlocation = 0;
+	}
+	break;
+	default:
+		break;
+	}
+	
+	
 
 	
 
@@ -797,6 +1164,14 @@ void Player::IdleAttackUpdate(float _Time)
 	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveUp"))
 	{
 		ChangeState(PlayerState::UpAttackPre);
+		return;
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerJump"))
+	{
+		ChangeState(PlayerState::Jump);
+		ResetLiveTime();
+		JumpCheck = true;
 		return;
 	}
 
@@ -820,17 +1195,19 @@ void Player::IdleAttackUpdate(float _Time)
 void Player::IdleAttackPreUpdate(float _Time)
 {
 
-	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.15)
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
 	{
 		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
-		Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x+50,GetTransform()->GetLocalPosition().y+7 });
-		Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y-10  });
+		Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y + 0 });
+
 		if (GetTransform()->GetLocalScale().x > 0)
 		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 10 });
 			Object->SetMoveDir(float4::Right);
 		}
 		if (GetTransform()->GetLocalScale().x < 0)
 		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
 			Object->SetMoveDir(float4::Left);
 		}
 		BulletTime = 0;
@@ -846,6 +1223,13 @@ void Player::IdleAttackPreUpdate(float _Time)
 	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		ChangeState(PlayerState::RunAttack);
+		return;
+	}
+	if (true == GameEngineInput::IsPress("PlayerJump"))
+	{
+		ChangeState(PlayerState::Jump);
+		ResetLiveTime();
+		JumpCheck = true;
 		return;
 	}
 
@@ -875,8 +1259,97 @@ void Player::IdleAttackPreUpdate(float _Time)
 
 void Player::RunAttackUpdate(float _Time)
 {
+	switch (Bulletlocation)
+	{
+	case 0:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+			
 
-	
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y + 20 });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 100,GetTransform()->GetLocalPosition().y - 20 });
+				Object->SetMoveDir(float4::Right);
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 50,GetTransform()->GetLocalPosition().y + 20 });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 100,GetTransform()->GetLocalPosition().y - 20 });
+				Object->SetMoveDir(float4::Left);
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 1:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 100,GetTransform()->GetLocalPosition().y - 20 });
+				Object->SetMoveDir(float4::Right);
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 50,GetTransform()->GetLocalPosition().y });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 100,GetTransform()->GetLocalPosition().y - 20 });
+				Object->SetMoveDir(float4::Left);
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 2:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y - 20 });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 100,GetTransform()->GetLocalPosition().y - 20 });
+				Object->SetMoveDir(float4::Right);
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 50,GetTransform()->GetLocalPosition().y - 20 });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 100,GetTransform()->GetLocalPosition().y - 20 });
+				Object->SetMoveDir(float4::Left);
+			}
+			BulletTime = 0;
+		}
+		Bulletlocation = 0;
+	}
+	break;
+	default:
+		break;
+	}
+
+	if (RunTime > 0.5)
+	{
+		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+		Object->SetState(EffectState::RunEffect);
+		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
+		RunTime = 0;
+		++EffectCheck;
+	}
+
+	if (EffectCheck == 1 && RunTime > 0.3)
+	{
+		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+		Object->SetState(EffectState::RunEffect);
+		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
+		RunTime = 0;
+		EffectCheck = 0;
+	}
 
 	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
@@ -934,6 +1407,7 @@ void Player::RunAttackUpdate(float _Time)
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
 		ChangeState(PlayerState::Jump);
+		ResetLiveTime();
 		JumpCheck = true;
 		return;
 	}
@@ -944,6 +1418,86 @@ void Player::RunAttackUpdate(float _Time)
 
 void Player::DiagonalUpRunAttackUpdate(float _Time)
 {
+	switch (Bulletlocation)
+	{
+	case 0:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 100,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,45 });
+				Object->SetMoveDir({ 1,1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 100,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });
+				Object->SetMoveDir({ -1,1 });
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 1:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 100,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,45 });
+				Object->SetMoveDir({ 1,1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 100,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });
+				Object->SetMoveDir({ -1,1 });
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 2:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 100,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,45 });
+				Object->SetMoveDir({ 1,1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 100,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });
+				Object->SetMoveDir({ -1,1 });
+			}
+			BulletTime = 0;
+		}
+		Bulletlocation = 0;
+	}
+	break;
+	default:
+		break;
+	}
 
 	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
@@ -1020,6 +1574,12 @@ void Player::UpUpdate(float _Time)
 		return;
 	}
 
+	if (GameEngineInput::IsPress("PlayerRock"))
+	{
+		ChangeState(PlayerState::UpAim);
+		return;
+	}
+
 	if (GameEngineInput::IsUp("PlayerMoveUp"))
 	{
 		ChangeState(PlayerState::Idle);
@@ -1051,6 +1611,26 @@ void Player::UpUpdate(float _Time)
 
 void Player::UpAttackUpdate(float _Time)
 {
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x+20 ,GetTransform()->GetLocalPosition().y+80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x-20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20,GetTransform()->GetLocalPosition().y +80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		BulletTime = 0;
+	}
+
 	if (GameEngineInput::IsPress("PlayerMoveRight") && GameEngineInput::IsPress("PlayerAttack"))
 	{
 		ChangeState(PlayerState::DiagonalUpRunAttack);
@@ -1091,6 +1671,27 @@ void Player::UpAttackUpdate(float _Time)
 
 void Player::UpAttackPre(float _Time)
 {
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		BulletTime = 0;
+	}
+
 	if (Render0->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::UpAttack);
@@ -1133,6 +1734,26 @@ void Player::UpAttackPre(float _Time)
 
 void Player::DuckAttackUpdate(float _Time)
 {
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 80 ,GetTransform()->GetLocalPosition().y -40 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 80 ,GetTransform()->GetLocalPosition().y - 40 });
+			
+			Object->SetMoveDir({ float4::Right });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 80 ,GetTransform()->GetLocalPosition().y -40 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 80 ,GetTransform()->GetLocalPosition().y -40 });
+
+			Object->SetMoveDir({ float4::Left });
+		}
+		BulletTime = 0;
+	}
+
 	if (true == GameEngineInput::IsUp("PlayerMoveDown"))
 	{
 		ChangeState(PlayerState::Idle);
@@ -1149,6 +1770,26 @@ void Player::DuckAttackUpdate(float _Time)
 
 void Player::DuckAttackPreUpdate(float _Time)
 {
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 80 ,GetTransform()->GetLocalPosition().y - 40 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 80 ,GetTransform()->GetLocalPosition().y - 40 });
+
+			Object->SetMoveDir({ float4::Right });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 80 ,GetTransform()->GetLocalPosition().y - 40 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 80 ,GetTransform()->GetLocalPosition().y - 40 });
+
+			Object->SetMoveDir({ float4::Left });
+		}
+		BulletTime = 0;
+	}
+
 	if (true == GameEngineInput::IsUp("PlayerMoveDown"))
 	{
 		ChangeState(PlayerState::Idle);
@@ -1170,6 +1811,88 @@ void Player::DuckAttackPreUpdate(float _Time)
 
 void Player::DiagonalDownAttackUpdate(float _Time)
 {
+
+	switch (Bulletlocation)
+	{
+	case 0:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,315 });
+				Object->SetMoveDir({ 1,-1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,225 });
+				Object->SetMoveDir({ -1,-1 });
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 1:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,315 });
+				Object->SetMoveDir({ 1,-1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y -45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,225 });
+				Object->SetMoveDir({ -1,-1 });
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 2:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,315 });
+				Object->SetMoveDir({ 1,-1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,225 });
+				Object->SetMoveDir({ -1,-1 });
+			}
+			BulletTime = 0;
+		}
+		Bulletlocation = 0;
+	}
+	break;
+	default:
+		break;
+	}
+
 	if (true == GameEngineInput::IsUp("PlayerRock"))
 	{
 		ChangeState(PlayerState::IdleAimAttack);
@@ -1201,6 +1924,90 @@ void Player::DiagonalDownAttackUpdate(float _Time)
 }
 void Player::DiagonalDownAttackPreUpdate(float _Time)
 {
+
+
+	switch (Bulletlocation)
+	{
+	case 0:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,315 });
+				Object->SetMoveDir({ 1,-1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,225 });
+				Object->SetMoveDir({ -1,-1 });
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 1:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,315 });
+				Object->SetMoveDir({ 1,-1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,225 });
+				Object->SetMoveDir({ -1,-1 });
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 2:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,315 });
+				Object->SetMoveDir({ 1,-1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y - 45 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,225 });
+				Object->SetMoveDir({ -1,-1 });
+			}
+			BulletTime = 0;
+		}
+		Bulletlocation = 0;
+	}
+	break;
+	default:
+		break;
+	}
+
+
 	if (true == GameEngineInput::IsUp("PlayerRock"))
 	{
 		ChangeState(PlayerState::IdleAimAttack);
@@ -1241,7 +2048,24 @@ void Player::DiagonalDownAttackPreUpdate(float _Time)
 
 void Player::IdleAimAttackUpdate(float _Time)
 {
-	
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y + 0 });
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->SetMoveDir(float4::Right);
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->SetMoveDir(float4::Left);
+		}
+		BulletTime = 0;
+	}
+
 	if (true == GameEngineInput::IsUp("PlayerRock"))
 	{
 		ChangeState(PlayerState::Idle);
@@ -1299,7 +2123,24 @@ void Player::IdleAimAttackUpdate(float _Time)
 
 void Player::IdleAimAttackPreUpdate(float _Time)
 {
-	
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50,GetTransform()->GetLocalPosition().y + 0 });
+
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->SetMoveDir(float4::Right);
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->SetMoveDir(float4::Left);
+		}
+		BulletTime = 0;
+	}
+
 	if (true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		ChangeState(PlayerState::DiagonalUpAttack);
@@ -1337,6 +2178,26 @@ void Player::IdleAimAttackPreUpdate(float _Time)
 
 void Player::UpAimAttackUpdate(float _Time)
 {
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		BulletTime = 0;
+	}
+
 	if (true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		ChangeState(PlayerState::DiagonalUpAttack);
@@ -1369,6 +2230,26 @@ void Player::UpAimAttackUpdate(float _Time)
 
 void Player::UpAimAttackPreUpdate(float _Time)
 {
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20 ,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20,GetTransform()->GetLocalPosition().y + 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			Object->SetMoveDir({ float4::Up });
+		}
+		BulletTime = 0;
+	}
+
 	if (true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		ChangeState(PlayerState::DiagonalUpAttack);
@@ -1406,6 +2287,26 @@ void Player::UpAimAttackPreUpdate(float _Time)
 
 void Player::DownAttackUpdate(float _Time)
 {
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 25 ,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 25,GetTransform()->GetLocalPosition().y -80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,270 });
+			Object->SetMoveDir({ float4::Down });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 25 ,GetTransform()->GetLocalPosition().y -80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 25,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,270 });
+			Object->SetMoveDir({ float4::Down });
+		}
+		BulletTime = 0;
+	}
+
 	if (true == GameEngineInput::IsPress("PlayerMoveDown") && true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		ChangeState(PlayerState::DiagonalDownAttack);
@@ -1442,6 +2343,27 @@ void Player::DownAttackUpdate(float _Time)
 
 void Player::DownAttackPreUpdate(float _Time)
 {
+
+	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+	{
+		std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 25 ,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 25,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,270 });
+			Object->SetMoveDir({ float4::Down });
+		}
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 25 ,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 25,GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,270 });
+			Object->SetMoveDir({ float4::Down });
+		}
+		BulletTime = 0;
+	}
+
 	if (true == GameEngineInput::IsPress("PlayerMoveDown") && true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		ChangeState(PlayerState::DiagonalDownAttack);
@@ -1484,6 +2406,91 @@ void Player::DownAttackPreUpdate(float _Time)
 
 void Player::DiagonalUpAttackUpdate(float _Time)
 {
+
+	switch (Bulletlocation)
+	{
+	case 0:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,45 });
+				Object->SetMoveDir({ 1,1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });
+				Object->SetMoveDir({ -1,1 });
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 1:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+			
+			
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,45 });
+				Object->SetMoveDir({ 1,1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x -60,GetTransform()->GetLocalPosition().y +25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });
+				Object->SetMoveDir({ -1,1 });
+			}
+			BulletTime = 0;
+		}
+		++Bulletlocation;
+	}
+	break;
+	case 2:
+	{
+		if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.13)
+		{
+			std::shared_ptr<IdleWeapon> Object = GetLevel()->CreateActor<IdleWeapon>(3);
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,45 });
+				Object->SetMoveDir({ 1,1 });
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y + 25 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });
+				Object->SetMoveDir({ -1,1 });
+			}
+			BulletTime = 0;
+		}
+		Bulletlocation = 0;
+	}
+	break;
+	default:
+		break;
+	}
+
+
+
+
 	if (true == GameEngineInput::IsUp("PlayerRock") && true == GameEngineInput::IsPress("PlayerMoveLeft") && true == GameEngineInput::IsPress("PlayerMoveUp"))
 	{
 		ChangeState(PlayerState::DiagonalUpRunAttack);

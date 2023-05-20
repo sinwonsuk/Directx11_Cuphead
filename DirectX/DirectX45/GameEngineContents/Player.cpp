@@ -25,7 +25,7 @@ void Player::Update(float _DeltaTime)
 	}
 	
 	BulletTime += _DeltaTime;
-
+	RunTime += _DeltaTime; 
 
 	float RotSpeed = 180.0f;
 

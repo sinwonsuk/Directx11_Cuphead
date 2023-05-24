@@ -3,6 +3,8 @@
 #include <GameEngineCore\GameEngineCore.h>
 #include "PlayLevel.h"
 #include "TitleLevel.h"
+#include "giantStageLevel.h"
+#include "DogAirplaneLevel.h"
 #include <GameEngineCore/GameEngineCoreWindow.h>
 
 ContentsCore::ContentsCore() 
@@ -32,9 +34,12 @@ void ContentsCore::GameStart()
 
 	ContentsResourcesCreate();
 
+	
 	GameEngineCore::CreateLevel<TitleLevel>();
 	GameEngineCore::CreateLevel<PlayLevel>();
-	GameEngineCore::ChangeLevel("PlayLevel");
+	GameEngineCore::CreateLevel<giantStageLevel>();
+	GameEngineCore::CreateLevel<DogAirplaneLevel>();
+	GameEngineCore::ChangeLevel("DogAirplaneLevel");
 }
 
 void ContentsCore::GameEnd() 

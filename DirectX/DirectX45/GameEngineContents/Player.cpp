@@ -97,12 +97,6 @@ void Player::Update(float _DeltaTime)
 
 
 	
-
-
-	
-	
-	
-	
 	if (GetTransform()->GetLocalScale().x > 0 && StateValue != PlayerState::Dash)
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
@@ -195,7 +189,7 @@ void Player::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DiagonalDownAttackPre").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DownAttack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DownAttackPre").GetFullPath());
-
+		
 		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttackPre").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAimAttack").GetFullPath());
@@ -242,7 +236,7 @@ void Player::Start()
 
 	Render0->ChangeAnimation("Idle");
 
-
+	\
 	
 }
 

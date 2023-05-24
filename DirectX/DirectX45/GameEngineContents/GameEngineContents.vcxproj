@@ -167,6 +167,11 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="DogAirplane.h" />
+    <ClInclude Include="DogAirplaneBackground.h" />
+    <ClInclude Include="DogAirplaneLevel.h" />
+    <ClInclude Include="GiantBoss.h" />
+    <ClInclude Include="giantStageLevel.h" />
     <ClInclude Include="IdleWeapon.h" />
     <ClInclude Include="Player.h">
       <SubType>
@@ -190,6 +195,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="DogAirplane.cpp" />
+    <ClCompile Include="DogAirplaneBackground.cpp" />
+    <ClCompile Include="DogAirplaneLevel.cpp" />
+    <ClCompile Include="DogAirplaneState.cpp" />
+    <ClCompile Include="EnumClass.cpp" />
+    <ClCompile Include="GiantBoss.cpp" />
+    <ClCompile Include="GiantBossState.cpp" />
+    <ClCompile Include="giantStageLevel.cpp" />
     <ClCompile Include="IdleWeapon.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>

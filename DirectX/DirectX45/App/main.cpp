@@ -36,6 +36,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	GameEngineCore::Start(hInstance, 
 		ContentsCore::GameStart, 
 		ContentsCore::GameEnd,
-		{0, 0}
+		{ 0, 0 }, {1280,720}
 	);
 }

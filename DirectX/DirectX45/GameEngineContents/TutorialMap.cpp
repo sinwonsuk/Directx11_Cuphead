@@ -12,7 +12,7 @@ TutorialMap::~TutorialMap()
 
 void TutorialMap::Start()
 {
-	CreateComponent<GameEngineSpriteRenderer>();
+
 
 
 	Render1 = CreateComponent<GameEngineSpriteRenderer>();

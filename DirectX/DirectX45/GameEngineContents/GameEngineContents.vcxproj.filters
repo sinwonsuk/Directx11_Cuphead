@@ -20,6 +20,13 @@
     </ClInclude>
     <ClInclude Include="PlayerRunEffect.h" />
     <ClInclude Include="IdleWeapon.h" />
+    <ClInclude Include="giantStageLevel.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="GiantBoss.h" />
+    <ClInclude Include="DogAirplaneLevel.h" />
+    <ClInclude Include="DogAirplane.h" />
+    <ClInclude Include="DogAirplaneBackground.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -44,6 +51,18 @@
     </ClCompile>
     <ClCompile Include="PlayerRunEffect.cpp" />
     <ClCompile Include="IdleWeapon.cpp" />
+    <ClCompile Include="giantStageLevel.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="GiantBoss.cpp" />
+    <ClCompile Include="GiantBossState.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="DogAirplaneLevel.cpp" />
+    <ClCompile Include="DogAirplane.cpp" />
+    <ClCompile Include="DogAirplaneState.cpp" />
+    <ClCompile Include="DogAirplaneBackground.cpp" />
+    <ClCompile Include="EnumClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

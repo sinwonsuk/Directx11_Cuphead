@@ -197,7 +197,7 @@ void Player::Start()
 	}
 		
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
-	Render0 = CreateComponent<GameEngineSpriteRenderer>();
+	Render0 = CreateComponent<GameEngineSpriteRenderer>(100);
 	
 
 

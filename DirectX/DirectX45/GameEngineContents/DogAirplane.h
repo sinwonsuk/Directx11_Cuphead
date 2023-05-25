@@ -24,7 +24,7 @@ public:
 	DogAirplane(DogAirplane&& _Other) noexcept = delete;
 	DogAirplane& operator=(const DogAirplane& _Other) = delete;
 	DogAirplane& operator=(DogAirplane&& _Other) noexcept = delete;
-	void ChangeState(DogAirplane _State);
+
 	void UpdateState(float _Time);
 	void AnimationCheck(const std::string_view& _AnimationName);
 	void BossIdleUpdate(float _Time);
@@ -40,17 +40,20 @@ protected:
 
 private:
 	std::vector<int> a;
-	float DownSpeed = 200;
+	float DownSpeed = 600;
 	DogAirplaneState StateValue = DogAirplaneState::BossIntro;
 
 	float Angle = 0.0f;
 	std::shared_ptr<class GameEngineSpriteRenderer> GirlDog;
 	std::shared_ptr<class GameEngineSpriteRenderer> dogcopter;
-	std::shared_ptr<class GameEngineSpriteRenderer> bulldog;
+	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIntro;
 	std::shared_ptr<class GameEngineSpriteRenderer> AirplaneSpin;
-	std::shared_ptr<class GameEngineSpriteRenderer> Airplane;
-	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro1;
-	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro2;
+	std::shared_ptr<class GameEngineSpriteRenderer> Airplane_Back;
+	std::shared_ptr<class GameEngineSpriteRenderer> Airplane_Front;
+	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIdle;
+	
 	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
 	
+	bool test = false;
+	bool test1 = false;
 };

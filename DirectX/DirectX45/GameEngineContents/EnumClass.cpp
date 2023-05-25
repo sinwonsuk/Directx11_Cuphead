@@ -10,5 +10,11 @@ enum class DogAirplaneType
 
 	
 	Boss,
+	BulDogIntro,
+	DogCopterIntro, 
+	ChinookIntro,
+	Airplane, 
+	AirplaneSpin,
+	BulDogIdle,
 	Player,
 };

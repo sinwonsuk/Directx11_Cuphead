@@ -58,20 +58,48 @@ void DogAirplane::BossIdleUpdate(float _Time)
 	
 		
 	AirplaneSpin->GetTransform()->AddLocalPosition({ float4::Down*DownSpeed * _Time });
-	
-		if (AirplaneSpin->GetTransform()->GetLocalPosition().y < 200)
-		{
-			AirplaneSpin->GetTransform()->AddLocalPosition({ float4::Up * DownSpeed* _Time });
-		}
+	Airplane_Back->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
+	Airplane_Front->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
+	bulldogIdle->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
 
 
+
 	
-		Airplane->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
+
+	if (AirplaneSpin->GetTransform()->GetLocalPosition().y < 200 && test ==false)
+	{			
+		test = true;
+	}
+
+	if (test == true)
+	{
+		DownSpeed -= 12;
+	}
+	if (AirplaneSpin->GetTransform()->GetLocalPosition().y > 200 && test == true )
+	{
+		DownSpeed = 0;
+		test = false;
+	}
+
+
+
+	if (bulldogIdle->GetTransform()->GetLocalPosition().y < 200)
+	{
+		
+		//bulldogIdle->GetTransform()->AddLocalPosition({ float4::Up * DownSpeed * _Time });
+	}
+
+	if (Airplane_Front->GetTransform()->GetLocalPosition().y < 150)
+	{
 	
-		if (Airplane->GetTransform()->GetLocalPosition().y < 200)
-		{
-			Airplane->GetTransform()->AddLocalPosition({ float4::Up * DownSpeed * _Time });
-		}
+		//Airplane_Front->GetTransform()->AddLocalPosition({ float4::Up * DownSpeed * _Time });
+	}
+
+	if (Airplane_Back->GetTransform()->GetLocalPosition().y < 150)
+	{
+		
+		//Airplane_Back->GetTransform()->AddLocalPosition({ float4::Up * DownSpeed * _Time });
+	}
 
 
 }
@@ -87,18 +115,18 @@ void DogAirplane::BossIntroUpdate(float _Time)
 		dogcopter->Off();
 		AirplaneSpin->On();
 
-		Airplane->On();
+		Airplane_Back->On();
 		ChangeState(DogAirplaneState::BossIdle);
-		return; 
+		return;
 	}
 
 	if (GirlDog->GetCurrentFrame() > 5)
 	{
-		bulldog->On();
+		bulldogIntro->On();
 	}
-	if (bulldog->IsAnimationEnd())
+	if (bulldogIntro->IsAnimationEnd())
 	{
-		bulldog->Off();
+		bulldogIntro->Off();
 	}
 
 	

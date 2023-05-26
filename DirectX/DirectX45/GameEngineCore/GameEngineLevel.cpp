@@ -4,6 +4,7 @@
 #include "GameEngineCamera.h"
 #include "GameEngineGUI.h"
 #include "GameEngineCollision.h"
+#include <GameEnginePlatform/GameEngineInput.h>
 
 GameEngineLevel::GameEngineLevel() 
 {
@@ -15,6 +16,8 @@ GameEngineLevel::GameEngineLevel()
 	UICamera->SetProjectionType(CameraType::Orthogonal);
 
 	Cameras.insert(std::make_pair(100, UICamera));
+
+	LastTarget = GameEngineRenderTarget::Create(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::Null);
 }
 
 GameEngineLevel::~GameEngineLevel() 
@@ -25,7 +28,6 @@ GameEngineLevel::~GameEngineLevel()
 
 void GameEngineLevel::Start()
 {
-
 }
 
 void GameEngineLevel::ActorUpdate(float _DeltaTime)
@@ -54,15 +56,55 @@ void GameEngineLevel::ActorUpdate(float _DeltaTime)
 
 				Actor->AllAccTime(_DeltaTime);
 				Actor->AllUpdate(_DeltaTime);
+			}
+		}
+	}
+}
 
-				//if (false == Actor->IsUpdate())
-				//{
-				//	continue;
-				//}
+void GameEngineLevel::ActorLevelChangeStart()
+{
 
-				//GameEngineTransform* Transform = Actor->GetTransform();
-				//Transform->AllAccTime(_DeltaTime);
-				//Transform->AllUpdate(_DeltaTime);
+	{
+		// 이건 나중에 만들어질 랜더러의 랜더가 다 끝나고 되는 랜더가 될겁니다.
+		std::map<int, std::list<std::shared_ptr<GameEngineActor>>>::iterator GroupStartIter = Actors.begin();
+		std::map<int, std::list<std::shared_ptr<GameEngineActor>>>::iterator GroupEndIter = Actors.end();
+
+		for (; GroupStartIter != GroupEndIter; ++GroupStartIter)
+		{
+			std::list<std::shared_ptr<GameEngineActor>>& ActorList = GroupStartIter->second;
+
+			std::list<std::shared_ptr<GameEngineActor>>::iterator ActorStart = ActorList.begin();
+			std::list<std::shared_ptr<GameEngineActor>>::iterator ActorEnd = ActorList.end();
+
+			for (; ActorStart != ActorEnd; ++ActorStart)
+			{
+				std::shared_ptr<GameEngineActor>& Actor = *ActorStart;
+
+				Actor->AllLevelChangeStart();
+			}
+		}
+	}
+}
+void GameEngineLevel::ActorLevelChangeEnd()
+{
+
+	{
+		// 이건 나중에 만들어질 랜더러의 랜더가 다 끝나고 되는 랜더가 될겁니다.
+		std::map<int, std::list<std::shared_ptr<GameEngineActor>>>::iterator GroupStartIter = Actors.begin();
+		std::map<int, std::list<std::shared_ptr<GameEngineActor>>>::iterator GroupEndIter = Actors.end();
+
+		for (; GroupStartIter != GroupEndIter; ++GroupStartIter)
+		{
+			std::list<std::shared_ptr<GameEngineActor>>& ActorList = GroupStartIter->second;
+
+			std::list<std::shared_ptr<GameEngineActor>>::iterator ActorStart = ActorList.begin();
+			std::list<std::shared_ptr<GameEngineActor>>::iterator ActorEnd = ActorList.end();
+
+			for (; ActorStart != ActorEnd; ++ActorStart)
+			{
+				std::shared_ptr<GameEngineActor>& Actor = *ActorStart;
+
+				Actor->AllLevelChangeEnd();
 			}
 		}
 	}
@@ -80,15 +122,24 @@ void GameEngineLevel::ActorRender(float _DeltaTime)
 		Cam->Setting();
 		Cam->CameraTransformUpdate();
 		Cam->Render(_DeltaTime);
+		Cam->CamTarget->Effect();
 	}
+
+	LastTarget->Clear();
 
 	for (std::pair<int, std::shared_ptr<GameEngineCamera>> Pair : Cameras)
 	{
 		std::shared_ptr<GameEngineCamera> Camera = Pair.second;
 		std::shared_ptr<GameEngineRenderTarget> Target = Camera->GetCamTarget();
 
-		GameEngineDevice::GetBackBufferTarget()->Merge(Target);
+		LastTarget->Merge(Target);
 	}
+
+	// 백버퍼는 효과를 줄수가 없습니다.
+
+
+
+	GameEngineDevice::GetBackBufferTarget()->Merge(LastTarget);
 
 
 	//// 이건 나중에 만들어질 랜더러의 랜더가 다 끝나고 되는 랜더가 될겁니다.
@@ -119,7 +170,17 @@ void GameEngineLevel::ActorRender(float _DeltaTime)
 	//	}
 	//}
 
-	GameEngineGUI::Render(GetSharedThis(), _DeltaTime);
+	static bool GUIRender = true;
+
+	if (true == GameEngineInput::IsDown("GUISwitch"))
+	{
+		GUIRender = !GUIRender;
+	}
+
+	if (true == GUIRender)
+	{
+		// GameEngineGUI::Render(GetSharedThis(), _DeltaTime);
+	}
 
 }
 
@@ -247,4 +308,37 @@ std::shared_ptr<GameEngineCamera> GameEngineLevel::GetCamera(int _CameraOrder)
 	std::shared_ptr<GameEngineCamera> Camera = FindIter->second;
 
 	return Camera;
+}
+
+void GameEngineLevel::TextureUnLoad(GameEngineLevel* _NextLevel)
+{
+	for (const std::pair<std::string, std::string>& Pair : LoadEndPath)
+	{
+		if (nullptr != _NextLevel && true == _NextLevel->TexturePath.contains(Pair.first))
+		{
+			continue;
+		}
+
+		GameEngineTexture::UnLoad(Pair.first);
+		TexturePath.insert(std::make_pair(Pair.first, Pair.second));
+	}
+
+	LoadEndPath.clear();
+}
+
+void GameEngineLevel::TextureReLoad(GameEngineLevel* _PrevLevel)
+{
+
+	for (const std::pair<std::string, std::string>& Pair : TexturePath)
+	{
+		if (nullptr != _PrevLevel && true == _PrevLevel->TexturePath.contains(Pair.first))
+		{
+			continue;
+		}
+
+		GameEngineTexture::ReLoad(Pair.second, Pair.first);
+		LoadEndPath.insert(std::make_pair(Pair.first, Pair.second));
+	}
+
+	TexturePath.clear();
 }

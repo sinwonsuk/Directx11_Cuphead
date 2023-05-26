@@ -17,6 +17,7 @@ DogAirplane::~DogAirplane()
 
 void DogAirplane::AnimationCheck(const std::string_view& _AnimationName)
 {
+	bulldogIdle->ChangeAnimation(_AnimationName);
 }
 
 
@@ -39,47 +40,52 @@ void DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Idle").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Left").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Right").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Jump").GetFullPath());
 	}
 
-	GirlDog = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::ChinookIntro);
+	GirlDog = CreateComponent<GameEngineSpriteRenderer>();
 	GirlDog->CreateAnimation({ .AnimationName = "Chinook_Pilot_Saluki", .SpriteName = "Chinook_Pilot_Saluki", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	GirlDog->ChangeAnimation("Chinook_Pilot_Saluki");
-	GirlDog->GetTransform()->AddLocalPosition({ 130,0 }); 
+	GirlDog->GetTransform()->AddLocalPosition({ 130,0, 81 }); 
 	 
-	dogcopter = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::DogCopterIntro);
+	dogcopter = CreateComponent<GameEngineSpriteRenderer>();
 	dogcopter->CreateAnimation({ .AnimationName = "ph1_dogcopter_intro", .SpriteName = "ph1_dogcopter_intro", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	dogcopter->ChangeAnimation("ph1_dogcopter_intro");
-	dogcopter->GetTransform()->AddLocalPosition({ 130,0 });
+	dogcopter->GetTransform()->AddLocalPosition({ 130,0,82 });
 
-	bulldogIntro = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::BulDogIntro);
+	bulldogIntro = CreateComponent<GameEngineSpriteRenderer>();
 	bulldogIntro->CreateAnimation({ .AnimationName = "ph1_bulldog_intro", .SpriteName = "ph1_bulldog_intro", .FrameInter = 0.07f,.Loop = false, .ScaleToTexture = true, });
 	bulldogIntro->ChangeAnimation("ph1_bulldog_intro");
+	bulldogIntro->GetTransform()->AddLocalPosition({ 0,0,89 });
 	bulldogIntro->Off();
 
-	AirplaneSpin = CreateComponent<GameEngineSpriteRenderer>(11);
+	AirplaneSpin = CreateComponent<GameEngineSpriteRenderer>();
 	AirplaneSpin->CreateAnimation({ .AnimationName = "DogAirplane", .SpriteName = "DogAirplane", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	AirplaneSpin->ChangeAnimation("DogAirplane"); 
-	AirplaneSpin->GetTransform()->AddLocalPosition({ 0,600 });
+	AirplaneSpin->GetTransform()->AddLocalPosition({ 0,600,83 });
 	AirplaneSpin->On();
 
-	Airplane_Back = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Airplane);
+	Airplane_Back = CreateComponent<GameEngineSpriteRenderer>();
 	Airplane_Back->CreateAnimation({ .AnimationName = "Airplane_Back", .SpriteName = "Airplane_Back", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	Airplane_Back->ChangeAnimation("Airplane_Back");
-	Airplane_Back->GetTransform()->AddLocalPosition({ 0,600 });
+	Airplane_Back->GetTransform()->AddLocalPosition({ 0,600,86 });
 	Airplane_Back->On();
 
-	Airplane_Front = CreateComponent<GameEngineSpriteRenderer>(10);
+	Airplane_Front = CreateComponent<GameEngineSpriteRenderer>();
 	Airplane_Front->CreateAnimation({ .AnimationName = "Airplane_Front", .SpriteName = "Airplane_Front", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	Airplane_Front->ChangeAnimation("Airplane_Front");
-	Airplane_Front->GetTransform()->AddLocalPosition({ 0,600 });
+
+	Airplane_Front->GetTransform()->AddLocalPosition({ 0,600,84 });
 	Airplane_Front->On();
 
-	bulldogIdle = CreateComponent<GameEngineSpriteRenderer>(11);
+	bulldogIdle = CreateComponent<GameEngineSpriteRenderer>();
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Idle", .SpriteName = "bulldog_Idle", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
+	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Jump", .SpriteName = "bulldog_Jump", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	bulldogIdle->ChangeAnimation("bulldog_Idle");
-	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650 });
-	bulldogIdle->On();
+	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,82 });
 
+	bulldogIdle->On();
+	
 	
 	
 }

@@ -1,72 +1,112 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="TitleLevel.h">
       <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
       <Filter>Levels</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="PrecompileHeader.h" />
-    <ClInclude Include="TestObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="TutorialMap.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerRunEffect.h" />
-    <ClInclude Include="IdleWeapon.h" />
     <ClInclude Include="giantStageLevel.h">
       <Filter>Levels</Filter>
     </ClInclude>
-    <ClInclude Include="GiantBoss.h" />
-    <ClInclude Include="DogAirplaneLevel.h" />
-    <ClInclude Include="DogAirplane.h" />
-    <ClInclude Include="DogAirplaneBackground.h" />
-    <ClInclude Include="NpcAirplane.h" />
+    <ClInclude Include="DogAirplaneLevel.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialMap.h">
+      <Filter>Object\TutorialMap</Filter>
+    </ClInclude>
+    <ClInclude Include="DogAirplane.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="DogAirplaneBackground.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsCore.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleWeapon.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObject.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcAirplane.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRunEffect.h">
+      <Filter>Object\test</Filter>
+    </ClInclude>
+    <ClInclude Include="PrecompileHeader.h">
+      <Filter>Object\test</Filter>
+    </ClInclude>
+    <ClInclude Include="GiantBoss.h">
+      <Filter>Object\Giant</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="PrecompileHeader.cpp" />
-    <ClCompile Include="TestObject.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialMap.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerState.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerRunEffect.cpp" />
-    <ClCompile Include="IdleWeapon.cpp" />
     <ClCompile Include="giantStageLevel.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
-    <ClCompile Include="GiantBoss.cpp" />
-    <ClCompile Include="GiantBossState.cpp">
-      <Filter>Object</Filter>
+    <ClCompile Include="DogAirplaneLevel.cpp">
+      <Filter>Levels</Filter>
     </ClCompile>
-    <ClCompile Include="DogAirplaneLevel.cpp" />
-    <ClCompile Include="DogAirplane.cpp" />
-    <ClCompile Include="DogAirplaneState.cpp" />
-    <ClCompile Include="DogAirplaneBackground.cpp" />
-    <ClCompile Include="EnumClass.cpp" />
-    <ClCompile Include="NpcAirplane.cpp" />
+    <ClCompile Include="TutorialMap.cpp">
+      <Filter>Object\TutorialMap</Filter>
+    </ClCompile>
+    <ClCompile Include="DogAirplane.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="DogAirplaneBackground.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="DogAirplaneState.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsCore.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleWeapon.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
     <ClCompile Include="NpcAirPlaneState.cpp">
-      <Filter>Object</Filter>
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObject.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EnumClass.cpp">
+      <Filter>Object\test</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcAirplane.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRunEffect.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PrecompileHeader.cpp">
+      <Filter>Object\test</Filter>
+    </ClCompile>
+    <ClCompile Include="GiantBossState.cpp">
+      <Filter>Object\Giant</Filter>
+    </ClCompile>
+    <ClCompile Include="GiantBoss.cpp">
+      <Filter>Object\Giant</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +115,21 @@
     </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{df11f953-5c45-4952-85fb-a35bec5d2a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\TutorialMap">
+      <UniqueIdentifier>{d03ae8e5-8422-4c99-be52-daa640ae419c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\DogAirplane">
+      <UniqueIdentifier>{23288ed3-af4d-4f23-873d-55fc43631cc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{e6795342-5d69-4293-a6a7-cc7e269c397f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\test">
+      <UniqueIdentifier>{a175c8e0-6066-4166-a0a3-e248c24ecc07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Giant">
+      <UniqueIdentifier>{cc7c939c-679c-4668-a056-b7ce01d4d5a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

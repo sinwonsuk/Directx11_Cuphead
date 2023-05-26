@@ -23,11 +23,13 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 
 void DogAirplaneLevel::Start()
 {
+	
+	GetMainCamera()->SetSortType(0,SortType::ZSort);
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
-	std::shared_ptr<DogAirplane> Object1 = CreateActor<DogAirplane>(2);
+	std::shared_ptr<DogAirplane> Object1 = CreateActor<DogAirplane>();
 
-	std::shared_ptr<DogAirplaneBackground> Object2 = CreateActor<DogAirplaneBackground>(1);
+	std::shared_ptr<DogAirplaneBackground> Object2 = CreateActor<DogAirplaneBackground>();
 	std::shared_ptr<NpcAirplane> Object3 = CreateActor<NpcAirplane>(2);
 	std::shared_ptr<Player> Object = CreateActor<Player>(3);
 

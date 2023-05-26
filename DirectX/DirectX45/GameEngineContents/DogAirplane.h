@@ -6,10 +6,10 @@ enum class DogAirplaneState
 	BossIntro2,
 	BossIntroRock,
 	BossIntroDust,
-	BossIdle,
+	bulldog_Idle,
 	BossIdleHand,
 	noumIntro,
-
+	bulldog_Jump,
 
 };
 
@@ -32,7 +32,7 @@ public:
 	void BossIntroUpdate(float _Time);
 	void BossIntro2Update(float _Time);
 	void ChangeState(DogAirplaneState _State);
-
+	void BossJumpUpdate(float _Time); 
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -43,6 +43,7 @@ protected:
 private:
 	std::vector<int> a;
 	float DownSpeed = 600;
+	float Speed = 75;
 	DogAirplaneState StateValue = DogAirplaneState::BossIntro;
 
 	float Angle = 0.0f;
@@ -54,8 +55,9 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Airplane_Front;
 	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIdle;
 	
-	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
-	
+	std::shared_ptr<class GameEngineSpriteRenderer> bulldog_Jump;
+	int bulldogIdleCheck = 0;
+	float4 CurPos = { 0,0 };
 	bool test = false;
 	bool test1 = false;
 };

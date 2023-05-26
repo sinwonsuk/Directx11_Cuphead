@@ -34,37 +34,38 @@ void DogAirplaneBackground::Start()
 
 
 
-	Sky = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Sky);
+	Sky = CreateComponent<GameEngineSpriteRenderer>();
 	Sky->SetScaleToTexture("background_sky_0001.png");
+	Sky->GetTransform()->AddLocalPosition({ 0, 0, 100 });
 
-	BackGround = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Ground);
+    BackGround = CreateComponent<GameEngineSpriteRenderer>();
 	BackGround->CreateAnimation({ .AnimationName = "Background", .SpriteName = "Background", .FrameInter = 0.04f,.Loop = true, .ScaleToTexture = true, });
 	BackGround->ChangeAnimation("Background");
 	BackGround->GetTransform()->AddLocalPosition({ 0,-400 });
-	
+	BackGround->GetTransform()->AddLocalPosition({ 0,0,90 });
 
 
-	A_Left_Clouds = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Cloulds);
+	A_Left_Clouds = CreateComponent<GameEngineSpriteRenderer>();
 	A_Left_Clouds->CreateAnimation({ .AnimationName = "A_clouds", .SpriteName = "A_clouds", .FrameInter = 0.04f,.Loop = true, .ScaleToTexture = true, });
 	A_Left_Clouds->ChangeAnimation("A_clouds");
-	
+	A_Left_Clouds->GetTransform()->AddLocalPosition({ 0,0,89 });
 	
 
-	B_Left_Clouds = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Cloulds);
+	B_Left_Clouds = CreateComponent<GameEngineSpriteRenderer>();
 	B_Left_Clouds->CreateAnimation({ .AnimationName = "B_clouds", .SpriteName = "B_clouds", .FrameInter = 0.04f,.Loop = true, .ScaleToTexture = true, });
 	B_Left_Clouds->ChangeAnimation("B_clouds");
+	B_Left_Clouds->GetTransform()->AddLocalPosition({ 0,0,89 });
 
-
-	C_Left_Clouds = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Cloulds);
+	C_Left_Clouds = CreateComponent<GameEngineSpriteRenderer>();
 	C_Left_Clouds->CreateAnimation({ .AnimationName = "C_clouds", .SpriteName = "C_clouds", .FrameInter = 0.04f,.Loop = true, .ScaleToTexture = true, });
 	C_Left_Clouds->ChangeAnimation("C_clouds");
 	C_Left_Clouds->Off();
+	C_Left_Clouds->GetTransform()->AddLocalPosition({ 0,0,89 });
 
-
-	D_Left_Clouds = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Cloulds);
+	D_Left_Clouds = CreateComponent<GameEngineSpriteRenderer>();
 	D_Left_Clouds->CreateAnimation({ .AnimationName = "D_clouds", .SpriteName = "D_clouds", .FrameInter = 0.04f,.Loop = true, .ScaleToTexture = true, });
 	D_Left_Clouds->ChangeAnimation("D_clouds");
-	
+	D_Left_Clouds->GetTransform()->AddLocalPosition({ 0,0,89 });
 	
 
 
@@ -78,10 +79,10 @@ void DogAirplaneBackground::Start()
 
 void DogAirplaneBackground::Update(float _Delta)
 {
-	if (C_Left_Clouds->IsAnimationEnd())
+	/*if (C_Left_Clouds->IsAnimationEnd())
 	{
 		C_Left_Clouds->Off();
-	}
+	}*/
 
 
 }

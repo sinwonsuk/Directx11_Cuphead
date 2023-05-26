@@ -27,6 +27,7 @@
     <ClInclude Include="DogAirplaneLevel.h" />
     <ClInclude Include="DogAirplane.h" />
     <ClInclude Include="DogAirplaneBackground.h" />
+    <ClInclude Include="NpcAirplane.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -63,6 +64,10 @@
     <ClCompile Include="DogAirplaneState.cpp" />
     <ClCompile Include="DogAirplaneBackground.cpp" />
     <ClCompile Include="EnumClass.cpp" />
+    <ClCompile Include="NpcAirplane.cpp" />
+    <ClCompile Include="NpcAirPlaneState.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

@@ -173,6 +173,7 @@
     <ClInclude Include="GiantBoss.h" />
     <ClInclude Include="giantStageLevel.h" />
     <ClInclude Include="IdleWeapon.h" />
+    <ClInclude Include="NpcAirplane.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -204,6 +205,8 @@
     <ClCompile Include="GiantBossState.cpp" />
     <ClCompile Include="giantStageLevel.cpp" />
     <ClCompile Include="IdleWeapon.cpp" />
+    <ClCompile Include="NpcAirplane.cpp" />
+    <ClCompile Include="NpcAirPlaneState.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>

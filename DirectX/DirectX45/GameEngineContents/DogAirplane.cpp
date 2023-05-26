@@ -44,12 +44,12 @@ void DogAirplane::Start()
 	GirlDog = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::ChinookIntro);
 	GirlDog->CreateAnimation({ .AnimationName = "Chinook_Pilot_Saluki", .SpriteName = "Chinook_Pilot_Saluki", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	GirlDog->ChangeAnimation("Chinook_Pilot_Saluki");
-	GirlDog->GetTransform()->AddLocalPosition({ 120,0 }); 
+	GirlDog->GetTransform()->AddLocalPosition({ 130,0 }); 
 	 
 	dogcopter = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::DogCopterIntro);
 	dogcopter->CreateAnimation({ .AnimationName = "ph1_dogcopter_intro", .SpriteName = "ph1_dogcopter_intro", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	dogcopter->ChangeAnimation("ph1_dogcopter_intro");
-	dogcopter->GetTransform()->AddLocalPosition({ 120,0 });
+	dogcopter->GetTransform()->AddLocalPosition({ 130,0 });
 
 	bulldogIntro = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::BulDogIntro);
 	bulldogIntro->CreateAnimation({ .AnimationName = "ph1_bulldog_intro", .SpriteName = "ph1_bulldog_intro", .FrameInter = 0.07f,.Loop = false, .ScaleToTexture = true, });
@@ -60,13 +60,13 @@ void DogAirplane::Start()
 	AirplaneSpin->CreateAnimation({ .AnimationName = "DogAirplane", .SpriteName = "DogAirplane", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	AirplaneSpin->ChangeAnimation("DogAirplane"); 
 	AirplaneSpin->GetTransform()->AddLocalPosition({ 0,600 });
-	AirplaneSpin->Off();
+	AirplaneSpin->On();
 
 	Airplane_Back = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Airplane);
 	Airplane_Back->CreateAnimation({ .AnimationName = "Airplane_Back", .SpriteName = "Airplane_Back", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	Airplane_Back->ChangeAnimation("Airplane_Back");
 	Airplane_Back->GetTransform()->AddLocalPosition({ 0,600 });
-	Airplane_Back->Off();
+	Airplane_Back->On();
 
 	Airplane_Front = CreateComponent<GameEngineSpriteRenderer>(10);
 	Airplane_Front->CreateAnimation({ .AnimationName = "Airplane_Front", .SpriteName = "Airplane_Front", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
@@ -80,6 +80,8 @@ void DogAirplane::Start()
 	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650 });
 	bulldogIdle->On();
 
+	
+	
 }
 
 void DogAirplane::Update(float _Delta)

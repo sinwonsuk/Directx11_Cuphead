@@ -3,6 +3,7 @@
 enum class DogAirplaneState
 {
 	BossIntro,
+	BossIntro2,
 	BossIntroRock,
 	BossIntroDust,
 	BossIdle,
@@ -29,6 +30,7 @@ public:
 	void AnimationCheck(const std::string_view& _AnimationName);
 	void BossIdleUpdate(float _Time);
 	void BossIntroUpdate(float _Time);
+	void BossIntro2Update(float _Time);
 	void ChangeState(DogAirplaneState _State);
 
 protected:

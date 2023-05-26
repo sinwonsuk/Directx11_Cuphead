@@ -202,9 +202,7 @@ void GameEngineTexture::ResCreate(const D3D11_TEXTURE2D_DESC& _Value)
 GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixelColor DefaultColor)
 {
 
-	_X += GameEngineWindow::GetScreenSize().hix();
-
-	_Y += GameEngineWindow::GetScreenSize().hiy();
+	
 
 
 	if (0 > _X)

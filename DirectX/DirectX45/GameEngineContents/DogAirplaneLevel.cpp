@@ -6,6 +6,7 @@
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include "DogAirplane.h"
 #include "Player.h"
+#include "NpcAirplane.h"
 #include "DogAirplaneBackground.h"
 
 DogAirplaneLevel::DogAirplaneLevel()
@@ -25,8 +26,9 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
 	std::shared_ptr<DogAirplane> Object1 = CreateActor<DogAirplane>(2);
-	std::shared_ptr<DogAirplaneBackground> Object2 = CreateActor<DogAirplaneBackground>(1);
 
+	std::shared_ptr<DogAirplaneBackground> Object2 = CreateActor<DogAirplaneBackground>(1);
+	std::shared_ptr<NpcAirplane> Object3 = CreateActor<NpcAirplane>(2);
 	std::shared_ptr<Player> Object = CreateActor<Player>(3);
 
 

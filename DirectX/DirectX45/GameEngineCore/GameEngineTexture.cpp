@@ -2,8 +2,6 @@
 #include "GameEngineTexture.h"
 #include "GameEngineLevel.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
-
-
 #ifdef _DEBUG
 #pragma comment(lib, "..\\GameEngineCore\\ThirdParty\\DirectXTex\\lib\\x64\\Debug\\DirectXTex.lib")
 #else

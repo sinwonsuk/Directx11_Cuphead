@@ -80,7 +80,7 @@ void DogAirplane::Start()
 
 	bulldogIdle = CreateComponent<GameEngineSpriteRenderer>();
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Idle", .SpriteName = "bulldog_Idle", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
-	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Jump", .SpriteName = "bulldog_Jump", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
+	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Jump", .SpriteName = "bulldog_Jump", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true, });
 	bulldogIdle->ChangeAnimation("bulldog_Idle");
 	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,82 });
 

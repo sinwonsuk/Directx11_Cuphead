@@ -67,6 +67,7 @@ void DogAirplane::Start()
 	AirplaneSpin->GetTransform()->AddLocalPosition({ 0,600,83 });
 	AirplaneSpin->On();
 
+
 	Airplane_Back = CreateComponent<GameEngineSpriteRenderer>();
 	Airplane_Back->CreateAnimation({ .AnimationName = "Airplane_Back", .SpriteName = "Airplane_Back", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	Airplane_Back->ChangeAnimation("Airplane_Back");

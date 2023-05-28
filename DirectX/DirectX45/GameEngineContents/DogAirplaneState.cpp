@@ -30,7 +30,9 @@ void DogAirplane::ChangeState(DogAirplaneState _State)
 	case DogAirplaneState::bulldog_Jump:
 		AnimationCheck("bulldog_Jump");
 		break;
-
+	case DogAirplaneState::BossAttackPase1:
+		AnimationCheck("bulldog_Attack_Pase1");
+		break;
 	default:
 		break;
 	}
@@ -59,7 +61,8 @@ void DogAirplane::UpdateState(float _Time)
 	case DogAirplaneState::bulldog_Jump:
 		BossJumpUpdate(_Time);
 		break;
-
+	case DogAirplaneState::BossAttackPase1:
+		BossAttackPase1Update(_Time);
 		break;
 	default:
 		break;
@@ -154,6 +157,12 @@ void DogAirplane::BossIntro2Update(float _Time)
 }
 
 
+void DogAirplane::BossAttackPase1Update(float _Time)
+{
+	float4 a = bulldogIdle->GetTransform()->GetLocalScale();
+
+}
+
 void DogAirplane::BossJumpUpdate(float _Time)
 {
 	
@@ -176,7 +185,10 @@ void DogAirplane::BossJumpUpdate(float _Time)
 	
 	if (bulldogIdle->IsAnimationEnd())
 	{
-		bulldogIdle->Off();
+		bulldogIdle->On();
+		bulldogIdle->GetTransform()->SetLocalPosition({ 550,0,0 });
+		ChangeState(DogAirplaneState::BossAttackPase1);
+		return; 
 	}
 
 		

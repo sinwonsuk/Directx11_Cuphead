@@ -10,6 +10,7 @@ enum class DogAirplaneState
 	BossIdleHand,
 	noumIntro,
 	bulldog_Jump,
+	BossAttackPase1, 
 
 };
 
@@ -32,6 +33,8 @@ public:
 	void BossIntroUpdate(float _Time);
 	void BossIntro2Update(float _Time);
 	void ChangeState(DogAirplaneState _State);
+
+	void BossAttackPase1Update(float _Time);
 	void BossJumpUpdate(float _Time); 
 protected:
 	void Start();

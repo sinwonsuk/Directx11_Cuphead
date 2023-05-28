@@ -3,6 +3,7 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCamera.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 #include "EnumClass.cpp"
 DogAirplane::DogAirplane()
 {
@@ -41,6 +42,7 @@ void DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Left").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Right").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Jump").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Attack_Pase1").GetFullPath());
 	}
 
 	GirlDog = CreateComponent<GameEngineSpriteRenderer>();
@@ -80,7 +82,8 @@ void DogAirplane::Start()
 
 	bulldogIdle = CreateComponent<GameEngineSpriteRenderer>();
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Idle", .SpriteName = "bulldog_Idle", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
-	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Jump", .SpriteName = "bulldog_Jump", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true, });
+	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Jump", .SpriteName = "bulldog_Jump", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true, });
+	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Attack_Pase1", .SpriteName = "bulldog_Attack_Pase1", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	bulldogIdle->ChangeAnimation("bulldog_Idle");
 	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,82 });
 
@@ -92,6 +95,22 @@ void DogAirplane::Start()
 
 void DogAirplane::Update(float _Delta)
 {
+	
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		{
+			GetTransform()->SetLocalNegativeScaleX();
+		}
+	
+
+	
+		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		{
+			GetTransform()->SetLocalPositiveScaleX();
+		}
+	
+
+
+
 
 	UpdateState(_Delta);
 }

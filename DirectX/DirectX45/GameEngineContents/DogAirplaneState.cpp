@@ -3,7 +3,9 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
+#include <GameEngineBase/GameEngineRandom.h>
 #include "DogAirplane.h"
+#include "BoneWeapon.h"
 void DogAirplane::ChangeState(DogAirplaneState _State)
 {
 	DogAirplaneState NextState = _State;
@@ -80,6 +82,8 @@ void DogAirplane::UpdateState(float _Time)
 
 void DogAirplane::BossIdleUpdate(float _Time)
 {
+	
+
 
 	if (bulldogIdle->IsAnimationEnd())
 	{
@@ -173,8 +177,35 @@ void DogAirplane::BossIntro2Update(float _Time)
 
 void DogAirplane::BossJumpReverseUpdate(float _Time)
 {
+	AirplaneSpin->GetTransform()->AddWorldPosition({ float4::Down * Speed * _Time });
+	Airplane_Back->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	Airplane_Front->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	bulldogIdle->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	AirplaneFlap_A->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	AirplaneFlap_B->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	AirplaneFlap_C->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	AirplaneFlap_D->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	Airplane_Tail->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+
+	Ball_Monster->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	Airplane_Wing->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+
+
+	if (bulldogIdle->GetCurrentFrame() > 4 && test1 == false)
+	{
+		Speed = -200;
+		test1 = true;
+	}
+
+	if (AirplaneSpin->GetTransform()->GetLocalPosition().y > CurPos.y && test1 == true)
+	{
+		Speed = 0;
+	}
+
 	if (bulldogIdle->IsAnimationEnd())
 	{
+		test1 = false;
+		Speed = 75;
 		bulldogIdle->GetTransform()->SetLocalPosition({ AirplaneSpin->GetTransform()->GetLocalPosition().x,AirplaneSpin->GetTransform()->GetLocalPosition().y + 50,81 });
 		ChangeState(DogAirplaneState::bulldog_Idle);
 		return;
@@ -186,27 +217,103 @@ void DogAirplane::BossJumpReverseUpdate(float _Time)
 
 void DogAirplane::BossAttackPase1Update(float _Time)
 {
+	if (Pase1_Attack < 0)
+	{
+		
+		int PinkBone = GameEngineRandom::MainRandom.RandomInt(0, 2);
+
+		if (bulldogIdle->GetCurrentFrame() == 41 && BoneCheck == 0)
+		{
+			
+			++BoneCheck;
+			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
+			if (PinkBone == 0)
+			{
+				Object->GetBullet()->ChangeAnimation("PinkBone"); 
+			}
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y+40 });
+			Object->SetCheck(0);
+		}
+		if (bulldogIdle->GetCurrentFrame() == 51 && BoneCheck == 1)
+		{
+			++BoneCheck;
+			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
+			if (PinkBone == 1)
+			{
+				Object->GetBullet()->ChangeAnimation("PinkBone");
+			}
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 80 });
+			Object->SetCheck(0);
+		}
+		if (bulldogIdle->GetCurrentFrame() == 67 && BoneCheck == 2)
+		{
+			++BoneCheck;
+			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
+			if (PinkBone == 2)
+			{
+				Object->GetBullet()->ChangeAnimation("PinkBone");
+			}
+			Object->SetTime(0.3);
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 190 });
+			Object->SetCheck(0);
+			BoneCheck = 0;
+		}
+	}
+	else if (Pase1_Attack > 0)
+	{
+		int PinkBone = GameEngineRandom::MainRandom.RandomInt(0, 3);
+
+		if (bulldogIdle->GetCurrentFrame() == 41 && BoneCheck == 0)
+		{
+			++BoneCheck;
+			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
+			if (PinkBone == 0)
+			{
+				Object->GetBullet()->ChangeAnimation("PinkBone");
+			}
+
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y+40 });
+			Object->SetCheck(1);
+		}
+		if (bulldogIdle->GetCurrentFrame() == 51 && BoneCheck == 1)
+		{
+			++BoneCheck;
+			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
+			if (PinkBone == 1)
+			{
+				Object->GetBullet()->ChangeAnimation("PinkBone");
+			}
+
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 80 });
+			Object->SetCheck(1);
+		}
+		if (bulldogIdle->GetCurrentFrame() == 68 && BoneCheck == 2)
+		{
+			
+
+			++BoneCheck;
+			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
+			if (PinkBone == 2)
+			{
+				Object->GetBullet()->ChangeAnimation("PinkBone");
+
+			}
+			Object->SetTime(0.3);
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 190 });
+			Object->SetCheck(1);
+			BoneCheck = 0;
+		}
+	}
 
 	
 
-
-	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
-	{
-		bulldogIdle->GetTransform()->SetLocalNegativeScaleX();
-	}
-
-
-
-	if (true == GameEngineInput::IsPress("PlayerMoveRight"))
-	{
-		bulldogIdle->GetTransform()->SetLocalPositiveScaleX();
-	}
+	
 
 	if (bulldogIdle->IsAnimationEnd())
 	{
 
 		bulldogIdle->GetTransform()->SetLocalPosition({ AirplaneSpin->GetTransform()->GetLocalPosition().x,AirplaneSpin->GetTransform()->GetLocalPosition().y+50,84 });
-	
+		Speed = 100;
 		ChangeState(DogAirplaneState::bulldog_Jump_Reverse);	
 		return; 
 	}
@@ -243,8 +350,22 @@ void DogAirplane::BossJumpUpdate(float _Time)
 	
 	if (bulldogIdle->IsAnimationEnd())
 	{
-		
-		bulldogIdle->GetTransform()->SetLocalPosition({ -500,0,0 });
+		test1 = false;
+		Speed = 75;
+		if (Pase1_Attack > 0)
+		{
+			Pase1_Attack = -500;
+			bulldogIdle->GetTransform()->SetLocalRotation({ 0,0,0 });
+		}
+
+		else if (Pase1_Attack < 0)
+		{
+			Pase1_Attack = 500;
+			bulldogIdle->GetTransform()->SetLocalRotation({ 0,180,0 });
+		}
+
+
+		bulldogIdle->GetTransform()->SetLocalPosition({ Pase1_Attack,0,0 });
 		
 		ChangeState(DogAirplaneState::BossAttackPase1);
 		return; 

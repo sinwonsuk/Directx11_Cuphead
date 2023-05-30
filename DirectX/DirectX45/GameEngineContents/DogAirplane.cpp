@@ -4,7 +4,10 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngineCore/GameEngineLevel.h>
 #include "EnumClass.cpp"
+#include "Dog_ball.h"
 DogAirplane::DogAirplane()
 {
 }
@@ -28,6 +31,7 @@ void DogAirplane::AnimationCheck(const std::string_view& _AnimationName)
 
 void DogAirplane::Start()
 {
+
 	if (nullptr == GameEngineSprite::Find("Chinook_Pilot_Saluki"))
 	{
 		GameEngineDirectory NewDir;
@@ -87,10 +91,6 @@ void DogAirplane::Start()
 	Airplane_Wing->ChangeAnimation("bulldog_plane_wing");
 	Airplane_Wing->GetTransform()->AddLocalPosition({ 0,600,87 });
 	
-	
-
-	
-
 	AirplaneFlap_A = CreateComponent<GameEngineSpriteRenderer>();
 	AirplaneFlap_A->CreateAnimation({ .AnimationName = "bulldog_plane_flap_left_a", .SpriteName = "bulldog_plane_flap_left_a", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	AirplaneFlap_A->ChangeAnimation("bulldog_plane_flap_left_a");
@@ -112,11 +112,11 @@ void DogAirplane::Start()
 	AirplaneFlap_D->GetTransform()->AddLocalPosition({ 0,600,86 });
 
 	Ball_Monster = CreateComponent<GameEngineSpriteRenderer>();
-	Ball_Monster->CreateAnimation({ .AnimationName = "ph1_dog_a_ball_toss", .SpriteName = "ph1_dog_a_ball_toss", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
-	Ball_Monster->CreateAnimation({ .AnimationName = "ph1_dog_b_ball_toss", .SpriteName = "ph1_dog_b_ball_toss", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
+	Ball_Monster->CreateAnimation({ .AnimationName = "ph1_dog_a_ball_toss", .SpriteName = "ph1_dog_a_ball_toss", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
+	Ball_Monster->CreateAnimation({ .AnimationName = "ph1_dog_b_ball_toss", .SpriteName = "ph1_dog_b_ball_toss", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	Ball_Monster->ChangeAnimation("ph1_dog_a_ball_toss");
 	Ball_Monster->GetTransform()->AddLocalPosition({ 170,640,85 });
-
+	Ball_Monster->Off();
 
 
 	Airplane_Back = CreateComponent<GameEngineSpriteRenderer>();
@@ -138,50 +138,98 @@ void DogAirplane::Start()
 	AirplaneSpin->GetTransform()->AddLocalPosition({ 0,600,82 });
 	AirplaneSpin->On();
 	
-	
 	bulldogIdle = CreateComponent<GameEngineSpriteRenderer>();
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Idle", .SpriteName = "bulldog_Idle", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Jump", .SpriteName = "bulldog_Jump", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true, });
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Jump_Reverse", .SpriteName = "bulldog_Jump_Reverse", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Attack_Pase1", .SpriteName = "bulldog_Attack_Pase1", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 
-
-	bulldogIdle->ChangeAnimation("bulldog_Attack_Pase1");
-	//bulldogIdle->GetTransform()->AddLocalPosition({ 0,100,81 });
+	bulldogIdle->ChangeAnimation("bulldog_Idle");
+	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,81 });
 	bulldogIdle->On();
 
 
-
-	
-
-	
-	
-
-	
 }
 
 void DogAirplane::Update(float _Delta)
-{
+{		
+
 	
-//	UpdateState(_Delta);
-	float4 ad = bulldogIdle->GetTransform()->GetLocalScale();
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+	Ball_Monster_Time += _Delta;
+
+	if (Ball_Monster_Time > 3)
+	{
+		int test = GameEngineRandom::MainRandom.RandomInt(0,3);
+
+		if (test == 0)
 		{
-			bulldogIdle->GetTransform()->SetLocalNegativeScaleX();
-		}
-	
 
-	
-		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+			
+		
+			
+			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x - 418,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 80,85});
+			Ball_Monster->GetTransform()->SetLocalRotation({ 0,180,0 });
+			Ball_Monster->ChangeAnimation("ph1_dog_b_ball_toss");
+
+			Ball_Monster->On();
+
+			
+
+		}
+
+		 if (test == 1)
 		{
-			bulldogIdle->GetTransform()->SetLocalPositiveScaleX();
+			Ball_Monster->ChangeAnimation("ph1_dog_a_ball_toss");
+			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x - 160,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 40 ,85});
+		
+			Ball_Monster->GetTransform()->SetLocalRotation({ 0,180,0 });
+			Ball_Monster->On();
+
 		}
+
+		else if (test == 2)
+		{
+			Ball_Monster->ChangeAnimation("ph1_dog_a_ball_toss");
+			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x + 170,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 40 ,85});
+		
+			Ball_Monster->GetTransform()->SetLocalRotation({ 0,0,0 });
+			Ball_Monster->On();
+		}
+
+		else if (test == 3)
+		{
+
+			 Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x + 418,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 80,85 });
+
+			 Ball_Monster->GetTransform()->SetLocalRotation({ 0,0,0 });
+
+			Ball_Monster->ChangeAnimation("ph1_dog_b_ball_toss");
+			Ball_Monster->On();
+
+		}
+
+		 Ball_Monster_Time = 0;
+	}
+
+	if (Ball_Monster->GetCurrentFrame() == 6 && Ball_MonsterCheck ==false)
+	{
+		
+		std::shared_ptr<Dog_ball> Object = GetLevel()->CreateActor<Dog_ball>(4);
+		Object->GetTransform()->SetLocalPosition({ Ball_Monster->GetTransform()->GetLocalPosition().x, Ball_Monster->GetTransform()->GetLocalPosition().y + 50 });
 	
+		Ball_MonsterCheck = true;
+	}
 
 
+	if (Ball_Monster->IsAnimationEnd())
+	{
+		
+		Ball_MonsterCheck = false;
+		Ball_Monster->Off();
+	}
 
-		float4 a = bulldogIdle->GetTransform()->GetLocalScale();
 
+	UpdateState(_Delta);
 }
 void DogAirplane::Render(float _Delta)
 {

@@ -29,18 +29,13 @@ private:
 //	NpcAirplaneState StateValue = NpcAirplaneState::Intro;
 
 
-	std::shared_ptr<class GameEngineSpriteRenderer> Ball_Monster;
-	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Front;
-	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Reg;
-	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Spin;
-
-	std::shared_ptr<class GameEngineSpriteRenderer> Npc;
-	std::shared_ptr<class GameEngineSpriteRenderer> C_Left_Clouds;
-	std::shared_ptr<class GameEngineSpriteRenderer> D_Left_Clouds;
-	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
-
-	int IntroCheck = 0;
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Left_Ball;
+	std::shared_ptr<class GameEngineSpriteRenderer> Middle_Ball;
+	std::shared_ptr<class GameEngineSpriteRenderer> Right_Ball;
+	float4 Gravity = { 0,0 };
+	float4 LeftMoveDir = {-0.5,1};
+	float4 MiddleMoveDir = { 0,1 };
+	float4 RightMoveDir = { 0.5,1 };
 
 
 };

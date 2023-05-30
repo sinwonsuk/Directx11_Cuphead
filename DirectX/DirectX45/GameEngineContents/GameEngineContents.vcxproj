@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BoneWeapon.h" />
     <ClInclude Include="ContentsCore.h">
       <SubType>
       </SubType>
@@ -193,6 +194,7 @@
     <ClInclude Include="TutorialMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoneWeapon.cpp" />
     <ClCompile Include="ContentsCore.cpp">
       <SubType>
       </SubType>

@@ -47,6 +47,7 @@
       <Filter>Object\Giant</Filter>
     </ClInclude>
     <ClInclude Include="Dog_ball.h" />
+    <ClInclude Include="BoneWeapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -110,6 +111,7 @@
       <Filter>Object\Giant</Filter>
     </ClCompile>
     <ClCompile Include="Dog_ball.cpp" />
+    <ClCompile Include="BoneWeapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

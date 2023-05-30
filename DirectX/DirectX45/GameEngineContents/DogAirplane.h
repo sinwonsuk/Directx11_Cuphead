@@ -78,8 +78,16 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIdle;
 	std::shared_ptr<class GameEngineSpriteRenderer> Ball_Monster;
 
-	int bulldogIdleCheck = 0;
+	
+	float Pase1_Attack = 500;
+	float Ball_Monster_Time = 0;
 	float4 CurPos = { 0,0 };
+
+	bool Ball_MonsterCheck = false;
 	bool test = false;
 	bool test1 = false;
+
+	int Ball_Monster_Random = 0;
+	int bulldogIdleCheck = 0;
+	int BoneCheck = 0;
 };

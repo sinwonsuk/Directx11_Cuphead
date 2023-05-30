@@ -261,7 +261,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 	}
 	else if (Pase1_Attack > 0)
 	{
-		int PinkBone = GameEngineRandom::MainRandom.RandomInt(0, 3);
+		int PinkBone = GameEngineRandom::MainRandom.RandomInt(0, 2);
 
 		if (bulldogIdle->GetCurrentFrame() == 41 && BoneCheck == 0)
 		{

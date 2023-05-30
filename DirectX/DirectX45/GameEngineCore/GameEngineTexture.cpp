@@ -2,7 +2,6 @@
 #include "GameEngineTexture.h"
 #include "GameEngineLevel.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
-
 #ifdef _DEBUG
 #pragma comment(lib, "..\\GameEngineCore\\ThirdParty\\DirectXTex\\lib\\x64\\Debug\\DirectXTex.lib")
 #else
@@ -193,6 +192,7 @@ void GameEngineTexture::ResCreate(const D3D11_TEXTURE2D_DESC& _Value)
 // 바깥에 나갔다면 무슨색깔 리턴할지에 대한 컬러도 넣어줘야 한다.
 GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixelColor DefaultColor)
 {
+
 	_X += GameEngineWindow::GetScreenSize().hix();
 
 	_Y += GameEngineWindow::GetScreenSize().hiy();
@@ -295,7 +295,6 @@ GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixel
 		Return.a = ColorPtr[3];
 		return Return;
 	}
-
 		break;
 	case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
 		break;

@@ -33,6 +33,9 @@ void DogAirplane::ChangeState(DogAirplaneState _State)
 	case DogAirplaneState::BossAttackPase1:
 		AnimationCheck("bulldog_Attack_Pase1");
 		break;
+	case DogAirplaneState::bulldog_Jump_Reverse:
+		AnimationCheck("bulldog_Jump_Reverse");
+		break;
 	default:
 		break;
 	}
@@ -64,6 +67,9 @@ void DogAirplane::UpdateState(float _Time)
 	case DogAirplaneState::BossAttackPase1:
 		BossAttackPase1Update(_Time);
 		break;
+	case DogAirplaneState::bulldog_Jump_Reverse:
+		BossJumpReverseUpdate(_Time);
+		break;
 	default:
 		break;
 	}
@@ -74,6 +80,7 @@ void DogAirplane::UpdateState(float _Time)
 
 void DogAirplane::BossIdleUpdate(float _Time)
 {
+
 	if (bulldogIdle->IsAnimationEnd())
 	{
 		++bulldogIdleCheck;
@@ -81,10 +88,11 @@ void DogAirplane::BossIdleUpdate(float _Time)
 	
 	if (bulldogIdleCheck == 3)
 	{
-		bulldogIdle->GetTransform()->AddLocalPosition({ 0,0, 3 });
+		
 		CurPos = AirplaneSpin->GetTransform()->GetLocalPosition();
 
-
+		bulldogIdle->GetTransform()->AddLocalPosition({ 0,0, 3 });
+		bulldogIdleCheck = 0;
 		ChangeState(DogAirplaneState::bulldog_Jump);
 		return; 
 	}
@@ -129,11 +137,18 @@ void DogAirplane::BossIntroUpdate(float _Time)
 void DogAirplane::BossIntro2Update(float _Time)
 {
 
-	AirplaneSpin->GetTransform()->AddWorldPosition({ float4::Down * DownSpeed * _Time });
+	AirplaneSpin->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
 	Airplane_Back->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
 	Airplane_Front->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
+	AirplaneFlap_A->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
+	AirplaneFlap_B->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
+	AirplaneFlap_C->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
+	AirplaneFlap_D->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
+	Airplane_Tail->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
 	bulldogIdle->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
-	
+	Ball_Monster->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
+	Airplane_Wing->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
+
 
 	if (AirplaneSpin->GetTransform()->GetLocalPosition().y < 180 && test == false)
 	{
@@ -156,10 +171,45 @@ void DogAirplane::BossIntro2Update(float _Time)
 
 }
 
+void DogAirplane::BossJumpReverseUpdate(float _Time)
+{
+	if (bulldogIdle->IsAnimationEnd())
+	{
+		bulldogIdle->GetTransform()->SetLocalPosition({ AirplaneSpin->GetTransform()->GetLocalPosition().x,AirplaneSpin->GetTransform()->GetLocalPosition().y + 50,81 });
+		ChangeState(DogAirplaneState::bulldog_Idle);
+		return;
+	}
+
+}
+
+
 
 void DogAirplane::BossAttackPase1Update(float _Time)
 {
-	float4 a = bulldogIdle->GetTransform()->GetLocalScale();
+
+	
+
+
+	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+	{
+		bulldogIdle->GetTransform()->SetLocalNegativeScaleX();
+	}
+
+
+
+	if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+	{
+		bulldogIdle->GetTransform()->SetLocalPositiveScaleX();
+	}
+
+	if (bulldogIdle->IsAnimationEnd())
+	{
+
+		bulldogIdle->GetTransform()->SetLocalPosition({ AirplaneSpin->GetTransform()->GetLocalPosition().x,AirplaneSpin->GetTransform()->GetLocalPosition().y+50,84 });
+	
+		ChangeState(DogAirplaneState::bulldog_Jump_Reverse);	
+		return; 
+	}
 
 }
 
@@ -170,6 +220,15 @@ void DogAirplane::BossJumpUpdate(float _Time)
 	Airplane_Back->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
 	Airplane_Front->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
 	bulldogIdle->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	AirplaneFlap_A->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	AirplaneFlap_B->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	AirplaneFlap_C->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	AirplaneFlap_D->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	Airplane_Tail->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+
+	Ball_Monster->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+	Airplane_Wing->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
+
 	
 	if (bulldogIdle->GetCurrentFrame() > 4 && test1 ==false)
 	{
@@ -178,15 +237,15 @@ void DogAirplane::BossJumpUpdate(float _Time)
 	}
 	
 	if (AirplaneSpin->GetTransform()->GetLocalPosition().y > CurPos.y && test1 ==true)
-	{
-		
+	{		
 		Speed = 0;
 	}
 	
 	if (bulldogIdle->IsAnimationEnd())
 	{
-		bulldogIdle->On();
-		bulldogIdle->GetTransform()->SetLocalPosition({ 550,0,0 });
+		
+		bulldogIdle->GetTransform()->SetLocalPosition({ -500,0,0 });
+		
 		ChangeState(DogAirplaneState::BossAttackPase1);
 		return; 
 	}

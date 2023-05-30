@@ -309,21 +309,24 @@ void GameEngineSpriteRenderer::Update(float _Delta)
 
 		GetShaderResHelper().SetTexture("DiffuseTex", Info.Texture);
 		AtlasData = Info.CutData;
+		
+			if (true == CurAnimation->ScaleToTexture)
+			{
+				std::shared_ptr<GameEngineTexture> Texture = Info.Texture;
 
-		if (true == CurAnimation->ScaleToTexture)
-		{
-			std::shared_ptr<GameEngineTexture> Texture = Info.Texture;
+				float4 Scale = Texture->GetScale();
 
-			float4 Scale = Texture->GetScale();
+				Scale.x *= Info.CutData.SizeX;
+				Scale.y *= Info.CutData.SizeY;
+				Scale.z = 1.0f;
 
-			Scale.x *= Info.CutData.SizeX;
-			Scale.y *= Info.CutData.SizeY;
-			Scale.z = 1.0f;
+				Scale *= ScaleRatio;
 
-			Scale *= ScaleRatio;
+				GetTransform()->SetLocalScale(Scale);
+			}
+		
+	
 
-			GetTransform()->SetLocalScale(Scale);
-		}
 	}
 }
 

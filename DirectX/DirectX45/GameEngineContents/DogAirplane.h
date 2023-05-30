@@ -10,6 +10,7 @@ enum class DogAirplaneState
 	BossIdleHand,
 	noumIntro,
 	bulldog_Jump,
+	bulldog_Jump_Reverse,
 	BossAttackPase1, 
 
 };
@@ -32,6 +33,9 @@ public:
 	void BossIdleUpdate(float _Time);
 	void BossIntroUpdate(float _Time);
 	void BossIntro2Update(float _Time);
+	void BossJumpReverseUpdate(float _Time);
+	void LevelChangeStart() override;
+
 	void ChangeState(DogAirplaneState _State);
 
 	void BossAttackPase1Update(float _Time);
@@ -53,12 +57,27 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> GirlDog;
 	std::shared_ptr<class GameEngineSpriteRenderer> dogcopter;
 	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIntro;
+
+
 	std::shared_ptr<class GameEngineSpriteRenderer> AirplaneSpin;
 	std::shared_ptr<class GameEngineSpriteRenderer> Airplane_Back;
 	std::shared_ptr<class GameEngineSpriteRenderer> Airplane_Front;
-	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIdle;
-	
+	std::shared_ptr<class GameEngineSpriteRenderer> Airplane_Wing;
+	std::shared_ptr<class GameEngineSpriteRenderer> Airplane_Tail;
+
+
+	std::shared_ptr<class GameEngineSpriteRenderer> AirplaneFlap_A;
+	std::shared_ptr<class GameEngineSpriteRenderer> AirplaneFlap_B;
+	std::shared_ptr<class GameEngineSpriteRenderer> AirplaneFlap_C;
+	std::shared_ptr<class GameEngineSpriteRenderer> AirplaneFlap_D;
+
+
+
 	std::shared_ptr<class GameEngineSpriteRenderer> bulldog_Jump;
+	std::shared_ptr<class GameEngineSpriteRenderer> bulldog_Jump_Reverse;
+	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIdle;
+	std::shared_ptr<class GameEngineSpriteRenderer> Ball_Monster;
+
 	int bulldogIdleCheck = 0;
 	float4 CurPos = { 0,0 };
 	bool test = false;

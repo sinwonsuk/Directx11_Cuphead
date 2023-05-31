@@ -23,6 +23,7 @@ void DogAirplane::LevelChangeStart()
 
 
 
+
 void DogAirplane::AnimationCheck(const std::string_view& _AnimationName)
 {
 	bulldogIdle->ChangeAnimation(_AnimationName);
@@ -60,6 +61,9 @@ void DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph1_dog_b_ball_toss").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_plane_wing").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("AirPlane_Tail").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Attack2_Pase1_intro").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Attack2_Pase1_Attack").GetFullPath());
+
 
 	}
 
@@ -143,7 +147,8 @@ void DogAirplane::Start()
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Jump", .SpriteName = "bulldog_Jump", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true, });
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Jump_Reverse", .SpriteName = "bulldog_Jump_Reverse", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Attack_Pase1", .SpriteName = "bulldog_Attack_Pase1", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
-
+	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Attack2_Pase1_intro", .SpriteName = "bulldog_Attack2_Pase1_intro", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
+	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Attack2_Pase1_Attack", .SpriteName = "bulldog_Attack2_Pase1_Attack", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	bulldogIdle->ChangeAnimation("bulldog_Idle");
 	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,81 });
 	bulldogIdle->On();

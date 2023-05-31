@@ -12,6 +12,9 @@ enum class DogAirplaneState
 	bulldog_Jump,
 	bulldog_Jump_Reverse,
 	BossAttackPase1, 
+	BossAttackPase2,
+	BossAttackPase2Intro,
+
 
 };
 
@@ -35,7 +38,8 @@ public:
 	void BossIntro2Update(float _Time);
 	void BossJumpReverseUpdate(float _Time);
 	void LevelChangeStart() override;
-
+	void BossAttackPase2IntroUpdate(float _Time);
+	void BossAttackPase2AttackUpdate(float _Time);
 	void ChangeState(DogAirplaneState _State);
 
 	void BossAttackPase1Update(float _Time);
@@ -87,7 +91,9 @@ private:
 	bool test = false;
 	bool test1 = false;
 
+	int bulldogAttackPase1 = 0;
 	int Ball_Monster_Random = 0;
 	int bulldogIdleCheck = 0;
 	int BoneCheck = 0;
+	int YarnballCheck = 0;
 };

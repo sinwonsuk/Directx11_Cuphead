@@ -171,6 +171,7 @@
     <ClInclude Include="DogAirplane.h" />
     <ClInclude Include="DogAirplaneBackground.h" />
     <ClInclude Include="DogAirplaneLevel.h" />
+    <ClInclude Include="dogfight_catshoot_yarnball.h" />
     <ClInclude Include="Dog_ball.h" />
     <ClInclude Include="GiantBoss.h" />
     <ClInclude Include="giantStageLevel.h" />
@@ -203,6 +204,7 @@
     <ClCompile Include="DogAirplaneBackground.cpp" />
     <ClCompile Include="DogAirplaneLevel.cpp" />
     <ClCompile Include="DogAirplaneState.cpp" />
+    <ClCompile Include="dogfight_catshoot_yarnball.cpp" />
     <ClCompile Include="Dog_ball.cpp" />
     <ClCompile Include="EnumClass.cpp" />
     <ClCompile Include="GiantBoss.cpp" />

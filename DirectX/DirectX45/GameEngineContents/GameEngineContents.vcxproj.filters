@@ -48,6 +48,7 @@
     </ClInclude>
     <ClInclude Include="Dog_ball.h" />
     <ClInclude Include="BoneWeapon.h" />
+    <ClInclude Include="dogfight_catshoot_yarnball.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -112,6 +113,7 @@
     </ClCompile>
     <ClCompile Include="Dog_ball.cpp" />
     <ClCompile Include="BoneWeapon.cpp" />
+    <ClCompile Include="dogfight_catshoot_yarnball.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

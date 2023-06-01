@@ -114,6 +114,8 @@ void NpcAirplane::Update(float _Delta)
 	Npc_Airplane_Front->GetTransform()->SetLocalRotation({ 0,0,(-Speed ) * SpeedControll });
 	Npc_Airplane_Spin->GetTransform()->SetLocalRotation({ 0,0,(-Speed ) * SpeedControll });
 
+
+
 	Npc->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
 	Npc_Airplane_Back->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
 	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });

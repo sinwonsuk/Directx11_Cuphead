@@ -18,3 +18,12 @@ enum class DogAirplaneType
 	BulDogIdle,
 	Player,
 };
+
+enum class CollisionType
+{
+	Player,
+	Bullet,
+	NpcAirPlane, 
+	DogAirPlane_Pase1,
+
+};

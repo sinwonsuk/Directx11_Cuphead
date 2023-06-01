@@ -28,14 +28,18 @@ public:
 		return Bullet;
 	}
 
+
+
+
 protected:
 	void Start();
 	void Update(float _Delta) override;
 
 private:
 	float4 MoveDir = { 0,0 };
-
+	std::shared_ptr<class GameEngineCollision> Collision;
 	std::shared_ptr<class GameEngineSpriteRenderer> Sfx;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
+	bool CollisionCheck = false;
 	bool Check = false;
 };

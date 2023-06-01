@@ -9,6 +9,7 @@
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "IdleWeapon.h"
+#include "EnumClass.cpp"
 Player* Player::MainPlayer;
 Player::Player()
 {
@@ -244,7 +245,7 @@ void Player::Start()
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
-	Collision->SetOrder(1);
+	Collision->SetOrder((int)CollisionType::Player);
 	
 }
 

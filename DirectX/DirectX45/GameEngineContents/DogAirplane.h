@@ -82,6 +82,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIdle;
 	std::shared_ptr<class GameEngineSpriteRenderer> Ball_Monster;
 
+	std::shared_ptr<class GameEngineCollision> Collision;
 	
 	float Pase1_Attack = 500;
 	float Ball_Monster_Time = 0;

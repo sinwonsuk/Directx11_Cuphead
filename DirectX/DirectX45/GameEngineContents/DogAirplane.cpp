@@ -6,7 +6,9 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.cpp"
+#include "IdleWeapon.h"
 #include "Dog_ball.h"
 DogAirplane::DogAirplane()
 {
@@ -153,11 +155,21 @@ void DogAirplane::Start()
 	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,81 });
 	bulldogIdle->On();
 
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 300.0f, 300.0f, 300.0f });
+
+	Collision->SetOrder((int)CollisionType::DogAirPlane_Pase1);
 
 }
 
 void DogAirplane::Update(float _Delta)
 {		
+	Collision->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition()});
+
+
+
+
+
 
 	
 	Ball_Monster_Time += _Delta;

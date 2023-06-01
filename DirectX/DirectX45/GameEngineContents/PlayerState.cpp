@@ -254,16 +254,18 @@ void Player::IdleUpdate(float _Time)
 
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
-		ChangeState(PlayerState::Jump);
+		
 		ResetLiveTime(); 
 		JumpCheck = true;
+		ChangeState(PlayerState::Jump);
 		return;
 	}
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
-		ChangeState(PlayerState::Jump);
+		
 		ResetLiveTime();
 		JumpCheck = true;
+		ChangeState(PlayerState::Jump);
 		return;
 	}
 	if (true == GameEngineInput::IsPress("PlayerMoveDown"))
@@ -1072,6 +1074,7 @@ void Player::DashUpdate(float _Time)
 	{
 	
 		DashEffectCheck = false;
+		ResetLiveTime();
 		ChangeState(PlayerState::Jump);
 		return;
 	}
@@ -1079,6 +1082,7 @@ void Player::DashUpdate(float _Time)
 	if (Render0->IsAnimationEnd() && Gravity ==true)
 	{
 		DashEffectCheck = false;
+
 		ChangeState(PlayerState::Idle);
 		return;
 	}
@@ -1180,9 +1184,10 @@ void Player::IdleAttackUpdate(float _Time)
 
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
-		ChangeState(PlayerState::Jump);
+		
 		ResetLiveTime();
 		JumpCheck = true;
+		ChangeState(PlayerState::Jump);
 		return;
 	}
 
@@ -1238,9 +1243,10 @@ void Player::IdleAttackPreUpdate(float _Time)
 	}
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
-		ChangeState(PlayerState::Jump);
+		
 		ResetLiveTime();
 		JumpCheck = true;
+		ChangeState(PlayerState::Jump);
 		return;
 	}
 
@@ -1421,9 +1427,10 @@ void Player::RunAttackUpdate(float _Time)
 	}
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
-		ChangeState(PlayerState::Jump);
 		ResetLiveTime();
 		JumpCheck = true;
+		ChangeState(PlayerState::Jump);
+		
 		return;
 	}
 }
@@ -1570,8 +1577,10 @@ void Player::DiagonalUpRunAttackUpdate(float _Time)
 	}
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
-		ChangeState(PlayerState::Jump);
+		ResetLiveTime();
 		JumpCheck = true;
+		ChangeState(PlayerState::Jump);
+
 		return;
 	}
 

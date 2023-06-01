@@ -54,6 +54,7 @@ private:
 	int IntroCheck = 0;
 	float4 CurPos = {0,0};
 	float Speed = 0;
+	float SpeedControll = 0.03;
 	float Speed1 = 0;
 };
 

@@ -71,10 +71,13 @@ void NpcAirplane::Start()
 	Collision->GetTransform()->SetLocalScale({ 350.0f, 100.0f, 100.0f });
 	Collision->SetOrder(3);
 
+	CurPos.x = Npc->GetTransform()->GetLocalPosition().x;
+
 }
 
 void NpcAirplane::Update(float _Delta)
 {
+	CurPos.x = Npc->GetTransform()->GetLocalPosition().x;
 	Collision->GetTransform()->SetLocalPosition({ Npc->GetTransform()->GetLocalPosition() });
 	Collision->GetTransform()->SetLocalRotation({ Npc->GetTransform()->GetLocalRotation() });
 	
@@ -89,66 +92,34 @@ void NpcAirplane::Update(float _Delta)
 	}
 
 	
+
+		
 	
-
-	CurPos.x = Npc->GetTransform()->GetLocalPosition().x;
-
-	
-
-	if (CurPos.x > Player::MainPlayer->GetTransform()->GetLocalPosition().x)
-	{
-		Npc->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
-		Npc_Airplane_Back->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
-		Npc_Airplane_Reg->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
-		Npc_Airplane_Front->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
-		Npc_Airplane_Spin->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
-	}
-
-	else if (CurPos.x < Player::MainPlayer->GetTransform()->GetLocalPosition().x)
-	{
-		Npc->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
-		Npc_Airplane_Back->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
-		Npc_Airplane_Reg->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
-		Npc_Airplane_Front->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
-		Npc_Airplane_Spin->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
-	}
 
 	if (CurPos.x < Player::MainPlayer->GetTransform()->GetLocalPosition().x)
 	{
 		Speed = CurPos.x - Player::MainPlayer->GetTransform()->GetLocalPosition().x;
-		Speed *= -1;
-
-
-		Npc->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-		Npc_Airplane_Back->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-		Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-		Npc_Airplane_Front->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-		Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-		Player::MainPlayer->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-
-
-
-
+		Speed *= -1;	
 	}
 
 	else if (CurPos.x > Player::MainPlayer->GetTransform()->GetLocalPosition().x)
 	{
 		Speed = CurPos.x - Player::MainPlayer->GetTransform()->GetLocalPosition().x;
 		Speed *= -1;
-
-
-		Npc->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-		Npc_Airplane_Back->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-		Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-		Npc_Airplane_Front->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-		Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-		Player::MainPlayer->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
-
-
-
-
 	}
 
+	Npc->GetTransform()->SetLocalRotation({ 0,0,(-Speed ) * SpeedControll });
+	Npc_Airplane_Back->GetTransform()->SetLocalRotation({ 0,0,(-Speed ) * SpeedControll });
+	Npc_Airplane_Reg->GetTransform()->SetLocalRotation({ 0,0,(-Speed ) * SpeedControll });
+	Npc_Airplane_Front->GetTransform()->SetLocalRotation({ 0,0,(-Speed ) * SpeedControll });
+	Npc_Airplane_Spin->GetTransform()->SetLocalRotation({ 0,0,(-Speed ) * SpeedControll });
+
+	Npc->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+	Npc_Airplane_Back->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+	Npc_Airplane_Front->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+	Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+	Player::MainPlayer->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
 
 	float ds = Speed;
 

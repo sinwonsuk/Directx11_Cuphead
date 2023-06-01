@@ -39,7 +39,8 @@ enum class PlayerState
 class Player : public GameEngineActor
 {
 public:
-	// constrcuter destructer
+
+	static Player* MainPlayer;
 	Player();
 	~Player();
 
@@ -84,6 +85,17 @@ public:
 	void UpAimAttackPreUpdate(float _Time);
 	void DownAttackUpdate(float _Time);
 	void DownAttackPreUpdate(float _Time);
+	bool GetGravity()
+	{
+		return Gravity;
+	}
+	bool SetGravity(bool _Gravity)
+	{
+		Gravity = _Gravity;
+		return Gravity;
+	}
+
+
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -97,7 +109,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Render0;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
-
+	std::shared_ptr<class GameEngineCollision> Collision;
 	int GravityCheck = 0; 
 	int RightCheck = 0;
 	int LeftCheck = 0;
@@ -108,7 +120,7 @@ private:
 	bool RightMove = true;
 	bool LeftMove = true;
 	bool JumpCheck = false;
-
+	bool CheckCamera = false;
 	bool test = false;
 	bool DashCheck = true;
 

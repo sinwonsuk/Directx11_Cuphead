@@ -49,11 +49,12 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> C_Left_Clouds;
 	std::shared_ptr<class GameEngineSpriteRenderer> D_Left_Clouds;
 	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
+	std::shared_ptr<class GameEngineCollision> Collision;
 	
 	int IntroCheck = 0;
-
-
-
+	float4 CurPos = {0,0};
+	float Speed = 0;
+	float Speed1 = 0;
 };
 
 

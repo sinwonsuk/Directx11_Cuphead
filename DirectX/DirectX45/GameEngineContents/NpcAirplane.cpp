@@ -2,9 +2,10 @@
 #include "NpcAirplane.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include "EnumClass.cpp"
-
+#include "Player.h"
 NpcAirplane::NpcAirplane()
 {
 }
@@ -66,11 +67,93 @@ void NpcAirplane::Start()
 	Npc->ChangeAnimation("NpcIntro");
 	Npc->GetTransform()->AddLocalPosition({ -300,-230 });
 
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 350.0f, 100.0f, 100.0f });
+	Collision->SetOrder(3);
+
 }
 
 void NpcAirplane::Update(float _Delta)
 {
+	Collision->GetTransform()->SetLocalPosition({ Npc->GetTransform()->GetLocalPosition() });
+	Collision->GetTransform()->SetLocalRotation({ Npc->GetTransform()->GetLocalRotation() });
 	
+	
+	if (Collision->Collision(1) == nullptr)
+	{
+		Player::MainPlayer->SetGravity(false);
+	}
+	else if (Collision->Collision(1,ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+		Player::MainPlayer->SetGravity(true);
+	}
+
+	
+	
+
+	CurPos.x = Npc->GetTransform()->GetLocalPosition().x;
+
+	
+
+	if (CurPos.x > Player::MainPlayer->GetTransform()->GetLocalPosition().x)
+	{
+		Npc->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
+		Npc_Airplane_Back->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
+		Npc_Airplane_Reg->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
+		Npc_Airplane_Front->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
+		Npc_Airplane_Spin->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
+	}
+
+	else if (CurPos.x < Player::MainPlayer->GetTransform()->GetLocalPosition().x)
+	{
+		Npc->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
+		Npc_Airplane_Back->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
+		Npc_Airplane_Reg->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
+		Npc_Airplane_Front->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
+		Npc_Airplane_Spin->GetTransform()->SetLocalRotation({ 0,0,(-Speed * _Delta) * 1.0f });
+	}
+
+	if (CurPos.x < Player::MainPlayer->GetTransform()->GetLocalPosition().x)
+	{
+		Speed = CurPos.x - Player::MainPlayer->GetTransform()->GetLocalPosition().x;
+		Speed *= -1;
+
+
+		Npc->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+		Npc_Airplane_Back->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+		Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+		Npc_Airplane_Front->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+		Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+		Player::MainPlayer->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+
+
+
+
+	}
+
+	else if (CurPos.x > Player::MainPlayer->GetTransform()->GetLocalPosition().x)
+	{
+		Speed = CurPos.x - Player::MainPlayer->GetTransform()->GetLocalPosition().x;
+		Speed *= -1;
+
+
+		Npc->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+		Npc_Airplane_Back->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+		Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+		Npc_Airplane_Front->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+		Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+		Player::MainPlayer->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.5f,0,0 });
+
+
+
+
+	}
+
+
+	float ds = Speed;
+
+
+
 	UpdateState(_Delta); 
 
 }

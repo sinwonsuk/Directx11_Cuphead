@@ -44,6 +44,8 @@ public:
 
 	void BossAttackPase1Update(float _Time);
 	void BossJumpUpdate(float _Time); 
+
+	static int Hp;
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -61,6 +63,12 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> GirlDog;
 	std::shared_ptr<class GameEngineSpriteRenderer> dogcopter;
 	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIntro;
+	std::shared_ptr<class GameEngineSpriteRenderer> dogcopter_hydrant;
+
+	std::shared_ptr<class GameEngineSpriteRenderer> testImage;
+	std::shared_ptr<class GameEngineSpriteRenderer> testImage1;
+	std::shared_ptr<class GameEngineSpriteRenderer> testImage2;
+
 
 
 	std::shared_ptr<class GameEngineSpriteRenderer> AirplaneSpin;
@@ -91,7 +99,11 @@ private:
 	bool Ball_MonsterCheck = false;
 	bool test = false;
 	bool test1 = false;
+	bool AttackCheck = false;
 
+	bool sds = false;
+
+	
 	int bulldogAttackPase1 = 0;
 	int Ball_Monster_Random = 0;
 	int bulldogIdleCheck = 0;

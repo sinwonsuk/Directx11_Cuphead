@@ -4,6 +4,7 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.cpp"
+#include "DogAirplane.h"
 IdleWeapon::IdleWeapon()
 {
 }
@@ -56,7 +57,7 @@ void IdleWeapon::Update(float _Delta)
 
 	if (Collision->Collision((int)CollisionType::DogAirPlane_Pase1) && CollisionCheck == false)
 	{
-
+		DogAirplane::Hp -= 1;
 		
 		Bullet->ChangeAnimation("Peashooter_Death");
 

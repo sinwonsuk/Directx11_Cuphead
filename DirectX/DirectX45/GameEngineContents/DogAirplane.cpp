@@ -7,9 +7,11 @@
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include <GameEngineCore/GameEngineSprite.h>
 #include "EnumClass.cpp"
 #include "IdleWeapon.h"
 #include "Dog_ball.h"
+int DogAirplane::Hp = 59;
 DogAirplane::DogAirplane()
 {
 }
@@ -65,7 +67,10 @@ void DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("AirPlane_Tail").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Attack2_Pase1_intro").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Attack2_Pase1_Attack").GetFullPath());
-
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph1_dogcopter_hydrant").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Buldog_Death").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("acada").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph1_2_transition_mini_dogs").GetFullPath());
 
 	}
 
@@ -85,6 +90,11 @@ void DogAirplane::Start()
 	bulldogIntro->GetTransform()->AddLocalPosition({ 0,0,89 });
 	bulldogIntro->Off();
 
+	dogcopter_hydrant = CreateComponent<GameEngineSpriteRenderer>();
+	dogcopter_hydrant->CreateAnimation({ .AnimationName = "ph1_dogcopter_hydrant", .SpriteName = "ph1_dogcopter_hydrant", .FrameInter = 0.07f,.Loop = false, .ScaleToTexture = true, });
+	dogcopter_hydrant->ChangeAnimation("ph1_dogcopter_hydrant");
+	dogcopter_hydrant->GetTransform()->AddLocalPosition({ 0,0,88 });
+	dogcopter_hydrant->Off();
 
 	Airplane_Tail = CreateComponent<GameEngineSpriteRenderer>();
 	Airplane_Tail->CreateAnimation({ .AnimationName = "AirPlane_Tail", .SpriteName = "AirPlane_Tail", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
@@ -97,6 +107,22 @@ void DogAirplane::Start()
 	Airplane_Wing->ChangeAnimation("bulldog_plane_wing");
 	Airplane_Wing->GetTransform()->AddLocalPosition({ 0,600,87 });
 	
+	testImage = CreateComponent<GameEngineSpriteRenderer>();
+	testImage->CreateAnimation({ .AnimationName = "Ph1_Buldog_Death", .SpriteName = "Ph1_Buldog_Death", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
+	testImage->ChangeAnimation("Ph1_Buldog_Death");
+	testImage->GetTransform()->AddLocalPosition({ 0,0,79 });
+
+	testImage1 = CreateComponent<GameEngineSpriteRenderer>();
+	testImage1->CreateAnimation({ .AnimationName = "acada", .SpriteName = "acada", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
+	testImage1->ChangeAnimation("acada");
+	testImage1->GetTransform()->AddLocalPosition({ 0,0,80 });
+
+	testImage2 = CreateComponent<GameEngineSpriteRenderer>();
+	testImage2->CreateAnimation({ .AnimationName = "ph1_2_transition_mini_dogs", .SpriteName = "ph1_2_transition_mini_dogs", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
+	testImage2->ChangeAnimation("ph1_2_transition_mini_dogs");
+	testImage2->GetTransform()->AddLocalPosition({ 0,0,80 });
+
+
 	AirplaneFlap_A = CreateComponent<GameEngineSpriteRenderer>();
 	AirplaneFlap_A->CreateAnimation({ .AnimationName = "bulldog_plane_flap_left_a", .SpriteName = "bulldog_plane_flap_left_a", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	AirplaneFlap_A->ChangeAnimation("bulldog_plane_flap_left_a");
@@ -166,11 +192,20 @@ void DogAirplane::Update(float _Delta)
 {		
 	Collision->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition()});
 
+	
 
 
+	
 
+	if (Hp == 50)
+	{
+		dogcopter_hydrant->On();
+	}
 
-
+	if (dogcopter_hydrant->IsAnimationEnd())
+	{
+		dogcopter_hydrant->Death();
+	}
 	
 	Ball_Monster_Time += _Delta;
 
@@ -180,35 +215,24 @@ void DogAirplane::Update(float _Delta)
 
 		if (test == 0)
 		{
-
-			
-		
-			
 			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x - 418,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 80,85});
 			Ball_Monster->GetTransform()->SetLocalRotation({ 0,180,0 });
 			Ball_Monster->ChangeAnimation("ph1_dog_b_ball_toss");
-
 			Ball_Monster->On();
-
-			
-
 		}
 
 		 if (test == 1)
 		{
 			Ball_Monster->ChangeAnimation("ph1_dog_a_ball_toss");
-			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x - 160,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 40 ,85});
-		
+			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x - 160,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 40 ,85});		
 			Ball_Monster->GetTransform()->SetLocalRotation({ 0,180,0 });
 			Ball_Monster->On();
-
 		}
 
 		else if (test == 2)
 		{
 			Ball_Monster->ChangeAnimation("ph1_dog_a_ball_toss");
-			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x + 170,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 40 ,85});
-		
+			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x + 170,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 40 ,85});	
 			Ball_Monster->GetTransform()->SetLocalRotation({ 0,0,0 });
 			Ball_Monster->On();
 		}
@@ -216,12 +240,10 @@ void DogAirplane::Update(float _Delta)
 		else if (test == 3)
 		{
 
-			 Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x + 418,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 80,85 });
-
-			 Ball_Monster->GetTransform()->SetLocalRotation({ 0,0,0 });
-
-			Ball_Monster->ChangeAnimation("ph1_dog_b_ball_toss");
-			Ball_Monster->On();
+		 Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x + 418,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 80,85 });
+		 Ball_Monster->GetTransform()->SetLocalRotation({ 0,0,0 });
+		 Ball_Monster->ChangeAnimation("ph1_dog_b_ball_toss");
+		 Ball_Monster->On();
 
 		}
 

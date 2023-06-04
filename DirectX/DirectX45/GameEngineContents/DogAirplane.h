@@ -14,7 +14,7 @@ enum class DogAirplaneState
 	BossAttackPase1, 
 	BossAttackPase2,
 	BossAttackPase2Intro,
-
+	Ph1_Finish,
 
 };
 
@@ -44,7 +44,7 @@ public:
 
 	void BossAttackPase1Update(float _Time);
 	void BossJumpUpdate(float _Time); 
-
+	void Ph1FinishUpdate(float _Time); 
 	static int Hp;
 protected:
 	void Start();
@@ -56,6 +56,7 @@ protected:
 private:
 	std::vector<int> a;
 	float DownSpeed = 600;
+	float Right_Left_Speed = 50;
 	float Speed = 75;
 	DogAirplaneState StateValue = DogAirplaneState::BossIntro;
 
@@ -65,11 +66,10 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIntro;
 	std::shared_ptr<class GameEngineSpriteRenderer> dogcopter_hydrant;
 
-	std::shared_ptr<class GameEngineSpriteRenderer> testImage;
+	std::shared_ptr<class GameEngineSpriteRenderer> Ph1_Buldog_Death;
 	std::shared_ptr<class GameEngineSpriteRenderer> testImage1;
-	std::shared_ptr<class GameEngineSpriteRenderer> testImage2;
-
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Buldog_Death_Intro;
+	std::shared_ptr<class GameEngineSpriteRenderer> testImage3;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> AirplaneSpin;
 	std::shared_ptr<class GameEngineSpriteRenderer> Airplane_Back;
@@ -90,11 +90,17 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIdle;
 	std::shared_ptr<class GameEngineSpriteRenderer> Ball_Monster;
 
+
+
+
 	std::shared_ptr<class GameEngineCollision> Collision;
 	
+
+
 	float Pase1_Attack = 500;
 	float Ball_Monster_Time = 0;
 	float4 CurPos = { 0,0 };
+
 
 	bool Ball_MonsterCheck = false;
 	bool test = false;

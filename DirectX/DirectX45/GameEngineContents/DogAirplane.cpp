@@ -11,7 +11,7 @@
 #include "EnumClass.cpp"
 #include "IdleWeapon.h"
 #include "Dog_ball.h"
-int DogAirplane::Hp = 59;
+int DogAirplane::Hp = 5;
 DogAirplane::DogAirplane()
 {
 }
@@ -69,9 +69,9 @@ void DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("bulldog_Attack2_Pase1_Attack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph1_dogcopter_hydrant").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Buldog_Death").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Buldog_Death_intro").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("acada").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph1_2_transition_mini_dogs").GetFullPath());
-
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Death_Front").GetFullPath());
 	}
 
 	GirlDog = CreateComponent<GameEngineSpriteRenderer>();
@@ -103,25 +103,33 @@ void DogAirplane::Start()
 
 
 	Airplane_Wing = CreateComponent<GameEngineSpriteRenderer>();
-	Airplane_Wing->CreateAnimation({ .AnimationName = "bulldog_plane_wing", .SpriteName = "bulldog_plane_wing", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
+	Airplane_Wing->CreateAnimation({ .AnimationName = "bulldog_plane_wing", .SpriteName = "bulldog_plane_wing", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true, });
 	Airplane_Wing->ChangeAnimation("bulldog_plane_wing");
 	Airplane_Wing->GetTransform()->AddLocalPosition({ 0,600,87 });
 	
-	testImage = CreateComponent<GameEngineSpriteRenderer>();
-	testImage->CreateAnimation({ .AnimationName = "Ph1_Buldog_Death", .SpriteName = "Ph1_Buldog_Death", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
-	testImage->ChangeAnimation("Ph1_Buldog_Death");
-	testImage->GetTransform()->AddLocalPosition({ 0,0,79 });
+	Ph1_Buldog_Death = CreateComponent<GameEngineSpriteRenderer>();
+	Ph1_Buldog_Death->CreateAnimation({ .AnimationName = "Ph1_Buldog_Death", .SpriteName = "Ph1_Buldog_Death", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
+	Ph1_Buldog_Death->ChangeAnimation("Ph1_Buldog_Death");
+	Ph1_Buldog_Death->GetTransform()->AddLocalPosition({ 0,0,79 });
+	Ph1_Buldog_Death->Off(); 
 
 	testImage1 = CreateComponent<GameEngineSpriteRenderer>();
-	testImage1->CreateAnimation({ .AnimationName = "acada", .SpriteName = "acada", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
+	testImage1->CreateAnimation({ .AnimationName = "acada", .SpriteName = "acada", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true, });
 	testImage1->ChangeAnimation("acada");
 	testImage1->GetTransform()->AddLocalPosition({ 0,0,80 });
+	testImage1->Off(); 
 
-	testImage2 = CreateComponent<GameEngineSpriteRenderer>();
-	testImage2->CreateAnimation({ .AnimationName = "ph1_2_transition_mini_dogs", .SpriteName = "ph1_2_transition_mini_dogs", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
-	testImage2->ChangeAnimation("ph1_2_transition_mini_dogs");
-	testImage2->GetTransform()->AddLocalPosition({ 0,0,80 });
+	Buldog_Death_Intro = CreateComponent<GameEngineSpriteRenderer>();
+	Buldog_Death_Intro->CreateAnimation({ .AnimationName = "Ph1_Buldog_Death_intro", .SpriteName = "Ph1_Buldog_Death_intro", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true, });
+	Buldog_Death_Intro->ChangeAnimation("Ph1_Buldog_Death_intro");
+	Buldog_Death_Intro->GetTransform()->AddLocalPosition({ 0,0,79 });
+	Buldog_Death_Intro->Off();
 
+	testImage3 = CreateComponent<GameEngineSpriteRenderer>();
+	testImage3->CreateAnimation({ .AnimationName = "Ph1_Death_Front", .SpriteName = "Ph1_Death_Front", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true, });
+	testImage3->ChangeAnimation("Ph1_Death_Front");
+	testImage3->GetTransform()->AddLocalPosition({ 0,0,78 });
+	testImage3->Off();
 
 	AirplaneFlap_A = CreateComponent<GameEngineSpriteRenderer>();
 	AirplaneFlap_A->CreateAnimation({ .AnimationName = "bulldog_plane_flap_left_a", .SpriteName = "bulldog_plane_flap_left_a", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
@@ -176,6 +184,7 @@ void DogAirplane::Start()
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Jump_Reverse", .SpriteName = "bulldog_Jump_Reverse", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Attack_Pase1", .SpriteName = "bulldog_Attack_Pase1", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Attack2_Pase1_intro", .SpriteName = "bulldog_Attack2_Pase1_intro", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
+	bulldogIdle->CreateAnimation({ .AnimationName = "Ph1_Buldog_Death", .SpriteName = "Ph1_Buldog_Death", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	bulldogIdle->CreateAnimation({ .AnimationName = "bulldog_Attack2_Pase1_Attack", .SpriteName = "bulldog_Attack2_Pase1_Attack", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	bulldogIdle->ChangeAnimation("bulldog_Idle");
 	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,81 });
@@ -197,7 +206,7 @@ void DogAirplane::Update(float _Delta)
 
 	
 
-	if (Hp == 50)
+	/*if (Hp == 50)
 	{
 		dogcopter_hydrant->On();
 	}
@@ -205,11 +214,11 @@ void DogAirplane::Update(float _Delta)
 	if (dogcopter_hydrant->IsAnimationEnd())
 	{
 		dogcopter_hydrant->Death();
-	}
+	}*/
 	
 	Ball_Monster_Time += _Delta;
 
-	if (Ball_Monster_Time > 3)
+	if (Ball_Monster_Time > 3 && Hp > 0)
 	{
 		int test = GameEngineRandom::MainRandom.RandomInt(0,3);
 
@@ -246,7 +255,6 @@ void DogAirplane::Update(float _Delta)
 		 Ball_Monster->On();
 
 		}
-
 		 Ball_Monster_Time = 0;
 	}
 
@@ -266,8 +274,6 @@ void DogAirplane::Update(float _Delta)
 		Ball_MonsterCheck = false;
 		Ball_Monster->Off();
 	}
-
-
 	UpdateState(_Delta);
 }
 void DogAirplane::Render(float _Delta)

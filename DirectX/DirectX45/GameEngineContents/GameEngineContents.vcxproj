@@ -171,12 +171,14 @@
     <ClInclude Include="DogAirplane.h" />
     <ClInclude Include="DogAirplaneBackground.h" />
     <ClInclude Include="DogAirplaneLevel.h" />
+    <ClInclude Include="DogAirPlaneManager.h" />
     <ClInclude Include="dogfight_catshoot_yarnball.h" />
     <ClInclude Include="Dog_ball.h" />
     <ClInclude Include="GiantBoss.h" />
     <ClInclude Include="giantStageLevel.h" />
     <ClInclude Include="IdleWeapon.h" />
     <ClInclude Include="NpcAirplane.h" />
+    <ClInclude Include="Ph2_DogAirpalne.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -203,6 +205,7 @@
     <ClCompile Include="DogAirplane.cpp" />
     <ClCompile Include="DogAirplaneBackground.cpp" />
     <ClCompile Include="DogAirplaneLevel.cpp" />
+    <ClCompile Include="DogAirPlaneManager.cpp" />
     <ClCompile Include="DogAirplaneState.cpp" />
     <ClCompile Include="dogfight_catshoot_yarnball.cpp" />
     <ClCompile Include="Dog_ball.cpp" />
@@ -213,6 +216,8 @@
     <ClCompile Include="IdleWeapon.cpp" />
     <ClCompile Include="NpcAirplane.cpp" />
     <ClCompile Include="NpcAirPlaneState.cpp" />
+    <ClCompile Include="Ph2_DogAirpalne.cpp" />
+    <ClCompile Include="Ph2_DogAirPlaneState.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>

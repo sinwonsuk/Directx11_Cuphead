@@ -7,7 +7,7 @@
 #include "DogAirplane.h"
 #include "Player.h"
 #include "NpcAirplane.h"
-
+#include "Ph2_DogAirpalne.h"
 #include "DogAirplaneBackground.h"
 
 DogAirplaneLevel::DogAirplaneLevel()
@@ -28,18 +28,22 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetSortType(0,SortType::ZSort);
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
+	//{
+	//	std::shared_ptr<DogAirplane> Object = CreateActor<DogAirplane>();
+	//}
+	//{
+	//	std::shared_ptr<DogAirplaneBackground> Object = CreateActor<DogAirplaneBackground>();
+	//}
+	//{
+	//	std::shared_ptr<NpcAirplane> Object = CreateActor<NpcAirplane>(2);
+	//}
+	//{
+	//	std::shared_ptr<Player> Object = CreateActor<Player>(4);
+	//	Object->GetTransform()->AddLocalPosition({ -350,0,0 });
+	//}
 	{
-		std::shared_ptr<DogAirplane> Object = CreateActor<DogAirplane>();
-	}
-	{
-		std::shared_ptr<DogAirplaneBackground> Object = CreateActor<DogAirplaneBackground>();
-	}
-	{
-		std::shared_ptr<NpcAirplane> Object = CreateActor<NpcAirplane>(2);
-	}
-	{
-		std::shared_ptr<Player> Object = CreateActor<Player>(4);
-		Object->GetTransform()->AddLocalPosition({ -350,0,0 });
+		std::shared_ptr<Ph2_DogAirpalne> Object = CreateActor<Ph2_DogAirpalne>(4);
+		//Object->GetTransform()->AddLocalPosition({ -350,0,0 });
 	}
 	/*{
 		std::shared_ptr<Dog_ball_Monster> Object = CreateActor<Dog_ball_Monster>(3);

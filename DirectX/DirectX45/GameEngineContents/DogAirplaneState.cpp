@@ -85,6 +85,9 @@ void DogAirplane::UpdateState(float _Time)
 	case DogAirplaneState::BossAttackPase2:
 		BossAttackPase2AttackUpdate(_Time);
 		break;
+	case DogAirplaneState::Ph1_Finish:
+		Ph1FinishUpdate(_Time);
+		break;
 	default:
 		break;
 	}
@@ -95,15 +98,43 @@ void DogAirplane::UpdateState(float _Time)
 
 void DogAirplane::BossIdleUpdate(float _Time)
 {
+	if (Hp < 0)
+	{
+		Airplane_Tail->Off();
+		Airplane_Wing->Off();
+
+		AirplaneFlap_A->Off();
+		AirplaneFlap_B->Off();
+		AirplaneFlap_C->Off();
+		AirplaneFlap_D->Off();
+		Ball_Monster->Off();
+		Airplane_Back->Off();
+		AirplaneSpin->Off();
+		bulldogIdle->Off();
+		Airplane_Front->Off();
+
+
+		Ph1_Buldog_Death->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x, bulldogIdle->GetTransform()->GetLocalPosition().y - 90, bulldogIdle->GetTransform()->GetLocalPosition().z });
+		testImage1->GetTransform()->SetLocalPosition({ AirplaneFlap_A->GetTransform()->GetLocalPosition().x,AirplaneFlap_A->GetTransform()->GetLocalPosition().y - 60,83 });
+		Buldog_Death_Intro->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x,bulldogIdle->GetTransform()->GetLocalPosition().y,bulldogIdle->GetTransform()->GetLocalPosition().z });
+		testImage3->GetTransform()->SetLocalPosition({ AirplaneFlap_A->GetTransform()->GetLocalPosition().x,AirplaneFlap_A->GetTransform()->GetLocalPosition().y- 80,82 });
+		testImage1->On();
+		Buldog_Death_Intro->On();
+		testImage3->On(); 
+
+		ChangeState(DogAirplaneState::Ph1_Finish);
+		return;
 	
-
-
+	}
+	
 	if (bulldogIdle->IsAnimationEnd())
 	{
 		++bulldogIdleCheck;
 	}
 	
-	if (bulldogIdleCheck == 3)
+
+
+	if (bulldogIdleCheck == 2)
 	{
 		
 		CurPos = AirplaneSpin->GetTransform()->GetLocalPosition();
@@ -408,6 +439,29 @@ void DogAirplane::BossJumpUpdate(float _Time)
 		return;
 	}
 		
+}
+void DogAirplane::Ph1FinishUpdate(float _Time)
+{
+	if (Hp < 0)
+	{
+	
+		if (testImage1->IsAnimationEnd())
+		{
+			testImage1->Off();
+		}
+
+		if (Buldog_Death_Intro->IsAnimationEnd())
+		{
+			Buldog_Death_Intro->Off();
+			testImage3->Off();
+		}
+		if (testImage1->GetCurrentFrame() == 25)
+		{
+			
+			Ph1_Buldog_Death->On();
+		}
+		return;
+	}
 }
 void DogAirplane::BossAttackPase2IntroUpdate(float _Time)
 {

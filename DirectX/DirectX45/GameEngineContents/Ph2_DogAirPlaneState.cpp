@@ -136,6 +136,8 @@ void Ph2_DogAirpalne::LeftIdleUpdate(float _Time)
 
 	TransformData date1 = Ph2_Boss->GetTransform()->GetTransDataRef();
 
+
+
 }
 
 void Ph2_DogAirpalne::UpIdleUpdate(float _Time)

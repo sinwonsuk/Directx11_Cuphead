@@ -12,7 +12,7 @@ Ph2_DogAirpalne::~Ph2_DogAirpalne()
 
 void Ph2_DogAirpalne::Start()
 {
-	if (nullptr == GameEngineSprite::Find("Chinook_Pilot_Saluki"))
+	if (nullptr == GameEngineSprite::Find("ph2_dog_a_intro"))
 	{
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("ContentResources");

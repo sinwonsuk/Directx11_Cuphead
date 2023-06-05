@@ -51,6 +51,7 @@
     <ClInclude Include="dogfight_catshoot_yarnball.h" />
     <ClInclude Include="DogAirPlaneManager.h" />
     <ClInclude Include="Ph2_DogAirpalne.h" />
+    <ClInclude Include="ph3_DogAirPlane.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -119,6 +120,10 @@
     <ClCompile Include="DogAirPlaneManager.cpp" />
     <ClCompile Include="Ph2_DogAirpalne.cpp" />
     <ClCompile Include="Ph2_DogAirPlaneState.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="ph3_DogAirPlane.cpp" />
+    <ClCompile Include="ph3_DogAirPlaneState.cpp">
       <Filter>Object\DogAirplane</Filter>
     </ClCompile>
   </ItemGroup>

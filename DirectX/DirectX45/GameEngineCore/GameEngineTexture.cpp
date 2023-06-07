@@ -106,7 +106,7 @@ void GameEngineTexture::ResLoad(const std::string_view& _Path)
 	}
 
 
-	else if (S_OK != DirectX::LoadFromDDSFile(Path.c_str(), DirectX::DDS_FLAGS_NONE, &Data, Image))
+	else if (S_OK != DirectX::LoadFromWICFile(Path.c_str(), DirectX::WIC_FLAGS_NONE, &Data, Image))
 	{
 		MsgAssert("텍스처 로드에 실패했습니다." + std::string(_Path.data()));
 	}

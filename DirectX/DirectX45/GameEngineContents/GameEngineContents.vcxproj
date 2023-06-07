@@ -180,6 +180,7 @@
     <ClInclude Include="NpcAirplane.h" />
     <ClInclude Include="Ph2_DogAirpalne.h" />
     <ClInclude Include="ph3_DogAirPlane.h" />
+    <ClInclude Include="ph3_Laser.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -221,6 +222,7 @@
     <ClCompile Include="Ph2_DogAirPlaneState.cpp" />
     <ClCompile Include="ph3_DogAirPlane.cpp" />
     <ClCompile Include="ph3_DogAirPlaneState.cpp" />
+    <ClCompile Include="ph3_Laser.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>

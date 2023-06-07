@@ -10,6 +10,7 @@
 #include "Ph2_DogAirpalne.h"
 #include "DogAirplaneBackground.h"
 #include "ph3_DogAirPlane.h"
+#include "ph3_Laser.h"
 DogAirplaneLevel::DogAirplaneLevel()
 {
 }
@@ -31,9 +32,9 @@ void DogAirplaneLevel::Start()
 	//{
 	//	std::shared_ptr<DogAirplane> Object = CreateActor<DogAirplane>();
 	//}
-	{
-		std::shared_ptr<DogAirplaneBackground> Object = CreateActor<DogAirplaneBackground>();
-	}
+	//{
+	//	std::shared_ptr<DogAirplaneBackground> Object = CreateActor<DogAirplaneBackground>();
+	//}
 	//{
 	//	std::shared_ptr<NpcAirplane> Object = CreateActor<NpcAirplane>(2);
 	//}
@@ -45,14 +46,14 @@ void DogAirplaneLevel::Start()
 	//	std::shared_ptr<Ph2_DogAirpalne> Object = CreateActor<Ph2_DogAirpalne>(4);
 	//	//Object->GetTransform()->AddLocalPosition({ -350,0,0 });
 	//}
-	/*{
-		std::shared_ptr<Dog_ball_Monster> Object = CreateActor<Dog_ball_Monster>(3);
-		Object->GetTransform()->AddLocalPosition({ 100,250 });
-	}*/
+	
+
 	{
-		std::shared_ptr<Ph3_DogAirplane> Object = CreateActor<Ph3_DogAirplane>(3);
-		
+		std::shared_ptr<Ph3_DogAirplane> Object = CreateActor<Ph3_DogAirplane>(3);		
 	}
+	
+		
+	
 }
 
 void DogAirplaneLevel::LevelChangeStart()

@@ -52,6 +52,7 @@
     <ClInclude Include="DogAirPlaneManager.h" />
     <ClInclude Include="Ph2_DogAirpalne.h" />
     <ClInclude Include="ph3_DogAirPlane.h" />
+    <ClInclude Include="ph3_Laser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -126,6 +127,7 @@
     <ClCompile Include="ph3_DogAirPlaneState.cpp">
       <Filter>Object\DogAirplane</Filter>
     </ClCompile>
+    <ClCompile Include="ph3_Laser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

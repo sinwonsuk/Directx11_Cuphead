@@ -32,38 +32,52 @@ public:
 		return MoveDir;
 	}
 
-	std::shared_ptr<class GameEngineSpriteRenderer> GetSfx()
+	std::shared_ptr<class GameEngineSpriteRenderer> Get_ph3_beam_top()
 	{
-		return Sfx;
-	}
-	std::shared_ptr<class GameEngineSpriteRenderer> GetBullet()
-	{
-		return Bullet;
+		return ph3_beam_top; 
 	}
 
 
 
+
+	std::shared_ptr<class GameEngineSpriteRenderer> Get_ph3_beam_mid()
+	{
+		return ph3_beam_mid;
+	}
+
+	std::shared_ptr<class GameEngineSpriteRenderer> Get_ph3_beam_low()
+	{
+		return ph3_beam_low;
+	}
+
+
+	LaserDir laserDir = LaserDir::Right_Mid;
 
 protected:
 	void Start();
 	void Update(float _Delta) override;
 
 private:
-	LaserDir laserDir = LaserDir::Left_Top;
-
-	std::shared_ptr<class GameEngineSpriteRenderer> ph3_beam_top;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_aura_top;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_particle_top;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_top;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_ring_top;
-
-	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_mid;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_particle_mid;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph3_beam_mid;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_electric_mid;
 	
 
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_beam_top = nullptr;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_aura_top = nullptr;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_particle_top = nullptr;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_top = nullptr;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_ring_top = nullptr;
 
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_mid = nullptr;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_particle_mid = nullptr;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_beam_mid = nullptr;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_electric_mid = nullptr;
+	
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_beam_low = nullptr;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_Right_warning_aura_low = nullptr;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_Left__warning_aura_low = nullptr;
+
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_low = nullptr;
+	
+	bool dirCheck = false;
 
 	float4 MoveDir = { 0,0 };
 	std::shared_ptr<class GameEngineCollision> Collision;

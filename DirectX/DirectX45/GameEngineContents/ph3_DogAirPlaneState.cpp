@@ -396,6 +396,7 @@ void Ph3_DogAirplane::Pase3_Attack_Reverse_Update(float _Time)
 		ChangeState(Ph3_DogAirPlaneState::Rotation);
 		return;
 	}
+	
 }
 
 

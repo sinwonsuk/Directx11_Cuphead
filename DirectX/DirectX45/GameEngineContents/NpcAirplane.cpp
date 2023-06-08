@@ -4,6 +4,7 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineCamera.h>
+#include <GameEngineCore/GameEngineLevel.h>
 #include "EnumClass.cpp"
 #include "Player.h"
 NpcAirplane::NpcAirplane()
@@ -79,34 +80,34 @@ void NpcAirplane::Start()
 
 void NpcAirplane::Update(float _Delta)
 {
-	
+	//GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
 
 	switch (RotationCheck)
 	{
 	case 0:
 	{
-		if (GetTransform()->GetTransDataRef().Rotation.z > 90)
+		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -90)
 		{
-			GetTransform()->AddLocalRotation({ 0,0,-1 });
-			GetTransform()->AddLocalPosition({ -3,0,0 });
+			/*GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -4,0,0 });*/
 			++RotationCheck;
 		}
 
-		GetTransform()->AddLocalRotation({ 0,0,1 });
-		GetTransform()->AddLocalPosition({ 3,0,0 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 0,3,0 });
 	}
 	break;
 	case 1:
 	{
-		if (GetTransform()->GetTransDataRef().Rotation.z > 180)
+		/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 180)
 		{
-			GetTransform()->AddLocalRotation({ 0,0,-1 });
-			GetTransform()->AddLocalPosition({ 3,0,0 });	
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });	
 			++RotationCheck;
 		}
 
-		GetTransform()->AddLocalRotation({ 0,0,1 });
-		GetTransform()->AddLocalPosition({ -3,0,0 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });*/
 	}
 	break;
 	case 2:
@@ -114,30 +115,29 @@ void NpcAirplane::Update(float _Delta)
 		
 
 		
-		if (GetTransform()->GetTransDataRef().Rotation.z > 270)
+		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 270)
 		{
-			GetTransform()->AddLocalRotation({ 0,0,-1 });
-			GetTransform()->AddLocalPosition({ 3,0,0 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
 			++RotationCheck;
 		}
 
-		GetTransform()->AddLocalRotation({ 0,0,1 });
-		GetTransform()->AddLocalPosition({ -3,0,0 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
 	}
 	break;
 	case 3:
 	{
 
-
-		if (GetTransform()->GetTransDataRef().Rotation.z > 360)
+		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
 		{
-			GetTransform()->AddLocalRotation({ 0,0,-1 });
-			GetTransform()->AddLocalPosition({ -3,0,0 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
 			//GetTransform()->SetLocalPosition({ 0,0 });
 			RotationCheck = 0;
 		}
-		GetTransform()->AddLocalRotation({ 0,0,1 });
-		GetTransform()->AddLocalPosition({3,0,0 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({3,0,0 });
 
 	}
 	break;
@@ -146,14 +146,14 @@ void NpcAirplane::Update(float _Delta)
 		break;
 	}
 
-	if (GetTransform()->GetTransDataRef().Rotation.z > 360)
+	/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
 	{
-		GetTransform()->SetLocalRotation({ 0,0,0});
-		GetTransform()->SetLocalPosition({ 0,0,0 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,0});
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 0,0,0 });
 		RotationCheck = 0;
 		TransformData data = GetTransform()->GetTransDataRef();
 		int a = 0;
-	}
+	}*/
 
 
 

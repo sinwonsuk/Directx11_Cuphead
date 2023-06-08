@@ -52,6 +52,7 @@ private:
 	std::shared_ptr<class GameEngineCollision> Collision;
 	
 	int IntroCheck = 0;
+	int RotationCheck = 0; 
 	float4 CurPos = {0,0};
 	float Speed = 0;
 	float SpeedControll = 0.03;

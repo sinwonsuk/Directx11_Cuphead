@@ -35,9 +35,9 @@ void DogAirplaneLevel::Start()
 	{
 		std::shared_ptr<DogAirplaneBackground> Object = CreateActor<DogAirplaneBackground>();
 	}*/
-	/*{
+	{
 		std::shared_ptr<NpcAirplane> Object = CreateActor<NpcAirplane>(2);
-	}*/
+	}
 	/*{
 		std::shared_ptr<Player> Object = CreateActor<Player>(4);
 		Object->GetTransform()->AddLocalPosition({ -350,0,0 });

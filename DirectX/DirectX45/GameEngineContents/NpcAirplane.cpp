@@ -42,24 +42,24 @@ void NpcAirplane::Start()
 	Npc_Airplane_Back = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Ground);
 	Npc_Airplane_Back->CreateAnimation({ .AnimationName = "Npc_Airplane_Back", .SpriteName = "Npc_Airplane_Back", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Back->ChangeAnimation("Npc_Airplane_Back");
-	Npc_Airplane_Back->GetTransform()->AddLocalPosition({ 300,-230 });
+	Npc_Airplane_Back->GetTransform()->AddLocalPosition({ 0,-230 });
 
 	Npc_Airplane_Reg = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Ground);
 	Npc_Airplane_Reg->CreateAnimation({ .AnimationName = "Npc_Airplane_Reg", .SpriteName = "Npc_Airplane_Reg", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Reg->ChangeAnimation("Npc_Airplane_Reg");
-	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ 300,-230 });
+	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ 0,-230 });
 
 	Npc_Airplane_Front = CreateComponent<GameEngineSpriteRenderer>(4);
 	Npc_Airplane_Front->CreateAnimation({ .AnimationName = "Npc_Airplane_Front", .SpriteName = "Npc_Airplane_Front", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Front->ChangeAnimation("Npc_Airplane_Front");
-	Npc_Airplane_Front->GetTransform()->AddLocalPosition({ 300,-230 });
+	Npc_Airplane_Front->GetTransform()->AddLocalPosition({ 0,-230 });
 
 	
 
 	Npc_Airplane_Spin = CreateComponent<GameEngineSpriteRenderer>(5);
 	Npc_Airplane_Spin->CreateAnimation({ .AnimationName = "Npc_Airplane_Spin", .SpriteName = "Npc_Airplane_Spin", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 	Npc_Airplane_Spin->ChangeAnimation("Npc_Airplane_Spin");
-	Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ 300,-230 });
+	Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ 0,-230 });
 
 
 	Npc = CreateComponent<GameEngineSpriteRenderer>(3);
@@ -79,13 +79,81 @@ void NpcAirplane::Start()
 
 void NpcAirplane::Update(float _Delta)
 {
-	if (GetTransform()->GetLocalRotation().z > 90)
+	
+
+	switch (RotationCheck)
 	{
-		GetTransform()->AddLocalRotation({ 0,0,-1 });
+	case 0:
+	{
+		if (GetTransform()->GetTransDataRef().Rotation.z > 90)
+		{
+			GetTransform()->AddLocalRotation({ 0,0,-1 });
+			GetTransform()->AddLocalPosition({ -3,0,0 });
+			++RotationCheck;
+		}
+
+		GetTransform()->AddLocalRotation({ 0,0,1 });
+		GetTransform()->AddLocalPosition({ 3,0,0 });
+	}
+	break;
+	case 1:
+	{
+		if (GetTransform()->GetTransDataRef().Rotation.z > 180)
+		{
+			GetTransform()->AddLocalRotation({ 0,0,-1 });
+			GetTransform()->AddLocalPosition({ 3,0,0 });	
+			++RotationCheck;
+		}
+
+		GetTransform()->AddLocalRotation({ 0,0,1 });
 		GetTransform()->AddLocalPosition({ -3,0,0 });
 	}
-	/*GetTransform()->AddLocalRotation({ 0,0,1 });
-	GetTransform()->AddLocalPosition({ 3,0,0 });*/
+	break;
+	case 2:
+	{
+		
+
+		
+		if (GetTransform()->GetTransDataRef().Rotation.z > 270)
+		{
+			GetTransform()->AddLocalRotation({ 0,0,-1 });
+			GetTransform()->AddLocalPosition({ 3,0,0 });
+			++RotationCheck;
+		}
+
+		GetTransform()->AddLocalRotation({ 0,0,1 });
+		GetTransform()->AddLocalPosition({ -3,0,0 });
+	}
+	break;
+	case 3:
+	{
+
+
+		if (GetTransform()->GetTransDataRef().Rotation.z > 360)
+		{
+			GetTransform()->AddLocalRotation({ 0,0,-1 });
+			GetTransform()->AddLocalPosition({ -3,0,0 });
+			//GetTransform()->SetLocalPosition({ 0,0 });
+			RotationCheck = 0;
+		}
+		GetTransform()->AddLocalRotation({ 0,0,1 });
+		GetTransform()->AddLocalPosition({3,0,0 });
+
+	}
+	break;
+
+	default:
+		break;
+	}
+
+	if (GetTransform()->GetTransDataRef().Rotation.z > 360)
+	{
+		GetTransform()->SetLocalRotation({ 0,0,0});
+		GetTransform()->SetLocalPosition({ 0,0,0 });
+		RotationCheck = 0;
+		TransformData data = GetTransform()->GetTransDataRef();
+		int a = 0;
+	}
 
 
 

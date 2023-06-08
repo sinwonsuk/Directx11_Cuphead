@@ -181,6 +181,7 @@
     <ClInclude Include="Ph2_DogAirpalne.h" />
     <ClInclude Include="ph3_DogAirPlane.h" />
     <ClInclude Include="ph3_Dog_Npc.h" />
+    <ClInclude Include="ph3_food_bowl.h" />
     <ClInclude Include="ph3_Laser.h" />
     <ClInclude Include="Player.h">
       <SubType>
@@ -224,6 +225,7 @@
     <ClCompile Include="ph3_DogAirPlane.cpp" />
     <ClCompile Include="ph3_DogAirPlaneState.cpp" />
     <ClCompile Include="ph3_Dog_Npc.cpp" />
+    <ClCompile Include="ph3_food_bowl.cpp" />
     <ClCompile Include="ph3_Laser.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>

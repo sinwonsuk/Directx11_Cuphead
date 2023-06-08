@@ -54,6 +54,7 @@
     <ClInclude Include="ph3_DogAirPlane.h" />
     <ClInclude Include="ph3_Laser.h" />
     <ClInclude Include="ph3_Dog_Npc.h" />
+    <ClInclude Include="ph3_food_bowl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -130,6 +131,7 @@
     </ClCompile>
     <ClCompile Include="ph3_Laser.cpp" />
     <ClCompile Include="ph3_Dog_Npc.cpp" />
+    <ClCompile Include="ph3_food_bowl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

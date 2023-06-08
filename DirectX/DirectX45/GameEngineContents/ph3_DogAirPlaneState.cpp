@@ -398,9 +398,6 @@ void Ph3_DogAirplane::Pase3_Attack_Reverse_Update(float _Time)
 	}
 }
 
-void Ph3_DogAirplane::Rotation_Attack_Update(float _Time)
-{
-}
 
 void Ph3_DogAirplane::Rotation_Update(float _Time)
 {
@@ -424,4 +421,8 @@ void Ph3_DogAirplane::Rotation_Update(float _Time)
 		return; 
 	}
 	
+}
+void Ph3_DogAirplane::Rotation_Attack_Update(float _Time)
+{
+
 }

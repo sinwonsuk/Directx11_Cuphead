@@ -4,6 +4,7 @@
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include "ph3_Laser.h"
+#include "ph3_Dog_Npc.h"
 void Ph3_DogAirplane::ChangeState(Ph3_DogAirPlaneState _State)
 {
 	Ph3_DogAirPlaneState NextState = _State;
@@ -37,6 +38,12 @@ void Ph3_DogAirplane::ChangeState(Ph3_DogAirPlaneState _State)
 		break;
 	case Ph3_DogAirPlaneState::Pase3_Attack_Reverse:
 		//	AnimationCheck("ph2_dog_b_intro");
+		break;
+	case Ph3_DogAirPlaneState::Rotation:
+	
+		break;
+	case Ph3_DogAirPlaneState::Rotation_Attack:
+		
 		break;
 	default:
 		break;
@@ -75,6 +82,12 @@ void Ph3_DogAirplane::UpdateState(float _Time)
 		break;
 	case Ph3_DogAirPlaneState::Pase3_Attack_Reverse:
 		Pase3_Attack_Reverse_Update(_Time);
+		break;
+	case Ph3_DogAirPlaneState::Rotation:
+		Rotation_Update(_Time); 
+		break;
+	case Ph3_DogAirPlaneState::Rotation_Attack:
+		Rotation_Attack_Update(_Time);
 		break;
 
 	default:
@@ -378,7 +391,37 @@ void Ph3_DogAirplane::Pase3_Attack_Reverse_Update(float _Time)
 		TopLaserCheck = false;
 		MidLaserCheck = false;
 
-		
+
+		ph3_dogcopter_rotate_camera->On();
+		ChangeState(Ph3_DogAirPlaneState::Rotation);
 		return;
 	}
+}
+
+void Ph3_DogAirplane::Rotation_Attack_Update(float _Time)
+{
+}
+
+void Ph3_DogAirplane::Rotation_Update(float _Time)
+{
+
+	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 15)
+	{
+		if (ph3_Npc_Check == false)
+		{
+			std::shared_ptr<ph3_Dog_Npc> object = GetLevel()->CreateActor<ph3_Dog_Npc>(); 
+			ph3_Npc_Check = true;
+		}
+	}
+
+	if (ph3_dogcopter_rotate_camera->IsAnimationEnd())
+	{
+		ph3_dogcopter_rotate_camera->Off(); 
+		ph3_dogcopter_rotated_idle->On(); 
+		ph3_dogcopter_rotate_camera_out_blades->On(); 
+
+		ChangeState(Ph3_DogAirPlaneState::Rotation_Attack);
+		return; 
+	}
+	
 }

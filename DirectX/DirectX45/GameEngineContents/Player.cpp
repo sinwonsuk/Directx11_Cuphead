@@ -23,6 +23,9 @@ Player::~Player()
 
 void Player::Update(float _DeltaTime)
 {
+
+	
+
 	if (Gravity == false && StateValue != PlayerState::Dash)
 	{
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });

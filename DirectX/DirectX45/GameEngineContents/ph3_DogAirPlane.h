@@ -11,8 +11,8 @@ enum class Ph3_DogAirPlaneState
 	Pase2_Attack_Reverse,
 	Pase3_Attack,
 	Pase3_Attack_Reverse,
-	
-	
+	Rotation,
+	Rotation_Attack
 	
 	
 
@@ -48,6 +48,9 @@ public:
 	void Pase2_Attack_Reverse_Update(float _Time);
 	void Pase3_AttackUpdate(float _Time);
 	void Pase3_Attack_Reverse_Update(float _Time);
+	void Rotation_Attack_Update(float _Time);
+
+	void Rotation_Update(float _Time); 
 
 	void LeftIdleUpdate(float _Time);
 	void UpIdleUpdate(float _Time);
@@ -67,7 +70,7 @@ protected:
 	float4 TestColor;
 
 private:
-	Ph3_DogAirPlaneState StateValue = Ph3_DogAirPlaneState::Intro;
+	Ph3_DogAirPlaneState StateValue = Ph3_DogAirPlaneState::Pase3_Attack_Reverse;
 	
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Ph3_Boss_Intro;
@@ -125,16 +128,19 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_Right_laser_low_Reverse;
 
 
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_tongue_rotate_camera;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dogcopter_rotate_camera;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dogcopter_rotated_idle;
 
-
-
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dogcopter_rotate_camera_out_blades;
 	
 	
 
 	std::shared_ptr<class GameEngineCollision> Collision;
-	int idleCheck = 0; 
+
 	bool TopLaserCheck = false;
 	bool MidLaserCheck = false;
 	bool LowLaserCheck = false;
-	bool Right_LowLaserCheck = false;
+
+	bool ph3_Npc_Check = false; 
 };

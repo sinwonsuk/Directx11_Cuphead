@@ -46,7 +46,27 @@ void Ph3_DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_mid").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_top").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_low").GetFullPath());
-
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_dogcopter_rotate_camera").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_dogcopter_rotated_idle").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_dogcopter_rotate_camera_out_blades").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_tongue_rotate_camera").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_arms").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_body").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_body_Attack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_arms_backer").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_beam_top").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_aura_top").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_particle_top").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_top").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_ring_top").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_mid").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_particle_mid").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_beam_mid").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_electric_mid").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_beam_low").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_low").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_aura_Low").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_tongue_rotate_camera_tongue").GetFullPath());
 		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_beam_top").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_aura_top").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_particle_top").GetFullPath());
@@ -64,9 +84,9 @@ void Ph3_DogAirplane::Start()
 
 
 
-	Ph3_Boss_Intro = CreateComponent<GameEngineSpriteRenderer>();
+	/*Ph3_Boss_Intro = CreateComponent<GameEngineSpriteRenderer>();
 	Ph3_Boss_Intro->CreateAnimation({ .AnimationName = "ph3_Intro", .SpriteName = "ph3_Intro", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
-	Ph3_Boss_Intro->ChangeAnimation("ph3_Intro");
+	Ph3_Boss_Intro->ChangeAnimation("ph3_Intro");*/
 
 	
 	{
@@ -235,10 +255,8 @@ void Ph3_DogAirplane::Start()
 		ph3_laser_Right_mid_paw_pad_opens_Reverse->GetTransform()->AddLocalPosition({ -20,0,0 });
 		ph3_laser_Right_mid_paw_pad_opens_Reverse->Off();
 
-
-
-
 	}
+
 	{
 		ph3_Right_paw_hole_low_backer = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_Right_paw_hole_low_backer->CreateAnimation({ .AnimationName = "ph3_left_paw_hole_low_backer", .SpriteName = "ph3_left_paw_hole_low_backer", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
@@ -268,6 +286,7 @@ void Ph3_DogAirplane::Start()
 		ph3_laser_Right_low_paw_pad_opens_Reverse->GetTransform()->AddLocalPosition({ -12,5 });
 		ph3_laser_Right_low_paw_pad_opens_Reverse->Off();
 	}
+
 	{
 		ph3_Left_laser_mid = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_Left_laser_mid->CreateAnimation({ .AnimationName = "ph3_laser_mid", .SpriteName = "ph3_laser_mid", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true,.FrameIndex = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,13} }); 
@@ -287,6 +306,7 @@ void Ph3_DogAirplane::Start()
 		ph3_Left_laser_low->GetTransform()->AddLocalPosition({ 0,0,0 });
 		ph3_Left_laser_low->Off(); 
 	}
+
 	{
 		ph3_Right_laser_mid = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_Right_laser_mid->CreateAnimation({ .AnimationName = "ph3_laser_mid", .SpriteName = "ph3_laser_mid", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true/*,.FrameIndex = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,13,13,12,11,10,9,8,7,6,5,4,3,2,1,0}*/ });
@@ -353,17 +373,39 @@ void Ph3_DogAirplane::Start()
 		ph3_Right_laser_low_Reverse->Off();
 	}
 
+	{
+
+		/*ph3_tongue_rotate_camera = CreateComponent<GameEngineSpriteRenderer>();
+		ph3_tongue_rotate_camera->CreateAnimation({ .AnimationName = "ph3_tongue_rotate_camera", .SpriteName = "ph3_tongue_rotate_camera", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true,.FrameIndex = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,13} });
+		ph3_tongue_rotate_camera->ChangeAnimation("ph3_tongue_rotate_camera");
+		ph3_tongue_rotate_camera->Off(); */
+	
+		ph3_dogcopter_rotate_camera = CreateComponent<GameEngineSpriteRenderer>();
+		ph3_dogcopter_rotate_camera->CreateAnimation({ .AnimationName = "ph3_dogcopter_rotate_camera", .SpriteName = "ph3_dogcopter_rotate_camera", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+		ph3_dogcopter_rotate_camera->ChangeAnimation("ph3_dogcopter_rotate_camera");
+		ph3_dogcopter_rotate_camera->Off();
+
+		ph3_dogcopter_rotated_idle = CreateComponent<GameEngineSpriteRenderer>();
+		ph3_dogcopter_rotated_idle->CreateAnimation({ .AnimationName = "ph3_dogcopter_rotated_idle", .SpriteName = "ph3_dogcopter_rotated_idle", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true ,.FrameIndex = {0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1} });
+		ph3_dogcopter_rotated_idle->ChangeAnimation("ph3_dogcopter_rotated_idle");
+		ph3_dogcopter_rotated_idle->Off();
+
+
+		ph3_dogcopter_rotate_camera_out_blades = CreateComponent<GameEngineSpriteRenderer>();
+		ph3_dogcopter_rotate_camera_out_blades->CreateAnimation({ .AnimationName = "ph3_dogcopter_rotate_camera_out_blades", .SpriteName = "ph3_dogcopter_rotate_camera_out_blades", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true /*,.FrameIndex = {0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1}*/ });
+		ph3_dogcopter_rotate_camera_out_blades->ChangeAnimation("ph3_dogcopter_rotate_camera_out_blades");
+		ph3_dogcopter_rotate_camera_out_blades->GetTransform()->AddLocalPosition({ -100,0,0 });
+		ph3_dogcopter_rotate_camera_out_blades->Off();
+
+	}
+
+
 
 }
 
 void Ph3_DogAirplane::Update(float _Delta)
 {
 	
-
-
-
-
-
 	UpdateState(_Delta);
 }
 

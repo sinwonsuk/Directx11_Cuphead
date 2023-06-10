@@ -12,8 +12,15 @@ enum class Ph3_DogAirPlaneState
 	Pase3_Attack,
 	Pase3_Attack_Reverse,
 	Rotation,
-	Rotation_Attack
-	
+	Rotation_Attack,
+	Rotation_Laser_Idle,
+	Rotation_Pase1_Laser_Attack,
+	Rotation_Pase1_Laser_Attack_Reverse,
+	Rotation_Pase2_Laser_Attack,
+	Rotation_Pase2_Laser_Attack_Reverse,
+	Rotation_Pase3_Laser_Attack,
+	Rotation_Pase3_Laser_Attack_Reverse,
+
 	
 
 	
@@ -25,7 +32,8 @@ enum class Ph3_DogAirPlaneState
 class Ph3_DogAirplane : public GameEngineActor
 {
 public:
-	// constrcuter destructer
+
+	static Ph3_DogAirplane* ph3_mainBoss;
 	Ph3_DogAirplane();
 	~Ph3_DogAirplane();
 
@@ -51,15 +59,41 @@ public:
 	void Rotation_Attack_Update(float _Time);
 
 	void Rotation_Update(float _Time); 
+	void Rotation_Laser_Update(float _Time);
+	void Rotation_Laser_Attack_Update(float _Time);
+
+
+
+	void Rotation_Pase2_Laser_Attack_Update(float _Time);
+	void Rotation_Pase2_Laser_Attack_Reverse_Update(float _Time);
+
+	void Rotation_Pase3_Laser_Attack_Update(float _Time);
+	void Rotation_Pase3_Laser_Attack_Reverse_Update(float _Time);
+
+
+
+
+
 
 	void LeftIdleUpdate(float _Time);
 	void UpIdleUpdate(float _Time);
 	void RightIdleUpdate(float _Time);
 	void DownIdleUpdate(float _Time);
 
+	int GetBowlCheck()
+	{
+		return BowlCheck;
+	}
 	
+	std::shared_ptr<class GameEngineSpriteRenderer> Get_ph3_dogcopter_rotate_camera()
+	{
+		return ph3_dogcopter_rotate_camera;
+	}
 
-
+	int GetRotationCheck()
+	{
+		return RotationCheck; 
+	}
 
 
 protected:
@@ -133,14 +167,17 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dogcopter_rotated_idle;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dogcopter_rotate_camera_out_blades;
-	
-	
+
+
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dogcopter_rotate_camera_out;
 
 	std::shared_ptr<class GameEngineCollision> Collision;
 
 	bool TopLaserCheck = false;
 	bool MidLaserCheck = false;
 	bool LowLaserCheck = false;
-
+	int BowlDirCheck = 0;
+	int BowlCheck = 0;
+	int RotationCheck = -1; 
 	bool ph3_Npc_Check = false; 
 };

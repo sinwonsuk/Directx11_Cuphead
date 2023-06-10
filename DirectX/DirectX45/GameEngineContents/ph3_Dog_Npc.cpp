@@ -4,6 +4,8 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineCamera.h>
+#include <GameEngineCore/GameEngineLevel.h>
+#include "ph3_DogAirPlane.h"
 ph3_Dog_Npc::ph3_Dog_Npc()
 {
 }
@@ -29,8 +31,19 @@ void ph3_Dog_Npc::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_arms_backer").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_arms_backer").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_tongue_rotate_camera_tongue").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_body_Finish").GetFullPath());
 	}
-	
+
+	ph3_leader_sideways_body_Finish = CreateComponent<GameEngineSpriteRenderer>();
+	ph3_leader_sideways_body_Finish->CreateAnimation({ .AnimationName = "ph3_leader_sideways_body_Finish", .SpriteName = "ph3_leader_sideways_body_Finish", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
+	ph3_leader_sideways_body_Finish->ChangeAnimation("ph3_leader_sideways_body_Finish");
+	ph3_leader_sideways_body_Finish->Off();
+
+	ph3_leader_sideways_body_Finish_0 = CreateComponent<GameEngineSpriteRenderer>();
+	ph3_leader_sideways_body_Finish_0->CreateAnimation({ .AnimationName = "ph3_leader_sideways_body_Finish_0", .SpriteName = "ph3_leader_sideways_body_Finish_0", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+	ph3_leader_sideways_body_Finish_0->ChangeAnimation("ph3_leader_sideways_body_Finish_0");
+	ph3_leader_sideways_body_Finish_0->Off();
+
 
 
 	ph3_leader_sideways_body = CreateComponent<GameEngineSpriteRenderer>();
@@ -65,28 +78,140 @@ void ph3_Dog_Npc::Start()
 	ph3_tongue_rotate_camera_tongue = CreateComponent<GameEngineSpriteRenderer>();
 	ph3_tongue_rotate_camera_tongue->CreateAnimation({ .AnimationName = "ph3_tongue_rotate_camera_tongue", .SpriteName = "ph3_tongue_rotate_camera_tongue", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
 	ph3_tongue_rotate_camera_tongue->ChangeAnimation("ph3_tongue_rotate_camera_tongue");
-
-	
 	ph3_tongue_rotate_camera_tongue->On();
 
+	
 
+	
 }
 
 void ph3_Dog_Npc::Update(float _Delta)
 {
-	if (ph3_tongue_rotate_camera_tongue->IsAnimationEnd())
+	if (Ph3_DogAirplane::ph3_mainBoss->Get_ph3_dogcopter_rotate_camera()->GetCurrentFrame() == 15)
 	{
-		ph3_tongue_rotate_camera_tongue->Off(); 
-		ph3_tongue_rotate_camera->On();
+		ph3_main_boss_Check = true;
 	}
+	if (ph3_main_boss_Check == true)
+	{
+		switch (Ph3_DogAirplane::ph3_mainBoss->GetRotationCheck())
+		{
+		case 0:
+		{
+			if (ph3_tongue_rotate_camera_tongue->IsAnimationEnd())
+			{
+				ph3_tongue_rotate_camera_tongue->Off();
+				ph3_tongue_rotate_camera->On();
+			}
 
-	if (ph3_leader_sideways_body->IsAnimationEnd())
-	{
-		ph3_leader_sideways_body->Off(); 
-		ph3_leader_sideways_arms_backer->On();
-		ph3_leader_sideways_body_Attack->On();
-		ph3_leader_sideways_arms->On(); 
+			if (ph3_leader_sideways_body->IsAnimationEnd())
+			{
+				ph3_leader_sideways_body->Off();
+				ph3_leader_sideways_arms_backer->On();
+				ph3_leader_sideways_body_Attack->On();
+				ph3_leader_sideways_arms->On();
+			}
+			if (Ph3_DogAirplane::ph3_mainBoss->GetBowlCheck() == 8)
+			{
+				ph3_leader_sideways_arms_backer->Off();
+				ph3_leader_sideways_body_Attack->Off();
+				ph3_leader_sideways_arms->Off();
+				ph3_leader_sideways_body_Finish_0->On();
+			}
+
+			if (ph3_leader_sideways_body_Finish_0->IsAnimationEnd())
+			{
+				ph3_leader_sideways_body_Finish_0->Off();
+				ph3_leader_sideways_body_Finish->On();
+			}
+
+
+
+
+
+
+
+			if (GetTransform()->GetTransDataRef().Rotation.z < -90)
+			{
+				break;
+			}
+
+			GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
+			GetTransform()->AddLocalPosition({ 150 * _Delta,1500 * _Delta ,0 });
+
+
+
+
+
+
+
+
+		}
+		break;
+		case 1:
+		{
+			ph3_leader_sideways_body->Off(); 
+			ph3_leader_sideways_arms_backer->Off(); 
+			ph3_leader_sideways_body_Attack->Off(); 
+			ph3_tongue_rotate_camera->Off();
+			ph3_tongue_rotate_camera_tongue->Off(); 
+			ph3_leader_sideways_body_Finish->Off(); 
+			/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 180)
+			{
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
+				++RotationCheck;
+			}
+
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });*/
+		}
+		break;
+		case 2:
+		{
+
+
+
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 270)
+			{
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
+				++RotationCheck;
+			}
+
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
+		}
+		break;
+		case 3:
+		{
+
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
+			{
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
+				//GetTransform()->SetLocalPosition({ 0,0 });
+				RotationCheck = 0;
+			}
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
+
+		}
+		break;
+
+		default:
+			break;
+		}
 	}
+	/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
+	{
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,0});
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 0,0,0 });
+		RotationCheck = 0;
+		TransformData data = GetTransform()->GetTransDataRef();
+		int a = 0;
+	}*/
+
+	
 
 
 }

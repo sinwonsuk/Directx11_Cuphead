@@ -50,7 +50,8 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> D_Left_Clouds;
 	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
 	std::shared_ptr<class GameEngineCollision> Collision;
-	
+	bool ph3_main_boss_Check =false;
+
 	int IntroCheck = 0;
 	int RotationCheck = 0; 
 	float4 CurPos = {0,0};

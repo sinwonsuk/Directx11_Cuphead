@@ -4,6 +4,8 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include "ph3_Laser.h"
+Ph3_DogAirplane* Ph3_DogAirplane::ph3_mainBoss;
+
 Ph3_DogAirplane::Ph3_DogAirplane()
 {
 }
@@ -20,7 +22,7 @@ void Ph3_DogAirplane::AnimationCheck(const std::string_view& _AnimationName)
 
 void Ph3_DogAirplane::Start()
 {
-
+	ph3_mainBoss = this; 
 	if (nullptr == GameEngineSprite::Find("ph3_Intro"))
 	{
 		GameEngineDirectory NewDir;
@@ -67,6 +69,9 @@ void Ph3_DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_low").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_aura_Low").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_tongue_rotate_camera_tongue").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_body_Finish").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_body_Finish_0").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_dogcopter_rotate_camera_out").GetFullPath());
 		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_beam_top").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_aura_top").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_particle_top").GetFullPath());
@@ -388,6 +393,7 @@ void Ph3_DogAirplane::Start()
 		ph3_dogcopter_rotated_idle = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_dogcopter_rotated_idle->CreateAnimation({ .AnimationName = "ph3_dogcopter_rotated_idle", .SpriteName = "ph3_dogcopter_rotated_idle", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true ,.FrameIndex = {0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1} });
 		ph3_dogcopter_rotated_idle->ChangeAnimation("ph3_dogcopter_rotated_idle");
+		ph3_dogcopter_rotated_idle->GetTransform()->AddLocalPosition({ 0,0,12 });
 		ph3_dogcopter_rotated_idle->Off();
 
 
@@ -397,6 +403,12 @@ void Ph3_DogAirplane::Start()
 		ph3_dogcopter_rotate_camera_out_blades->GetTransform()->AddLocalPosition({ -100,0,0 });
 		ph3_dogcopter_rotate_camera_out_blades->Off();
 
+		ph3_dogcopter_rotate_camera_out = CreateComponent<GameEngineSpriteRenderer>();
+		ph3_dogcopter_rotate_camera_out->CreateAnimation({ .AnimationName = "ph3_dogcopter_rotate_camera_out", .SpriteName = "ph3_dogcopter_rotate_camera_out", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true /*,.FrameIndex = {0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1}*/ });
+		ph3_dogcopter_rotate_camera_out->ChangeAnimation("ph3_dogcopter_rotate_camera_out");
+		ph3_dogcopter_rotate_camera_out->GetTransform()->AddLocalPosition({ 0,0,0 });
+		ph3_dogcopter_rotate_camera_out->Off();
+
 	}
 
 
@@ -405,7 +417,81 @@ void Ph3_DogAirplane::Start()
 
 void Ph3_DogAirplane::Update(float _Delta)
 {
+	switch (RotationCheck)
+	{
+	case 0:
+	{
+		if (GetTransform()->GetTransDataRef().Rotation.z < -90)
+		{		
+			break;
+		}
+
+		GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
+		GetTransform()->AddLocalPosition({ 150 * _Delta,1500 * _Delta ,0 });
+	}
+	break;
+	case 1:
+	{
+		//GetTransform()->SetLocalRotation({ 0,0,0 });
+
+		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -180)
+		{			
+			//GetTransform()->SetLocalRotation({ 0,0,-360 });
+			TransformData date = GetTransform()->GetTransDataRef();
+			break;
+		}
 	
+		 GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
+		 GetTransform()->AddLocalPosition({ 150 * _Delta,-1500 * _Delta ,0 });
+	}
+	break;
+	case 2:
+	{
+		
+
+		
+		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 270)
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
+			++RotationCheck;
+		}
+
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
+	}
+	break;
+	case 3:
+	{
+
+		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
+			//GetTransform()->SetLocalPosition({ 0,0 });
+			RotationCheck = 0;
+		}
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({3,0,0 });
+
+	}
+	break;
+
+	default:
+		break;
+	}
+
+	/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
+	{
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,0});
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 0,0,0 });
+		RotationCheck = 0;
+		TransformData data = GetTransform()->GetTransDataRef();
+		int a = 0;
+	}*/
+
+
+
 	UpdateState(_Delta);
 }
 

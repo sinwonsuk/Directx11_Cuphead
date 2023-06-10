@@ -83,7 +83,7 @@ void ph3_Laser::Start()
 		ph3_laser_warning_mid = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_laser_warning_mid->CreateAnimation({ .AnimationName = "ph3_laser_warning_mid", .SpriteName = "ph3_laser_warning_mid", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
 		ph3_laser_warning_mid->ChangeAnimation("ph3_laser_warning_mid");
-		ph3_laser_warning_mid->GetTransform()->AddLocalPosition({ 0,-190 });
+		ph3_laser_warning_mid->GetTransform()->AddLocalPosition({ 0,-190,-50 });
 		ph3_laser_warning_mid->Off(); 
 
 		ph3_laser_warning_particle_mid = CreateComponent<GameEngineSpriteRenderer>();
@@ -96,7 +96,7 @@ void ph3_Laser::Start()
 		ph3_beam_mid = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_beam_mid->CreateAnimation({ .AnimationName = "ph3_beam_mid", .SpriteName = "ph3_beam_mid", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
 		ph3_beam_mid->ChangeAnimation("ph3_beam_mid");
-		ph3_beam_mid->GetTransform()->AddLocalPosition({ 30,0,1 });
+		ph3_beam_mid->GetTransform()->AddLocalPosition({ 30,0,-50 });
 		ph3_beam_mid->Off();
 
 		ph3_laser_warning_electric_mid = CreateComponent<GameEngineSpriteRenderer>();
@@ -106,39 +106,11 @@ void ph3_Laser::Start()
 		ph3_laser_warning_electric_mid->Off(); 
 	}
 	// low
-
-	{
-		ph3_laser_warning_mid = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_mid->CreateAnimation({ .AnimationName = "ph3_laser_warning_mid", .SpriteName = "ph3_laser_warning_mid", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
-		ph3_laser_warning_mid->ChangeAnimation("ph3_laser_warning_mid");
-		ph3_laser_warning_mid->GetTransform()->AddLocalPosition({ 0,-190 });
-		ph3_laser_warning_mid->Off(); 
-
-		ph3_laser_warning_particle_mid = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_particle_mid->CreateAnimation({ .AnimationName = "ph3_laser_warning_particle_mid", .SpriteName = "ph3_laser_warning_particle_mid", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
-		ph3_laser_warning_particle_mid->ChangeAnimation("ph3_laser_warning_particle_mid");
-		ph3_laser_warning_particle_mid->GetTransform()->AddLocalPosition({ -320,60 });
-		ph3_laser_warning_particle_mid->Off(); 
-
-
-
-		ph3_beam_mid = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_beam_mid->CreateAnimation({ .AnimationName = "ph3_beam_mid", .SpriteName = "ph3_beam_mid", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
-		ph3_beam_mid->ChangeAnimation("ph3_beam_mid");
-		ph3_beam_mid->GetTransform()->AddLocalPosition({ 30,0,1 });
-		ph3_beam_mid->Off();
-
-		ph3_laser_warning_electric_mid = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_electric_mid->CreateAnimation({ .AnimationName = "ph3_laser_warning_electric_mid", .SpriteName = "ph3_laser_warning_electric_mid", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
-		ph3_laser_warning_electric_mid->ChangeAnimation("ph3_laser_warning_electric_mid");
-		ph3_laser_warning_electric_mid->GetTransform()->AddLocalPosition({ -327,67 });
-		ph3_laser_warning_electric_mid->Off(); 
-	}
-
 	{
 		ph3_beam_low = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_beam_low->CreateAnimation({ .AnimationName = "ph3_beam_low", .SpriteName = "ph3_beam_low", .FrameInter = 0.065f,.Loop = false, .ScaleToTexture = true });
 		ph3_beam_low->ChangeAnimation("ph3_beam_low");
+		ph3_beam_low->GetTransform()->AddLocalPosition({ 0,0,-10 });
 		ph3_beam_low->Off(); 
 
 		ph3_laser_Right_warning_aura_low = CreateComponent<GameEngineSpriteRenderer>();
@@ -158,7 +130,7 @@ void ph3_Laser::Start()
 		ph3_laser_warning_low = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_laser_warning_low->CreateAnimation({ .AnimationName = "ph3_laser_warning_low", .SpriteName = "ph3_laser_warning_low", .FrameInter = 0.065f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_low->ChangeAnimation("ph3_laser_warning_low");
-		ph3_laser_warning_low->GetTransform()->AddLocalPosition({ 0,-220 });
+		ph3_laser_warning_low->GetTransform()->AddLocalPosition({ 0,-220,-10 });
 		ph3_laser_warning_low->Off(); 
 	}
 
@@ -280,7 +252,7 @@ void ph3_Laser::Update(float _Delta)
 
 
 				ph3_beam_top->GetTransform()->AddLocalRotation({ 0,180,0 });
-				ph3_beam_top->GetTransform()->SetLocalPosition({ -60,0,0 });
+				ph3_beam_top->GetTransform()->SetLocalPosition({ -60,-10,0 });
 
 				ph3_laser_warning_ring_top->On();
 				ph3_laser_warning_aura_top->On();
@@ -324,12 +296,10 @@ void ph3_Laser::Update(float _Delta)
 				ph3_laser_warning_particle_mid->GetTransform()->SetLocalRotation({ 0,180,0 });
 				ph3_laser_warning_electric_mid->GetTransform()->SetLocalRotation({ 0,180,0 });
 
-				ph3_beam_mid->GetTransform()->SetLocalPosition({ -30,0,1 });
-				ph3_laser_warning_mid->GetTransform()->SetLocalPosition({ 0,-190,0 });
+				ph3_beam_mid->GetTransform()->SetLocalPosition({ -30,0,-50 });
+				ph3_laser_warning_mid->GetTransform()->SetLocalPosition({ 0,-190,-50 });
 				ph3_laser_warning_particle_mid->GetTransform()->SetLocalPosition({ 320,60,0 });
 				ph3_laser_warning_electric_mid->GetTransform()->SetLocalPosition({ 327,67,0 });
-
-
 
 				
 				ph3_beam_mid->Off();
@@ -369,6 +339,15 @@ void ph3_Laser::Update(float _Delta)
 
 			if (dirCheck == false)
 			{
+				ph3_laser_warning_ring_top->GetTransform()->AddLocalPosition({ 50,0 });
+				ph3_laser_warning_aura_top->GetTransform()->AddLocalPosition({ 50,0 });
+				ph3_laser_warning_particle_top->GetTransform()->AddLocalPosition({ 50,0 });
+
+
+				ph3_laser_warning_top->GetTransform()->AddLocalPosition({ 80,-20 });
+
+				ph3_beam_top->GetTransform()->AddLocalPosition({ 80,-20,0 });
+
 				ph3_laser_warning_ring_top->On();
 				ph3_laser_warning_aura_top->On();
 				ph3_laser_warning_particle_top->On();
@@ -404,18 +383,22 @@ void ph3_Laser::Update(float _Delta)
 				ph3_laser_warning_ring_top->GetTransform()->SetLocalRotation({ 0,180,0 });
 				ph3_laser_warning_aura_top->GetTransform()->SetLocalRotation({ 0,180,0 });
 				ph3_laser_warning_particle_top->GetTransform()->SetLocalRotation({ 0,180,0 });
-
-				ph3_laser_warning_ring_top->GetTransform()->SetLocalPosition({ 240,135 });
-				ph3_laser_warning_aura_top->GetTransform()->SetLocalPosition({ 240, 135 });
-				ph3_laser_warning_particle_top->GetTransform()->SetLocalPosition({ 240,135 });
-
-
 				ph3_laser_warning_top->GetTransform()->AddLocalRotation({ 0,180,0 });
-				ph3_laser_warning_top->GetTransform()->SetLocalPosition({ -138,-197 });
-
-
 				ph3_beam_top->GetTransform()->AddLocalRotation({ 0,180,0 });
-				ph3_beam_top->GetTransform()->SetLocalPosition({ 0,-70,0 });
+
+				
+				
+
+				ph3_laser_warning_ring_top->GetTransform()->SetLocalPosition({ 230,195 });
+				ph3_laser_warning_aura_top->GetTransform()->SetLocalPosition({ 230, 195 });
+				ph3_laser_warning_particle_top->GetTransform()->SetLocalPosition({ 230,195 });
+				ph3_laser_warning_top->GetTransform()->SetLocalPosition({ -138,-147,-10 });
+				ph3_beam_top->GetTransform()->SetLocalPosition({ 0,-10,-10 });
+
+
+
+
+				
 
 				ph3_laser_warning_ring_top->On();
 				ph3_laser_warning_aura_top->On();
@@ -445,6 +428,87 @@ void ph3_Laser::Update(float _Delta)
 				ph3_laser_warning_top->Off();
 				ph3_laser_warning_ring_top->Off();
 			}
+			break;
+		case LaserDir::Left_Mid_Reverse:
+
+			if (dirCheck == false)
+			{
+
+			
+
+
+				ph3_beam_mid->GetTransform()->SetLocalRotation({ 0,180,0 });
+				ph3_laser_warning_mid->GetTransform()->SetLocalRotation({ 0,180,0 });
+				ph3_laser_warning_particle_mid->GetTransform()->SetLocalRotation({ 0,180,0 });
+				ph3_laser_warning_electric_mid->GetTransform()->SetLocalRotation({ 0,180,0 });
+
+
+				ph3_beam_mid->GetTransform()->SetLocalPosition({7,0,-50 });
+				ph3_laser_warning_mid->GetTransform()->SetLocalPosition({ 37,-185,-50});
+				ph3_laser_warning_particle_mid->GetTransform()->SetLocalPosition({ 379,92,0 });
+				ph3_laser_warning_electric_mid->GetTransform()->SetLocalPosition({ 379,85,0 });
+
+
+
+
+				ph3_beam_mid->Off();
+				ph3_laser_warning_mid->On();
+				ph3_laser_warning_particle_mid->On();
+				ph3_laser_warning_electric_mid->On();
+				dirCheck = true;
+
+
+			}
+			if (ph3_laser_warning_electric_mid->IsAnimationEnd())
+			{
+				ph3_laser_warning_mid->Off();
+				ph3_laser_warning_particle_mid->Off();
+				ph3_laser_warning_electric_mid->Off();
+
+
+				ph3_beam_mid->On();
+			}
+
+			if (ph3_beam_mid->IsAnimationEnd())
+			{
+				ph3_beam_mid->Off();
+				ph3_laser_warning_mid->Off();
+				ph3_laser_warning_particle_mid->Off();
+				ph3_laser_warning_electric_mid->Off();
+			}
+			break;
+		case LaserDir::Low_Reverse:
+
+			if (dirCheck == false)
+			{
+				ph3_laser_Right_warning_aura_low->GetTransform()->AddLocalPosition({ 60,15 });
+				ph3_laser_Left__warning_aura_low->GetTransform()->AddLocalPosition({ 60,15});
+				ph3_laser_warning_low->GetTransform()->AddLocalPosition({ 60,15,-10 });
+				ph3_beam_low->GetTransform()->AddLocalPosition({ 60,15,-10 });
+
+
+				ph3_laser_warning_low->On();
+				ph3_laser_Left__warning_aura_low->On();
+				ph3_laser_Right_warning_aura_low->On();
+				dirCheck = true;
+			}
+
+			if (ph3_laser_Right_warning_aura_low->IsAnimationEnd())
+			{
+				ph3_laser_warning_low->Off();
+				ph3_laser_Left__warning_aura_low->Off();
+				ph3_laser_Right_warning_aura_low->Off();
+				ph3_beam_low->On();
+			}
+
+			if (ph3_beam_low->IsAnimationEnd())
+			{
+				ph3_beam_low->Off();
+				ph3_laser_Right_warning_aura_low->Off();
+				ph3_laser_Right_warning_aura_low->Off();
+				ph3_laser_warning_low->Off();
+			}
+
 
 
 			break;

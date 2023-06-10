@@ -54,7 +54,27 @@ void Ph3_DogAirplane::ChangeState(Ph3_DogAirPlaneState _State)
 	case Ph3_DogAirPlaneState::Rotation_Pase1_Laser_Attack:
 
 		break;
+	case Ph3_DogAirPlaneState::Rotation_Pase1_Laser_Attack_Reverse:
 
+		break;
+	case Ph3_DogAirPlaneState::Rotation_Pase2_Laser_Attack:
+
+		break;
+	case Ph3_DogAirPlaneState::Rotation_Pase2_Laser_Attack_Reverse:
+
+		break;
+	case Ph3_DogAirPlaneState::Rotation_Pase3_Laser_Attack:
+
+		break;
+	case Ph3_DogAirPlaneState::Rotation_Pase3_Laser_Attack_Reverse:
+
+		break;
+	case Ph3_DogAirPlaneState::Left_Rotation:
+
+		break;
+	case Ph3_DogAirPlaneState::Left_Rotation_Attack:
+
+		break;
 	default:
 		break;
 	}
@@ -105,6 +125,28 @@ void Ph3_DogAirplane::UpdateState(float _Time)
 	case Ph3_DogAirPlaneState::Rotation_Pase1_Laser_Attack:
 		Rotation_Laser_Attack_Update(_Time);
 		break;
+	case Ph3_DogAirPlaneState::Rotation_Pase1_Laser_Attack_Reverse:
+		Rotation_Laser_Attack_Reverse_Update(_Time);
+		break;
+	case Ph3_DogAirPlaneState::Rotation_Pase2_Laser_Attack:
+		Rotation_Pase2_Laser_Attack_Update(_Time);
+		break;
+	case Ph3_DogAirPlaneState::Rotation_Pase2_Laser_Attack_Reverse:
+		Rotation_Pase2_Laser_Attack_Reverse_Update(_Time);
+		break;
+	case Ph3_DogAirPlaneState::Rotation_Pase3_Laser_Attack:
+		Rotation_Pase3_Laser_Attack_Update(_Time);
+		break;
+	case Ph3_DogAirPlaneState::Rotation_Pase3_Laser_Attack_Reverse:
+		Rotation_Pase3_Laser_Attack_Reverse_Update(_Time);
+		break;
+	case Ph3_DogAirPlaneState::Left_Rotation:
+		Left_Rotation_Update(_Time);
+		break;
+	case Ph3_DogAirPlaneState::Left_Rotation_Attack:
+		Left_Rotation_Attack_Update(_Time);
+		break;
+
 	default:
 		break;
 	}
@@ -162,7 +204,7 @@ void Ph3_DogAirplane::Pase1_AttackUpdate(float _Time)
 	{
 		if (TopLaserCheck == false)
 		{
-			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
+			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>();
 			Object->laserDir = LaserDir::Left_Top;
 			TopLaserCheck = true;
 
@@ -177,7 +219,7 @@ void Ph3_DogAirplane::Pase1_AttackUpdate(float _Time)
 	{
 		if (MidLaserCheck == false)
 		{
-			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
+			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>();
 			Object->laserDir = LaserDir::Left_Mid;
 			MidLaserCheck = true;
 			
@@ -189,7 +231,7 @@ void Ph3_DogAirplane::Pase1_AttackUpdate(float _Time)
 
 void Ph3_DogAirplane::Pase1_Attack_Reverse_Update(float _Time)
 {
-	if (GetLiveTime() > 1.7)
+	if (GetLiveTime() > 2.0)
 	{
 		ph3_Left_laser_top->Off();
 		ph3_Left_laser_mid->Off(); 
@@ -252,7 +294,7 @@ void Ph3_DogAirplane::Pase2_AttackUpdate(float _Time)
 		int a = 0;
 		if (MidLaserCheck == false)
 		{
-			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
+			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>();
 			Object->laserDir = LaserDir::Right_Mid;
 			MidLaserCheck = true;
 
@@ -266,7 +308,7 @@ void Ph3_DogAirplane::Pase2_AttackUpdate(float _Time)
 
 void Ph3_DogAirplane::Pase2_Attack_Reverse_Update(float _Time)
 {
-	if (GetLiveTime() > 1.7)
+	if (GetLiveTime() > 2.0)
 	{
 		ph3_Right_laser_mid->Off();
 		ph3_Right_laser_mid_Reverse->On();
@@ -355,7 +397,7 @@ void Ph3_DogAirplane::Pase3_AttackUpdate(float _Time)
 
 void Ph3_DogAirplane::Pase3_Attack_Reverse_Update(float _Time)
 {
-	if (GetLiveTime() > 1.7)
+	if (GetLiveTime() > 2.0)
 	{
 		ph3_Right_laser_top->Off();
 
@@ -406,6 +448,10 @@ void Ph3_DogAirplane::Pase3_Attack_Reverse_Update(float _Time)
 		TopLaserCheck = false;
 		MidLaserCheck = false;
 
+		Idle_Arom->Off();
+		Idle_Body->Off();
+		Idle_Arom_Hand->Off();
+		Ph3_Boss_Intro->Off();
 
 		ph3_dogcopter_rotate_camera->On();
 		ChangeState(Ph3_DogAirPlaneState::Rotation);
@@ -417,6 +463,12 @@ void Ph3_DogAirplane::Pase3_Attack_Reverse_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Update(float _Time)
 {
+	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 10)
+	{
+		ph3_paw_merge->Off();
+	}
+
+
 
 	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 15)
 	{
@@ -481,7 +533,7 @@ void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 		ph3_dogcopter_rotated_idle->Off();
 		ph3_dogcopter_rotate_camera_out->On(); 
 	}
-	if (ph3_dogcopter_rotate_camera_out->GetCurrentFrame() == 6)
+	if (ph3_dogcopter_rotate_camera_out->GetCurrentFrame() == 4)
 	{
 		RotationCheck = 1;
 	}
@@ -492,21 +544,28 @@ void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 		ph3_dogcopter_rotate_camera_out->Off(); 
 		
 		GetTransform()->SetLocalRotation({ 0,0,0 });
+
 		Idle_Arom->On();
 		Idle_Body->On();
 		Idle_Arom_Hand->On();
 		ph3_paw_merge->On();
 
 
+		ph3_Right_paw_hole_mid->On();
+		ph3_Right_paw_hole_mid_backer->On();
+		
+		ph3_laser_Right_mid_paw_pad_opens->ChangeAnimation("ph3_laser_mid_paw_pad_opens");
+		ph3_Right_laser_mid->ChangeAnimation("ph3_laser_mid");
 
-		ph3_left_paw_hole_top->On();
-		ph3_left_paw_hole_top_backer->On();
-		ph3_laser_Left_top_paw_pad_opens->On();
+		ph3_laser_Right_mid_paw_pad_opens->On(); 
+	
+		/*dle_Arom->GetTransform()->SetLocalRotation({ 0,0,0 });
+		Idle_Body->GetTransform()->SetLocalRotation({ 0,0,0 });
+		Idle_Arom_Hand->GetTransform()->SetLocalRotation({ 0,0,0 });
+		ph3_paw_merge->GetTransform()->SetLocalRotation({ 0,0,0 });*/
 
-		ph3_Right_paw_hole_top->On();
-		ph3_Right_paw_hole_top_backer->On();
-		ph3_laser_Right_top_paw_pad_opens->On();
 		ResetLiveTime(); 
+		
 		ChangeState(Ph3_DogAirPlaneState::Rotation_Pase1_Laser_Attack);
 		return;
 	}
@@ -517,59 +576,344 @@ void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Laser_Attack_Update(float _Time)
 {
+	//TransformData data 
+	
 	GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180 });
 	GetTransform()->SetLocalRotation({ 0,0,0 });
 
-	TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
-
+	
 	if (GetLiveTime() > 0.5)
 	{
-
-
-		if (ph3_laser_Left_top_paw_pad_opens->IsAnimationEnd())
+		if (ph3_laser_Right_mid_paw_pad_opens->IsAnimationEnd())
 		{
-			ph3_Left_laser_top->On();
-
-		}
-		if (ph3_laser_Right_top_paw_pad_opens->IsAnimationEnd())
-		{
-			ph3_Right_laser_top->On();
+			
+			ph3_Right_laser_mid->On();
 		}
 
-		if (ph3_Left_laser_top->IsAnimationEnd())
+		if (ph3_Right_laser_mid->IsAnimationEnd())
 		{
 			if (TopLaserCheck == false)
 			{
-				std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
-				Object->laserDir = LaserDir::Right_Top_Reverse;
+				std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(120);
+				Object->laserDir = LaserDir::Left_Mid_Reverse;
 				TopLaserCheck = true;
 
-				/*std::shared_ptr<ph3_Laser> Object1 = GetLevel()->CreateActor<ph3_Laser>(3);
-				Object1->laserDir = LaserDir::Right_Top_Reverse;*/
 
-				//ChangeState(Ph3_DogAirPlaneState::Pase1_Attack_Reverse);
+				ph3_Right_laser_mid_Reverse->ChangeAnimation("ph3_laser_mid");
+				ph3_laser_Right_mid_paw_pad_opens_Reverse->ChangeAnimation("ph3_laser_mid_paw_pad_opens");
+
+				ChangeState(Ph3_DogAirPlaneState::Rotation_Pase1_Laser_Attack_Reverse);
 				ResetLiveTime();
 				return;
 			}
 		}
+
+
+		
 	}
 	
+}void Ph3_DogAirplane::Rotation_Laser_Attack_Reverse_Update(float _Time)
+{
+	if (GetLiveTime() > 2.0)
+	{	
+		ph3_Right_laser_mid->Off();	
+		ph3_Right_laser_mid_Reverse->On(); 
+
+	}
+
+	if (ph3_Right_laser_mid_Reverse->IsAnimationEnd())
+	{
+		ph3_Right_laser_mid_Reverse->Off();
+		ph3_laser_Right_mid_paw_pad_opens->Off();
+		ph3_laser_Right_mid_paw_pad_opens_Reverse->On();
+	}
+
+	if (ph3_laser_Right_mid_paw_pad_opens_Reverse->IsAnimationEnd())
+	{
+		ph3_laser_Right_mid_paw_pad_opens_Reverse->Off();
+		ph3_Right_paw_hole_mid_backer->Off();
+		ph3_Right_paw_hole_mid->Off();
+	
+
+		ph3_left_paw_hole_top->On();
+	    ph3_left_paw_hole_top_backer->On();
+	    ph3_laser_Left_top_paw_pad_opens->On();
+
+	    ph3_Right_paw_hole_top->On();
+	    ph3_Right_paw_hole_top_backer->On();
+	    ph3_laser_Right_top_paw_pad_opens->On();
+		
+		ph3_Left_laser_top->ChangeAnimation("ph3_laser_top");
+		ph3_Right_laser_top->ChangeAnimation("ph3_laser_top");
+		ph3_laser_Left_top_paw_pad_opens->ChangeAnimation("ph3_laser_top_paw_pad_opens");
+		ph3_laser_Right_top_paw_pad_opens->ChangeAnimation("ph3_laser_top_paw_pad_opens");
+
+		TopLaserCheck = false;
+		MidLaserCheck = false;
+
+		ChangeState(Ph3_DogAirPlaneState::Rotation_Pase2_Laser_Attack);
+		return;
+	}
+
 }
+
+
 
 void Ph3_DogAirplane::Rotation_Pase2_Laser_Attack_Update(float _Time)
 {
+	if (ph3_laser_Left_top_paw_pad_opens->IsAnimationEnd())
+	{
+		ph3_Left_laser_top->On();
 
+	}
+	if (ph3_laser_Right_top_paw_pad_opens->IsAnimationEnd())
+	{
+		ph3_Right_laser_top->On();
+	}
+
+
+	if (ph3_Left_laser_top->IsAnimationEnd())
+	{
+		if (TopLaserCheck == false)
+		{
+			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
+			Object->laserDir = LaserDir::Left_Top_Reverse;
+	
+
+			std::shared_ptr<ph3_Laser> Object1 = GetLevel()->CreateActor<ph3_Laser>(3);
+			Object1->laserDir = LaserDir::Right_Top_Reverse;
+			ResetLiveTime();
+
+
+			TopLaserCheck = true;
+
+
+			ph3_Right_laser_top_Reverse->ChangeAnimation("ph3_laser_top");
+			ph3_Left_laser_top_Reverse->ChangeAnimation("ph3_laser_top");
+			ph3_laser_Left_top_paw_pad_opens_Reverse->ChangeAnimation("ph3_laser_top_paw_pad_opens");
+			ph3_laser_Right_top_paw_pad_opens_Reverse->ChangeAnimation("ph3_laser_top_paw_pad_opens");
+
+		    ChangeState(Ph3_DogAirPlaneState::Rotation_Pase2_Laser_Attack_Reverse);
+			
+			return;
+		}
+	}
 
 }
 
+
 void Ph3_DogAirplane::Rotation_Pase2_Laser_Attack_Reverse_Update(float _Time)
 {
+	
+
+	if (GetLiveTime() > 1.7)
+	{
+		ph3_Right_laser_top->Off();
+		ph3_Left_laser_top->Off();
+
+		ph3_Right_laser_top_Reverse->On();
+		ph3_Left_laser_top_Reverse->On();
+	}
+
+	if (ph3_Right_laser_top_Reverse->IsAnimationEnd())
+	{
+		ph3_Right_laser_top_Reverse->Off();
+		ph3_laser_Right_top_paw_pad_opens->Off();
+		ph3_laser_Right_top_paw_pad_opens_Reverse->On();
+	}
+
+	if (ph3_Left_laser_top_Reverse->IsAnimationEnd())
+	{
+		ph3_Left_laser_top_Reverse->Off();
+		ph3_laser_Left_top_paw_pad_opens->Off();
+		ph3_laser_Left_top_paw_pad_opens_Reverse->On();
+	}
+
+
+	if (ph3_laser_Left_top_paw_pad_opens_Reverse->IsAnimationEnd())
+	{
+		ph3_Right_paw_hole_top_backer->Off();
+		ph3_Right_paw_hole_top->Off();
+		ph3_laser_Right_top_paw_pad_opens_Reverse->Off();
+
+		ph3_left_paw_hole_top_backer->Off();
+		ph3_left_paw_hole_top->Off();
+		ph3_laser_Left_top_paw_pad_opens_Reverse->Off();
+
+
+		ph3_left_paw_hole_low_backer->On();
+		ph3_left_paw_hole_low->On();
+
+
+		ph3_laser_Left_low_paw_pad_opens->ChangeAnimation("ph3_laser_low_paw_pad_opens");
+		ph3_laser_Right_low_paw_pad_opens->ChangeAnimation("ph3_laser_low_paw_pad_opens");
+		ph3_Left_laser_low->ChangeAnimation("ph3_laser_low");
+		ph3_Right_laser_low->ChangeAnimation("ph3_laser_low");
+
+		ph3_laser_Left_low_paw_pad_opens->On();
+		ph3_laser_Right_low_paw_pad_opens->On();
+
+
+		ph3_Right_paw_hole_low_backer->On();
+		ph3_Right_paw_hole_low->On();
+
+
+		
+
+		TopLaserCheck = false;
+		MidLaserCheck = false;
+		LowLaserCheck = false;
+		ChangeState(Ph3_DogAirPlaneState::Rotation_Pase3_Laser_Attack);
+		return;
+	}
+
+
 }
 
 void Ph3_DogAirplane::Rotation_Pase3_Laser_Attack_Update(float _Time)
 {
+
+	if (ph3_laser_Left_low_paw_pad_opens->IsAnimationEnd())
+	{
+		ph3_Left_laser_low->On();
+	}
+	if (ph3_laser_Right_low_paw_pad_opens->IsAnimationEnd())
+	{
+		ph3_Right_laser_low->On();
+	}
+
+	if (ph3_Left_laser_low->IsAnimationEnd())
+	{
+		if (LowLaserCheck == false)
+		{
+			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
+			Object->laserDir = LaserDir::Low_Reverse;
+			LowLaserCheck = true;
+			ResetLiveTime();
+
+
+			ph3_Right_laser_low_Reverse->ChangeAnimation("ph3_laser_low");
+			ph3_Left_laser_low_Reverse->ChangeAnimation("ph3_laser_low");
+			ph3_laser_Right_low_paw_pad_opens_Reverse->ChangeAnimation("ph3_laser_low_paw_pad_opens");
+			ph3_laser_Left_low_paw_pad_opens_Reverse->ChangeAnimation("ph3_laser_low_paw_pad_opens");
+			ChangeState(Ph3_DogAirPlaneState::Rotation_Pase3_Laser_Attack_Reverse);
+			return;
+
+		}
+	}
+
 }
 
 void Ph3_DogAirplane::Rotation_Pase3_Laser_Attack_Reverse_Update(float _Time)
 {
+	if (GetLiveTime() > 1.7)
+	{
+		
+
+		ph3_Right_laser_low->Off();
+		ph3_Left_laser_low->Off();
+
+		
+
+		ph3_Right_laser_low_Reverse->On();
+		ph3_Left_laser_low_Reverse->On();
+
+	}
+
+	
+
+	if (ph3_Right_laser_low_Reverse->IsAnimationEnd())
+	{
+		ph3_Right_laser_low_Reverse->Off();
+		ph3_laser_Right_low_paw_pad_opens->Off();
+		ph3_laser_Right_low_paw_pad_opens_Reverse->On();
+	}
+	if (ph3_Left_laser_low_Reverse->IsAnimationEnd())
+	{
+		ph3_Left_laser_low_Reverse->Off();
+		ph3_laser_Left_low_paw_pad_opens->Off();
+		ph3_laser_Left_low_paw_pad_opens_Reverse->On();
+	}
+
+	if (ph3_laser_Left_low_paw_pad_opens_Reverse->IsAnimationEnd())
+	{
+		ph3_left_paw_hole_low_backer->Off();
+		ph3_left_paw_hole_low->Off();
+		ph3_laser_Left_low_paw_pad_opens_Reverse->Off();
+
+		ph3_Right_paw_hole_low_backer->Off();
+		ph3_Right_paw_hole_low->Off();
+		ph3_laser_Right_low_paw_pad_opens_Reverse->Off();
+
+		TopLaserCheck = false;
+		MidLaserCheck = false;
+
+		ph3_dogcopter_rotate_camera->ChangeAnimation("ph3_dogcopter_rotate_camera");
+		ph3_dogcopter_rotate_camera->On();
+
+
+		Idle_Arom->Off();
+		Idle_Body->Off();
+		Idle_Arom_Hand->Off();
+		Ph3_Boss_Intro->Off();
+		ph3_Npc_Check = true; 
+		ChangeState(Ph3_DogAirPlaneState::Left_Rotation);
+		return;
+	}
+}
+
+void Ph3_DogAirplane::Left_Rotation_Update(float _Time)
+{
+
+	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 10)
+	{
+		ph3_paw_merge->Off();
+	}
+
+	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 15)
+	{
+		RotationCheck = 2;		
+	}
+
+	if (ph3_dogcopter_rotate_camera->IsAnimationEnd())
+	{
+	
+		ph3_dogcopter_rotate_camera->Off();
+		ph3_dogcopter_rotated_idle->On();
+		ph3_dogcopter_rotate_camera_out_blades->On();
+		ResetLiveTime();
+		ChangeState(Ph3_DogAirPlaneState::Left_Rotation_Attack);
+		return;
+	}
+}
+
+void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
+{
+	if (GetLiveTime() > 1.0)
+	{
+
+		/*	if (BowlDirCheck == 0)
+			{
+				std::shared_ptr<ph3_food_bowl> Object = GetLevel()->CreateActor<ph3_food_bowl>();
+				Object->GetBullet()->GetTransform()->AddLocalPosition({ -120,740 });
+				Object->GetSfx()->GetTransform()->AddLocalPosition({ -120,760 });
+				++BowlDirCheck;
+			}
+			else if (BowlDirCheck == 1)
+			{
+				std::shared_ptr<ph3_food_bowl> Object = GetLevel()->CreateActor<ph3_food_bowl>();
+				Object->GetBullet()->GetTransform()->AddLocalPosition({ 120,740 });
+				Object->GetSfx()->GetTransform()->AddLocalPosition({ 170,760 });
+				BowlDirCheck = 0;
+				Object->SetDirCheck(1);
+			}
+			++BowlCheck;
+			ResetLiveTime();*/
+	}
+
+	if (BowlCheck == 0)
+	{
+		ResetLiveTime();
+		return;
+	}
 }

@@ -57,8 +57,9 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> D_Left_Clouds;
 	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
 	std::shared_ptr<class GameEngineCollision> Collision;
+
 	int RotationCheck = 0;
-	
+	bool test = false;
 };
 
 

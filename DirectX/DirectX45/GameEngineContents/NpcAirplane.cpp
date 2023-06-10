@@ -41,35 +41,35 @@ void NpcAirplane::Start()
 
 
 
-	Npc_Airplane_Back = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Ground);
+	Npc_Airplane_Back = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Back->CreateAnimation({ .AnimationName = "Npc_Airplane_Back", .SpriteName = "Npc_Airplane_Back", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Back->ChangeAnimation("Npc_Airplane_Back");
-	Npc_Airplane_Back->GetTransform()->AddLocalPosition({ 0,-230 });
+	Npc_Airplane_Back->GetTransform()->AddLocalPosition({ 0,-230,-1 });
 
-	Npc_Airplane_Reg = CreateComponent<GameEngineSpriteRenderer>(DogAirplaneType::Ground);
+	Npc_Airplane_Reg = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Reg->CreateAnimation({ .AnimationName = "Npc_Airplane_Reg", .SpriteName = "Npc_Airplane_Reg", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Reg->ChangeAnimation("Npc_Airplane_Reg");
-	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ 0,-230 });
+	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ 0,-230,-1 });
 
-	Npc_Airplane_Front = CreateComponent<GameEngineSpriteRenderer>(4);
+	Npc_Airplane_Front = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Front->CreateAnimation({ .AnimationName = "Npc_Airplane_Front", .SpriteName = "Npc_Airplane_Front", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Front->ChangeAnimation("Npc_Airplane_Front");
-	Npc_Airplane_Front->GetTransform()->AddLocalPosition({ 0,-230 });
+	Npc_Airplane_Front->GetTransform()->AddLocalPosition({ 0,-230,-3 });
 
 	
 
-	Npc_Airplane_Spin = CreateComponent<GameEngineSpriteRenderer>(5);
+	Npc_Airplane_Spin = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Spin->CreateAnimation({ .AnimationName = "Npc_Airplane_Spin", .SpriteName = "Npc_Airplane_Spin", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 	Npc_Airplane_Spin->ChangeAnimation("Npc_Airplane_Spin");
-	Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ 0,-230 });
+	Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ 0,-230,-4 });
 
 
-	Npc = CreateComponent<GameEngineSpriteRenderer>(3);
+	Npc = CreateComponent<GameEngineSpriteRenderer>();
 	Npc->CreateAnimation({ .AnimationName = "NpcIntro", .SpriteName = "NpcIntro", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 	Npc->CreateAnimation({ .AnimationName = "Npc_Intro2", .SpriteName = "Npc_Intro2", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 	Npc->CreateAnimation({ .AnimationName = "Npc_Idle", .SpriteName = "Npc_Idle", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 	Npc->ChangeAnimation("NpcIntro");
-	Npc->GetTransform()->AddLocalPosition({ 0,-230 });
+	Npc->GetTransform()->AddLocalPosition({ 0,-230,-2 });
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 350.0f, 100.0f, 100.0f });
@@ -118,24 +118,24 @@ void NpcAirplane::Update(float _Delta)
 			/*GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 1 ,-1  ,0 });*/
 
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-400 * _Delta });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150 * _Delta,-1500 * _Delta ,0 });
 		}
 		break;
 		case 2:
 		{
 
-
-
-			/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 270)
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269)
 			{
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
-				++RotationCheck;
+				//GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,90 });
+				break;
 			}
 
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });*/
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150 * _Delta, 1500 * _Delta ,0 });
+
+
+			
 		}
 		break;
 		case 3:

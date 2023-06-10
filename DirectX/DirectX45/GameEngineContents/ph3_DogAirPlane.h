@@ -20,6 +20,8 @@ enum class Ph3_DogAirPlaneState
 	Rotation_Pase2_Laser_Attack_Reverse,
 	Rotation_Pase3_Laser_Attack,
 	Rotation_Pase3_Laser_Attack_Reverse,
+	Left_Rotation,
+	Left_Rotation_Attack,
 
 	
 
@@ -60,8 +62,9 @@ public:
 
 	void Rotation_Update(float _Time); 
 	void Rotation_Laser_Update(float _Time);
-	void Rotation_Laser_Attack_Update(float _Time);
 
+	void Rotation_Laser_Attack_Update(float _Time);
+	void Rotation_Laser_Attack_Reverse_Update(float _Time);
 
 
 	void Rotation_Pase2_Laser_Attack_Update(float _Time);
@@ -70,9 +73,9 @@ public:
 	void Rotation_Pase3_Laser_Attack_Update(float _Time);
 	void Rotation_Pase3_Laser_Attack_Reverse_Update(float _Time);
 
+	void Left_Rotation_Update(float _Time); 
 
-
-
+	void Left_Rotation_Attack_Update(float _Time);
 
 
 	void LeftIdleUpdate(float _Time);
@@ -104,8 +107,8 @@ protected:
 	float4 TestColor;
 
 private:
-	Ph3_DogAirPlaneState StateValue = Ph3_DogAirPlaneState::Pase3_Attack_Reverse;
-	
+	//Ph3_DogAirPlaneState StateValue = Ph3_DogAirPlaneState::Pase3_Attack_Reverse;
+	Ph3_DogAirPlaneState StateValue = Ph3_DogAirPlaneState::Intro;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Ph3_Boss_Intro;
 

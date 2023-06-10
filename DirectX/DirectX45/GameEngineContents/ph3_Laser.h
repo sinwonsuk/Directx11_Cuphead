@@ -14,7 +14,8 @@ enum class LaserDir
 
 	Left_Top_Reverse,
 	Right_Top_Reverse,
-
+	Left_Mid_Reverse,
+	Low_Reverse,
 };
 
 class ph3_Laser : public GameEngineActor

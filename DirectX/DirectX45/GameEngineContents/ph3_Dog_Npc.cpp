@@ -124,12 +124,6 @@ void ph3_Dog_Npc::Update(float _Delta)
 				ph3_leader_sideways_body_Finish->On();
 			}
 
-
-
-
-
-
-
 			if (GetTransform()->GetTransDataRef().Rotation.z < -90)
 			{
 				break;
@@ -137,25 +131,91 @@ void ph3_Dog_Npc::Update(float _Delta)
 
 			GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
 			GetTransform()->AddLocalPosition({ 150 * _Delta,1500 * _Delta ,0 });
-
-
-
-
-
-
-
-
 		}
 		break;
 		case 1:
 		{
+
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179)
+			{
+				GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180 });
+				GetTransform()->SetLocalRotation({ 0,0,0 });
+				TransformData date = GetTransform()->GetTransDataRef();
+				break;
+			}
+			TransformData date = GetTransform()->GetTransDataRef();
+			GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
+			GetTransform()->AddLocalPosition({ 150 * _Delta,-1500 * _Delta ,0 });
+
 			ph3_leader_sideways_body->Off(); 
 			ph3_leader_sideways_arms_backer->Off(); 
 			ph3_leader_sideways_body_Attack->Off(); 
 			ph3_tongue_rotate_camera->Off();
 			ph3_tongue_rotate_camera_tongue->Off(); 
 			ph3_leader_sideways_body_Finish->Off(); 
-			/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 180)
+			ph3_leader_sideways_body_Finish_0->Off();
+			ph3_leader_sideways_arms->Off();         
+		}
+		break;
+		case 2:
+		{
+			
+
+			if (test == false)
+			{
+				
+				ph3_tongue_rotate_camera_tongue->ChangeAnimation("ph3_tongue_rotate_camera_tongue");
+				ph3_leader_sideways_body->ChangeAnimation("ph3_leader_sideways_body");
+				ph3_leader_sideways_body_Finish_0->ChangeAnimation("ph3_leader_sideways_body_Finish_0");
+
+				test = true;
+				ph3_tongue_rotate_camera_tongue->On();
+				ph3_leader_sideways_body->On();
+				
+			}
+
+			if (ph3_tongue_rotate_camera_tongue->IsAnimationEnd())
+			{
+				ph3_tongue_rotate_camera_tongue->Off();
+				ph3_tongue_rotate_camera->On();
+			}
+
+			if (ph3_leader_sideways_body->IsAnimationEnd())
+			{
+				ph3_leader_sideways_body->Off();
+				ph3_leader_sideways_arms_backer->On();
+				ph3_leader_sideways_body_Attack->On();
+				ph3_leader_sideways_arms->On();
+			}
+			if (Ph3_DogAirplane::ph3_mainBoss->GetBowlCheck() == 8)
+			{
+				ph3_leader_sideways_arms_backer->Off();
+				ph3_leader_sideways_body_Attack->Off();
+				ph3_leader_sideways_arms->Off();
+				ph3_leader_sideways_body_Finish_0->On();
+			}
+
+			if (ph3_leader_sideways_body_Finish_0->IsAnimationEnd())
+			{
+				ph3_leader_sideways_body_Finish_0->Off();
+				ph3_leader_sideways_body_Finish->On();
+			}
+
+
+
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269)
+			{
+			
+				TransformData date = GetTransform()->GetTransDataRef(); 
+				int a = 0;
+				break;
+			}
+			GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
+			GetTransform()->AddLocalPosition({ 150 * _Delta,1500 * _Delta ,0 });
+
+
+
+		/*	if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 270)
 			{
 				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
 				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
@@ -164,22 +224,6 @@ void ph3_Dog_Npc::Update(float _Delta)
 
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });*/
-		}
-		break;
-		case 2:
-		{
-
-
-
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 270)
-			{
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
-				++RotationCheck;
-			}
-
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
 		}
 		break;
 		case 3:

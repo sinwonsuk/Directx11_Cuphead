@@ -44,34 +44,34 @@ void ph3_Laser::Start()
 	//Top
 	{
 		ph3_laser_warning_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_top", .SpriteName = "ph3_laser_warning_top", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+		ph3_laser_warning_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_top", .SpriteName = "ph3_laser_warning_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_top->ChangeAnimation("ph3_laser_warning_top");
 		ph3_laser_warning_top->Off();
 		ph3_laser_warning_top->GetTransform()->AddLocalPosition({ 160,-115 });
 
 		ph3_beam_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_beam_top->CreateAnimation({ .AnimationName = "ph3_beam_top", .SpriteName = "ph3_beam_top", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+		ph3_beam_top->CreateAnimation({ .AnimationName = "ph3_beam_top", .SpriteName = "ph3_beam_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
 		ph3_beam_top->ChangeAnimation("ph3_beam_top");
 		ph3_beam_top->GetTransform()->AddLocalPosition({ 30,0,0 });
 		ph3_beam_top->Off();
 
 
 		ph3_laser_warning_aura_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_aura_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_aura_top", .SpriteName = "ph3_laser_warning_aura_top", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+		ph3_laser_warning_aura_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_aura_top", .SpriteName = "ph3_laser_warning_aura_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_aura_top->ChangeAnimation("ph3_laser_warning_aura_top");
 		ph3_laser_warning_aura_top->GetTransform()->AddLocalPosition({ -180, 190 });
 		ph3_laser_warning_aura_top->Off(); 
 
 
 		ph3_laser_warning_particle_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_particle_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_particle_top", .SpriteName = "ph3_laser_warning_particle_top", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+		ph3_laser_warning_particle_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_particle_top", .SpriteName = "ph3_laser_warning_particle_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_particle_top->ChangeAnimation("ph3_laser_warning_particle_top");
 
 		ph3_laser_warning_particle_top->GetTransform()->AddLocalPosition({ -180,190 });
 		ph3_laser_warning_particle_top->Off();
 
 		ph3_laser_warning_ring_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_ring_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_ring_top", .SpriteName = "ph3_laser_warning_ring_top", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+		ph3_laser_warning_ring_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_ring_top", .SpriteName = "ph3_laser_warning_ring_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_ring_top->ChangeAnimation("ph3_laser_warning_ring_top");
 		ph3_laser_warning_ring_top->Off();
 
@@ -362,6 +362,89 @@ void ph3_Laser::Update(float _Delta)
 		case LaserDir::Right_Low:
 
 
+
+
+			break;
+		case LaserDir::Left_Top_Reverse:
+
+			if (dirCheck == false)
+			{
+				ph3_laser_warning_ring_top->On();
+				ph3_laser_warning_aura_top->On();
+				ph3_laser_warning_particle_top->On();
+				ph3_laser_warning_top->On();
+				dirCheck = true;
+			}
+
+			if (ph3_laser_warning_aura_top->IsAnimationEnd())
+			{
+				ph3_laser_warning_ring_top->Off();
+				ph3_laser_warning_aura_top->Off();
+				ph3_laser_warning_particle_top->Off();
+				ph3_laser_warning_top->Off();
+
+				ph3_beam_top->On();
+			}
+
+
+			if (ph3_beam_top->IsAnimationEnd())
+			{
+				ph3_beam_top->Off();
+				ph3_laser_warning_aura_top->Off();
+				ph3_laser_warning_particle_top->Off();
+				ph3_laser_warning_top->Off();
+				ph3_laser_warning_ring_top->Off();
+			}
+
+			break;
+		case LaserDir::Right_Top_Reverse:
+			if (dirCheck == false)
+			{
+
+				ph3_laser_warning_ring_top->GetTransform()->SetLocalRotation({ 0,180,0 });
+				ph3_laser_warning_aura_top->GetTransform()->SetLocalRotation({ 0,180,0 });
+				ph3_laser_warning_particle_top->GetTransform()->SetLocalRotation({ 0,180,0 });
+
+				ph3_laser_warning_ring_top->GetTransform()->SetLocalPosition({ 240,135 });
+				ph3_laser_warning_aura_top->GetTransform()->SetLocalPosition({ 240, 135 });
+				ph3_laser_warning_particle_top->GetTransform()->SetLocalPosition({ 240,135 });
+
+
+				ph3_laser_warning_top->GetTransform()->AddLocalRotation({ 0,180,0 });
+				ph3_laser_warning_top->GetTransform()->SetLocalPosition({ -138,-197 });
+
+
+				ph3_beam_top->GetTransform()->AddLocalRotation({ 0,180,0 });
+				ph3_beam_top->GetTransform()->SetLocalPosition({ 0,-70,0 });
+
+				ph3_laser_warning_ring_top->On();
+				ph3_laser_warning_aura_top->On();
+				ph3_laser_warning_particle_top->On();
+				ph3_laser_warning_top->On();
+
+
+				dirCheck = true;
+			}
+
+			if (ph3_laser_warning_aura_top->IsAnimationEnd())
+			{
+				ph3_laser_warning_ring_top->Off();
+				ph3_laser_warning_aura_top->Off();
+				ph3_laser_warning_particle_top->Off();
+				ph3_laser_warning_top->Off();
+
+				ph3_beam_top->On();
+			}
+
+
+			if (ph3_beam_top->IsAnimationEnd())
+			{
+				ph3_beam_top->Off();
+				ph3_laser_warning_aura_top->Off();
+				ph3_laser_warning_particle_top->Off();
+				ph3_laser_warning_top->Off();
+				ph3_laser_warning_ring_top->Off();
+			}
 
 
 			break;

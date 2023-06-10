@@ -536,11 +536,11 @@ void Ph3_DogAirplane::Rotation_Laser_Attack_Update(float _Time)
 			if (TopLaserCheck == false)
 			{
 				std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
-				Object->laserDir = LaserDir::Left_Top;
+				Object->laserDir = LaserDir::Right_Top_Reverse;
 				TopLaserCheck = true;
 
-				std::shared_ptr<ph3_Laser> Object1 = GetLevel()->CreateActor<ph3_Laser>(3);
-				Object1->laserDir = LaserDir::Right_Top;
+				/*std::shared_ptr<ph3_Laser> Object1 = GetLevel()->CreateActor<ph3_Laser>(3);
+				Object1->laserDir = LaserDir::Right_Top_Reverse;*/
 
 				//ChangeState(Ph3_DogAirPlaneState::Pase1_Attack_Reverse);
 				ResetLiveTime();

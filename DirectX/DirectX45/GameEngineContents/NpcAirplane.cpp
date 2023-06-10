@@ -91,7 +91,7 @@ void NpcAirplane::Update(float _Delta)
 		{
 		case 0:
 		{
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -90)
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetLocalRotation().z < -90)
 			{			
 				break;
 			}
@@ -102,13 +102,23 @@ void NpcAirplane::Update(float _Delta)
 		break;
 		case 1:
 		{
-		
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179)
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetLocalRotation().z <= -179)
 			{
-				break;
+				TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
+				int a = 0; 
 			}
 
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
+
+			TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179)
+			{
+				GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180 });
+				break;
+			}
+			/*GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 1 ,-1  ,0 });*/
+
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-400 * _Delta });
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150 * _Delta,-1500 * _Delta ,0 });
 		}
 		break;

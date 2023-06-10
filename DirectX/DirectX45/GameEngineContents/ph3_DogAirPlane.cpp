@@ -432,16 +432,16 @@ void Ph3_DogAirplane::Update(float _Delta)
 	break;
 	case 1:
 	{
-		//GetTransform()->SetLocalRotation({ 0,0,0 });
+		
 
-		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -180)
+		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179)
 		{			
-			//GetTransform()->SetLocalRotation({ 0,0,-360 });
+			
 			TransformData date = GetTransform()->GetTransDataRef();
 			break;
 		}
 	
-		 GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
+		 GetTransform()->AddLocalRotation({ 0,0,-400 * _Delta });
 		 GetTransform()->AddLocalPosition({ 150 * _Delta,-1500 * _Delta ,0 });
 	}
 	break;

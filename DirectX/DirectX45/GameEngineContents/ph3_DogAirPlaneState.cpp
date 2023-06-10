@@ -517,7 +517,9 @@ void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Laser_Attack_Update(float _Time)
 {
-	//GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,180 });
+	GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180 });
+//	GetTransform()->SetLocalRotation({ 0,0,0 });
+
 	TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
 
 	

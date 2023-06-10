@@ -518,11 +518,14 @@ void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 void Ph3_DogAirplane::Rotation_Laser_Attack_Update(float _Time)
 {
 	GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180 });
-//	GetTransform()->SetLocalRotation({ 0,0,0 });
+	GetTransform()->SetLocalRotation({ 0,0,0 });
 
 	TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
 
-	
+	if (GetLiveTime() > 0.5)
+	{
+
+
 		if (ph3_laser_Left_top_paw_pad_opens->IsAnimationEnd())
 		{
 			ph3_Left_laser_top->On();
@@ -549,7 +552,7 @@ void Ph3_DogAirplane::Rotation_Laser_Attack_Update(float _Time)
 				return;
 			}
 		}
-		
+	}
 	
 }
 

@@ -3,7 +3,7 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
-
+#include <GameEngineCore/GameEngineLevel.h>
 ph3_Laser::ph3_Laser()
 {
 }

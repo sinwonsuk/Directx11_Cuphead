@@ -176,6 +176,8 @@ private:
 
 	std::shared_ptr<class GameEngineCollision> Collision;
 
+	float4 trsd = { 0,0,-500 };
+	float4 tsdds = { 150,1500,0 };
 	bool TopLaserCheck = false;
 	bool MidLaserCheck = false;
 	bool LowLaserCheck = false;

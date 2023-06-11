@@ -339,14 +339,14 @@ void ph3_Laser::Update(float _Delta)
 
 			if (dirCheck == false)
 			{
-				ph3_laser_warning_ring_top->GetTransform()->AddLocalPosition({ 50,0 });
-				ph3_laser_warning_aura_top->GetTransform()->AddLocalPosition({ 50,0 });
-				ph3_laser_warning_particle_top->GetTransform()->AddLocalPosition({ 50,0 });
+				ph3_laser_warning_ring_top->GetTransform()->AddLocalPosition({ 50,10 });
+				ph3_laser_warning_aura_top->GetTransform()->AddLocalPosition({ 50,10 });
+				ph3_laser_warning_particle_top->GetTransform()->AddLocalPosition({ 50,10 });
 
 
-				ph3_laser_warning_top->GetTransform()->AddLocalPosition({ 80,-20 });
+				ph3_laser_warning_top->GetTransform()->AddLocalPosition({ 80,-10 });
 
-				ph3_beam_top->GetTransform()->AddLocalPosition({ 80,-20,0 });
+				ph3_beam_top->GetTransform()->AddLocalPosition({ 80,-10,0 });
 
 				ph3_laser_warning_ring_top->On();
 				ph3_laser_warning_aura_top->On();
@@ -389,11 +389,11 @@ void ph3_Laser::Update(float _Delta)
 				
 				
 
-				ph3_laser_warning_ring_top->GetTransform()->SetLocalPosition({ 230,195 });
-				ph3_laser_warning_aura_top->GetTransform()->SetLocalPosition({ 230, 195 });
-				ph3_laser_warning_particle_top->GetTransform()->SetLocalPosition({ 230,195 });
-				ph3_laser_warning_top->GetTransform()->SetLocalPosition({ -138,-147,-10 });
-				ph3_beam_top->GetTransform()->SetLocalPosition({ 0,-10,-10 });
+				ph3_laser_warning_ring_top->GetTransform()->SetLocalPosition({ 230,205 });
+				ph3_laser_warning_aura_top->GetTransform()->SetLocalPosition({ 230, 205 });
+				ph3_laser_warning_particle_top->GetTransform()->SetLocalPosition({ 230,205 });
+				ph3_laser_warning_top->GetTransform()->SetLocalPosition({ -138,-137,-10 });
+				ph3_beam_top->GetTransform()->SetLocalPosition({ 0,0,-10 });
 
 
 

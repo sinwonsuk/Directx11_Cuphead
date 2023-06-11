@@ -435,8 +435,6 @@ void Ph3_DogAirplane::Update(float _Delta)
 	{
 		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179)
 		{			
-			GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180});
-			//GetTransform()->SetLocalRotation({0,0,0 });;
 			break;
 		}
 		 GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
@@ -450,8 +448,7 @@ void Ph3_DogAirplane::Update(float _Delta)
 		
 		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269 )
 		{
-			//GetTransform()->SetLocalRotation({ 0,0,0 });
-			//GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,90 });
+			
 			break;
 		}
 
@@ -462,15 +459,15 @@ void Ph3_DogAirplane::Update(float _Delta)
 	case 3:
 	{
 
-		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
-		{
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
-			//GetTransform()->SetLocalPosition({ 0,0 });
-			RotationCheck = 0;
-		}
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({3,0,0 });
+		//if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
+		//{
+		//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+		//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
+		//	//GetTransform()->SetLocalPosition({ 0,0 });
+		//	RotationCheck = 0;
+		//}
+		//GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+		//GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({3,0,0 });
 
 	}
 	break;

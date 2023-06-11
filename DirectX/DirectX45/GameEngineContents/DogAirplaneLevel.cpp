@@ -25,7 +25,6 @@ DogAirplaneLevel::~DogAirplaneLevel()
 
 void DogAirplaneLevel::Update(float _DeltaTime)
 {
-
 		switch (Ph3_DogAirplane::ph3_mainBoss->GetRotationCheck())
 		{
 		case 0:
@@ -35,28 +34,32 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 				break;
 			}
 
-			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
-			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,1500.0f * _DeltaTime ,0 });
+			
+				Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
+				Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,1500.0f * _DeltaTime ,0 });
 
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,1500.0f * _DeltaTime ,0 });
-		
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,1500.0f * _DeltaTime ,0 });
+			
 		}
 		break;
 		case 1:
 		{
 			TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
 			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179.0f)
-			{
-				
+			{	
 				break;
 			}
+			
+				Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
+				Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,-1500.0f * _DeltaTime ,0 });
 
-			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
-			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,-1500.0f * _DeltaTime ,0 });
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _DeltaTime,-1500.0f * _DeltaTime ,0 });
+			
 
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _DeltaTime,-1500.0f * _DeltaTime ,0 });
+
+		
 			
 		}
 		break;

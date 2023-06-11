@@ -98,25 +98,25 @@ void Ph3_DogAirplane::Start()
 		Idle_Arom = CreateComponent<GameEngineSpriteRenderer>();
 		Idle_Arom->CreateAnimation({ .AnimationName = "ph3_Idle_Arom", .SpriteName = "ph3_Idle_Arom", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true,  . FrameIndex = {0,1,2,3,4,5,6,7,8,9,10,11,10,9,8,7,6,5,4,3,2,1,0} });
 		Idle_Arom->ChangeAnimation("ph3_Idle_Arom");
-		Idle_Arom->GetTransform()->AddLocalPosition({ 0,0,56 });
+		Idle_Arom->GetTransform()->AddLocalPosition({ 0,0,56.0f });
 		Idle_Arom->Off();
 
 		Idle_Body = CreateComponent<GameEngineSpriteRenderer>();
 		Idle_Body->CreateAnimation({ .AnimationName = "ph3_Idle_body", .SpriteName = "ph3_Idle_body", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true ,.FrameIndex = {0,1,2,3,4,5,6,7,8,9,10,11,12,11,10,9,8,7,6,5,4,3,2,1,0} });
 		Idle_Body->ChangeAnimation("ph3_Idle_body");
-		Idle_Body->GetTransform()->AddLocalPosition({ 0,0,56 });
+		Idle_Body->GetTransform()->AddLocalPosition({ 0,0,56.0f });
 		Idle_Body->Off();
 
 		Idle_Arom_Hand = CreateComponent<GameEngineSpriteRenderer>();
 		Idle_Arom_Hand->CreateAnimation({ .AnimationName = "Ph3_Idle_Arom_Hand", .SpriteName = "Ph3_Idle_Arom_Hand", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 		Idle_Arom_Hand->ChangeAnimation("Ph3_Idle_Arom_Hand");
-		Idle_Arom_Hand->GetTransform()->AddLocalPosition({ 0,0,56 });
+		Idle_Arom_Hand->GetTransform()->AddLocalPosition({ 0,0,56.0f });
 		Idle_Arom_Hand->Off();
 
 		ph3_paw_merge = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_paw_merge->CreateAnimation({ .AnimationName = "ph3_right_paw_merge", .SpriteName = "ph3_right_paw_merge", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 		ph3_paw_merge->ChangeAnimation("ph3_right_paw_merge");
-		ph3_paw_merge->GetTransform()->AddLocalPosition({ 0,0,55 });
+		ph3_paw_merge->GetTransform()->AddLocalPosition({ 0,0,55.0f });
 		ph3_paw_merge->Off(); 
 	}
 
@@ -124,13 +124,13 @@ void Ph3_DogAirplane::Start()
 		ph3_left_paw_hole_top = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_left_paw_hole_top->CreateAnimation({ .AnimationName = "ph3_left_paw_hole_top", .SpriteName = "ph3_left_paw_hole_top", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 		ph3_left_paw_hole_top->ChangeAnimation("ph3_left_paw_hole_top");
-		ph3_left_paw_hole_top->GetTransform()->AddLocalPosition({ 0,0,52 });
+		ph3_left_paw_hole_top->GetTransform()->AddLocalPosition({ 0,0,52.0f });
 		ph3_left_paw_hole_top->Off(); 
 
 		ph3_left_paw_hole_top_backer = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_left_paw_hole_top_backer->CreateAnimation({ .AnimationName = "ph3_left_paw_hole_top_backer", .SpriteName = "ph3_left_paw_hole_top_backer", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 		ph3_left_paw_hole_top_backer->ChangeAnimation("ph3_left_paw_hole_top_backer");
-		ph3_left_paw_hole_top_backer->GetTransform()->AddLocalPosition({ -0,0,50 });
+		ph3_left_paw_hole_top_backer->GetTransform()->AddLocalPosition({ -0,0,50.0f });
 		ph3_left_paw_hole_top_backer->Off(); 
 
 		ph3_laser_Left_top_paw_pad_opens = CreateComponent<GameEngineSpriteRenderer>();
@@ -150,7 +150,7 @@ void Ph3_DogAirplane::Start()
 		ph3_left_paw_hole_mid = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_left_paw_hole_mid->CreateAnimation({ .AnimationName = "ph3_left_paw_hole_mid", .SpriteName = "ph3_left_paw_hole_mid", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 		ph3_left_paw_hole_mid->ChangeAnimation("ph3_left_paw_hole_mid");
-		ph3_left_paw_hole_mid->GetTransform()->AddLocalPosition({ 0,0,52 });
+		ph3_left_paw_hole_mid->GetTransform()->AddLocalPosition({ 0,0,52.0f });
 		ph3_left_paw_hole_mid->Off(); 
 
 		
@@ -158,7 +158,7 @@ void Ph3_DogAirplane::Start()
 		ph3_left_paw_hole_mid_backer = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_left_paw_hole_mid_backer->CreateAnimation({ .AnimationName = "ph3_left_paw_hole_mid_backer", .SpriteName = "ph3_left_paw_hole_mid_backer", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 		ph3_left_paw_hole_mid_backer->ChangeAnimation("ph3_left_paw_hole_mid_backer");
-		ph3_left_paw_hole_mid_backer->GetTransform()->AddLocalPosition({ -0,0,50 }); 
+		ph3_left_paw_hole_mid_backer->GetTransform()->AddLocalPosition({ -0,0,50.0f }); 
 		ph3_left_paw_hole_mid_backer->Off(); 
 	
 		ph3_laser_Left_mid_paw_pad_opens = CreateComponent<GameEngineSpriteRenderer>();
@@ -177,19 +177,19 @@ void Ph3_DogAirplane::Start()
 		ph3_left_paw_hole_low_backer = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_left_paw_hole_low_backer->CreateAnimation({ .AnimationName = "ph3_left_paw_hole_low_backer", .SpriteName = "ph3_left_paw_hole_low_backer", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 		ph3_left_paw_hole_low_backer->ChangeAnimation("ph3_left_paw_hole_low_backer");
-		ph3_left_paw_hole_low_backer->GetTransform()->AddLocalPosition({ 0,5 });
+		ph3_left_paw_hole_low_backer->GetTransform()->AddLocalPosition({ 0,5.0f });
 		ph3_left_paw_hole_low_backer->Off();
 
 		ph3_left_paw_hole_low = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_left_paw_hole_low->CreateAnimation({ .AnimationName = "ph3_left_paw_hole_low", .SpriteName = "ph3_left_paw_hole_low", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 		ph3_left_paw_hole_low->ChangeAnimation("ph3_left_paw_hole_low");
-		ph3_left_paw_hole_low->GetTransform()->AddLocalPosition({ 0,5 });
+		ph3_left_paw_hole_low->GetTransform()->AddLocalPosition({ 0,5.0f });
 		ph3_left_paw_hole_low->Off(); 
 
 		ph3_laser_Left_low_paw_pad_opens = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_laser_Left_low_paw_pad_opens->CreateAnimation({ .AnimationName = "ph3_laser_low_paw_pad_opens", .SpriteName = "ph3_laser_low_paw_pad_opens", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 		ph3_laser_Left_low_paw_pad_opens->ChangeAnimation("ph3_laser_low_paw_pad_opens");
-		ph3_laser_Left_low_paw_pad_opens->GetTransform()->AddLocalPosition({ 0,5 });
+		ph3_laser_Left_low_paw_pad_opens->GetTransform()->AddLocalPosition({ 0,5.0f });
 		ph3_laser_Left_low_paw_pad_opens->Off();
 
 		ph3_laser_Left_low_paw_pad_opens_Reverse = CreateComponent<GameEngineSpriteRenderer>();
@@ -203,29 +203,29 @@ void Ph3_DogAirplane::Start()
 		ph3_Right_paw_hole_top = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_Right_paw_hole_top->CreateAnimation({ .AnimationName = "ph3_left_paw_hole_top", .SpriteName = "ph3_left_paw_hole_top", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 		ph3_Right_paw_hole_top->ChangeAnimation("ph3_left_paw_hole_top");
-		ph3_Right_paw_hole_top->GetTransform()->AddLocalRotation({ 0,-165,0 }); 
-		ph3_Right_paw_hole_top->GetTransform()->AddLocalPosition({ -3,7,0 });
+		ph3_Right_paw_hole_top->GetTransform()->AddLocalRotation({ 0,-165.0f,0 }); 
+		ph3_Right_paw_hole_top->GetTransform()->AddLocalPosition({ -3.0f,7.0f,0 });
 		ph3_Right_paw_hole_top->Off(); 
 
 		ph3_Right_paw_hole_top_backer = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_Right_paw_hole_top_backer->CreateAnimation({ .AnimationName = "ph3_left_paw_hole_top_backer", .SpriteName = "ph3_left_paw_hole_top_backer", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 		ph3_Right_paw_hole_top_backer->ChangeAnimation("ph3_left_paw_hole_top_backer");
-		ph3_Right_paw_hole_top_backer->GetTransform()->AddLocalRotation({ 0,-165,0 });
-		ph3_Right_paw_hole_top_backer->GetTransform()->AddLocalPosition({ -3,7,0 });
+		ph3_Right_paw_hole_top_backer->GetTransform()->AddLocalRotation({ 0,-165.0f,0 });
+		ph3_Right_paw_hole_top_backer->GetTransform()->AddLocalPosition({ -3.0f,7.0f,0 });
 		ph3_Right_paw_hole_top_backer->Off(); 
 
 		ph3_laser_Right_top_paw_pad_opens = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_laser_Right_top_paw_pad_opens->CreateAnimation({ .AnimationName = "ph3_laser_top_paw_pad_opens", .SpriteName = "ph3_laser_top_paw_pad_opens", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 		ph3_laser_Right_top_paw_pad_opens->ChangeAnimation("ph3_laser_top_paw_pad_opens");
-		ph3_laser_Right_top_paw_pad_opens->GetTransform()->AddLocalRotation({ 0,-165,0 });
-		ph3_laser_Right_top_paw_pad_opens->GetTransform()->AddLocalPosition({ -3,7,0 });
+		ph3_laser_Right_top_paw_pad_opens->GetTransform()->AddLocalRotation({ 0,-165.0f,0 });
+		ph3_laser_Right_top_paw_pad_opens->GetTransform()->AddLocalPosition({ -3.0f,7.0f,0 });
 		ph3_laser_Right_top_paw_pad_opens->Off(); 
 
 		ph3_laser_Right_top_paw_pad_opens_Reverse = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_laser_Right_top_paw_pad_opens_Reverse->CreateAnimation({ .AnimationName = "ph3_laser_top_paw_pad_opens", .SpriteName = "ph3_laser_top_paw_pad_opens", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true,.FrameIndex = {3,2,1,0} });
 		ph3_laser_Right_top_paw_pad_opens_Reverse->ChangeAnimation("ph3_laser_top_paw_pad_opens");
-		ph3_laser_Right_top_paw_pad_opens_Reverse->GetTransform()->AddLocalRotation({ 0,-165,0 });
-		ph3_laser_Right_top_paw_pad_opens_Reverse->GetTransform()->AddLocalPosition({ -3,7,0 });
+		ph3_laser_Right_top_paw_pad_opens_Reverse->GetTransform()->AddLocalRotation({ 0,-165.0f,0 });
+		ph3_laser_Right_top_paw_pad_opens_Reverse->GetTransform()->AddLocalPosition({ -3.0f,7.0f,0 });
 		ph3_laser_Right_top_paw_pad_opens_Reverse->Off();
 
 
@@ -426,7 +426,6 @@ void Ph3_DogAirplane::Update(float _Delta)
 		{		
 			break;
 		}
-
 		GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
 		GetTransform()->AddLocalPosition({ 150 * _Delta,1500 * _Delta ,0 });
 	}
@@ -442,13 +441,9 @@ void Ph3_DogAirplane::Update(float _Delta)
 	}
 	break;
 	case 2:
-	{
-		
-
-		
+	{		
 		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269 )
-		{
-			
+		{			
 			break;
 		}
 
@@ -458,7 +453,6 @@ void Ph3_DogAirplane::Update(float _Delta)
 	break;
 	case 3:
 	{
-
 		//if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
 		//{
 		//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
@@ -468,7 +462,6 @@ void Ph3_DogAirplane::Update(float _Delta)
 		//}
 		//GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
 		//GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({3,0,0 });
-
 	}
 	break;
 
@@ -484,9 +477,6 @@ void Ph3_DogAirplane::Update(float _Delta)
 		TransformData data = GetTransform()->GetTransDataRef();
 		int a = 0;
 	}*/
-
-
-
 	UpdateState(_Delta);
 }
 

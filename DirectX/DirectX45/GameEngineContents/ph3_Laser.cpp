@@ -252,7 +252,7 @@ void ph3_Laser::Update(float _Delta)
 
 
 				ph3_beam_top->GetTransform()->AddLocalRotation({ 0,180,0 });
-				ph3_beam_top->GetTransform()->SetLocalPosition({ -60,-10,0 });
+				ph3_beam_top->GetTransform()->SetLocalPosition({ -35,-10,0 });
 
 				ph3_laser_warning_ring_top->On();
 				ph3_laser_warning_aura_top->On();
@@ -339,20 +339,24 @@ void ph3_Laser::Update(float _Delta)
 
 			if (dirCheck == false)
 			{
-				ph3_laser_warning_ring_top->GetTransform()->AddLocalPosition({ 50,10 });
-				ph3_laser_warning_aura_top->GetTransform()->AddLocalPosition({ 50,10 });
-				ph3_laser_warning_particle_top->GetTransform()->AddLocalPosition({ 50,10 });
+				ph3_laser_warning_ring_top->GetTransform()->SetLocalRotation({ 0,180,0 });
+				ph3_laser_warning_aura_top->GetTransform()->SetLocalRotation({ 0,180,0 });
+				ph3_laser_warning_particle_top->GetTransform()->SetLocalRotation({ 0,180,0 });
+				ph3_laser_warning_top->GetTransform()->SetLocalRotation({ 0,180,0 });
+				ph3_beam_top->GetTransform()->SetLocalRotation({ 0,180,0 });
+
+				ph3_laser_warning_ring_top->GetTransform()->SetLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x+180,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y+190,0 });
+				ph3_laser_warning_aura_top->GetTransform()->SetLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x+ 180,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y + 190,0 });
+				ph3_laser_warning_particle_top->GetTransform()->SetLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x+ 180,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y + 190,0 });
+				ph3_laser_warning_top->GetTransform()->SetLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x-160,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y-115,-10 });
+				ph3_beam_top->GetTransform()->SetLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x -60,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y - 10,-10 });
 
 
-				ph3_laser_warning_top->GetTransform()->AddLocalPosition({ 80,-10 });
-
-				ph3_beam_top->GetTransform()->AddLocalPosition({ 80,-10,0 });
 
 				ph3_laser_warning_ring_top->On();
 				ph3_laser_warning_aura_top->On();
 				ph3_laser_warning_particle_top->On();
 				ph3_laser_warning_top->On();
-				dirCheck = true;
 			}
 
 			if (ph3_laser_warning_aura_top->IsAnimationEnd())
@@ -380,22 +384,17 @@ void ph3_Laser::Update(float _Delta)
 			if (dirCheck == false)
 			{
 
-				ph3_laser_warning_ring_top->GetTransform()->SetLocalRotation({ 0,180,0 });
-				ph3_laser_warning_aura_top->GetTransform()->SetLocalRotation({ 0,180,0 });
-				ph3_laser_warning_particle_top->GetTransform()->SetLocalRotation({ 0,180,0 });
-				ph3_laser_warning_top->GetTransform()->AddLocalRotation({ 0,180,0 });
-				ph3_beam_top->GetTransform()->AddLocalRotation({ 0,180,0 });
-
 				
 				
-
-				ph3_laser_warning_ring_top->GetTransform()->SetLocalPosition({ 230,205 });
-				ph3_laser_warning_aura_top->GetTransform()->SetLocalPosition({ 230, 205 });
-				ph3_laser_warning_particle_top->GetTransform()->SetLocalPosition({ 230,205 });
-				ph3_laser_warning_top->GetTransform()->SetLocalPosition({ -138,-137,-10 });
-				ph3_beam_top->GetTransform()->SetLocalPosition({ 0,0,-10 });
+				GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition();
 
 
+
+				ph3_laser_warning_ring_top->GetTransform()->AddLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y,0 });
+				ph3_laser_warning_aura_top->GetTransform()->AddLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y,0 });
+				ph3_laser_warning_particle_top->GetTransform()->AddLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y,0 });
+				ph3_laser_warning_top->GetTransform()->AddLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y,-10 });
+				ph3_beam_top->GetTransform()->AddLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y,-10 });
 
 
 				
@@ -433,23 +432,17 @@ void ph3_Laser::Update(float _Delta)
 
 			if (dirCheck == false)
 			{
-
-			
-
-
 				ph3_beam_mid->GetTransform()->SetLocalRotation({ 0,180,0 });
 				ph3_laser_warning_mid->GetTransform()->SetLocalRotation({ 0,180,0 });
 				ph3_laser_warning_particle_mid->GetTransform()->SetLocalRotation({ 0,180,0 });
 				ph3_laser_warning_electric_mid->GetTransform()->SetLocalRotation({ 0,180,0 });
 
+				ph3_beam_mid->GetTransform()->SetLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x -13,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y +5,-50 });
+				ph3_laser_warning_mid->GetTransform()->SetLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x + 17,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y -185,-50 });
+				ph3_laser_warning_particle_mid->GetTransform()->SetLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x + 339,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y + 84,0 });
+				ph3_laser_warning_electric_mid->GetTransform()->SetLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x + 339,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y + 77,0 });
 
-				ph3_beam_mid->GetTransform()->SetLocalPosition({7,0,-50 });
-				ph3_laser_warning_mid->GetTransform()->SetLocalPosition({ 37,-185,-50});
-				ph3_laser_warning_particle_mid->GetTransform()->SetLocalPosition({ 379,92,0 });
-				ph3_laser_warning_electric_mid->GetTransform()->SetLocalPosition({ 379,85,0 });
-
-
-
+				
 
 				ph3_beam_mid->Off();
 				ph3_laser_warning_mid->On();
@@ -481,10 +474,10 @@ void ph3_Laser::Update(float _Delta)
 
 			if (dirCheck == false)
 			{
-				ph3_laser_Right_warning_aura_low->GetTransform()->AddLocalPosition({ 60,15 });
-				ph3_laser_Left__warning_aura_low->GetTransform()->AddLocalPosition({ 60,15});
-				ph3_laser_warning_low->GetTransform()->AddLocalPosition({ 60,15,-10 });
-				ph3_beam_low->GetTransform()->AddLocalPosition({ 60,15,-10 });
+				ph3_laser_Right_warning_aura_low->GetTransform()->AddLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y,-10});
+				ph3_laser_Left__warning_aura_low->GetTransform()->AddLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y,-10 });
+				ph3_laser_warning_low->GetTransform()->AddLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y,-10});
+				ph3_beam_low->GetTransform()->AddLocalPosition({ GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().x,GetLevel()->GetMainCamera()->GetTransform()->GetLocalPosition().y,-10 });
 
 
 				ph3_laser_warning_low->On();

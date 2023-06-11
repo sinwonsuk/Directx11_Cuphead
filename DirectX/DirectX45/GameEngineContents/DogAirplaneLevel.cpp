@@ -48,38 +48,31 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 		break;
 		case 1:
 		{
-
-
 			TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
 
 			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179.5f)
 			{	
 				TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
 				TransformData date1 = Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetTransDataRef();
-				int a = 0;
 				break;
 			}
-		
 
 			float test = std::lerp(0, -700, _DeltaTime);
 			float test1 = std::lerp(0, -250, _DeltaTime);
 			float test2 = std::lerp(0, 150, _DeltaTime);
+
+			
 				Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,test1 });
 				Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ test2,test ,0 });
 
 				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,test1 });
 				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ test2,test ,0 });
-			
-
-
-				float a = { _DeltaTime * 1500.0f };
-				int ad= 0;
 		}
 		break;
 		case 2:
 		{
 
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269.0f)
+		/*	if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269.0f)
 			{
 				break;
 			}
@@ -87,7 +80,7 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _DeltaTime, 1500.0f * _DeltaTime ,0 });
 			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
-			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,1500.0f * _DeltaTime ,0 });
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,1500.0f * _DeltaTime ,0 });*/
 
 		}
 		break;

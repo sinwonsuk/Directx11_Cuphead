@@ -138,9 +138,7 @@ void ph3_Dog_Npc::Update(float _Delta)
 
 			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179)
 			{
-				GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180.0f });
 				GetTransform()->SetLocalRotation({ 0,0,0 });
-				TransformData date = GetTransform()->GetTransDataRef();
 				break;
 			}
 			TransformData date = GetTransform()->GetTransDataRef();

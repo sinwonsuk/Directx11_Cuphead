@@ -478,6 +478,9 @@ void Ph3_DogAirplane::Update(float _Delta)
 	//	TransformData data = GetTransform()->GetTransDataRef();
 	//	int a = 0;
 	//}*/
+
+
+	
 	UpdateState(_Delta);
 }
 

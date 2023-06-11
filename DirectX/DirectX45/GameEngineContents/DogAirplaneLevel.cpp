@@ -34,8 +34,13 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 			{
 				break;
 			}
+
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,1500.0f * _DeltaTime ,0 });
+
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,1500.0f * _DeltaTime ,0 });
+		
 		}
 		break;
 		case 1:
@@ -43,13 +48,16 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 			TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
 			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179.0f)
 			{
-				GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180 });
+				
 				break;
 			}
 
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,-1500.0f * _DeltaTime ,0 });
 
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _DeltaTime,-1500.0f * _DeltaTime ,0 });
+			
 		}
 		break;
 		case 2:
@@ -57,12 +65,14 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 
 			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269.0f)
 			{
-
 				break;
 			}
 
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _DeltaTime, 1500.0f * _DeltaTime ,0 });
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,1500.0f * _DeltaTime ,0 });
+
 		}
 		break;
 		case 3:

@@ -430,6 +430,7 @@ void Ph3_DogAirplane::Update(float _Delta)
 		GetTransform()->AddLocalPosition({ 150.0f * _Delta,1500.0f * _Delta ,0 });
 	}
 	break;
+
 	case 1:
 	{
 		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179.0f)

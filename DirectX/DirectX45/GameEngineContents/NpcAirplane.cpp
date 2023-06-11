@@ -81,81 +81,72 @@ void NpcAirplane::Start()
 
 void NpcAirplane::Update(float _Delta)
 {
-	if (Ph3_DogAirplane::ph3_mainBoss->Get_ph3_dogcopter_rotate_camera()->GetCurrentFrame() == 14)
-	{
-		ph3_main_boss_Check = true;
-	}
-	if (ph3_main_boss_Check == true)
-	{
-		switch (Ph3_DogAirplane::ph3_mainBoss->GetRotationCheck())
-		{
-		case 0:
-		{
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetLocalRotation().z < -90.0f)
-			{			
-				break;
-			}
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150 * _Delta,1500.0f* _Delta ,0 });
-		}
-		break;
-		case 1:
-		{
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetLocalRotation().z <= -179.0f)
-			{
-				TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
-				int a = 0; 
-			}
+	//if (Ph3_DogAirplane::ph3_mainBoss->Get_ph3_dogcopter_rotate_camera()->GetCurrentFrame() == 14)
+	//{
+	//	ph3_main_boss_Check = true;
+	//}
 
+	//if (ph3_main_boss_Check == true)
+	//{
+	//	switch (Ph3_DogAirplane::ph3_mainBoss->GetRotationCheck())
+	//	{
+	//	case 0:
+	//	{
+	//		if (GetLevel()->GetMainCamera()->GetTransform()->GetLocalRotation().z < -90.0f)
+	//		{			
+	//			break;
+	//		}
+	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
+	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150 * _Delta,1500.0f* _Delta ,0 });
+	//	}
+	//	break;
+	//	case 1:
+	//	{
+	//		TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
+	//		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179.0f)
+	//		{
+	//			GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180 });
+	//			break;
+	//		}
+	//		
 
-			TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179.0f)
-			{
-				GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180 });
-				break;
-			}
-			/*GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 1 ,-1  ,0 });*/
+	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
+	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _Delta,-1500.0f * _Delta ,0 });
+	//	}
+	//	break;
+	//	case 2:
+	//	{
 
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _Delta,-1500.0f * _Delta ,0 });
-		}
-		break;
-		case 2:
-		{
+	//		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269.0f)
+	//		{
+	//			
+	//			break;
+	//		}
 
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269.0f)
-			{
-				//GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,90 });
-				break;
-			}
+	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
+	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _Delta, 1500.0f * _Delta ,0 });
+	//	}
+	//	break;
+	//	case 3:
+	//	{
 
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _Delta, 1500.0f * _Delta ,0 });
+	//		//if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
+	//		//{
+	//		//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+	//		//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
+	//		//	//GetTransform()->SetLocalPosition({ 0,0 });
+	//		//	RotationCheck = 0;
+	//		//}
+	//		//GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+	//		//GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
 
+	//	}
+	//	break;
 
-		}
-		break;
-		case 3:
-		{
-
-			//if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
-			//{
-			//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
-			//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
-			//	//GetTransform()->SetLocalPosition({ 0,0 });
-			//	RotationCheck = 0;
-			//}
-			//GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
-			//GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
-
-		}
-		break;
-
-		default:
-			break;
-		}
-	}
+	//	default:
+	//		break;
+	//	}
+	//}
 	/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
 	{
 		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,0});

@@ -12,6 +12,9 @@
 #include "ph3_DogAirPlane.h"
 #include "ph3_Laser.h"
 #include "ph3_food_bowl.h"
+#include "ph3_Dog_Npc.h"
+
+
 DogAirplaneLevel::DogAirplaneLevel()
 {
 }
@@ -22,7 +25,77 @@ DogAirplaneLevel::~DogAirplaneLevel()
 
 void DogAirplaneLevel::Update(float _DeltaTime)
 {
-}
+
+		switch (Ph3_DogAirplane::ph3_mainBoss->GetRotationCheck())
+		{
+		case 0:
+		{
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetLocalRotation().z < -90.0f)
+			{
+				break;
+			}
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150 * _DeltaTime,1500.0f * _DeltaTime ,0 });
+		}
+		break;
+		case 1:
+		{
+			TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179.0f)
+			{
+				GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180 });
+				break;
+			}
+
+
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _DeltaTime,-1500.0f * _DeltaTime ,0 });
+		}
+		break;
+		case 2:
+		{
+
+			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269.0f)
+			{
+
+				break;
+			}
+
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _DeltaTime });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _DeltaTime, 1500.0f * _DeltaTime ,0 });
+		}
+		break;
+		case 3:
+		{
+
+			//if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
+			//{
+			//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+			//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
+			//	//GetTransform()->SetLocalPosition({ 0,0 });
+			//	RotationCheck = 0;
+			//}
+			//GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+			//GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
+
+		}
+		break;
+
+		default:
+			break;
+		}
+	}
+	/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
+	{
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,0});
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 0,0,0 });
+		RotationCheck = 0;
+		TransformData data = GetTransform()->GetTransDataRef();
+		int a = 0;
+	}*/
+
+
+
 
 void DogAirplaneLevel::Start()
 {

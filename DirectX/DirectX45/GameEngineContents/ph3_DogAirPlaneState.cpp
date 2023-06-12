@@ -452,7 +452,7 @@ void Ph3_DogAirplane::Pase3_Attack_Reverse_Update(float _Time)
 		Idle_Body->Off();
 		Idle_Arom_Hand->Off();
 		Ph3_Boss_Intro->Off();
-
+	
 		ph3_dogcopter_rotate_camera->On();
 		ChangeState(Ph3_DogAirPlaneState::Rotation);
 		return;
@@ -468,6 +468,10 @@ void Ph3_DogAirplane::Rotation_Update(float _Time)
 		ph3_paw_merge->Off();
 	}
 
+	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 12)
+	{
+		RotationCheck = 0; 
+	}
 
 
 	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 15)
@@ -475,7 +479,7 @@ void Ph3_DogAirplane::Rotation_Update(float _Time)
 		
 		if (ph3_Npc_Check == false)
 		{
-			++RotationCheck;
+			//++RotationCheck;
 			std::shared_ptr<ph3_Dog_Npc> object = GetLevel()->CreateActor<ph3_Dog_Npc>(); 
 			ph3_Npc_Check = true;
 		}
@@ -496,29 +500,29 @@ void Ph3_DogAirplane::Rotation_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Attack_Update(float _Time)
 {
-	/*if (GetLiveTime() > 1.0)
+	if (GetLiveTime() > 1.0)
 	{
 		
 		if (BowlDirCheck == 0)
 		{
 			std::shared_ptr<ph3_food_bowl> Object = GetLevel()->CreateActor<ph3_food_bowl>();
 			Object->GetBullet()->GetTransform()->AddLocalPosition({ -120,740 });
-			Object->GetSfx()->GetTransform()->AddLocalPosition({ -120,760 });
+			Object->GetSfx()->GetTransform()->AddLocalPosition({ -160,760 });
 			++BowlDirCheck;
 		}
 		else if (BowlDirCheck == 1)
 		{
 			std::shared_ptr<ph3_food_bowl> Object = GetLevel()->CreateActor<ph3_food_bowl>();
 			Object->GetBullet()->GetTransform()->AddLocalPosition({ 120,740 });
-			Object->GetSfx()->GetTransform()->AddLocalPosition({ 170,760 });
+			Object->GetSfx()->GetTransform()->AddLocalPosition({ 170,750 });
 			BowlDirCheck = 0;
 			Object->SetDirCheck(1);
 		}
 		++BowlCheck;
 		ResetLiveTime();
-	}*/
+	}
 
-	if (BowlCheck == 0)
+	if (BowlCheck == 8)
 	{
 		ResetLiveTime();
 		ChangeState(Ph3_DogAirPlaneState::Rotation_Laser_Idle);
@@ -535,6 +539,7 @@ void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 	}
 	if (ph3_dogcopter_rotate_camera_out->GetCurrentFrame() == 4)
 	{
+		BowlCheck = 0;
 		RotationCheck = 1;
 	}
 
@@ -542,7 +547,7 @@ void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 	if (ph3_dogcopter_rotate_camera_out->IsAnimationEnd())
 	{
 		ph3_dogcopter_rotate_camera_out->Off(); 
-		
+		ph3_dogcopter_rotate_camera_out_blades->Off(); 
 		GetTransform()->SetLocalRotation({ 0,0,0 });
 		TransformData date = GetTransform()->GetTransDataRef(); 
 		Idle_Arom->On();
@@ -589,7 +594,7 @@ void Ph3_DogAirplane::Rotation_Laser_Attack_Update(float _Time)
 			
 			ph3_Right_laser_mid->On();
 		}
-
+		
 		if (ph3_Right_laser_mid->IsAnimationEnd())
 		{
 			if (TopLaserCheck == false)
@@ -859,6 +864,7 @@ void Ph3_DogAirplane::Rotation_Pase3_Laser_Attack_Reverse_Update(float _Time)
 		Idle_Arom_Hand->Off();
 		Ph3_Boss_Intro->Off();
 		ph3_Npc_Check = true; 
+		
 		ChangeState(Ph3_DogAirPlaneState::Left_Rotation);
 		return;
 	}
@@ -872,7 +878,7 @@ void Ph3_DogAirplane::Left_Rotation_Update(float _Time)
 		ph3_paw_merge->Off();
 	}
 
-	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 15)
+	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 13)
 	{
 		RotationCheck = 2;		
 	}
@@ -894,28 +900,39 @@ void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
 	if (GetLiveTime() > 1.0)
 	{
 
-		/*	if (BowlDirCheck == 0)
+			if (BowlDirCheck == 0)
 			{
 				std::shared_ptr<ph3_food_bowl> Object = GetLevel()->CreateActor<ph3_food_bowl>();
-				Object->GetBullet()->GetTransform()->AddLocalPosition({ -120,740 });
-				Object->GetSfx()->GetTransform()->AddLocalPosition({ -120,760 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
+				Object->GetBullet()->GetTransform()->AddLocalPosition({ -230,740 });
+				Object->GetSfx()->GetTransform()->AddLocalPosition({ -200,750 });
+				Object->SetDirCheck(2);
 				++BowlDirCheck;
 			}
 			else if (BowlDirCheck == 1)
 			{
 				std::shared_ptr<ph3_food_bowl> Object = GetLevel()->CreateActor<ph3_food_bowl>();
-				Object->GetBullet()->GetTransform()->AddLocalPosition({ 120,740 });
-				Object->GetSfx()->GetTransform()->AddLocalPosition({ 170,760 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
+				Object->GetBullet()->GetTransform()->AddLocalPosition({ 30,740 });
+				Object->GetSfx()->GetTransform()->AddLocalPosition({ 100,750 });
 				BowlDirCheck = 0;
-				Object->SetDirCheck(1);
+				Object->SetDirCheck(3);
+				++BowlCheck;
 			}
-			++BowlCheck;
-			ResetLiveTime();*/
+			
+			ResetLiveTime();
 	}
-
-	if (BowlCheck == 0)
+	if (BowlCheck == 8)
 	{
 		ResetLiveTime();
 		return;
 	}
+}
+
+void Ph3_DogAirplane::Right_Rotation_Attack_Update(float _Time)
+{
+
+
+
+
 }

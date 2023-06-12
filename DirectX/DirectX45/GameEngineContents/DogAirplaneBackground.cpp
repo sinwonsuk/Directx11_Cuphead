@@ -5,6 +5,8 @@
 #include <GameEngineCore/GameEngineCamera.h>
 #include "EnumClass.cpp"
 
+DogAirplaneBackground* DogAirplaneBackground::Background;
+
 DogAirplaneBackground::DogAirplaneBackground()
 {
 }
@@ -15,6 +17,9 @@ DogAirplaneBackground::~DogAirplaneBackground()
 
 void DogAirplaneBackground::Start()
 {
+	Background = this;
+
+
 	if (nullptr == GameEngineSprite::Find("Background"))
 	{
 		GameEngineDirectory NewDir;

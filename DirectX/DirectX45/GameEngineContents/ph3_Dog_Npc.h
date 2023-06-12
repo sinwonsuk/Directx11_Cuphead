@@ -17,6 +17,7 @@ enum class ph3_Dog_Npc_State
 class ph3_Dog_Npc : public GameEngineActor
 {
 public:
+	static ph3_Dog_Npc* ph3_Npc;
 	// constrcuter destructer
 	ph3_Dog_Npc();
 	~ph3_Dog_Npc();
@@ -57,6 +58,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> D_Left_Clouds;
 	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
 	std::shared_ptr<class GameEngineCollision> Collision;
+
 
 	int RotationCheck = 0;
 	bool test = false;

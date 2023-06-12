@@ -4,6 +4,7 @@
 class DogAirplaneBackground : public GameEngineActor
 {
 public:
+	static DogAirplaneBackground* Background;
 	// constrcuter destructer
 	DogAirplaneBackground();
 	~DogAirplaneBackground();
@@ -23,7 +24,7 @@ protected:
 	float4 TestColor;
 
 private:
-	
+
 
 	float Angle = 0.0f;
 	std::shared_ptr<class GameEngineSpriteRenderer> Sky;

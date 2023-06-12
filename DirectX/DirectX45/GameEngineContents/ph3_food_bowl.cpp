@@ -173,7 +173,97 @@ void ph3_food_bowl::Update(float _Delta)
 			}
 		}
 		break;
+	case 2:
 
+		if (Gravity.y > -8)
+		{
+			Gravity += float4::Down * 20.0f * _Delta;
+			Bullet->GetTransform()->AddLocalPosition({ Gravity });
+			Bullet->GetTransform()->AddLocalPosition(LeftMoveDir * _Delta * 650);
+
+		}
+		if (Gravity.y < -8)
+		{
+
+			Bullet->GetTransform()->AddLocalPosition({ 0,-600 * _Delta,0 });
+			TransformData data = GetTransform()->GetTransDataRef();
+
+			if (Bullet->GetTransform()->GetLocalPosition().y < -170 && ColorCheck == 0)
+			{
+				if (HeightCheck == false)
+				{
+					Bullet->ChangeAnimation("ph3_dog_bowl_shoot_red");
+					ph3_dog_bowl_shoot_lines->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
+					ph3_dog_bowl_shoot_lines->On();
+					HeightCheck = true;
+				}
+				Bullet->GetTransform()->AddLocalPosition({ 600 * _Delta,600 * _Delta,-1 });
+				Bullet->GetTransform()->SetLocalRotation({ 0,0,0 });
+			}
+
+			else if (Bullet->GetTransform()->GetLocalPosition().y < -40 && ColorCheck == 1)
+			{
+				if (HeightCheck == false)
+				{
+					Bullet->ChangeAnimation("ph3_dog_bowl_shoot_yellow");
+					ph3_dog_bowl_shoot_lines->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
+					ph3_dog_bowl_shoot_lines->On();
+					HeightCheck = true;
+
+				}
+				Bullet->GetTransform()->AddLocalPosition({ 600 * _Delta,600 * _Delta,-1 });
+				Bullet->GetTransform()->SetLocalRotation({ 0,180,0 });
+			}
+
+
+		}
+		break;
+	case 3:
+
+		Sfx->GetTransform()->SetLocalRotation({ 0,180,0 });
+		ph3_dog_bowl_shoot_lines->GetTransform()->SetLocalRotation({ 0,180,0 });
+
+
+		if (Gravity.y > -8)
+		{
+			Gravity += float4::Down * 20.0f * _Delta;
+			Bullet->GetTransform()->AddLocalPosition({ Gravity });
+			Bullet->GetTransform()->AddLocalPosition(RightMoveDir * _Delta * 650);
+
+		}
+		if (Gravity.y < -8)
+		{
+
+			Bullet->GetTransform()->AddLocalPosition({ 0,-600 * _Delta,0 });
+			TransformData data = GetTransform()->GetTransDataRef();
+
+			if (Bullet->GetTransform()->GetLocalPosition().y < -170 && ColorCheck == 0)
+			{
+				if (HeightCheck == false)
+				{
+					Bullet->ChangeAnimation("ph3_dog_bowl_shoot_red");
+					ph3_dog_bowl_shoot_lines->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
+					ph3_dog_bowl_shoot_lines->On();
+					HeightCheck = true;
+				}
+				Bullet->GetTransform()->AddLocalPosition({ -600 * _Delta,600 * _Delta,0 });
+				Bullet->GetTransform()->SetLocalRotation({ 0,0,0 });
+			}
+
+			else if (Bullet->GetTransform()->GetLocalPosition().y < -40 && ColorCheck == 1)
+			{
+				if (HeightCheck == false)
+				{
+					Bullet->ChangeAnimation("ph3_dog_bowl_shoot_yellow");
+					ph3_dog_bowl_shoot_lines->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
+					ph3_dog_bowl_shoot_lines->On();
+					HeightCheck = true;
+				}
+				Bullet->GetTransform()->AddLocalPosition({ -600 * _Delta,600 * _Delta,0 });
+				Bullet->GetTransform()->SetLocalRotation({ 0,360,0 });
+			}
+		}
+		break;
 	default:
 		break;
 	}

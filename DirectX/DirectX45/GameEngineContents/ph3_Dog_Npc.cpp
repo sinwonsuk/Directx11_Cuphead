@@ -6,6 +6,10 @@
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include "ph3_DogAirPlane.h"
+
+
+ph3_Dog_Npc* ph3_Dog_Npc::ph3_Npc;
+
 ph3_Dog_Npc::ph3_Dog_Npc()
 {
 }
@@ -16,6 +20,9 @@ ph3_Dog_Npc::~ph3_Dog_Npc()
 
 void ph3_Dog_Npc::Start()
 {
+	ph3_Npc = this;
+
+
 	if (nullptr == GameEngineSprite::Find("ph3_tongue_rotate_camera"))
 	{
 		GameEngineDirectory NewDir;
@@ -124,26 +131,15 @@ void ph3_Dog_Npc::Update(float _Delta)
 				ph3_leader_sideways_body_Finish->On();
 			}
 
-			if (GetTransform()->GetTransDataRef().Rotation.z < -90)
-			{
-				break;
-			}
+			
 
-			GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
-			GetTransform()->AddLocalPosition({ 150 * _Delta,1500 * _Delta ,0 });
 		}
 		break;
 		case 1:
 		{
 
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179)
-			{
-				GetTransform()->SetLocalRotation({ 0,0,0 });
-				break;
-			}
-			TransformData date = GetTransform()->GetTransDataRef();
-			GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
-			GetTransform()->AddLocalPosition({ 150 * _Delta,-1500 * _Delta ,0 });
+			
+			
 
 			ph3_leader_sideways_body->Off(); 
 			ph3_leader_sideways_arms_backer->Off(); 
@@ -162,14 +158,20 @@ void ph3_Dog_Npc::Update(float _Delta)
 			if (test == false)
 			{
 				
+				
+
+				
+
+				ph3_leader_sideways_body_Finish->Off(); 
+				ph3_tongue_rotate_camera_tongue->On();
+				ph3_leader_sideways_body->On();
+
 				ph3_tongue_rotate_camera_tongue->ChangeAnimation("ph3_tongue_rotate_camera_tongue");
 				ph3_leader_sideways_body->ChangeAnimation("ph3_leader_sideways_body");
 				ph3_leader_sideways_body_Finish_0->ChangeAnimation("ph3_leader_sideways_body_Finish_0");
+				ph3_leader_sideways_body_Finish->ChangeAnimation("ph3_leader_sideways_body_Finish");
 
 				test = true;
-				ph3_tongue_rotate_camera_tongue->On();
-				ph3_leader_sideways_body->On();
-				
 			}
 
 			if (ph3_tongue_rotate_camera_tongue->IsAnimationEnd())
@@ -200,28 +202,8 @@ void ph3_Dog_Npc::Update(float _Delta)
 			}
 
 
-
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269)
-			{
-			
-				TransformData date = GetTransform()->GetTransDataRef(); 
-				int a = 0;
-				break;
-			}
-			GetTransform()->AddLocalRotation({ 0,0,-500 * _Delta });
-			GetTransform()->AddLocalPosition({ 150 * _Delta,1500 * _Delta ,0 });
-
-
-
-		/*	if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 270)
-			{
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
-				++RotationCheck;
-			}
-
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });*/
+	
+		
 		}
 		break;
 		case 3:

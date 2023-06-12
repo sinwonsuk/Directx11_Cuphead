@@ -22,11 +22,7 @@ enum class Ph3_DogAirPlaneState
 	Rotation_Pase3_Laser_Attack_Reverse,
 	Left_Rotation,
 	Left_Rotation_Attack,
-
-	
-
-	
-	
+	Right_Rotation_Attack,
 	
 
 };
@@ -76,7 +72,7 @@ public:
 	void Left_Rotation_Update(float _Time); 
 
 	void Left_Rotation_Attack_Update(float _Time);
-
+	void Right_Rotation_Attack_Update(float _Time);
 
 	void LeftIdleUpdate(float _Time);
 	void UpIdleUpdate(float _Time);
@@ -107,8 +103,8 @@ protected:
 	float4 TestColor;
 
 private:
-	//Ph3_DogAirPlaneState StateValue = Ph3_DogAirPlaneState::Pase3_Attack_Reverse;
 	Ph3_DogAirPlaneState StateValue = Ph3_DogAirPlaneState::Intro;
+//	Ph3_DogAirPlaneState StateValue = Ph3_DogAirPlaneState::Intro;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Ph3_Boss_Intro;
 
@@ -173,6 +169,10 @@ private:
 
 
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dogcopter_rotate_camera_out;
+
+
+
+
 
 	std::shared_ptr<class GameEngineCollision> Collision;
 

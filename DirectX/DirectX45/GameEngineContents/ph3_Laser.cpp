@@ -50,7 +50,7 @@ void ph3_Laser::Start()
 		ph3_laser_warning_top->GetTransform()->AddLocalPosition({ 160,-115 });
 
 		ph3_beam_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_beam_top->CreateAnimation({ .AnimationName = "ph3_beam_top", .SpriteName = "ph3_beam_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
+		ph3_beam_top->CreateAnimation({ .AnimationName = "ph3_beam_top", .SpriteName = "ph3_beam_top", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
 		ph3_beam_top->ChangeAnimation("ph3_beam_top");
 		ph3_beam_top->GetTransform()->AddLocalPosition({ 30,0,0 });
 		ph3_beam_top->Off();

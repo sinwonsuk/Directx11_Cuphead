@@ -27,7 +27,7 @@ void Ph2_DogAirpalne::ChangeState(Ph2_DogAirPlaneState _State)
 		AnimationCheck("ph2_dog_d_intro");
 		break;
 	case Ph2_DogAirPlaneState::LeftIdle:
-		AnimationCheck("ph2_dog_a_intro_transition");
+		AnimationCheck("SD_Idle_side");
 		break;
 	case Ph2_DogAirPlaneState::UpIdle:
 		AnimationCheck("ph2_dog_b_intro_transition");
@@ -89,12 +89,7 @@ void Ph2_DogAirpalne::UpdateState(float _Time)
 
 void Ph2_DogAirpalne::LeftIntroUpdate(float _Time)
 {
-	//Ph2_Boss->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
-
-	/*if (Ph2_Boss->GetTransform()->GetLocalPosition().x > 20)
-	{
-		Ph2_Boss->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
-	}*/
+	
 
 	if (Ph2_Boss->IsAnimationEnd())
 	{
@@ -128,26 +123,205 @@ void Ph2_DogAirpalne::LeftIdleUpdate(float _Time)
 {
 	
 	
-	GetTransform()->AddLocalRotation({ 1,0,0} );
-	GetTransform()->AddLocalRotation({ 0,1,0 });
+	float RadiousX = 600;
+	float RadiousY = 300;
 	
-	TransformData date = Ph2_Boss->GetTransform()->GetTransDataRef();
-	Ph2_Boss->GetTransform()->SetWorldRotation({ 0,0,0 });
+	switch (RotationAnimation)
+	{
+	case 0:
+	{
+		if (Left_Pos_x > -525)
+		{
 
-	TransformData date1 = Ph2_Boss->GetTransform()->GetTransDataRef();
+			Ph2_Boss->ChangeAnimation("SD_Idle_front_side");
+
+			++RotationAnimation;
+
+		}
+		
+	}
+	break;
+	case 1:
+	{
+		if (Left_Pos_x > -375)
+		{
+
+			Ph2_Boss->ChangeAnimation("SD_Idle_3_4_front");
+
+			++RotationAnimation;
+
+		}
+	}
+	break;
+case 2:
+	{
+	if (Left_Pos_x > -225)
+	{
+		Ph2_Boss->ChangeAnimation("SD_Idle_front_front");
+		++RotationAnimation;
+	}
+	}
+	break;
+case 3:
+	{
+	if (Left_Pos_x > -75)
+	{
+		Ph2_Boss->ChangeAnimation("SD_Idle_front_Up");
+		++RotationAnimation;
+	}
+		
+		
+	}
+	break;
+
+	default:
+		break;
+	}
+	
 
 
+	if (Ph2_Boss->GetTransform()->GetLocalPosition().x <= -620)
+	{
+		RotationCheck = false;
+	}
+
+	if (Ph2_Boss->GetTransform()->GetLocalPosition().x >= 620)
+	{
+		RotationCheck = true;		
+	}
+	
+	if (RotationCheck == false)
+	{
+		Left_Pos_x += 1;
+
+		float y1 = (RadiousY * RadiousY) - ((RadiousY * RadiousY) * (Left_Pos_x * Left_Pos_x)) / (RadiousX * RadiousX);
+		float y = sqrt(y1);
+
+		Ph2_Boss->GetTransform()->SetLocalPosition({ Left_Pos_x ,y,0 });
+	}
+
+	if (RotationCheck == true)
+	{
+		Left_Pos_x -= 1;
+
+		float y1 = (RadiousY * RadiousY) - ((RadiousY * RadiousY) * (Left_Pos_x * Left_Pos_x)) / (RadiousX * RadiousX);
+		float y = sqrt(y1);
+
+		Ph2_Boss->GetTransform()->SetLocalPosition({ Left_Pos_x ,-y,0 });
+	}
 
 }
 
 void Ph2_DogAirpalne::UpIdleUpdate(float _Time)
 {
+	float RadiousX = 620;
+	float RadiousY = 300;
+
+
+	if (Ph2_Boss->GetTransform()->GetLocalPosition().x <= -620)
+	{
+		RotationCheck = false;
+	}
+
+	if (Ph2_Boss->GetTransform()->GetLocalPosition().x >= 620)
+	{
+		RotationCheck = true;
+	}
+
+	if (RotationCheck == false)
+	{
+		Up_Pos_x += 1;
+
+		float y1 = (RadiousY * RadiousY) - ((RadiousY * RadiousY) * (Up_Pos_x * Up_Pos_x)) / (RadiousX * RadiousX);
+		float y = sqrt(y1);
+
+		Ph2_Boss->GetTransform()->SetLocalPosition({ Up_Pos_x ,y,0 });
+	}
+
+	if (RotationCheck == true)
+	{
+		Right_Pos_x -= 1;
+
+		float y1 = (RadiousY * RadiousY) - ((RadiousY * RadiousY) * (Up_Pos_x * Up_Pos_x)) / (RadiousX * RadiousX);
+		float y = sqrt(y1);
+
+		Ph2_Boss->GetTransform()->SetLocalPosition({ Up_Pos_x ,-y,0 });
+	}
+
 }
 
 void Ph2_DogAirpalne::RightIdleUpdate(float _Time)
 {
+	float RadiousX = 620;
+	float RadiousY = 300;
+
+	if (Ph2_Boss->GetTransform()->GetLocalPosition().x <= -620)
+	{
+		RotationCheck = false;
+	}
+
+	if (Ph2_Boss->GetTransform()->GetLocalPosition().x >= 620)
+	{
+		RotationCheck = true;
+	}
+
+	if (RotationCheck == false)
+	{
+		Right_Pos_x += 1;
+
+		float y1 = (RadiousY * RadiousY) - ((RadiousY * RadiousY) * (Right_Pos_x * Right_Pos_x)) / (RadiousX * RadiousX);
+		float y = sqrt(y1);
+
+		Ph2_Boss->GetTransform()->SetLocalPosition({ Right_Pos_x ,y,0 });
+	}
+
+	if (RotationCheck == true)
+	{
+		Right_Pos_x -= 1;
+
+		float y1 = (RadiousY * RadiousY) - ((RadiousY * RadiousY) * (Right_Pos_x * Right_Pos_x)) / (RadiousX * RadiousX);
+		float y = sqrt(y1);
+
+		Ph2_Boss->GetTransform()->SetLocalPosition({ Right_Pos_x ,-y,0 });
+	}
+
+
 }
 
 void Ph2_DogAirpalne::DownIdleUpdate(float _Time)
 {
+
+	float RadiousX = 620;
+	float RadiousY = 300;
+
+	if (Ph2_Boss->GetTransform()->GetLocalPosition().x <= -620)
+	{
+		RotationCheck = false;
+	}
+
+	if (Ph2_Boss->GetTransform()->GetLocalPosition().x >= 620)
+	{
+		RotationCheck = true;
+	}
+
+	if (RotationCheck == false)
+	{
+		Down_Pos_x += 1;
+
+		float y1 = (RadiousY * RadiousY) - ((RadiousY * RadiousY) * (Down_Pos_x * Down_Pos_x)) / (RadiousX * RadiousX);
+		float y = sqrt(y1);
+
+		Ph2_Boss->GetTransform()->SetLocalPosition({ Down_Pos_x ,y,0 });
+	}
+
+	if (RotationCheck == true)
+	{
+		Down_Pos_x -= 1;
+
+		float y1 = (RadiousY * RadiousY) - ((RadiousY * RadiousY) * (Down_Pos_x * Down_Pos_x)) / (RadiousX * RadiousX);
+		float y = sqrt(y1);
+
+		Ph2_Boss->GetTransform()->SetLocalPosition({ Down_Pos_x ,-y,0 });
+	}
+
 }

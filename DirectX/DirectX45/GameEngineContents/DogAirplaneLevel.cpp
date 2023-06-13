@@ -25,6 +25,8 @@ DogAirplaneLevel::~DogAirplaneLevel()
 
 void DogAirplaneLevel::Update(float _DeltaTime)
 {
+	if (Ph3_DogAirplane::ph3_mainBoss != nullptr)
+	{
 		switch (Ph3_DogAirplane::ph3_mainBoss->GetRotationCheck())
 		{
 		case 0:
@@ -36,28 +38,28 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 
 			float test = std::lerp(0, 700, _DeltaTime);
 			float test1 = std::lerp(0, -250, _DeltaTime);
-			float test2 = std::lerp(0,   50, _DeltaTime);
+			float test2 = std::lerp(0, 50, _DeltaTime);
 
-				Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,test1 });
-				Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ test2 , test ,0 });
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,test1 });
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ test2 , test ,0 });
 
-				if (ph3_Dog_Npc::ph3_Npc != nullptr)
-				{
-					ph3_Dog_Npc::ph3_Npc->GetTransform()->SetLocalRotation(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalRotation());
-					ph3_Dog_Npc::ph3_Npc->GetTransform()->SetLocalPosition(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalPosition());
-				}
-				if (DogAirplaneBackground::Background != nullptr)
-				{
-					DogAirplaneBackground::Background->GetTransform()->SetLocalRotation(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalRotation());
-					DogAirplaneBackground::Background->GetTransform()->SetLocalPosition(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalPosition());
-				}
+			if (ph3_Dog_Npc::ph3_Npc != nullptr)
+			{
+				ph3_Dog_Npc::ph3_Npc->GetTransform()->SetLocalRotation(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalRotation());
+				ph3_Dog_Npc::ph3_Npc->GetTransform()->SetLocalPosition(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalPosition());
+			}
+			if (DogAirplaneBackground::Background != nullptr)
+			{
+				DogAirplaneBackground::Background->GetTransform()->SetLocalRotation(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalRotation());
+				DogAirplaneBackground::Background->GetTransform()->SetLocalPosition(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalPosition());
+			}
 
-			
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,test1 });
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ test2,test ,0 });
 
-			
-			
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,test1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ test2,test ,0 });
+
+
+
 		}
 		break;
 		case 1:
@@ -65,35 +67,35 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 			TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
 
 			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179.5f)
-			{	
-				
+			{
+
 				break;
 			}
 
 			float test = std::lerp(0, -700, _DeltaTime);
 			float test1 = std::lerp(0, -250, _DeltaTime);
-			float test2 = std::lerp(0,  50, _DeltaTime);
-
-			
-				Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,test1 });
-				Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ test2,test ,0 });
+			float test2 = std::lerp(0, 50, _DeltaTime);
 
 
-				if (ph3_Dog_Npc::ph3_Npc != nullptr)
-				{
-					ph3_Dog_Npc::ph3_Npc->GetTransform()->SetLocalRotation(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalRotation());
-					ph3_Dog_Npc::ph3_Npc->GetTransform()->SetLocalPosition(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalPosition());
-				}
-
-				if (DogAirplaneBackground::Background != nullptr)
-				{
-					DogAirplaneBackground::Background->GetTransform()->SetLocalRotation(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalRotation());
-					DogAirplaneBackground::Background->GetTransform()->SetLocalPosition(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalPosition());
-				}
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalRotation({ 0,0,test1 });
+			Ph3_DogAirplane::ph3_mainBoss->GetTransform()->AddLocalPosition({ test2,test ,0 });
 
 
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,test1 });
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ test2,test ,0 });
+			if (ph3_Dog_Npc::ph3_Npc != nullptr)
+			{
+				ph3_Dog_Npc::ph3_Npc->GetTransform()->SetLocalRotation(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalRotation());
+				ph3_Dog_Npc::ph3_Npc->GetTransform()->SetLocalPosition(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalPosition());
+			}
+
+			if (DogAirplaneBackground::Background != nullptr)
+			{
+				DogAirplaneBackground::Background->GetTransform()->SetLocalRotation(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalRotation());
+				DogAirplaneBackground::Background->GetTransform()->SetLocalPosition(Ph3_DogAirplane::ph3_mainBoss->GetTransform()->GetLocalPosition());
+			}
+
+
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,test1 });
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ test2,test ,0 });
 		}
 		break;
 		case 2:
@@ -106,7 +108,7 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 
 			float test = std::lerp(0, 700, _DeltaTime);
 			float test1 = std::lerp(0, -250, _DeltaTime);
-     		float test2 = std::lerp(0, -230, _DeltaTime);
+			float test2 = std::lerp(0, -230, _DeltaTime);
 
 
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,test1 });
@@ -154,6 +156,7 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 			break;
 		}
 	}
+}
 	/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
 	{
 		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,0});
@@ -173,28 +176,28 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
 
-	/*{
-		std::shared_ptr<DogAirplane> Object = CreateActor<DogAirplane>();
-	}*/
-	{
-		std::shared_ptr<DogAirplaneBackground> Object = CreateActor<DogAirplaneBackground>();
-	}
-	{
-		std::shared_ptr<NpcAirplane> Object = CreateActor<NpcAirplane>();
-	}
-	{
-		std::shared_ptr<Player> Object = CreateActor<Player>();
-		Object->GetTransform()->AddLocalPosition({ 0,0,0 });
-	}
 	//{
-	//	std::shared_ptr<Ph2_DogAirpalne> Object = CreateActor<Ph2_DogAirpalne>(4);
-	//	//Object->GetTransform()->AddLocalPosition({ -350,0,0 });
+	//	std::shared_ptr<DogAirplane> Object = CreateActor<DogAirplane>();
 	//}
+	//{
+	//	std::shared_ptr<DogAirplaneBackground> Object = CreateActor<DogAirplaneBackground>();
+	//}
+	//{
+	//	std::shared_ptr<NpcAirplane> Object = CreateActor<NpcAirplane>();
+	//}
+	//{
+	//	std::shared_ptr<Player> Object = CreateActor<Player>();
+	//	Object->GetTransform()->AddLocalPosition({ 0,0,0 });
+	//}
+	{
+		std::shared_ptr<Ph2_DogAirpalne> Object = CreateActor<Ph2_DogAirpalne>(4);
+		//Object->GetTransform()->AddLocalPosition({ -350,0,0 });
+	}
 	
 
-	{
-		std::shared_ptr<Ph3_DogAirplane> Object = CreateActor<Ph3_DogAirplane>();		
-	}
+	//{
+	//	std::shared_ptr<Ph3_DogAirplane> Object = CreateActor<Ph3_DogAirplane>();		
+	//}
 	
 	
 		

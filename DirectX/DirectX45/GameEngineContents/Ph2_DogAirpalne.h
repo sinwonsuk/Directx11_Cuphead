@@ -14,7 +14,13 @@ enum class Ph2_DogAirPlaneState
 
 	Attack, 
 	Win,
-	FinishWin
+	FinishWin,
+
+	LeftIdle1,
+	LeftSide,
+    LeftFront,
+	LeftFrontFront,
+
 
 };
 enum class DirectionCheck
@@ -82,6 +88,15 @@ private:
 
 	std::shared_ptr<class GameEngineCollision> Collision;
 
+
+	float Left_Pos_x = -620.0f;
+	float Up_Pos_x = 300.0f;
+	float Right_Pos_x = 620.0f;
+	float Down_Pos_x = -300.0f;
+
+
+	int RotationAnimation = 0;
+	bool RotationCheck = false;
 	int IntroCheck = 0;
 	float4 CurPos = { 0,0 };
 	float Speed = 300;

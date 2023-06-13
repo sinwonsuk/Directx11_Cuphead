@@ -56,7 +56,7 @@ private:
 	int RotationCheck = 0; 
 	float4 CurPos = {0,0};
 	float Speed = 0;
-	float SpeedControll = 0.03;
+	float SpeedControll = 0.03f;
 	float Speed1 = 0;
 };
 

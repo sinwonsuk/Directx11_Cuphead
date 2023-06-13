@@ -121,11 +121,7 @@ void Ph2_DogAirpalne::DownIntroUpdate(float _Time)
 
 void Ph2_DogAirpalne::LeftIdleUpdate(float _Time)
 {
-	
-	
-	float RadiousX = 600;
-	float RadiousY = 300;
-	
+		
 	switch (RotationAnimation)
 	{
 	case 0:
@@ -178,7 +174,8 @@ case 3:
 		break;
 	}
 	
-
+	float RadiousX = 600;
+	float RadiousY = 300;
 
 	if (Ph2_Boss->GetTransform()->GetLocalPosition().x <= -620)
 	{

@@ -6,17 +6,8 @@ enum class Ph2_DogAirPlaneState
 	UpIntro,
 	RightIntro,
 	DownIntro,
-	Rotation,
-	UpIdle,
-	RightIdle,
-	DownIdle,
-	Attack, 
-	Win,
-	FinishWin,
-	LeftIdle1,
-	LeftSide,
-    LeftFront,
-	LeftFrontFront,
+     Rotation,
+	
 
 
 };
@@ -81,14 +72,24 @@ protected:
 	float4 TestColor;
 
 private:
+	int f = 0;
 	Ph2_DogAirPlaneState StateValue = Ph2_DogAirPlaneState::LeftIntro;
 	DirectionCheck directionCheck = DirectionCheck::Left;
-
+	float test1 = 0;
 	std::shared_ptr<class GameEngineSpriteRenderer> Ph2_Boss;
 	std::shared_ptr<class GameEngineSpriteRenderer> jetpack;
-	std::shared_ptr<class GameEngineSpriteRenderer> D_Left_Clouds;
-	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a1;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a2;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a3;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a4;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a5;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a6;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a7;
 
+	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_b;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_c;
+	bool dsda = false;
 
 
 	std::shared_ptr<class GameEngineCollision> Collision;

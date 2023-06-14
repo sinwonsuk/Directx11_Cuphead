@@ -29,15 +29,7 @@ void Ph2_DogAirpalne::ChangeState(Ph2_DogAirPlaneState _State)
 	case Ph2_DogAirPlaneState::Rotation:
 		AnimationCheck("SD_Idle_side");
 		break;
-	case Ph2_DogAirPlaneState::UpIdle:
-		AnimationCheck("ph2_dog_b_intro_transition");
-		break;
-	case Ph2_DogAirPlaneState::RightIdle:
-		AnimationCheck("ph2_dog_c_intro_transition");
-		break;
-	case Ph2_DogAirPlaneState::DownIdle:
-		AnimationCheck("ph2_dog_d_intro_transition");
-		break;
+
 
 	
 	default:
@@ -69,15 +61,7 @@ void Ph2_DogAirpalne::UpdateState(float _Time)
 	case Ph2_DogAirPlaneState::Rotation:
 		RotationUpdate(_Time);
 		break;
-	case Ph2_DogAirPlaneState::UpIdle:
-		UpIdleUpdate(_Time);
-		break;
-	case Ph2_DogAirPlaneState::RightIdle:
-		RightIdleUpdate(_Time);
-		break;
-	case Ph2_DogAirPlaneState::DownIdle:
-		DownIdleUpdate(_Time);
-		break;
+
 	
 	default:
 		break;
@@ -96,11 +80,13 @@ void Ph2_DogAirpalne::LeftIntroUpdate(float _Time)
 	if (Ph2_Boss->GetTransform()->GetLocalPosition().x > -550.0f)
 	{
 		Ph2_Boss->GetTransform()->AddLocalPosition({ -300.0f* _Time,0 });
+		jetpack->GetTransform()->AddLocalPosition({ -300.0f * _Time,0 });
 	}
 
 	Ph2_Boss->GetTransform()->AddLocalPosition({ 300.0f* _Time,0 });
 
-	
+	jetpack->GetTransform()->AddLocalPosition({ 300.0f * _Time,0 });
+
 	if (GetLiveTime() > 2)
 	{
 	
@@ -118,10 +104,11 @@ void Ph2_DogAirpalne::UpIntroUpdate(float _Time)
 	if (Ph2_Boss->GetTransform()->GetLocalPosition().y < 300.0f)
 	{
 		Ph2_Boss->GetTransform()->AddLocalPosition({ 0.0f , 300.0f * _Time,0.0f });
+		jetpack->GetTransform()->AddLocalPosition({ 0.0f , 300.0f * _Time, 0.0f });
 	}
 
 	Ph2_Boss->GetTransform()->AddLocalPosition({ 0.0f , -300.0f * _Time, 0.0f });
-
+	jetpack->GetTransform()->AddLocalPosition({ 0.0f , -300.0f * _Time, 0.0f });
 	
 
 	if (GetLiveTime() > 2)
@@ -140,10 +127,11 @@ void Ph2_DogAirpalne::RightIntroUpdate(float _Time)
 	if (Ph2_Boss->GetTransform()->GetLocalPosition().x < 550.0f)
 	{
 		Ph2_Boss->GetTransform()->AddLocalPosition({ 300.0f * _Time , 0.0f ,0.0f });
+		jetpack->GetTransform()->AddLocalPosition({ 300.0f * _Time , 0, 0.0f });
 	}
 
-
-	Ph2_Boss->GetTransform()->AddLocalPosition({ -300.0f * _Time,  0.0f, 0.0f });
+	jetpack->GetTransform()->AddLocalPosition({ -300.0f * _Time , 0.0f, 0.0f });
+	Ph2_Boss->GetTransform()->AddLocalPosition({- 300.0f * _Time,  0.0f, 0.0f });
 
 	if (GetLiveTime() > 2)
 	{
@@ -162,10 +150,11 @@ void Ph2_DogAirpalne::DownIntroUpdate(float _Time)
 	if (Ph2_Boss->GetTransform()->GetLocalPosition().y > -300.0f)
 	{
 		Ph2_Boss->GetTransform()->AddLocalPosition({ 0.0f , -300.0f * _Time,0.0f });
+		jetpack->GetTransform()->AddLocalPosition({ 0.0f , -300.0f * _Time, 0.0f });
 	}
 
 	Ph2_Boss->GetTransform()->AddLocalPosition({ 0.0f , 300.0f * _Time, 0.0f });
-
+	jetpack->GetTransform()->AddLocalPosition({ 0.0f , 300.0f * _Time, 0.0f });
 
 
 	if (GetLiveTime() > 2)
@@ -183,7 +172,11 @@ void Ph2_DogAirpalne::DownIntroUpdate(float _Time)
 
 void Ph2_DogAirpalne::RotationUpdate(float _Time)
 {
-		
+
+
+	test1 += _Time;
+
+
 	// 타원의 중심
 	float x = 0.0;
 	float y = 0.0;
@@ -192,7 +185,7 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 	double a = 550;
 	double b = 300;
 
-	test += 1.2f * _Time;
+	test += 0.8f * _Time;
 
 	//test += 1* _Time;
 	Pos_x = x + a * cos(test);
@@ -210,6 +203,7 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 	{
 	case 0:
 	{
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x - 40, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
 		if (Pos_x < 525.0f)
 		{
 
@@ -218,11 +212,12 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 			++RotationAnimation;
 
 		}
-		
+
 	}
 	break;
 	case 1:
 	{
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x - 30, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
 		if (Pos_x < 375.0f)
 		{
 
@@ -233,162 +228,176 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 		}
 	}
 	break;
-case 2:
+	case 2:
 	{
-	if (Pos_x < 225.0f)
-	{
-		Ph2_Boss->ChangeAnimation("SD_Idle_front_front");
-		++RotationAnimation;
-	}
-	}
-	break;
-case 3:
-	{
-	if (Pos_x < 75.0f)
-	{
-		Ph2_Boss->ChangeAnimation("SD_Idle_front_Up");
-		++RotationAnimation;
-	}
-		
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x - 20, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x < 225.0f)
+		{
+			Ph2_Boss->ChangeAnimation("SD_Idle_front_front");
+			++RotationAnimation;
+		}
 	}
 	break;
-case 4:
-{
-	if (Pos_x < -75.0f)
+	case 3:
 	{
-		Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
-		Ph2_Boss->ChangeAnimation("SD_Idle_front_front");
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x - 10, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x < 75.0f)
+		{
+			Ph2_Boss->ChangeAnimation("SD_Idle_front_Up");
+			++RotationAnimation;
+		}
 
-		++RotationAnimation;
 	}
-
-}
-break;
-case 5:
-{
-	if (Pos_x < -225.0f)
+	break;
+	case 4:
 	{
-		Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
-		Ph2_Boss->ChangeAnimation("SD_Idle_3_4_front");
-		++RotationAnimation;
-	}
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x < -75.0f)
+		{
+			Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
+			Ph2_Boss->ChangeAnimation("SD_Idle_front_front");
 
-}
-break;
-case 6:
-{
-	if (Pos_x < -375.0f)
+			++RotationAnimation;
+		}
+
+	}
+	break;
+	case 5:
 	{
-		Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
-		Ph2_Boss->ChangeAnimation("SD_Idle_front_side");
-		++RotationAnimation;
-	}
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x + 10, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x < -225.0f)
+		{
+			Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
+			Ph2_Boss->ChangeAnimation("SD_Idle_3_4_front");
+			++RotationAnimation;
+		}
 
-}
-break;
-case 7:
-{
-	if (Pos_x < -525.0f)
+	}
+	break;
+	case 6:
 	{
-		Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
-		Ph2_Boss->ChangeAnimation("SD_Idle_side");
-		++RotationAnimation;
-	}
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x + 20, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x < -375.0f)
+		{
+			Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
+			Ph2_Boss->ChangeAnimation("SD_Idle_front_side");
+			++RotationAnimation;
+		}
 
-}
-break;
-case 8:
-{
-	if (Pos_x > -525.0f)
+	}
+	break;
+	case 7:
 	{
-		Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
-		//Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back_back");
-		Ph2_Boss->ChangeAnimation("SD_Idle_side_back");
-		++RotationAnimation;
-	}
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x + 30, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x < -525.0f)
+		{
+			Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
+			Ph2_Boss->ChangeAnimation("SD_Idle_side");
+			++RotationAnimation;
+		}
 
-}
-break;
-case 9:
-{
-	if (Pos_x > -375.0f)
+	}
+	break;
+	case 8:
 	{
-		Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
-		//Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back");
-		Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back");
-		++RotationAnimation;
-	}
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x + 40, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x > -525.0f)
+		{
+			Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
+			//Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back_back");
+			Ph2_Boss->ChangeAnimation("SD_Idle_side_back");
+			++RotationAnimation;
+		}
 
-}
-break;
-case 10:
-{
-	if (Pos_x > -225.0f)
+	}
+	break;
+	case 9:
 	{
-		Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
-		Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back_back");
-		++RotationAnimation;
-	}
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x + 40, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x > -375.0f)
+		{
+			Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
+			//Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back");
+			Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back");
+			++RotationAnimation;
+		}
 
-}
-break;
-case 11:
-{
-	if (Pos_x > -75.0f)
+	}
+	break;
+	case 10:
 	{
-		Ph2_Boss->GetTransform()->SetLocalRotation({ 0,0,0 });
-		Ph2_Boss->ChangeAnimation("SD_Idle_back");
-		++RotationAnimation;
-	}
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x + 30, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x > -225.0f)
+		{
+			Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
+			Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back_back");
+			++RotationAnimation;
+		}
 
-}
-case 12:
-{
-	if (Pos_x > 75.0f)
+	}
+	break;
+	case 11:
 	{
-		Ph2_Boss->GetTransform()->SetLocalRotation({ 0,0,0 });
-		Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back_back");
-		++RotationAnimation;
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x + 37, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x > -75.0f)
+		{
+			Ph2_Boss->GetTransform()->SetLocalRotation({ 0,0,0 });
+			Ph2_Boss->ChangeAnimation("SD_Idle_back");
+			++RotationAnimation;
+		}
+
 	}
-
-}
-break;
-
-case 13:
-{
-	if (Pos_x > 225.0f)
+	case 12:
 	{
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x + 15, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x > 75.0f)
+		{
+			Ph2_Boss->GetTransform()->SetLocalRotation({ 0,0,0 });
+			Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back_back");
+			++RotationAnimation;
+		}
 
-		Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back");
-		++RotationAnimation;
 	}
+	break;
 
-}
-break;
-
-case 14:
-{
-	if (Pos_x > 375)
+	case 13:
 	{
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x - 20, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x > 225.0f)
+		{
 
-		Ph2_Boss->ChangeAnimation("SD_Idle_side_back");
-		++RotationAnimation;
+			Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back");
+			++RotationAnimation;
+		}
+
 	}
+	break;
 
-}
-break;
-
-case 15:
-{
-	if (Pos_x > 525)
+	case 14:
 	{
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x - 35, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x > 375)
+		{
 
-		Ph2_Boss->ChangeAnimation("SD_Idle_side");
-		RotationAnimation = 0;
+			Ph2_Boss->ChangeAnimation("SD_Idle_side_back");
+			++RotationAnimation;
+		}
+
 	}
+	break;
 
-}
-break;
+	case 15:
+	{
+		jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x - 40, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
+		if (Pos_x > 525)
+		{
+
+			Ph2_Boss->ChangeAnimation("SD_Idle_side");
+			RotationAnimation = 0;
+		}
+
+	}
+	break;
 
 
 
@@ -400,36 +409,76 @@ break;
 		break;
 	}
 
-
-
-	
-
-	
-	// 회전 각도
-	//test += 1* _Time*2;
-
-	// 타원을 출력합니다.
-	
-		// x, y 좌표를 계산합니다.
-//	float x_1 = x + a * cos(90);
-//	float ds = cos(90);
-		
-
-	
-		Ph2_Boss->GetTransform()->SetLocalPosition({ -Pos_x, Pos_y,0 });
+	Ph2_Boss->GetTransform()->SetLocalPosition({ -Pos_x, Pos_y,0 });
 
 	
 
-
-		// 회전 각도를 증가시킵니다.
-		
-	
-		if (test > 90)
+	if (dsda == false)
+	{
+		if (test1 > 0.2)
 		{
-			int a = 0;
+
+			ph2_jetpack_smoke_a->On();
+			ph2_jetpack_smoke_a->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y });
+		}
+		if (test1 > 0.4)
+		{
+
+			ph2_jetpack_smoke_a1->On();
+			ph2_jetpack_smoke_a1->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y });
+		}
+		if (test1 > 0.6)
+		{
+
+			ph2_jetpack_smoke_a2->On();
+			ph2_jetpack_smoke_a2->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y });
+		}
+		if (test1 >0.8)
+		{
+
+			ph2_jetpack_smoke_a3->On();
+			ph2_jetpack_smoke_a3->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y });
+		}
+		if (test1 > 1.0)
+		{
+			ph2_jetpack_smoke_a4->On();
+			dsda = true;
+			ph2_jetpack_smoke_a4->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y });
 		}
 
+	}
 
+
+	if (ph2_jetpack_smoke_a->IsAnimationEnd() )
+	{	
+		ph2_jetpack_smoke_a->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y });
+	}
+	if (ph2_jetpack_smoke_a1->IsAnimationEnd() )
+	{
+		
+		ph2_jetpack_smoke_a1->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y });
+	}
+
+	if (ph2_jetpack_smoke_a2->IsAnimationEnd())
+	{
+	
+		ph2_jetpack_smoke_a2->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y });
+	}
+
+	if (ph2_jetpack_smoke_a3->IsAnimationEnd() )
+	{
+		
+		ph2_jetpack_smoke_a3->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y });
+	}
+
+	if (ph2_jetpack_smoke_a4->IsAnimationEnd())
+	{
+	
+		ph2_jetpack_smoke_a4->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y });
+	}
+	
+
+//	jetpack->GetTransform()->SetLocalRotation({ Ph2_Boss->GetTransform()->GetLocalRotation() });
 
 
 }

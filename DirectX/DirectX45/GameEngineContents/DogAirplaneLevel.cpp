@@ -4,6 +4,7 @@
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCoreWindow.h>
+#include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include "DogAirplane.h"
 #include "Player.h"
 #include "NpcAirplane.h"
@@ -176,28 +177,54 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
 
-	//{
-	//	std::shared_ptr<DogAirplane> Object = CreateActor<DogAirplane>();
-	//}
-	//{
-	//	std::shared_ptr<DogAirplaneBackground> Object = CreateActor<DogAirplaneBackground>();
-	//}
-	//{
-	//	std::shared_ptr<NpcAirplane> Object = CreateActor<NpcAirplane>();
-	//}
-	//{
-	//	std::shared_ptr<Player> Object = CreateActor<Player>();
-	//	Object->GetTransform()->AddLocalPosition({ 0,0,0 });
-	//}
+	/*{
+		std::shared_ptr<DogAirplane> Object = CreateActor<DogAirplane>();
+	}*/
+
 	{
+		std::shared_ptr<DogAirplaneBackground> Object = CreateActor<DogAirplaneBackground>();
+	}
+	{
+		std::shared_ptr<NpcAirplane> Object = CreateActor<NpcAirplane>();
+	}
+	{
+		std::shared_ptr<Player> Object = CreateActor<Player>();
+		Object->GetTransform()->AddLocalPosition({ 0,0,0 });
+	}
+
+
+
+	/*{
 		std::shared_ptr<Ph2_DogAirpalne> Object = CreateActor<Ph2_DogAirpalne>(4);
-		//Object->GetTransform()->AddLocalPosition({ -350,0,0 });
+		Object->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ -700.0f,0.0f,82.0f });
+		Object->ChangeState(Ph2_DogAirPlaneState::LeftIntro); 
 	}
 	
+	{
+		std::shared_ptr<Ph2_DogAirpalne> Object = CreateActor<Ph2_DogAirpalne>(4);
+		Object->ChangeState(Ph2_DogAirPlaneState::UpIntro);
+		Object->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 0.0f,400.0f,82.0f });
+		Object->Get_jetpack()->GetTransform()->AddLocalPosition({ -700.0f,0.0f,82.0f });
+	}
 
-	//{
-	//	std::shared_ptr<Ph3_DogAirplane> Object = CreateActor<Ph3_DogAirplane>();		
-	//}
+	{
+		std::shared_ptr<Ph2_DogAirpalne> Object = CreateActor<Ph2_DogAirpalne>(4);
+		Object->ChangeState(Ph2_DogAirPlaneState::RightIntro);
+		Object->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 700.0f,0.0f,82.0f });
+		Object->Get_jetpack()->GetTransform()->AddLocalPosition({ -700.0f,0.0f,82.0f });
+	}
+
+	{
+		std::shared_ptr<Ph2_DogAirpalne> Object = CreateActor<Ph2_DogAirpalne>(4);
+		Object->ChangeState(Ph2_DogAirPlaneState::DownIntro);
+		Object->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 0.0f,-400.0f,82.0f });
+		Object->Get_jetpack()->GetTransform()->AddLocalPosition({ -700.0f,0.0f,82.0f });
+	}*/
+
+	
+	{
+		std::shared_ptr<Ph3_DogAirplane> Object = CreateActor<Ph3_DogAirplane>();		
+	}
 	
 	
 		

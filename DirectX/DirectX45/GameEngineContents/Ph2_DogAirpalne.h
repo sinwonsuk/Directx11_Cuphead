@@ -6,16 +6,13 @@ enum class Ph2_DogAirPlaneState
 	UpIntro,
 	RightIntro,
 	DownIntro,
-
-	LeftIdle,
+	Rotation,
 	UpIdle,
 	RightIdle,
 	DownIdle,
-
 	Attack, 
 	Win,
 	FinishWin,
-
 	LeftIdle1,
 	LeftSide,
     LeftFront,
@@ -53,14 +50,27 @@ public:
 	void RightIntroUpdate(float _Time);
 	void DownIntroUpdate(float _Time);
 
-	void LeftIdleUpdate(float _Time);
+	void RotationUpdate(float _Time);
 	void UpIdleUpdate(float _Time);
 	void RightIdleUpdate(float _Time);
 	void DownIdleUpdate(float _Time);
 
 
+	std::shared_ptr<class GameEngineSpriteRenderer> Get_Ph2_Boss()
+	{
+		return Ph2_Boss; 
+	}
 
+	std::shared_ptr<class GameEngineSpriteRenderer> Get_jetpack()
+	{
+		return jetpack;
 
+	}
+	Ph2_DogAirPlaneState SetState(Ph2_DogAirPlaneState _StateValue)
+	{
+		StateValue = _StateValue; 
+		return StateValue; 
+	}
 
 
 protected:
@@ -75,12 +85,7 @@ private:
 	DirectionCheck directionCheck = DirectionCheck::Left;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Ph2_Boss;
-	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Front;
-	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Reg;
-	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Spin;
-
-	std::shared_ptr<class GameEngineSpriteRenderer> Npc;
-	std::shared_ptr<class GameEngineSpriteRenderer> C_Left_Clouds;
+	std::shared_ptr<class GameEngineSpriteRenderer> jetpack;
 	std::shared_ptr<class GameEngineSpriteRenderer> D_Left_Clouds;
 	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
 
@@ -94,7 +99,9 @@ private:
 	float Right_Pos_x = 620.0f;
 	float Down_Pos_x = -300.0f;
 
-
+	float Pos_x = 0.0f;
+	float Pos_y = 0.0f;
+	float test = 0;
 	int RotationAnimation = 0;
 	bool RotationCheck = false;
 	int IntroCheck = 0;

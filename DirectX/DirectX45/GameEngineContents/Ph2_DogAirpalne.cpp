@@ -41,12 +41,25 @@ void Ph2_DogAirpalne::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_Idle_3_4_back_back").GetFullPath());
 		
 	
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_Attack_3_4_front").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_Attack_front_front").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_Attack_front_side").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_Attack_side").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_Attack_front").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_Attack_back").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_Attack_side_back").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_Attack_3_4_back").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_Attack_3_4_back_back").GetFullPath());
+
+
+
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph2_jetpack_flame_straight").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph2_jetpack_smoke_a").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph2_jetpack_smoke_b").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph2_jetpack_smoke_c").GetFullPath());
 
-		//GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph2_jetpack_flame_curve").GetFullPath());
+		
 	
 
 
@@ -69,53 +82,44 @@ void Ph2_DogAirpalne::Start()
 	Ph2_Boss->CreateAnimation({ .AnimationName = "ph2_dog_c_intro_transition", .SpriteName = "ph2_dog_c_intro_transition", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	Ph2_Boss->CreateAnimation({ .AnimationName = "ph2_dog_d_intro", .SpriteName = "ph2_dog_d_intro", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true,.FrameIndex = {0,1,2,3,4,3,2,1} });
 
-	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_3_4_front", .SpriteName = "SD_Idle_3_4_front", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true,.FrameIndex = {0,1,2,3,4,3,2,1} });
-	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_front_front", .SpriteName = "SD_Idle_front_front", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
-	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_front_side", .SpriteName = "SD_Idle_front_side", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
-	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_side", .SpriteName = "SD_Idle_side", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
-	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_front_Up", .SpriteName = "SD_Idle_front_Up", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_3_4_front", .SpriteName = "SD_Idle_3_4_front", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true,.FrameIndex = {0,1,2,3,4,3,2,1} });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_front_front", .SpriteName = "SD_Idle_front_front", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_front_side", .SpriteName = "SD_Idle_front_side", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_side", .SpriteName = "SD_Idle_side", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_front_Up", .SpriteName = "SD_Idle_front_Up", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
 
-	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_back", .SpriteName = "SD_Idle_back", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
-	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_side_back", .SpriteName = "SD_Idle_side_back", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
-	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_3_4_back", .SpriteName = "SD_Idle_3_4_back", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
-	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_3_4_back_back", .SpriteName = "SD_Idle_3_4_back_back", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_back", .SpriteName = "SD_Idle_back", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_side_back", .SpriteName = "SD_Idle_side_back", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_3_4_back", .SpriteName = "SD_Idle_3_4_back", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Idle_3_4_back_back", .SpriteName = "SD_Idle_3_4_back_back", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, .FrameIndex = {0,1,2,3,4,3,2,1} });
 	
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_3_4_front", .SpriteName = "SD_Attack_3_4_front", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true, });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_front_front", .SpriteName = "SD_Attack_front_front", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true,  });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_front_side", .SpriteName = "SD_Attack_front_side", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true,  });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_side", .SpriteName = "SD_Attack_side", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true, });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_front", .SpriteName = "SD_Attack_front", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true,  });
+
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_back", .SpriteName = "SD_Attack_back", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true,  });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_side_back", .SpriteName = "SD_Attack_side_back", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true, });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_3_4_back", .SpriteName = "SD_Attack_3_4_back", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true,  });
+	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_3_4_back_back", .SpriteName = "SD_Attack_3_4_back_back", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true  });
+
+
 	Ph2_Boss->ChangeAnimation("ph2_dog_a_intro");
 
-	ph2_jetpack_smoke_a = CreateComponent<GameEngineSpriteRenderer>();
-	ph2_jetpack_smoke_a->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_a", .SpriteName = "ph2_jetpack_smoke_a", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
-	ph2_jetpack_smoke_a->ChangeAnimation("ph2_jetpack_smoke_a");
-	ph2_jetpack_smoke_a->Off();
+	for (size_t i = 0; i < 20; i++)
+	{
+		
+		ph2_jetpack_smoke_a1 = CreateComponent<GameEngineSpriteRenderer>();
+		ph2_jetpack_smoke_a1->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_a", .SpriteName = "ph2_jetpack_smoke_a", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+		ph2_jetpack_smoke_a1->ChangeAnimation("ph2_jetpack_smoke_a");
+		ph2_jetpack_smoke_a1->SetScaleRatio(1.2f);
+		ph2_jetpack_smoke_a1->Off();
 
-	ph2_jetpack_smoke_a1 = CreateComponent<GameEngineSpriteRenderer>();
-	ph2_jetpack_smoke_a1->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_a", .SpriteName = "ph2_jetpack_smoke_a", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
-    ph2_jetpack_smoke_a1->ChangeAnimation("ph2_jetpack_smoke_a");
-	ph2_jetpack_smoke_a1->Off();
+		ph2_jetpack_smoke_a.push_back(ph2_jetpack_smoke_a1);
+	}
 
-
-	ph2_jetpack_smoke_a2 = CreateComponent<GameEngineSpriteRenderer>();
-	ph2_jetpack_smoke_a2->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_a", .SpriteName = "ph2_jetpack_smoke_a", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
-	ph2_jetpack_smoke_a2->ChangeAnimation("ph2_jetpack_smoke_a");
-	ph2_jetpack_smoke_a2->Off();
-
-
-	ph2_jetpack_smoke_a3 = CreateComponent<GameEngineSpriteRenderer>();
-	ph2_jetpack_smoke_a3->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_a", .SpriteName = "ph2_jetpack_smoke_a", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
-	ph2_jetpack_smoke_a3->ChangeAnimation("ph2_jetpack_smoke_a");
-	ph2_jetpack_smoke_a3->Off();
-
-
-	ph2_jetpack_smoke_a4 = CreateComponent<GameEngineSpriteRenderer>();
-	ph2_jetpack_smoke_a4->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_a", .SpriteName = "ph2_jetpack_smoke_a", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
-	ph2_jetpack_smoke_a4->ChangeAnimation("ph2_jetpack_smoke_a");
-	ph2_jetpack_smoke_a4->Off();
-
-
-	ph2_jetpack_smoke_a5 = CreateComponent<GameEngineSpriteRenderer>();
-	ph2_jetpack_smoke_a5->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_a", .SpriteName = "ph2_jetpack_smoke_a", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
-	ph2_jetpack_smoke_a5->ChangeAnimation("ph2_jetpack_smoke_a");
-	ph2_jetpack_smoke_a5->Off();
-
+	
 
 	ph2_jetpack_smoke_b = CreateComponent<GameEngineSpriteRenderer>();
 	ph2_jetpack_smoke_b->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_b", .SpriteName = "ph2_jetpack_smoke_b", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });

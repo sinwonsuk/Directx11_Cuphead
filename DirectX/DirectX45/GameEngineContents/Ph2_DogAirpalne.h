@@ -7,7 +7,7 @@ enum class Ph2_DogAirPlaneState
 	RightIntro,
 	DownIntro,
      Rotation,
-	
+	Attack,
 
 
 };
@@ -45,6 +45,7 @@ public:
 	void UpIdleUpdate(float _Time);
 	void RightIdleUpdate(float _Time);
 	void DownIdleUpdate(float _Time);
+	void AttackUpdate(float _Time);
 
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Get_Ph2_Boss()
@@ -72,29 +73,25 @@ protected:
 	float4 TestColor;
 
 private:
-	int f = 0;
+	
 	Ph2_DogAirPlaneState StateValue = Ph2_DogAirPlaneState::LeftIntro;
 	DirectionCheck directionCheck = DirectionCheck::Left;
-	float test1 = 0;
+	
 	std::shared_ptr<class GameEngineSpriteRenderer> Ph2_Boss;
 	std::shared_ptr<class GameEngineSpriteRenderer> jetpack;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a;
+	
 	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a1;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a2;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a3;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a4;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a5;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a6;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a7;
+	
 
 	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_b;
 	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_c;
-	bool dsda = false;
 
-
+	
+	std::vector<std::shared_ptr<class GameEngineSpriteRenderer>> ph2_jetpack_smoke_a;
 	std::shared_ptr<class GameEngineCollision> Collision;
 
 
+	float test1 = 0;
 	float Left_Pos_x = -620.0f;
 	float Up_Pos_x = 300.0f;
 	float Right_Pos_x = 620.0f;
@@ -103,12 +100,16 @@ private:
 	float Pos_x = 0.0f;
 	float Pos_y = 0.0f;
 	float test = 0;
+
 	int RotationAnimation = 0;
-	bool RotationCheck = false;
 	int IntroCheck = 0;
-	float4 CurPos = { 0,0 };
-	float Speed = 300;
-	float4 SpeedControll = {0,0};
-	float Speed1 = 0;
+	int f = 0;
+
+	bool AttackCheck = true;
+	bool dsda = false;
+	bool RotationCheck = false;
+	
+	
+
 };
 

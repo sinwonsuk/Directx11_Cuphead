@@ -55,6 +55,7 @@
     <ClInclude Include="ph3_Laser.h" />
     <ClInclude Include="ph3_Dog_Npc.h" />
     <ClInclude Include="ph3_food_bowl.h" />
+    <ClInclude Include="ph2_Boss_Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -132,6 +133,7 @@
     <ClCompile Include="ph3_Laser.cpp" />
     <ClCompile Include="ph3_Dog_Npc.cpp" />
     <ClCompile Include="ph3_food_bowl.cpp" />
+    <ClCompile Include="ph2_Boss_Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

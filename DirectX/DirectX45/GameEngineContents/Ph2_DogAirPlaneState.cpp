@@ -2,7 +2,8 @@
 #include "Ph2_DogAirpalne.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
-
+#include "ph2_Boss_Weapon.h"
+#include <GameEngineCore/GameEngineLevel.h>
 
 void Ph2_DogAirpalne::ChangeState(Ph2_DogAirPlaneState _State)
 {
@@ -94,6 +95,7 @@ void Ph2_DogAirpalne::LeftIntroUpdate(float _Time)
 	if (GetLiveTime() > 2)
 	{
 		ResetLiveTime();
+		RandomAttack = GameEngineRandom().MainRandom.RandomFloat(0.5f, 6.0f);
 		ChangeState(Ph2_DogAirPlaneState::Rotation);
 		return;
 	}
@@ -121,6 +123,7 @@ void Ph2_DogAirpalne::UpIntroUpdate(float _Time)
 		ResetLiveTime();
 		test = 1.5f;
 		RotationAnimation = 3;
+		RandomAttack = GameEngineRandom().MainRandom.RandomFloat(0.5f, 6.0f);
 		ChangeState(Ph2_DogAirPlaneState::Rotation);
 		return;
 	}
@@ -143,6 +146,7 @@ void Ph2_DogAirpalne::RightIntroUpdate(float _Time)
 		ResetLiveTime();
 		test = 3.1f;
 		RotationAnimation = 7;
+		RandomAttack = GameEngineRandom().MainRandom.RandomFloat(0.5f, 6.0f);
 		ChangeState(Ph2_DogAirPlaneState::Rotation);
 		return;
 	}
@@ -168,9 +172,11 @@ void Ph2_DogAirpalne::DownIntroUpdate(float _Time)
 		test = 4.7f;
 		RotationAnimation = 11;
 		Ph2_Boss->GetTransform()->SetLocalRotation({ 0,0,0 });
+		RandomAttack = GameEngineRandom().MainRandom.RandomFloat(0.5f, 7.0f);
 		ChangeState(Ph2_DogAirPlaneState::Rotation);
 		return;
 	}
+	
 
 }
 
@@ -571,13 +577,42 @@ void Ph2_DogAirpalne::AttackUpdate(float _Time)
 
 		}
 	}
+	if (AttackCheck == false && Ph2_Boss->GetCurrentFrame() == 2)
+	{
+		
+		if (WeaponCheck == false)
+		{
+			std::shared_ptr<ph2_Boss_Weapon> Object = GetLevel()->CreateActor<ph2_Boss_Weapon>();
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x,Ph2_Boss->GetTransform()->GetLocalPosition().y,-1.0f });
+			WeaponCheck = true;
+		}
+
+		Attack_Effect->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x,Ph2_Boss->GetTransform()->GetLocalPosition().y,-1.0f });
+		Attack_Effect->On();
+	}
+	
+	
+	
+
+
+
+
+	if (Attack_Effect->IsAnimationEnd())
+	{
+		Attack_Effect->Off();
+	}
+
+
 
 	if (AttackCheck == false)
 	{
 		if (Ph2_Boss->IsAnimationEnd())
 		{
+			
 			ResetLiveTime();
+			WeaponCheck = false;
 			AttackCheck = true;
+			RandomAttack = GameEngineRandom().MainRandom.RandomFloat(0.5f, 6.0f);
 			ChangeState(Ph2_DogAirPlaneState::Rotation);
 			return;
 		}
@@ -719,9 +754,8 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 	Pos_x = x + a * cos(test);
 	Pos_y = y + b * sin(test);
 
-	
 
-	
+
 
 		switch (RotationAnimation)
 		{
@@ -743,11 +777,8 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 			jetpack->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x - 30, Ph2_Boss->GetTransform()->GetLocalPosition().y - 60,0 });
 			if (Pos_x < 375.0f)
 			{
-
 				Ph2_Boss->ChangeAnimation("SD_Idle_3_4_front");
-
 				++RotationAnimation;
-
 			}
 		}
 		break;
@@ -779,7 +810,6 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 			{
 				Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
 				Ph2_Boss->ChangeAnimation("SD_Idle_front_front");
-
 				++RotationAnimation;
 			}
 
@@ -827,7 +857,6 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 			if (Pos_x > -525.0f)
 			{
 				Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
-				//Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back_back");
 				Ph2_Boss->ChangeAnimation("SD_Idle_side_back");
 				++RotationAnimation;
 			}
@@ -840,7 +869,6 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 			if (Pos_x > -375.0f)
 			{
 				Ph2_Boss->GetTransform()->SetLocalRotation({ 0,180.0f,0 });
-				//Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back");
 				Ph2_Boss->ChangeAnimation("SD_Idle_3_4_back");
 				++RotationAnimation;
 			}
@@ -921,13 +949,6 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 
 		}
 		break;
-
-
-
-
-
-
-
 		default:
 			break;
 		}
@@ -1093,18 +1114,25 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 		}
 	}
 
-	if (GetLiveTime() > 1.5)
+	
+
+	if (Attack_Effect->IsAnimationEnd())
+	{
+		Attack_Effect->Off();
+	}
+	
+
+	if (GetLiveTime() > RandomAttack)
 	{
 		if (Ph2_Boss->IsAnimationEnd())
 		{
 			ResetLiveTime();
+		
+			Attack_Effect->ChangeAnimation("SD_bow_big_spark");
+
 			ChangeState(Ph2_DogAirPlaneState::Attack);
 			return;
 		}
-
-
-		
-	
 	}
 
 

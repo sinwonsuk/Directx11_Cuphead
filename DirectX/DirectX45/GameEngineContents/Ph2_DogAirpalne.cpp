@@ -59,7 +59,7 @@ void Ph2_DogAirpalne::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph2_jetpack_smoke_b").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph2_jetpack_smoke_c").GetFullPath());
 
-		
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_bow_big_spark").GetFullPath());
 	
 
 
@@ -121,17 +121,13 @@ void Ph2_DogAirpalne::Start()
 
 	
 
-	ph2_jetpack_smoke_b = CreateComponent<GameEngineSpriteRenderer>();
-	ph2_jetpack_smoke_b->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_b", .SpriteName = "ph2_jetpack_smoke_b", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
-	ph2_jetpack_smoke_b->ChangeAnimation("ph2_jetpack_smoke_b");
-	ph2_jetpack_smoke_b->On();
+	Attack_Effect = CreateComponent<GameEngineSpriteRenderer>();
+	Attack_Effect->CreateAnimation({ .AnimationName = "SD_bow_big_spark", .SpriteName = "SD_bow_big_spark", .FrameInter = 0.07f,.Loop = false, .ScaleToTexture = true });
+	Attack_Effect->ChangeAnimation("SD_bow_big_spark");
+	Attack_Effect->Off();
 	
 
-	ph2_jetpack_smoke_c = CreateComponent<GameEngineSpriteRenderer>();
-	ph2_jetpack_smoke_c->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_c", .SpriteName = "ph2_jetpack_smoke_c", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
-	ph2_jetpack_smoke_c->ChangeAnimation("ph2_jetpack_smoke_c");
-	ph2_jetpack_smoke_c->On();
-
+	
 
 }
 

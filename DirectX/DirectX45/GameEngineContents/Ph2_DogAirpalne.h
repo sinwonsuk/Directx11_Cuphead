@@ -84,12 +84,13 @@ private:
 	
 
 	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_b;
-	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_c;
+	std::shared_ptr<class GameEngineSpriteRenderer> Attack_Effect;
 
 	
 	std::vector<std::shared_ptr<class GameEngineSpriteRenderer>> ph2_jetpack_smoke_a;
 	std::shared_ptr<class GameEngineCollision> Collision;
 
+	float RandomAttack = 0;
 
 	float test1 = 0;
 	float Left_Pos_x = -620.0f;
@@ -100,6 +101,7 @@ private:
 	float Pos_x = 0.0f;
 	float Pos_y = 0.0f;
 	float test = 0;
+	bool WeaponCheck = false;
 
 	int RotationAnimation = 0;
 	int IntroCheck = 0;

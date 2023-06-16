@@ -177,13 +177,17 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
 
-	{
+	/*{
 		std::shared_ptr<DogAirplane> Object = CreateActor<DogAirplane>();
-	}
+	}*/
 
 	{
 		std::shared_ptr<DogAirplaneBackground> Object = CreateActor<DogAirplaneBackground>();
 	}
+
+
+
+
 	{
 		std::shared_ptr<NpcAirplane> Object = CreateActor<NpcAirplane>();
 	}
@@ -226,12 +230,12 @@ void DogAirplaneLevel::Start()
 	}
 
 	
-	{
+	/*{
 		std::shared_ptr<Ph3_DogAirplane> Object = CreateActor<Ph3_DogAirplane>();		
 	}
 	
 	
-		
+		*/
 	
 }
 

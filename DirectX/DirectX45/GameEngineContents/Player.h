@@ -94,7 +94,10 @@ public:
 		Gravity = _Gravity;
 		return Gravity;
 	}
-
+	std::shared_ptr<class GameEngineSpriteRenderer> GetPlayer()
+	{
+		return Render0;
+	}
 
 protected:
 	void Start();

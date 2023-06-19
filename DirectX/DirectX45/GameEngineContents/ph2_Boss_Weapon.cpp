@@ -58,8 +58,8 @@ void ph2_Boss_Weapon::Start()
 
 void ph2_Boss_Weapon::Update(float _Delta)
 {
-	TransformData date = Player::MainPlayer->GetTransform()->GetTransDataRef();
-	TransformData date1 = Bullet_First->GetTransform()->GetTransDataRef();
+	/*TransformData date = Player::MainPlayer->GetTransform()->GetTransDataRef();
+	TransformData date1 = Bullet_First->GetTransform()->GetTransDataRef();*/
 
 	Bullet->GetTransform()->SetLocalPosition({ Bullet_First->GetTransform()->GetLocalPosition() });
 
@@ -77,6 +77,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	if (GetLiveTime() > 0.2)
 	{
 		Bullet_First->GetTransform()->AddLocalPosition({ MoveDir*2 });
+
 	}
 
 
@@ -92,10 +93,12 @@ void ph2_Boss_Weapon::Update(float _Delta)
 		}
 	
 
-		if (Bullet_First->IsAnimationEnd())
+		if (Bullet_First->IsAnimationEnd() && BulletCheck ==false)
 		{
 			Bullet_First->Off();
+			Bullet->ChangeAnimation("SD_bow");
 			Bullet->On();
+			BulletCheck = true;
 		}
 
 		
@@ -103,39 +106,227 @@ void ph2_Boss_Weapon::Update(float _Delta)
 		break;
 	case 1:
 	{
-		Bullet_First->ChangeAnimation("SD_wow_First");
 
-		if (Bullet_First->IsAnimationEnd())
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_wow_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
+
+
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
 		{
 			Bullet_First->Off();
 			Bullet->ChangeAnimation("SD_wow");
+			Bullet->On();
+			BulletCheck = true;
 		}
 	}
 		break;
 
 	case 2:
 	{
-		Bullet_First->ChangeAnimation("SD_bow_pink_First");
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_bow_pink_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
 
-		if (Bullet_First->IsAnimationEnd())
+
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
 		{
 			Bullet_First->Off();
 			Bullet->ChangeAnimation("SD_bow_pink");
+			Bullet->On();
+			BulletCheck = true;
 		}
 	}
 		break;
 	case 3:
 	{
-		Bullet_First->ChangeAnimation("SD_wow_pink_First");
-
-		if (Bullet_First->IsAnimationEnd())
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_wow_pink_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
 		{
 			Bullet_First->Off();
 			Bullet->ChangeAnimation("SD_wow_pink");
+			Bullet->On();
+			BulletCheck = true;
+
 		}
+
 	}
 		break;
+	case 4:
+	{
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_bow_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
 
+
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
+		{
+			Bullet_First->Off();
+			Bullet->ChangeAnimation("SD_bow");
+			Bullet->On();
+			BulletCheck = true;
+		}
+
+
+	}
+	break;
+	case 5:
+	{
+
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_wow_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
+
+
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
+		{
+			Bullet_First->Off();
+			Bullet->ChangeAnimation("SD_wow");
+			Bullet->On();
+			BulletCheck = true;
+		}
+	}
+	break;
+	case 6:
+	{
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_bow_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
+
+
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
+		{
+			Bullet_First->Off();
+			Bullet->ChangeAnimation("SD_bow");
+			Bullet->On();
+			BulletCheck = true;
+		}
+
+
+	}
+	break;
+	case 7:
+	{
+
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_wow_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
+
+
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
+		{
+			Bullet_First->Off();
+			Bullet->ChangeAnimation("SD_wow");
+			Bullet->On();
+			BulletCheck = true;
+		}
+	}
+	break;
+	case 8:
+	{
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_bow_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
+
+
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
+		{
+			Bullet_First->Off();
+			Bullet->ChangeAnimation("SD_bow");
+			Bullet->On();
+			BulletCheck = true;
+		}
+
+
+	}
+	break;
+	case 9:
+	{
+
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_wow_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
+
+
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
+		{
+			Bullet_First->Off();
+			Bullet->ChangeAnimation("SD_wow");
+			Bullet->On();
+			BulletCheck = true;
+		}
+	}
+	break;
+	case 10:
+	{
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_bow_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
+
+
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
+		{
+			Bullet_First->Off();
+			Bullet->ChangeAnimation("SD_bow");
+			Bullet->On();
+			BulletCheck = true;
+		}
+
+
+	}
+	break;
+	case 11:
+	{
+
+		if (AnimationCheck == false)
+		{
+			Bullet_First->ChangeAnimation("SD_wow_First");
+			Bullet_First->On();
+			AnimationCheck = true;
+		}
+
+
+		if (Bullet_First->IsAnimationEnd() && BulletCheck == false)
+		{
+			Bullet_First->Off();
+			Bullet->ChangeAnimation("SD_wow");
+			Bullet->On();
+			BulletCheck = true;
+		}
+	}
+	break;
 	default:
 		break;
 	}

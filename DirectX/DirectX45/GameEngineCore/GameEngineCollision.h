@@ -53,7 +53,7 @@ protected:
 	void Start() override;
 
 private:
-	ColType Type = ColType::SPHERE3D;
+	ColType Type = ColType::OBBBOX2D;
 
 //#ifdef _DEBUG
 	GameEngineCamera* DebugCamera = nullptr;

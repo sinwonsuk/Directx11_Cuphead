@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include "DogAirPlaneManager.h"
 enum class NpcAirplaneState
 {
 	Intro,
@@ -29,13 +30,17 @@ public:
 	void Intro2Update(float _Time);
 	void IntroUpdate(float _Time);
 	void IdleUpdate(float _Time); 
+
+	void collision(float _Delta);
+
 protected:
 	void Start();
 	void Update(float _Delta) override;
 	void Render(float _Delta) override;
 
 	float4 TestColor;
-
+	float4 test = {0,0};
+	bool axccs = false;
 private:
 	NpcAirplaneState StateValue = NpcAirplaneState::Intro;
 
@@ -51,6 +56,12 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
 	std::shared_ptr<class GameEngineCollision> Collision;
 	bool ph3_main_boss_Check =false;
+
+	bool fdasd = false;
+
+	
+
+	float Player_Pos_Y_Check = -150.0f;
 
 	int IntroCheck = 0;
 	int RotationCheck = 0; 

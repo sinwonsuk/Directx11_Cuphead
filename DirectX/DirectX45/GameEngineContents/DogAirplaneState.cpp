@@ -7,6 +7,8 @@
 #include "DogAirplane.h"
 #include "BoneWeapon.h"
 #include "dogfight_catshoot_yarnball.h"
+#include <GameEngineCore/GameEngineCollision.h>
+
 void DogAirplane::ChangeState(DogAirplaneState _State)
 {
 	DogAirplaneState NextState = _State;
@@ -88,12 +90,15 @@ void DogAirplane::UpdateState(float _Time)
 	case DogAirplaneState::Ph1_Finish:
 		Ph1FinishUpdate(_Time);
 		break;
+	case DogAirplaneState::Unload:
+		UnloadUpdate(_Time);
+		break;
 	default:
 		break;
 	}
 
 
-
+	
 }
 
 void DogAirplane::BossIdleUpdate(float _Time)
@@ -198,19 +203,19 @@ void DogAirplane::BossIntro2Update(float _Time)
 	Airplane_Wing->GetTransform()->AddLocalPosition({ float4::Down * DownSpeed * _Time });
 
 
-	if (AirplaneSpin->GetTransform()->GetLocalPosition().y < 180 && test == false)
+	if (AirplaneSpin->GetTransform()->GetLocalPosition().y < 180 && Intro_Jump_Check == false)
 	{
-		test = true;
+		Intro_Jump_Check = true;
 	}
 
-	if (test == true)
+	if (Intro_Jump_Check == true)
 	{
 		DownSpeed -= 30;
 	}
-	if (AirplaneSpin->GetTransform()->GetLocalPosition().y > 180 && test == true)
+	if (AirplaneSpin->GetTransform()->GetLocalPosition().y > 180 && Intro_Jump_Check == true)
 	{
 		DownSpeed = 600;
-		test = false;
+		Intro_Jump_Check = false;
 		ChangeState(DogAirplaneState::bulldog_Idle);
 		return; 
 	}
@@ -235,20 +240,20 @@ void DogAirplane::BossJumpReverseUpdate(float _Time)
 	Airplane_Wing->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
 
 
-	if (bulldogIdle->GetCurrentFrame() > 4 && test1 == false)
+	if (bulldogIdle->GetCurrentFrame() > 4 && JumpCheck == false)
 	{
 		Speed = -200;
-		test1 = true;
+		JumpCheck = true;
 	}
 
-	if (AirplaneSpin->GetTransform()->GetLocalPosition().y > CurPos.y && test1 == true)
+	if (AirplaneSpin->GetTransform()->GetLocalPosition().y > CurPos.y && JumpCheck == true)
 	{
 		Speed = 0;
 	}
 
 	if (bulldogIdle->IsAnimationEnd())
 	{
-		test1 = false;
+		JumpCheck = false;
 		Speed = 75;
 		bulldogIdle->GetTransform()->SetLocalPosition({ AirplaneSpin->GetTransform()->GetLocalPosition().x,AirplaneSpin->GetTransform()->GetLocalPosition().y + 50,81 });
 		ChangeState(DogAirplaneState::bulldog_Idle);
@@ -261,11 +266,48 @@ void DogAirplane::BossJumpReverseUpdate(float _Time)
 
 void DogAirplane::BossAttackPase1Update(float _Time)
 {
+
+	CollisionMove -= 350.0f * _Time;
+
+	if (bulldogIdle->GetCurrentFrame() > 36)
+	{
+		if (bulldogIdle->GetCurrentFrame() < 43)
+		{
+			CollisionMove += 350.0f * _Time;
+		}
+	}
+
+	if (bulldogIdle->GetCurrentFrame() > 47)
+	{
+		if (bulldogIdle->GetCurrentFrame() < 55)
+		{
+			CollisionMove += 350.0f * _Time;
+		}
+	}
+
+	if (bulldogIdle->GetCurrentFrame() > 64)
+	{
+		if (bulldogIdle->GetCurrentFrame() < 82)
+		{
+			CollisionMove += 350.0f * _Time;
+		}
+	}
+
+
+
+
+
+
+
 	if (Pase1_Attack < 0)
 	{
 		
-		int PinkBone = GameEngineRandom::MainRandom.RandomInt(0, 2);
 
+		Collision->GetTransform()->SetLocalPosition({-600,CollisionMove });
+
+
+
+	
 		if (bulldogIdle->GetCurrentFrame() == 41 && BoneCheck == 0)
 		{
 			
@@ -297,7 +339,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 			{
 				Object->GetBullet()->ChangeAnimation("PinkBone");
 			}
-			Object->SetTime(0.3);
+			Object->SetTime(0.3f);
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 190 });
 			Object->SetCheck(0);
 			BoneCheck = 0;
@@ -305,11 +347,17 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 	}
 	else if (Pase1_Attack > 0)
 	{
-		int PinkBone = GameEngineRandom::MainRandom.RandomInt(0, 2);
+		Collision->GetTransform()->SetLocalPosition({ 600,CollisionMove });
+
+
+
+		
 
 		if (bulldogIdle->GetCurrentFrame() == 41 && BoneCheck == 0)
 		{
 			++BoneCheck;
+
+
 			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
 			if (PinkBone == 0)
 			{
@@ -342,7 +390,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 				Object->GetBullet()->ChangeAnimation("PinkBone");
 
 			}
-			Object->SetTime(0.3);
+			Object->SetTime(0.3f);
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 190 });
 			Object->SetCheck(1);
 			BoneCheck = 0;
@@ -358,6 +406,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 
 		bulldogIdle->GetTransform()->SetLocalPosition({ AirplaneSpin->GetTransform()->GetLocalPosition().x,AirplaneSpin->GetTransform()->GetLocalPosition().y+50,84 });
 		Speed = 100;
+		CollisionMove = 640;
 		ChangeState(DogAirplaneState::bulldog_Jump_Reverse);	
 		return; 
 	}
@@ -381,25 +430,26 @@ void DogAirplane::BossJumpUpdate(float _Time)
 	Airplane_Wing->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
 
 	
-	if (bulldogIdle->GetCurrentFrame() > 4 && test1 ==false)
+	if (bulldogIdle->GetCurrentFrame() > 4 && JumpCheck ==false)
 	{
 		Speed = -200;
-		test1 = true;
+		JumpCheck = true;
 	}
 	
-	if (AirplaneSpin->GetTransform()->GetLocalPosition().y > CurPos.y && test1 ==true)
+	if (AirplaneSpin->GetTransform()->GetLocalPosition().y > CurPos.y && JumpCheck ==true)
 	{		
 		Speed = 0;
 	}
 	if (bulldogIdle->IsAnimationEnd())
 	{
 		bulldogAttackPase1 = GameEngineRandom::MainRandom.RandomInt(0, 1);
+		//hfghgfg
 	}
 
 
 	if (bulldogIdle->IsAnimationEnd() && bulldogAttackPase1 ==0 )
 	{
-		test1 = false;
+		JumpCheck = false;
 		Speed = 75;
 		if (Pase1_Attack > 0)
 		{
@@ -413,14 +463,15 @@ void DogAirplane::BossJumpUpdate(float _Time)
 			bulldogIdle->GetTransform()->SetLocalRotation({ 0,180,0 });
 		}
 		bulldogIdle->GetTransform()->SetLocalPosition({ Pase1_Attack,0,-100 });
-		
+
+		PinkBone = GameEngineRandom::MainRandom.RandomInt(0, 2);
 		ChangeState(DogAirplaneState::BossAttackPase1);
 		return; 
 	}
 
 	if (bulldogIdle->IsAnimationEnd() && bulldogAttackPase1 == 1)
 	{
-		test1 = false;
+		JumpCheck = false;
 		Speed = 75;
 		if (Pase1_Attack < 0)
 		{
@@ -444,10 +495,13 @@ void DogAirplane::Ph1FinishUpdate(float _Time)
 {
 	if (Hp < 0)
 	{
+		Collision->Death(); 
 	
 		if (testImage1->IsAnimationEnd())
 		{
 			testImage1->Off();
+			ChangeState(DogAirplaneState::Unload);
+			return;
 		}
 
 		if (Buldog_Death_Intro->IsAnimationEnd())
@@ -456,13 +510,117 @@ void DogAirplane::Ph1FinishUpdate(float _Time)
 			testImage3->Off();
 		}
 		if (testImage1->GetCurrentFrame() == 25)
-		{
-			
+		{			
 			Ph1_Buldog_Death->On();
 		}
-		return;
+
+		if (Ph1_Buldog_Death->IsAnimationEnd())
+		{
+			Ph1_Buldog_Death->Off(); 
+			//ChangeState(DogAirplaneState::Unload);
+			return; 
+		}
+
 	}
 }
+void DogAirplane::UnloadUpdate(float _Time)
+{
+	
+	switch (unloadCheck)
+	{
+	case 0:
+	{
+		Finish = true;
+
+		GameEngineSprite::UnLoad("ph1_dogcopter_intro");
+		GameEngineSprite::UnLoad("ph1_bulldog_intro");
+		GameEngineSprite::UnLoad("DogAirplane");
+		++unloadCheck;
+	}
+	break;
+
+	case 1:
+	{
+		GameEngineSprite::UnLoad("bulldog_Left");
+		GameEngineSprite::UnLoad("bulldog_Right");
+		GameEngineSprite::UnLoad("bulldog_Jump");
+		++unloadCheck;
+	}
+	break;
+
+	case 2:
+	{
+		GameEngineSprite::UnLoad("bulldog_Attack_Pase1");
+		GameEngineSprite::UnLoad("bulldog_Jump_Reverse");
+		GameEngineSprite::UnLoad("bulldog_plane_flap_left_a");
+		++unloadCheck;
+	}
+	break;
+
+	case 3:
+	{
+		GameEngineSprite::UnLoad("bulldog_plane_flap_left_b");
+		GameEngineSprite::UnLoad("bulldog_plane_flap_left_c");
+		GameEngineSprite::UnLoad("bulldog_plane_flap_left_d");
+		++unloadCheck;
+	}
+	break;
+
+	case 4:
+	{
+		GameEngineSprite::UnLoad("ph1_dog_a_ball_toss");
+		GameEngineSprite::UnLoad("ph1_dog_b_ball_toss");
+		GameEngineSprite::UnLoad("bulldog_plane_wing");
+		++unloadCheck;
+	}
+	break;
+
+	case 5:
+	{
+		GameEngineSprite::UnLoad("AirPlane_Tail");
+		GameEngineSprite::UnLoad("bulldog_Attack2_Pase1_intro");
+		GameEngineSprite::UnLoad("bulldog_Attack2_Pase1_Attack");
+		++unloadCheck;
+	}
+	break;
+
+	case 6:
+	{
+		GameEngineSprite::UnLoad("ph1_dogcopter_hydrant");
+		GameEngineSprite::UnLoad("Ph1_Buldog_Death");
+		GameEngineSprite::UnLoad("Ph1_Buldog_Death_intro");
+		++unloadCheck;
+	}
+	break;
+
+	case 7:
+	{
+		GameEngineSprite::UnLoad("acada");
+		GameEngineSprite::UnLoad("Ph1_Death_Front");
+		++unloadCheck;
+
+	}
+	break;
+	default:
+		break;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+}
+
+
 void DogAirplane::BossAttackPase2IntroUpdate(float _Time)
 {
 	if (bulldogIdle->IsAnimationEnd())
@@ -476,7 +634,7 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 {
 	if (Pase1_Attack < 0)
 	{
-		if (YarnballCheck == 0 && bulldogIdle->GetCurrentFrame() == 19)
+		if (YarnballCheck == 0 && bulldogIdle->GetCurrentFrame() == 16)
 		{
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
@@ -484,7 +642,7 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 			Object->SetCheck(0);
 			Object->GetBullet()->ChangeAnimation("dogfight_catshoot_red_yarnball");
 		}
-		if ( YarnballCheck == 1 && bulldogIdle->GetCurrentFrame() == 25)
+		if ( YarnballCheck == 1 && bulldogIdle->GetCurrentFrame() == 22)
 		{
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
@@ -492,7 +650,7 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 			Object->SetCheck(0);
 			Object->GetBullet()->ChangeAnimation("dogfight_catshoot_green_yarnball");
 		}
-		if (YarnballCheck == 2 && bulldogIdle->GetCurrentFrame() == 31)
+		if (YarnballCheck == 2 && bulldogIdle->GetCurrentFrame() == 28)
 		{
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
@@ -503,7 +661,7 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 	}
 	else if (Pase1_Attack > 0)
 	{
-		if (YarnballCheck == 0 && bulldogIdle->GetCurrentFrame() == 19)
+		if (YarnballCheck == 0 && bulldogIdle->GetCurrentFrame() == 16)
 		{
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
@@ -511,7 +669,7 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 			Object->SetCheck(1);
 			Object->GetBullet()->ChangeAnimation("dogfight_catshoot_red_yarnball");
 		}
-		if (YarnballCheck == 1 && bulldogIdle->GetCurrentFrame() == 25)
+		if (YarnballCheck == 1 && bulldogIdle->GetCurrentFrame() == 22)
 		{
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
@@ -519,7 +677,7 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 			Object->SetCheck(1);
 			Object->GetBullet()->ChangeAnimation("dogfight_catshoot_green_yarnball");
 		}
-		if ( YarnballCheck == 2 && bulldogIdle->GetCurrentFrame() == 31)
+		if ( YarnballCheck == 2 && bulldogIdle->GetCurrentFrame() == 28)
 		{
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
@@ -528,15 +686,6 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 			Object->GetBullet()->ChangeAnimation("dogfight_catshoot_yellow_yarnball");
 		}
 	}
-
-
-
-
-
-
-
-
-
 
 	if (bulldogIdle->IsAnimationEnd())
 	{

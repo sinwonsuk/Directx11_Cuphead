@@ -31,6 +31,7 @@ std::shared_ptr<GameEngineCollision> GameEngineCollision::Collision(int _TargetG
 	{
 		_ThisColType = Type;
 	}
+	
 
 	for (std::shared_ptr<GameEngineCollision>& _OtherCol : Group)
 	{
@@ -43,6 +44,8 @@ std::shared_ptr<GameEngineCollision> GameEngineCollision::Collision(int _TargetG
 		{
 			_OtherColtype = _OtherCol->Type;
 		}
+
+		
 
 		if (GetTransform()->Collision({ _OtherCol->GetTransform(),_ThisColType, _OtherColtype }))
 		{

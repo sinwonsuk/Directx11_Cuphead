@@ -184,7 +184,7 @@ void Ph2_DogAirpalne::AttackUpdate(float _Time)
 {
 
 
-	
+	RandomAttack = GameEngineRandom().MainRandom.RandomFloat(1.0f, 4.5f);
 
 
 	// 타원의 중심
@@ -421,149 +421,149 @@ void Ph2_DogAirpalne::AttackUpdate(float _Time)
 
 	Ph2_Boss->GetTransform()->SetLocalPosition({ -Pos_x, Pos_y,0 });
 
-	test1 += _Time;
+	SmokeTime += _Time;
 
 
 	
-	if (test1 > 0.1 && f==0)
+	if (SmokeTime > 0.1 && SmokeCheck==0)
 	{
 		
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x ,jetpack->GetTransform()->GetLocalPosition().y,83.0f});	
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x ,jetpack->GetTransform()->GetLocalPosition().y,83.0f});	
+		SmokeCheck++;
 	}
-	if (test1 > 0.2 && f == 1)
+	if (SmokeTime > 0.2 && SmokeCheck == 1)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x ,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x ,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.3 && f == 2)
+	if (SmokeTime > 0.3 && SmokeCheck == 2)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.4 && f == 3)
+	if (SmokeTime > 0.4 && SmokeCheck == 3)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.5 && f == 4)
+	if (SmokeTime > 0.5 && SmokeCheck == 4)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.6 && f == 5)
+	if (SmokeTime > 0.6 && SmokeCheck == 5)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.7 && f == 6)
+	if (SmokeTime > 0.7 && SmokeCheck == 6)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.8 && f == 7)
+	if (SmokeTime > 0.8 && SmokeCheck == 7)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.9 && f == 8)
+	if (SmokeTime > 0.9 && SmokeCheck == 8)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.0 && f == 9)
+	if (SmokeTime > 1.0 && SmokeCheck == 9)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.1 && f == 10)
+	if (SmokeTime > 1.1 && SmokeCheck == 10)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.2 && f == 11)
+	if (SmokeTime > 1.2 && SmokeCheck == 11)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.3 && f == 12)
+	if (SmokeTime > 1.3 && SmokeCheck == 12)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.4 && f == 13)
+	if (SmokeTime > 1.4 && SmokeCheck == 13)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.5 && f == 14)
+	if (SmokeTime > 1.5 && SmokeCheck == 14)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.6 && f == 15)
+	if (SmokeTime > 1.6 && SmokeCheck == 15)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.7 && f == 16)
+	if (SmokeTime > 1.7 && SmokeCheck == 16)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.8 && f == 17)
+	if (SmokeTime > 1.8 && SmokeCheck == 17)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.9 && f == 18)
+	if (SmokeTime > 1.9 && SmokeCheck == 18)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 2.0 && f == 19)
+	if (SmokeTime > 2.0 && SmokeCheck == 19)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
 	
 	for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
@@ -582,7 +582,9 @@ void Ph2_DogAirpalne::AttackUpdate(float _Time)
 		
 		if (WeaponCheck == false)
 		{
+			RandomWeapon = GameEngineRandom::MainRandom.RandomInt(0, 11);
 			std::shared_ptr<ph2_Boss_Weapon> Object = GetLevel()->CreateActor<ph2_Boss_Weapon>();
+			Object->SetAttackCheck(RandomWeapon);
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x,Ph2_Boss->GetTransform()->GetLocalPosition().y,-1.0f });
 			WeaponCheck = true;
 		}
@@ -612,7 +614,6 @@ void Ph2_DogAirpalne::AttackUpdate(float _Time)
 			ResetLiveTime();
 			WeaponCheck = false;
 			AttackCheck = true;
-			RandomAttack = GameEngineRandom().MainRandom.RandomFloat(0.5f, 6.0f);
 			ChangeState(Ph2_DogAirPlaneState::Rotation);
 			return;
 		}
@@ -745,8 +746,8 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 	float y = 0.0;
 
 	// 타원의 반지름
-	double a = 550;
-	double b = 300;
+	float a = 550;
+	float b = 300;
 
 	test += 1.0f * _Time;
 
@@ -957,149 +958,149 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 
 	Ph2_Boss->GetTransform()->SetLocalPosition({ -Pos_x, Pos_y,0 });
 
-	test1 += _Time;
+	SmokeTime += _Time;
 
 
 
-	if (test1 > 0.1 && f == 0)
+	if (SmokeTime > 0.1 && SmokeCheck == 0)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x ,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x ,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.2 && f == 1)
+	if (SmokeTime > 0.2 && SmokeCheck == 1)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x ,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x ,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.3 && f == 2)
+	if (SmokeTime > 0.3 && SmokeCheck == 2)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.4 && f == 3)
+	if (SmokeTime > 0.4 && SmokeCheck == 3)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.5 && f == 4)
+	if (SmokeTime > 0.5 && SmokeCheck == 4)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.6 && f == 5)
+	if (SmokeTime > 0.6 && SmokeCheck == 5)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.7 && f == 6)
+	if (SmokeTime > 0.7 && SmokeCheck == 6)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.8 && f == 7)
+	if (SmokeTime > 0.8 && SmokeCheck == 7)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 0.9 && f == 8)
+	if (SmokeTime > 0.9 && SmokeCheck == 8)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.0 && f == 9)
+	if (SmokeTime > 1.0 && SmokeCheck == 9)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.1 && f == 10)
+	if (SmokeTime > 1.1 && SmokeCheck == 10)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.2 && f == 11)
+	if (SmokeTime > 1.2 && SmokeCheck == 11)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.3 && f == 12)
+	if (SmokeTime > 1.3 && SmokeCheck == 12)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.4 && f == 13)
+	if (SmokeTime > 1.4 && SmokeCheck == 13)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.5 && f == 14)
+	if (SmokeTime > 1.5 && SmokeCheck == 14)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.6 && f == 15)
+	if (SmokeTime > 1.6 && SmokeCheck == 15)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.7 && f == 16)
+	if (SmokeTime > 1.7 && SmokeCheck == 16)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.8 && f == 17)
+	if (SmokeTime > 1.8 && SmokeCheck == 17)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y ,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 1.9 && f == 18)
+	if (SmokeTime > 1.9 && SmokeCheck == 18)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
-	if (test1 > 2.0 && f == 19)
+	if (SmokeTime > 2.0 && SmokeCheck == 19)
 	{
 
-		ph2_jetpack_smoke_a[f]->On();
-		ph2_jetpack_smoke_a[f]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
-		f++;
+		ph2_jetpack_smoke_a[SmokeCheck]->On();
+		ph2_jetpack_smoke_a[SmokeCheck]->GetTransform()->SetLocalPosition({ jetpack->GetTransform()->GetLocalPosition().x,jetpack->GetTransform()->GetLocalPosition().y,83.0f });
+		SmokeCheck++;
 	}
 
 	for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
@@ -1129,6 +1130,7 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 			ResetLiveTime();
 		
 			Attack_Effect->ChangeAnimation("SD_bow_big_spark");
+			
 
 			ChangeState(Ph2_DogAirPlaneState::Attack);
 			return;

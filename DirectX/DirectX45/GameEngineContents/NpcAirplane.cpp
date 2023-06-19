@@ -8,6 +8,8 @@
 #include "EnumClass.cpp"
 #include "Player.h"
 #include "ph3_DogAirPlane.h"
+#include "DogAirplane.h"
+#include "DogAirplaneLevel.h"
 NpcAirplane::NpcAirplane()
 {
 
@@ -72,105 +74,31 @@ void NpcAirplane::Start()
 	Npc->GetTransform()->AddLocalPosition({ 0,-230,19 });
 
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 350.0f, 100.0f, 100.0f });
+	Collision->GetTransform()->SetLocalScale({ 450.0f, 100.0f, 100.0f });
 	Collision->SetOrder((int)CollisionType::NpcAirPlane);
 
 	CurPos.x = Npc->GetTransform()->GetLocalPosition().x;
 
 }
-
-void NpcAirplane::Update(float _Delta)
+void NpcAirplane::collision(float _Delta)
 {
-	//if (Ph3_DogAirplane::ph3_mainBoss->Get_ph3_dogcopter_rotate_camera()->GetCurrentFrame() == 14)
-	//{
-	//	ph3_main_boss_Check = true;
-	//}
-
-	//if (ph3_main_boss_Check == true)
-	//{
-	//	switch (Ph3_DogAirplane::ph3_mainBoss->GetRotationCheck())
-	//	{
-	//	case 0:
-	//	{
-	//		if (GetLevel()->GetMainCamera()->GetTransform()->GetLocalRotation().z < -90.0f)
-	//		{			
-	//			break;
-	//		}
-	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
-	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150 * _Delta,1500.0f* _Delta ,0 });
-	//	}
-	//	break;
-	//	case 1:
-	//	{
-	//		TransformData date = GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef();
-	//		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179.0f)
-	//		{
-	//			GetLevel()->GetMainCamera()->GetTransform()->SetLocalRotation({ 0,0,-180 });
-	//			break;
-	//		}
-	//		
-
-	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
-	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _Delta,-1500.0f * _Delta ,0 });
-	//	}
-	//	break;
-	//	case 2:
-	//	{
-
-	//		if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269.0f)
-	//		{
-	//			
-	//			break;
-	//		}
-
-	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
-	//		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 150.0f * _Delta, 1500.0f * _Delta ,0 });
-	//	}
-	//	break;
-	//	case 3:
-	//	{
-
-	//		//if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
-	//		//{
-	//		//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
-	//		//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
-	//		//	//GetTransform()->SetLocalPosition({ 0,0 });
-	//		//	RotationCheck = 0;
-	//		//}
-	//		//GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
-	//		//GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
-
-	//	}
-	//	break;
-
-	//	default:
-	//		break;
-	//	}
-	//}
-	/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
-	{
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,0});
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 0,0,0 });
-		RotationCheck = 0;
-		TransformData data = GetTransform()->GetTransDataRef();
-		int a = 0;
-	}*/
-
-	CurPos.x = Npc->GetTransform()->GetLocalPosition().x;
-	Collision->GetTransform()->SetLocalPosition({ Npc->GetTransform()->GetLocalPosition() });
-	Collision->GetTransform()->SetLocalRotation({ Npc->GetTransform()->GetLocalRotation() });
 	
-	
+
+
+
 	if (Collision->Collision((int)CollisionType::Player) == nullptr)
-	{
-		Player::MainPlayer->SetGravity(false);
-	}
-	else if (Collision->Collision((int)CollisionType::Player,ColType::AABBBOX2D, ColType::AABBBOX2D))
 	{
 		Player::MainPlayer->SetGravity(true);
 	}
+	else if (Collision->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+		if (Player::MainPlayer->GetTransform()->GetLocalPosition().y > Player_Pos_Y_Check)
+		{
+			Player::MainPlayer->SetGravity(false);
+		}
+	}
 
-	
+
 	if (Collision->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D))
 	{
 
@@ -193,16 +121,58 @@ void NpcAirplane::Update(float _Delta)
 		Npc_Airplane_Front->GetTransform()->SetLocalRotation({ 0,0,(-Speed) * SpeedControll });
 		Npc_Airplane_Spin->GetTransform()->SetLocalRotation({ 0,0,(-Speed) * SpeedControll });
 
-
-
 		Npc->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.7f,0,0 });
 		Npc_Airplane_Back->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.7f,0,0 });
 		Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.7f,0,0 });
 		Npc_Airplane_Front->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.7f,0,0 });
 		Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.7f,0,0 });
 		Player::MainPlayer->GetTransform()->AddLocalPosition({ (Speed * _Delta) * 0.7f,0,0 });
+
+	}
+	
+}
+
+void NpcAirplane::Update(float _Delta)
+{
+	CurPos.x = Npc->GetTransform()->GetLocalPosition().x;
+	Collision->GetTransform()->SetLocalPosition({ Npc->GetTransform()->GetLocalPosition().x, Npc->GetTransform()->GetLocalPosition().y - 20.0f,Npc->GetTransform()->GetLocalPosition().z });
+	Collision->GetTransform()->SetLocalRotation({ Npc->GetTransform()->GetLocalRotation().x, Npc->GetTransform()->GetLocalRotation().y,Npc->GetTransform()->GetLocalRotation().z });
+	
+
+	if (DogAirplane::Finish ==true)
+	{
+		float4 a = { 0,-60.0f };
+		float4  ad = { Npc->GetTransform()->GetLocalPosition().x, Npc->GetTransform()->GetLocalPosition().y };
+		float4 b = a - ad;
+		test = b.NormalizeReturn();
+
+		Npc->GetTransform()->AddLocalPosition({ test *1.3f });
+		Npc_Airplane_Back->GetTransform()->AddLocalPosition({ test * 1.3f });
+		Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ test * 1.3f });
+		Npc_Airplane_Front->GetTransform()->AddLocalPosition({ test * 1.3f });
+		Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ test * 1.3f });
+		Player::MainPlayer->GetTransform()->AddLocalPosition({ test * 1.3f });
+
+		Player_Pos_Y_Check += test.y * 1.3f;
+	}
+	
+	TransformData date = Npc->GetTransform()->GetTransDataRef(); 
+
+	if (DogAirplane::Finish == true && Npc->GetTransform()->GetLocalPosition().y > -75.0f)
+	{
+		DogAirplane::Finish = false;
+		DogAirplaneLevel* A = (DogAirplaneLevel*)GetLevel();
+		A->ad = 1;
 	}
 
+
+	if (DogAirplane::Finish == false)
+	{
+		collision(_Delta);
+	}
+	
+
+	
 	UpdateState(_Delta); 
 
 }

@@ -11,7 +11,10 @@
 #include "EnumClass.cpp"
 #include "IdleWeapon.h"
 #include "Dog_ball.h"
-int DogAirplane::Hp = 5;
+int DogAirplane::Hp = 20;
+bool DogAirplane::Finish = false;
+
+
 DogAirplane::DogAirplane()
 {
 }
@@ -191,15 +194,45 @@ void DogAirplane::Start()
 	bulldogIdle->On();
 
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 300.0f, 300.0f, 300.0f });
+	Collision->GetTransform()->SetLocalScale({ 300.0f, 250.0f, 300.0f });
 
-	Collision->SetOrder((int)CollisionType::DogAirPlane_Pase1);
+	Collision->SetOrder((int)CollisionType::BossBody);
 
 }
 
+
 void DogAirplane::Update(float _Delta)
 {		
-	Collision->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition()});
+	
+
+	if (StateValue != DogAirplaneState::BossAttackPase1)
+	{
+		Collision->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition()});
+	}
+
+
+
+	if (Collision->Collision((int)CollisionType::Bullet))
+	{
+		Hp -= 1.0;
+
+		if (CollisonCheck == false)
+		{
+			bulldogIdle->ColorOptionValue.PlusColor = { 1,1,1,0 };
+			bulldogIdle->ResetLiveTime(); 
+			CollisonCheck = true; 
+			
+		}
+		std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+
+		collision->Death();
+	}
+
+	if (CollisonCheck == true && bulldogIdle->GetLiveTime() > 0.05f)
+	{
+		bulldogIdle->ColorOptionValue.PlusColor = { 0,0,0,0 };
+		CollisonCheck = false;
+	}
 
 	
 

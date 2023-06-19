@@ -378,7 +378,7 @@ void Player::RunUpdate(float _Time)
 		ChangeState(PlayerState::Jump);		
 		return;
 	}
-
+	
 
 }
 
@@ -533,6 +533,7 @@ void Player::JumpUpdate(float _Time)
 		if (GetTransform()->GetLocalScale().x < 0)
 		{
 			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 			Object->SetMoveDir(float4::Left);
 		}
 		BulletTime = 0;
@@ -583,7 +584,7 @@ void Player::JumpUpdate(float _Time)
 
 	
 	
-	if (Gravity == true && test == true)
+	if (Gravity == false && test == true)
 	{
 
 		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
@@ -635,6 +636,7 @@ void Player::ParryUpdate(float _Time)
 		if (GetTransform()->GetLocalScale().x < 0)
 		{
 			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 			Object->SetMoveDir(float4::Left);
 		}
 		BulletTime = 0;
@@ -786,6 +788,7 @@ void Player::ParryUpdate(float _Time)
 		if (GetTransform()->GetLocalScale().x < 0)
 		{
 			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 			Object->SetMoveDir(float4::Left);
 		}
 		BulletTime = 0;
@@ -833,7 +836,7 @@ void Player::ParryUpdate(float _Time)
 
 
 
-	if (Gravity == true && test == true)
+	if (Gravity == false && test == true)
 	{
 		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
 		Object->SetState(EffectState::JumpEffect);
@@ -1070,7 +1073,7 @@ void Player::DashUpdate(float _Time)
 		GetTransform()->AddLocalPosition(float4::Left * Speed * 2 * _Time);
 		
 	}
-	if (Render0->IsAnimationEnd() && Gravity != true)
+	if (Render0->IsAnimationEnd() && Gravity != false)
 	{
 	
 		DashEffectCheck = false;
@@ -1079,7 +1082,7 @@ void Player::DashUpdate(float _Time)
 		return;
 	}
 
-	if (Render0->IsAnimationEnd() && Gravity ==true)
+	if (Render0->IsAnimationEnd() && Gravity ==false)
 	{
 		DashEffectCheck = false;
 
@@ -1108,6 +1111,8 @@ void Player::IdleAttackUpdate(float _Time)
 			if (GetTransform()->GetLocalScale().x < 0)
 			{
 				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
+
 				Object->SetMoveDir(float4::Left);
 			}
 			BulletTime = 0;
@@ -1129,6 +1134,7 @@ void Player::IdleAttackUpdate(float _Time)
 			if (GetTransform()->GetLocalScale().x < 0)
 			{
 				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 				Object->SetMoveDir(float4::Left);
 			}
 			BulletTime = 0;
@@ -1150,6 +1156,7 @@ void Player::IdleAttackUpdate(float _Time)
 			if (GetTransform()->GetLocalScale().x < 0)
 			{
 				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 				Object->SetMoveDir(float4::Left);
 			}
 			BulletTime = 0;
@@ -1224,6 +1231,7 @@ void Player::IdleAttackPreUpdate(float _Time)
 		if (GetTransform()->GetLocalScale().x < 0)
 		{
 			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 			Object->SetMoveDir(float4::Left);
 		}
 		BulletTime = 0;
@@ -1295,6 +1303,7 @@ void Player::RunAttackUpdate(float _Time)
 			{
 				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 50,GetTransform()->GetLocalPosition().y + 20 });
 				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 100,GetTransform()->GetLocalPosition().y - 20 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 				Object->SetMoveDir(float4::Left);
 			}
 			BulletTime = 0;
@@ -1317,6 +1326,7 @@ void Player::RunAttackUpdate(float _Time)
 			{
 				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 50,GetTransform()->GetLocalPosition().y });
 				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 100,GetTransform()->GetLocalPosition().y - 20 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 				Object->SetMoveDir(float4::Left);
 			}
 			BulletTime = 0;
@@ -1339,6 +1349,7 @@ void Player::RunAttackUpdate(float _Time)
 			{
 				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 50,GetTransform()->GetLocalPosition().y - 20 });
 				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 100,GetTransform()->GetLocalPosition().y - 20 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 				Object->SetMoveDir(float4::Left);
 			}
 			BulletTime = 0;
@@ -1402,12 +1413,20 @@ void Player::RunAttackUpdate(float _Time)
 	}
 
 
-	if (true == GameEngineInput::IsUp("PlayerAttack"))
+	if (true == GameEngineInput::IsUp("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		Frame = Render0->GetCurrentFrame();
 		ChangeState(PlayerState::Run);
 		return;
 	}
+	if (true == GameEngineInput::IsUp("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveRight"))
+	{
+		Frame = Render0->GetCurrentFrame();
+		ChangeState(PlayerState::Run);
+		return;
+	}
+
+
 
 	if (true == GameEngineInput::IsPress("PlayerRock"))
 	{
@@ -1659,6 +1678,8 @@ void Player::UpAttackUpdate(float _Time)
 		BulletTime = 0;
 	}
 
+	
+
 	if (GameEngineInput::IsPress("PlayerMoveRight") && GameEngineInput::IsPress("PlayerAttack"))
 	{
 		ChangeState(PlayerState::DiagonalUpRunAttack);
@@ -1667,6 +1688,15 @@ void Player::UpAttackUpdate(float _Time)
 	if (GameEngineInput::IsPress("PlayerMoveLeft") && GameEngineInput::IsPress("PlayerAttack"))
 	{
 		ChangeState(PlayerState::DiagonalUpRunAttack);
+		return;
+	}
+
+	if (GameEngineInput::IsPress("PlayerJump"))
+	{
+		
+		ResetLiveTime();
+		JumpCheck = true;
+		ChangeState(PlayerState::Jump);
 		return;
 	}
 
@@ -1776,7 +1806,7 @@ void Player::DuckAttackUpdate(float _Time)
 		{
 			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 80 ,GetTransform()->GetLocalPosition().y -40 });
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 80 ,GetTransform()->GetLocalPosition().y -40 });
-
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 			Object->SetMoveDir({ float4::Left });
 		}
 		BulletTime = 0;
@@ -1812,7 +1842,7 @@ void Player::DuckAttackPreUpdate(float _Time)
 		{
 			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 80 ,GetTransform()->GetLocalPosition().y - 40 });
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 80 ,GetTransform()->GetLocalPosition().y - 40 });
-
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 			Object->SetMoveDir({ float4::Left });
 		}
 		BulletTime = 0;
@@ -2089,6 +2119,7 @@ void Player::IdleAimAttackUpdate(float _Time)
 		if (GetTransform()->GetLocalScale().x < 0)
 		{
 			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 			Object->SetMoveDir(float4::Left);
 		}
 		BulletTime = 0;
@@ -2164,6 +2195,7 @@ void Player::IdleAimAttackPreUpdate(float _Time)
 		if (GetTransform()->GetLocalScale().x < 0)
 		{
 			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 			Object->SetMoveDir(float4::Left);
 		}
 		BulletTime = 0;

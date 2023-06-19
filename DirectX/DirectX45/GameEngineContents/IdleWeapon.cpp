@@ -30,7 +30,7 @@ void IdleWeapon::Start()
 
 	Bullet = CreateComponent<GameEngineSpriteRenderer>();
 
-	Bullet->CreateAnimation({ .AnimationName = "IdleWeapon", .SpriteName = "IdleWeapon.png", .FrameInter = 0.1f, .Loop = false, .ScaleToTexture = true, });
+	Bullet->CreateAnimation({ .AnimationName = "IdleWeapon", .SpriteName = "IdleWeapon.png", .FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true,.FrameIndex = {2,3,4,5,6,7} });
 	Bullet->CreateAnimation({ .AnimationName = "Peashooter_Death", .SpriteName = "Peashooter_Death.png", .FrameInter = 0.05f, .Loop = false,.ScaleToTexture = true, });
 	Bullet->ChangeAnimation("IdleWeapon");
 
@@ -39,8 +39,9 @@ void IdleWeapon::Start()
 	Sfx->ChangeAnimation("IdleWeaponSfx");
 	
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
+	Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 50.0f });
 	Collision->SetOrder((int)CollisionType::Bullet);
+
 
 }
 
@@ -49,35 +50,26 @@ void IdleWeapon::Update(float _Delta)
 
 	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 
+	//Sfx->ColorOptionValue.PlusColor = { 1,1,1,1 };
 
 	if (CollisionCheck == false)
 	{
-		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500 });
+		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
 	}
 
-	if (Collision->Collision((int)CollisionType::DogAirPlane_Pase1) && CollisionCheck == false)
+	if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
 	{
-		DogAirplane::Hp -= 1;
 		
-		Bullet->ChangeAnimation("Peashooter_Death");
-
-		
+		Bullet->ChangeAnimation("Peashooter_Death");	
 		CollisionCheck = true;
 		
 	}
-
-	if (Bullet->IsAnimationEnd())
-	{
-		Bullet->Death();
-	}
-
-
-	/*if (CollisionCheck == true)
-	{
-		
-	}*/
-
 	
+
+	if (GetLiveTime() > 10)
+	{
+		this->Death(); 
+	}
 	
 	
 	if (Sfx->IsAnimationEnd())

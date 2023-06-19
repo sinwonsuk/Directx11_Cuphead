@@ -78,4 +78,3 @@ void NpcAirplane::IdleUpdate(float _Time)
 {
 
 }
-

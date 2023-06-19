@@ -33,6 +33,8 @@ void dogfight_catshoot_yarnball::Start()
 	Bullet->CreateAnimation({ .AnimationName = "dogfight_catshoot_green_yarnball", .SpriteName = "dogfight_catshoot_green_yarnball", .FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true, });
 	Bullet->CreateAnimation({ .AnimationName = "dogfight_catshoot_yellow_yarnball", .SpriteName = "dogfight_catshoot_yellow_yarnball", .FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true, });
 	Bullet->ChangeAnimation("dogfight_catshoot_yellow_yarnball");
+
+	Bullet->GetTransform()->SetLocalPosition({ 0,0,50 });
 }
 
 void dogfight_catshoot_yarnball::Update(float _Delta)

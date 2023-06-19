@@ -117,9 +117,9 @@ private:
 	int RightCheck = 0;
 	int LeftCheck = 0;
 	float Speed = 300;
-	float GravitySpeed = 400;
+	float GravitySpeed = 450;
 	float JumpSpeed = 1200;
-	bool Gravity = false;
+	bool Gravity = true;
 	bool RightMove = true;
 	bool LeftMove = true;
 	bool JumpCheck = false;

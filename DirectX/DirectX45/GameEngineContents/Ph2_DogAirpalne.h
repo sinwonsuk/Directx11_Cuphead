@@ -90,9 +90,10 @@ private:
 	std::vector<std::shared_ptr<class GameEngineSpriteRenderer>> ph2_jetpack_smoke_a;
 	std::shared_ptr<class GameEngineCollision> Collision;
 
+	int RandomWeapon = 0; 
 	float RandomAttack = 0;
 
-	float test1 = 0;
+	float SmokeTime = 0;
 	float Left_Pos_x = -620.0f;
 	float Up_Pos_x = 300.0f;
 	float Right_Pos_x = 620.0f;
@@ -103,12 +104,14 @@ private:
 	float test = 0;
 	bool WeaponCheck = false;
 
+	int Hp = 20; 
 	int RotationAnimation = 0;
 	int IntroCheck = 0;
-	int f = 0;
+	int SmokeCheck = 0;
 
+	bool CollisonCheck = false;
 	bool AttackCheck = true;
-	bool dsda = false;
+
 	bool RotationCheck = false;
 	
 	

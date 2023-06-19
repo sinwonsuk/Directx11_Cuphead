@@ -30,7 +30,12 @@ public:
 
 		return DirCheck;
 	}
+	int SetAttackCheck(int _AttackCheck)
+	{
+		AttackCheck = _AttackCheck;
 
+		return AttackCheck;
+	}
 
 
 protected:
@@ -46,7 +51,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dog_bowl_shoot_lines;
 	
 	int AttackCheck = 0;
-	
+	bool BulletCheck = false;
 	bool MoveDirCheck = false;
 	bool AnimationCheck = false;
 	float4 MoveDir = {0,0};

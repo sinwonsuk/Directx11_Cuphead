@@ -1,7 +1,8 @@
 #include "PrecompileHeader.h"
 #include "Ph2_DogAirpalne.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
-
+#include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.cpp"
 Ph2_DogAirpalne::Ph2_DogAirpalne()
 {
 }
@@ -127,13 +128,40 @@ void Ph2_DogAirpalne::Start()
 	Attack_Effect->Off();
 	
 
-	
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 300.0f, 250.0f, 300.0f });
+
+	Collision->SetOrder((int)CollisionType::BossBody);
 
 }
 
 void Ph2_DogAirpalne::Update(float _Delta)
 {
 	
+	
+		Collision->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition()});
+	
+
+		if (Collision->Collision((int)CollisionType::Bullet))
+		{
+			
+			if (CollisonCheck == false)
+			{
+				Ph2_Boss->ColorOptionValue.PlusColor = { 1,1,1,0 };
+				Ph2_Boss->ResetLiveTime();
+				CollisonCheck = true;
+
+			}
+			std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+
+			collision->Death();
+		}
+
+		if (CollisonCheck == true && Ph2_Boss->GetLiveTime() > 0.05f)
+		{
+			Ph2_Boss->ColorOptionValue.PlusColor = { 0,0,0,0 };
+			CollisonCheck = false;
+		}
 
 
 	

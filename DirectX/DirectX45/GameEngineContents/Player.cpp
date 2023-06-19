@@ -26,7 +26,7 @@ void Player::Update(float _DeltaTime)
 
 	
 
-	if (Gravity == false && StateValue != PlayerState::Dash)
+	if (Gravity == true && StateValue != PlayerState::Dash)
 	{
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
 	}
@@ -247,7 +247,8 @@ void Player::Start()
 	Render0->ChangeAnimation("Idle");
 
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
+	Collision->GetTransform()->AddLocalPosition({ 0.0f, -30.0f, 0.0f });
+	Collision->GetTransform()->SetLocalScale({ 100.0f, 110.0f, 100.0f });
 	Collision->SetOrder((int)CollisionType::Player);
 	
 }

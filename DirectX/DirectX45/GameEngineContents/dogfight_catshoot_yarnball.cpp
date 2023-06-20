@@ -1,7 +1,8 @@
 #include "PrecompileHeader.h"
 #include "dogfight_catshoot_yarnball.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
-
+#include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.cpp"
 dogfight_catshoot_yarnball::dogfight_catshoot_yarnball()
 {
 
@@ -35,23 +36,31 @@ void dogfight_catshoot_yarnball::Start()
 	Bullet->ChangeAnimation("dogfight_catshoot_yellow_yarnball");
 
 	Bullet->GetTransform()->SetLocalPosition({ 0,0,50 });
+
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 174.0f, 154.0f, 300.0f });
+
+	Collision->SetOrder((int)CollisionType::BossAttack);
+
 }
 
 void dogfight_catshoot_yarnball::Update(float _Delta)
 {
+
+	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 	switch (Check)
 	{
 	case 0:
 	{
 		MoveDir = { 1,0 };
-		Bullet->GetTransform()->AddWorldPosition({ MoveDir * _Delta * 800 });
+		Bullet->GetTransform()->AddWorldPosition({ MoveDir * _Delta * 800.0f });
 
 	}
 	break;
 	case 1:
 	{
 		MoveDir = { -1,0 };
-		Bullet->GetTransform()->AddWorldPosition({ MoveDir * _Delta * 800 });
+		Bullet->GetTransform()->AddWorldPosition({ MoveDir * _Delta * 800.0f });
 
 	}
 	break;

@@ -46,24 +46,24 @@ void NpcAirplane::Start()
 	Npc_Airplane_Back = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Back->CreateAnimation({ .AnimationName = "Npc_Airplane_Back", .SpriteName = "Npc_Airplane_Back", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Back->ChangeAnimation("Npc_Airplane_Back");
-	Npc_Airplane_Back->GetTransform()->AddLocalPosition({ 0,-230,20 });
+	Npc_Airplane_Back->GetTransform()->AddLocalPosition({ 0,-230,-7.0f });// -7
 
 	Npc_Airplane_Reg = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Reg->CreateAnimation({ .AnimationName = "Npc_Airplane_Reg", .SpriteName = "Npc_Airplane_Reg", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Reg->ChangeAnimation("Npc_Airplane_Reg");
-	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ 0,-230,20 });
+	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ 0,-230,-7.0f }); //-7
 
 	Npc_Airplane_Front = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Front->CreateAnimation({ .AnimationName = "Npc_Airplane_Front", .SpriteName = "Npc_Airplane_Front", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Front->ChangeAnimation("Npc_Airplane_Front");
-	Npc_Airplane_Front->GetTransform()->AddLocalPosition({ 0,-230,17});
+	Npc_Airplane_Front->GetTransform()->AddLocalPosition({ 0,-230,-9.0f}); // -9
 
 	
 
 	Npc_Airplane_Spin = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Spin->CreateAnimation({ .AnimationName = "Npc_Airplane_Spin", .SpriteName = "Npc_Airplane_Spin", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 	Npc_Airplane_Spin->ChangeAnimation("Npc_Airplane_Spin");
-	Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ 0,-230,16 });
+	Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ 0,-230,-10.0f }); // -10
 
 
 	Npc = CreateComponent<GameEngineSpriteRenderer>();
@@ -71,11 +71,20 @@ void NpcAirplane::Start()
 	Npc->CreateAnimation({ .AnimationName = "Npc_Intro2", .SpriteName = "Npc_Intro2", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 	Npc->CreateAnimation({ .AnimationName = "Npc_Idle", .SpriteName = "Npc_Idle", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 	Npc->ChangeAnimation("NpcIntro");
-	Npc->GetTransform()->AddLocalPosition({ 0,-230,19 });
+	Npc->GetTransform()->AddLocalPosition({ 0,-230,-8.0f });  // -8
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 450.0f, 100.0f, 100.0f });
+	//Collision->GetTransform()->AddLocalScale({ 0.0f, -50.0f, 0.0f });
 	Collision->SetOrder((int)CollisionType::NpcAirPlane);
+	Collision->SetColType(ColType::OBBBOX2D);
+    
+	DownCollision = CreateComponent<GameEngineCollision>();
+	DownCollision->GetTransform()->SetLocalScale({1400.0f, 100.0f, 100.0f });
+	DownCollision->GetTransform()->AddLocalPosition({ 0,-400.0f,0 });
+
+
+	DownCollision->SetOrder((int)CollisionType::MapOut);
 
 	CurPos.x = Npc->GetTransform()->GetLocalPosition().x;
 
@@ -83,14 +92,16 @@ void NpcAirplane::Start()
 void NpcAirplane::collision(float _Delta)
 {
 	
+	CurPos.x = Npc->GetTransform()->GetLocalPosition().x;
+	Collision->GetTransform()->SetLocalPosition({ Npc->GetTransform()->GetLocalPosition().x, Npc->GetTransform()->GetLocalPosition().y - 20.0f,Npc->GetTransform()->GetLocalPosition().z });
+	Collision->GetTransform()->SetLocalRotation({ Npc->GetTransform()->GetLocalRotation().x, Npc->GetTransform()->GetLocalRotation().y,Npc->GetTransform()->GetLocalRotation().z });
 
 
-
-	if (Collision->Collision((int)CollisionType::Player) == nullptr)
+	if (Collision->Collision((int)CollisionType::Player, ColType::OBBBOX2D, ColType::OBBBOX2D) == nullptr)
 	{
 		Player::MainPlayer->SetGravity(true);
 	}
-	else if (Collision->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	else if (Collision->Collision((int)CollisionType::Player, ColType::OBBBOX2D, ColType::OBBBOX2D) && Player::MainPlayer->GetJumpCheck() ==false)
 	{
 		if (Player::MainPlayer->GetTransform()->GetLocalPosition().y > Player_Pos_Y_Check)
 		{
@@ -99,7 +110,7 @@ void NpcAirplane::collision(float _Delta)
 	}
 
 
-	if (Collision->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	if (Collision->Collision((int)CollisionType::Player, ColType::OBBBOX2D, ColType::OBBBOX2D)&& Player::MainPlayer->GetJumpCheck() ==false)
 	{
 
 
@@ -134,10 +145,10 @@ void NpcAirplane::collision(float _Delta)
 
 void NpcAirplane::Update(float _Delta)
 {
-	CurPos.x = Npc->GetTransform()->GetLocalPosition().x;
-	Collision->GetTransform()->SetLocalPosition({ Npc->GetTransform()->GetLocalPosition().x, Npc->GetTransform()->GetLocalPosition().y - 20.0f,Npc->GetTransform()->GetLocalPosition().z });
-	Collision->GetTransform()->SetLocalRotation({ Npc->GetTransform()->GetLocalRotation().x, Npc->GetTransform()->GetLocalRotation().y,Npc->GetTransform()->GetLocalRotation().z });
 	
+	
+	DogAirplaneLevel* AirPlaneLevel = (DogAirplaneLevel*)GetLevel();
+
 
 	if (DogAirplane::Finish ==true)
 	{
@@ -165,6 +176,34 @@ void NpcAirplane::Update(float _Delta)
 		A->ad = 1;
 	}
 
+	if (AirPlaneLevel->Get_Ph2_DogAirpalne_Bottom()->GetHp() <0 &&
+		AirPlaneLevel->Get_Ph2_DogAirpalne_Top()->GetHp() < 0 &&
+		AirPlaneLevel->Get_Ph2_DogAirpalne_Right()->GetHp() < 0 &&
+		AirPlaneLevel->Get_Ph2_DogAirpalne_Left()->GetHp() < 0 	&&
+		AirPlaneLevel->ad ==1
+		)
+	{
+		float4 a = { 0,-230.0f };
+		float4  ad = { Npc->GetTransform()->GetLocalPosition().x, Npc->GetTransform()->GetLocalPosition().y };
+		float4 b = a-ad;
+		test = b.NormalizeReturn();
+
+		Npc->GetTransform()->AddLocalPosition({ test * 1.3f });
+		Npc_Airplane_Back->GetTransform()->AddLocalPosition({ test * 1.3f });
+		Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ test * 1.3f });
+		Npc_Airplane_Front->GetTransform()->AddLocalPosition({ test * 1.3f });
+		Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ test * 1.3f });
+		Player::MainPlayer->GetTransform()->AddLocalPosition({ test * 1.3f });
+		Player_Pos_Y_Check -= test.y * 1.4f;
+
+		if (Npc->GetTransform()->GetLocalPosition().y < -225.0f)
+		{
+			Player_Pos_Y_Check = -150.0f;
+			AirPlaneLevel->ad = 2;
+		}
+    }
+
+	TransformData date13= Npc->GetTransform()->GetTransDataRef(); 
 
 	if (DogAirplane::Finish == false)
 	{

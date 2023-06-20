@@ -2,7 +2,8 @@
 #include "BoneWeapon.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEnginePlatform/GameEngineInput.h>
-
+#include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.cpp"
 BoneWeapon::BoneWeapon()
 {
 }
@@ -32,11 +33,17 @@ void BoneWeapon::Start()
 
 	Bullet->ChangeAnimation("WhiteBone");
 	
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 121.0f, 94.0f, 300.0f });
+	Collision->SetOrder((int)CollisionType::BossAttack);
+
+
 }
 
 void BoneWeapon::Update(float _Delta)
 {
-	
+	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
+
 	switch (Check)
 	{
 	case 0:

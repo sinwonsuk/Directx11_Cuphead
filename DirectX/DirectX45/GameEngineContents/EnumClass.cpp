@@ -25,5 +25,6 @@ enum class CollisionType
 	Bullet,
 	NpcAirPlane, 
 	BossBody,
-
+	MapOut,
+	BossAttack,
 };

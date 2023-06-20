@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
-
+#include "UserInterface.h"
 
 DogAirplaneLevel::DogAirplaneLevel()
 {
@@ -27,7 +27,7 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 		Ph2_DogAirpalne_Right->Off();
 		Ph2_DogAirpalne_Top->Off();
 		Ph2_DogAirpalne_Bottom->Off();
-
+		Ph3_DogAirpalne->Off();
 	}
 	break;
 
@@ -38,10 +38,14 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 		Ph2_DogAirpalne_Top->On();
 		Ph2_DogAirpalne_Bottom->On();
 	}
-
+	break;
 	case 2:
 	{
-
+		Ph2_DogAirpalne_Left->Off();
+		Ph2_DogAirpalne_Right->Off();
+		Ph2_DogAirpalne_Top->Off();
+		Ph2_DogAirpalne_Bottom->Off();
+		Ph3_DogAirpalne->On(); 
 	}
 
 	break;
@@ -207,17 +211,23 @@ void DogAirplaneLevel::Start()
 
 	GameEngineLevel::IsDebugSwitch();
 
+	
+	//CreateNewCamera
 
+	std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
 	
 	
-	BackGround = GetLevel()->CreateActor<DogAirplaneBackground>();
+	BackGround = CreateActor<DogAirplaneBackground>();
 
-	Npc = GetLevel()->CreateActor<NpcAirplane>();
+	Npc = CreateActor<NpcAirplane>();
 
-	Ph1_DogAirplane = GetLevel()->CreateActor<DogAirplane>();
+	Ph1_DogAirplane = CreateActor<DogAirplane>();
 
-	player = GetLevel()->CreateActor<Player>();
+	player = CreateActor<Player>();
 	player->GetTransform()->AddLocalPosition({ 0,0,0 });
+
+
+	Ph3_DogAirpalne = CreateActor<Ph3_DogAirplane>();
 
 
 
@@ -249,6 +259,10 @@ void DogAirplaneLevel::Start()
 		Ph2_DogAirpalne_Bottom->Get_jetpack()->GetTransform()->AddLocalPosition({ 0.0f, -450.0f,82.0f });
 	}
 	
+	
+
+
+
 }
 
 void DogAirplaneLevel::LevelChangeStart()

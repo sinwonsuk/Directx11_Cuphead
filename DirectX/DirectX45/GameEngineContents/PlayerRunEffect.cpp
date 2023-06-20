@@ -31,6 +31,7 @@ void PlayerRunEffect::Start()
 	Render->CreateAnimation({ .AnimationName = "RunDust", .SpriteName = "RunDust", .FrameInter = 0.05f, .Loop= false, .ScaleToTexture = true, });
 	Render->CreateAnimation({ .AnimationName = "JumpDust", .SpriteName = "JumpDust", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
 	Render->CreateAnimation({ .AnimationName = "DashDust", .SpriteName = "DashDust", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
+	Render->GetTransform()->AddLocalPosition({ 0.0f,0.0f,-100.0f });
 	//Render->CreateAnimation({ .AnimationName = "RunDust", .SpriteName = "RunDust", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
 	Render->ChangeAnimation("RunDust"); 
 

@@ -65,21 +65,28 @@ public:
 
 	void CalSortZ(class GameEngineCamera* _Camera);
 
+	GameEngineCamera* GetCamera() 
+	{
+		return RenderCamera;
+	}
 
-	// 업데이트에서 할것이기 때문에 그냥 하겠습니다. 
-	// 랜더 도중에 카메라를 바꾸거나 한다면 이상한 일이 발생할수 있다.
+	
 
 protected:
 	void Start();
 
 	void Render(float _Delta) override;
 
+	// 업데이트에서 할것이기 때문에 그냥 하겠습니다. 
+	// 랜더 도중에 카메라를 바꾸거나 한다면 이상한 일이 발생할수 있다.
 	void PushCameraRender(int _CameraOrder);
 
 private:
 	bool IsCameraCulling = false;
 
 	float CalZ = 0.0f;
+
+	GameEngineCamera* RenderCamera;
 
 	std::vector<std::shared_ptr<GameEngineRenderUnit>> Units;
 

@@ -26,6 +26,27 @@ public:
 
 	std::shared_ptr<class GameEngineVideo> Video;
 	int ad = 0;
+
+
+	std::shared_ptr<Ph2_DogAirpalne> Get_Ph2_DogAirpalne_Left()
+	{
+		return Ph2_DogAirpalne_Left;
+	}
+	std::shared_ptr<Ph2_DogAirpalne> Get_Ph2_DogAirpalne_Right()
+	{
+		return Ph2_DogAirpalne_Right;
+	}
+	std::shared_ptr<Ph2_DogAirpalne> Get_Ph2_DogAirpalne_Top()
+	{
+		return Ph2_DogAirpalne_Top;
+	}
+	std::shared_ptr<Ph2_DogAirpalne> Get_Ph2_DogAirpalne_Bottom()
+	{
+		return Ph2_DogAirpalne_Bottom;
+	}
+
+
+
 protected:
 	void Update(float _DeltaTime) override;
 	void Start() override;
@@ -44,6 +65,7 @@ private:
 	std::shared_ptr<Ph2_DogAirpalne> Ph2_DogAirpalne_Right;
 	std::shared_ptr<Ph2_DogAirpalne> Ph2_DogAirpalne_Top;
 	std::shared_ptr<Ph2_DogAirpalne> Ph2_DogAirpalne_Bottom;
+	std::shared_ptr<Ph3_DogAirplane> Ph3_DogAirpalne;
 	std::shared_ptr<DogAirplaneBackground> BackGround;
 
 };

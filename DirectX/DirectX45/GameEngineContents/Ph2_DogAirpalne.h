@@ -8,7 +8,7 @@ enum class Ph2_DogAirPlaneState
 	DownIntro,
      Rotation,
 	Attack,
-
+	Death,
 
 };
 enum class DirectionCheck
@@ -47,6 +47,7 @@ public:
 	void DownIdleUpdate(float _Time);
 	void AttackUpdate(float _Time);
 
+	void DeathUpdate(float _Time);
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Get_Ph2_Boss()
 	{
@@ -62,6 +63,10 @@ public:
 	{
 		StateValue = _StateValue; 
 		return StateValue; 
+	}
+	int GetHp()
+	{
+		return Hp;
 	}
 
 
@@ -80,7 +85,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Ph2_Boss;
 	std::shared_ptr<class GameEngineSpriteRenderer> jetpack;
 	
-	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a1;
+	//std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a1;
 	
 
 	std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_b;
@@ -104,7 +109,8 @@ private:
 	float test = 0;
 	bool WeaponCheck = false;
 
-	int Hp = 20; 
+	int Hp = 5; 
+
 	int RotationAnimation = 0;
 	int IntroCheck = 0;
 	int SmokeCheck = 0;

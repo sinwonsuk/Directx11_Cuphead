@@ -99,7 +99,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> bulldogIdle;
 	std::shared_ptr<class GameEngineSpriteRenderer> Ball_Monster;
 
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Ready;
 
 
 	std::shared_ptr<class GameEngineCollision> Collision;

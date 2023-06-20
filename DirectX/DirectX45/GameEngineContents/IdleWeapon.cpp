@@ -5,6 +5,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.cpp"
 #include "DogAirplane.h"
+#include "UserInterface.h"
 IdleWeapon::IdleWeapon()
 {
 }
@@ -22,7 +23,6 @@ void IdleWeapon::Start()
 		NewDir.Move("ContentResources");
 		NewDir.Move("Texture");
 		
-
 		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\IdleWeapon.png").GetFullPath(),5,2);
 		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\IdleWeaponSfx.png").GetFullPath(),4, 1);
 		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\Peashooter_Death.png").GetFullPath(), 5, 2);
@@ -50,8 +50,6 @@ void IdleWeapon::Update(float _Delta)
 
 	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 
-	//Sfx->ColorOptionValue.PlusColor = { 1,1,1,1 };
-
 	if (CollisionCheck == false)
 	{
 		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
@@ -59,7 +57,7 @@ void IdleWeapon::Update(float _Delta)
 
 	if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
 	{
-		
+		UserInterface::Cut += 0.1;
 		Bullet->ChangeAnimation("Peashooter_Death");	
 		CollisionCheck = true;
 		

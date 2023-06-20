@@ -4,7 +4,8 @@
 #include <GameEngineBase/GameEngineRandom.h>
 #include "ph2_Boss_Weapon.h"
 #include <GameEngineCore/GameEngineLevel.h>
-
+#include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.cpp"
 void Ph2_DogAirpalne::ChangeState(Ph2_DogAirPlaneState _State)
 {
 	Ph2_DogAirPlaneState NextState = _State;
@@ -33,7 +34,9 @@ void Ph2_DogAirpalne::ChangeState(Ph2_DogAirPlaneState _State)
 	case Ph2_DogAirPlaneState::Attack:
 		//AnimationCheck("SD_Idle_side");
 		break;
-
+	case Ph2_DogAirPlaneState::Death:
+		AnimationCheck("ph2_dog_death");
+		break;
 	
 	default:
 		break;
@@ -67,7 +70,9 @@ void Ph2_DogAirpalne::UpdateState(float _Time)
 	case Ph2_DogAirPlaneState::Attack:
 		AttackUpdate(_Time); 
 		break;
-	
+	case Ph2_DogAirPlaneState::Death:
+		DeathUpdate(_Time);
+		break;
 	default:
 		break;
 	}
@@ -78,9 +83,17 @@ void Ph2_DogAirpalne::UpdateState(float _Time)
 
 void Ph2_DogAirpalne::LeftIntroUpdate(float _Time)
 {
-
-
-
+	if (Hp < 0)
+	{
+		jetpack->Off();
+		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
+		{
+			ph2_jetpack_smoke_a[i]->Off();
+		}
+		Collision->Off();
+		ChangeState(Ph2_DogAirPlaneState::Death);
+		return;
+	}
 
 	if (Ph2_Boss->GetTransform()->GetLocalPosition().x > -550.0f)
 	{
@@ -107,6 +120,19 @@ void Ph2_DogAirpalne::LeftIntroUpdate(float _Time)
 void Ph2_DogAirpalne::UpIntroUpdate(float _Time)
 {
 
+	if (Hp < 0)
+	{
+		jetpack->Off();
+		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
+		{
+			ph2_jetpack_smoke_a[i]->Off();
+		}
+		Collision->Off();
+		ChangeState(Ph2_DogAirPlaneState::Death);
+		return;
+	}
+
+
 	if (Ph2_Boss->GetTransform()->GetLocalPosition().y < 300.0f)
 	{
 		Ph2_Boss->GetTransform()->AddLocalPosition({ 0.0f , 300.0f * _Time,0.0f });
@@ -131,6 +157,18 @@ void Ph2_DogAirpalne::UpIntroUpdate(float _Time)
 
 void Ph2_DogAirpalne::RightIntroUpdate(float _Time)
 {
+	if (Hp < 0)
+	{
+		jetpack->Off();
+		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
+		{
+			ph2_jetpack_smoke_a[i]->Off();
+		}
+		Collision->Off();
+		ChangeState(Ph2_DogAirPlaneState::Death);
+		return;
+	}
+
 	if (Ph2_Boss->GetTransform()->GetLocalPosition().x < 550.0f)
 	{
 		Ph2_Boss->GetTransform()->AddLocalPosition({ 300.0f * _Time , 0.0f ,0.0f });
@@ -155,6 +193,18 @@ void Ph2_DogAirpalne::RightIntroUpdate(float _Time)
 
 void Ph2_DogAirpalne::DownIntroUpdate(float _Time)
 {
+	if (Hp < 0)
+	{
+		jetpack->Off();
+		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
+		{
+			ph2_jetpack_smoke_a[i]->Off();
+		}
+		Collision->Off();
+		ChangeState(Ph2_DogAirPlaneState::Death);
+		return;
+	}
+
 	if (Ph2_Boss->GetTransform()->GetLocalPosition().y > -300.0f)
 	{
 		Ph2_Boss->GetTransform()->AddLocalPosition({ 0.0f , -300.0f * _Time,0.0f });
@@ -182,7 +232,17 @@ void Ph2_DogAirpalne::DownIntroUpdate(float _Time)
 
 void Ph2_DogAirpalne::AttackUpdate(float _Time)
 {
-
+	if (Hp < 0)
+	{
+		jetpack->Off();
+		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
+		{
+			ph2_jetpack_smoke_a[i]->Off();
+		}
+		Collision->Off();
+		ChangeState(Ph2_DogAirPlaneState::Death);
+		return;
+	}
 
 	RandomAttack = GameEngineRandom().MainRandom.RandomFloat(1.0f, 4.5f);
 
@@ -247,7 +307,6 @@ void Ph2_DogAirpalne::AttackUpdate(float _Time)
 				++RotationAnimation;
 				AttackCheck = false;
 			}
-
 		}
 		break;
 		case 4:
@@ -622,8 +681,46 @@ void Ph2_DogAirpalne::AttackUpdate(float _Time)
 
 }
 
+void Ph2_DogAirpalne::DeathUpdate(float _Time)
+{
+	// 타원의 중심
+	float x = 0.0;
+	float y = 0.0;
+
+	// 타원의 반지름
+	float a = 550;
+	float b = 300;
+
+	test += 1.0f * _Time;
+
+	//test += 1* _Time;
+	Pos_x = x + a * cos(test);
+	Pos_y = y + b * sin(test);
+
+
+	Ph2_Boss->GetTransform()->SetLocalPosition({ -Pos_x, Pos_y,0 });
+
+	if (Ph2_Boss->IsAnimationEnd())
+	{
+		Ph2_Boss->Off();
+		
+	}
+}
+
 void Ph2_DogAirpalne::UpIdleUpdate(float _Time)
 {
+	if (Hp < 0)
+	{
+		jetpack->Off();
+		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
+		{
+			ph2_jetpack_smoke_a[i]->Off();
+		}
+		Collision->Off();
+		ChangeState(Ph2_DogAirPlaneState::Death);
+		return;
+	}
+
 	float RadiousX = 620;
 	float RadiousY = 300;
 
@@ -662,6 +759,17 @@ void Ph2_DogAirpalne::UpIdleUpdate(float _Time)
 
 void Ph2_DogAirpalne::RightIdleUpdate(float _Time)
 {
+	if (Hp < 0)
+	{
+		jetpack->Off();
+		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
+		{
+			ph2_jetpack_smoke_a[i]->Off();
+		}
+		Collision->Off();
+		ChangeState(Ph2_DogAirPlaneState::Death);
+		return;
+	}
 	float RadiousX = 620;
 	float RadiousY = 300;
 
@@ -700,6 +808,18 @@ void Ph2_DogAirpalne::RightIdleUpdate(float _Time)
 
 void Ph2_DogAirpalne::DownIdleUpdate(float _Time)
 {
+	if (Hp < 0)
+	{
+		jetpack->Off();
+		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
+		{
+			ph2_jetpack_smoke_a[i]->Off();
+		}
+		Collision->Off();
+		ChangeState(Ph2_DogAirPlaneState::Death);
+		return;
+	}
+
 
 	float RadiousX = 620;
 	float RadiousY = 300;
@@ -738,7 +858,17 @@ void Ph2_DogAirpalne::DownIdleUpdate(float _Time)
 
 void Ph2_DogAirpalne::RotationUpdate(float _Time)
 {
-
+	if (Hp < 0)
+	{
+		jetpack->Off();
+		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
+		{
+			ph2_jetpack_smoke_a[i]->Off();
+		}
+		Collision->Off();
+		ChangeState(Ph2_DogAirPlaneState::Death);
+		return;
+	}
 
 
 	// 타원의 중심
@@ -754,8 +884,6 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 	//test += 1* _Time;
 	Pos_x = x + a * cos(test);
 	Pos_y = y + b * sin(test);
-
-
 
 
 		switch (RotationAnimation)

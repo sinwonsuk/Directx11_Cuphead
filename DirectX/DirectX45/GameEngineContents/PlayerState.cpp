@@ -106,6 +106,16 @@ void Player::ChangeState(PlayerState _State)
 	case PlayerState::DownAttackPre:
 		AnimationCheck("DownAttackPre");
 		break;
+	case PlayerState::MapOut:
+		AnimationCheck("Hit_Ground");
+		break;
+	case PlayerState::Fail:
+		AnimationCheck("Jump");
+		break;
+	case PlayerState::Hit:
+		AnimationCheck("Hit_Ground");
+		break;
+
 	default:
 		break;
 	}
@@ -220,7 +230,15 @@ void Player::UpdateState(float _Time)
 	case PlayerState::DownAttackPre:
 		DownAttackPreUpdate(_Time);
 		break;
-
+	case PlayerState::MapOut:
+		MapOutUpdate(_Time);
+		break;
+	case PlayerState::Fail:
+		FailUpdate(_Time);
+		break;
+	case PlayerState::Hit:
+		HitUpdate(_Time); 
+		break;
 	default:
 		break;
 	}
@@ -231,30 +249,45 @@ void Player::UpdateState(float _Time)
 
 void Player::IdleUpdate(float _Time)
 {
+	if (DownCheck == false)
+	{
+		CurPos_y = GetTransform()->GetLocalPosition().y;
+		DownCheck = true;
+	}
 	
 
+	if (CurPos_y-25.0f > GetTransform()->GetLocalPosition().y)
+	{
+		DownCheck = false;
+		ChangeState(PlayerState::Fail);	
+		return;
+	}
 
 	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		ChangeState(PlayerState::Run);
+		DownCheck = false;
 		ResetLiveTime();
 		return; 
 	}
 	if (true == GameEngineInput::IsPress("PlayerMoveRight"))
 	{	
-		ChangeState(PlayerState::Run);
+		DownCheck = false;
 		ResetLiveTime();
+		ChangeState(PlayerState::Run);
+	
 		return;
 	}
 	if (true == GameEngineInput::IsPress("PlayerMoveUp"))
 	{
+		DownCheck = false;
 		ChangeState(PlayerState::Up);
 		return;
 	}
 
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
-		
+		DownCheck = false;
 		ResetLiveTime(); 
 		JumpCheck = true;
 		ChangeState(PlayerState::Jump);
@@ -262,7 +295,7 @@ void Player::IdleUpdate(float _Time)
 	}
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
-		
+		DownCheck = false;
 		ResetLiveTime();
 		JumpCheck = true;
 		ChangeState(PlayerState::Jump);
@@ -270,21 +303,25 @@ void Player::IdleUpdate(float _Time)
 	}
 	if (true == GameEngineInput::IsPress("PlayerMoveDown"))
 	{
+		DownCheck = false;
 		ChangeState(PlayerState::Duck);
 		return;
 	}
 	if (true == GameEngineInput::IsPress("PlayerRock"))
 	{
+		DownCheck = false;
 		ChangeState(PlayerState::IdleAim);
 		return;
 	}
 	if (true == GameEngineInput::IsPress("PlayerDash"))
 	{
+		DownCheck = false;
 		ChangeState(PlayerState::Dash);
 		return;
 	}
 	if (true == GameEngineInput::IsPress("PlayerAttack"))
 	{
+		DownCheck = false;
 		ChangeState(PlayerState::IdleAttackPre);
 		return;
 	}
@@ -292,6 +329,14 @@ void Player::IdleUpdate(float _Time)
 
 void Player::RunUpdate(float _Time)
 {
+
+	if (DownCheck == false)
+	{
+		CurPos_y = GetTransform()->GetLocalPosition().y;
+		DownCheck = true;
+	}
+	
+
 	if (CheckCamera == true)
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
@@ -319,7 +364,7 @@ void Player::RunUpdate(float _Time)
 
 	if (RunTime > 0.5)
 	{
-		std::shared_ptr<PlayerRunEffect> Object =GetLevel()->CreateActor<PlayerRunEffect>(3);
+		std::shared_ptr<PlayerRunEffect> Object =GetLevel()->CreateActor<PlayerRunEffect>(101);
 		Object->SetState(EffectState::RunEffect);
 		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
 		RunTime = 0;
@@ -328,7 +373,7 @@ void Player::RunUpdate(float _Time)
 	
 	if (EffectCheck == 1 && RunTime > 0.3)
 	{
-		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(101);
 		Object->SetState(EffectState::RunEffect);
 		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
 		RunTime = 0;
@@ -341,6 +386,15 @@ void Player::RunUpdate(float _Time)
 		ChangeState(PlayerState::DiagonalUpRunAttack);
 		return; 
 	}
+
+
+	if (CurPos_y - 25.0f > GetTransform()->GetLocalPosition().y)
+	{
+		DownCheck = false;
+		ChangeState(PlayerState::Fail);
+		return;
+	}
+
 
 	if (true == GameEngineInput::IsPress("PlayerDash"))
 	{
@@ -429,7 +483,7 @@ void Player::JumpUpdate(float _Time)
 		if (GetLiveTime() > 0.25)
 		{
 			JumpCheck = false;
-			test = true;
+			//test = true;
 			ResetLiveTime();
 
 		}
@@ -584,15 +638,16 @@ void Player::JumpUpdate(float _Time)
 
 	
 	
-	if (Gravity == false && test == true)
+	if (Gravity == false /*&& test == true*/)
 	{
 
-		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(101);
 		Object->SetState(EffectState::JumpEffect);
 		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
 		test = false;
 		DashCheck = true;
 		RunTime = 0;
+		GravitySpeed = 450;
 		ChangeState(PlayerState::Idle);
 		return;
 	}
@@ -677,7 +732,7 @@ void Player::ParryUpdate(float _Time)
 		{
 			ResetLiveTime();
 			JumpCheck = false;
-			test = true;
+			//test = true;
 		}
 	}
 
@@ -836,9 +891,9 @@ void Player::ParryUpdate(float _Time)
 
 
 
-	if (Gravity == false && test == true)
+	if (Gravity == false /*&& test == true*/)
 	{
-		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(101);
 		Object->SetState(EffectState::JumpEffect);
 		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
 
@@ -1047,7 +1102,7 @@ void Player::DashUpdate(float _Time)
 	{
 		if (DashEffectCheck == false)
 		{
-			std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+			std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(101);
 			Object->SetState(EffectState::DashEffect);
 			Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x-50,GetTransform()->GetLocalPosition().y-25  });
 
@@ -1063,7 +1118,7 @@ void Player::DashUpdate(float _Time)
 	{
 		if (DashEffectCheck == false)
 		{
-			std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+			std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(101);
 			Object->SetState(EffectState::DashEffect);
 			Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x+50,GetTransform()->GetLocalPosition().y - 25 });
 
@@ -1076,6 +1131,7 @@ void Player::DashUpdate(float _Time)
 	if (Render0->IsAnimationEnd() && Gravity != false)
 	{
 	
+		JumpCheck = false;
 		DashEffectCheck = false;
 		ResetLiveTime();
 		ChangeState(PlayerState::Jump);
@@ -1284,6 +1340,14 @@ void Player::IdleAttackPreUpdate(float _Time)
 
 void Player::RunAttackUpdate(float _Time)
 {
+
+	if (DownCheck == false)
+	{
+		CurPos_y = GetTransform()->GetLocalPosition().y;
+		DownCheck = true;
+	}
+	
+
 	switch (Bulletlocation)
 	{
 	case 0:
@@ -1363,7 +1427,7 @@ void Player::RunAttackUpdate(float _Time)
 
 	if (RunTime > 0.5)
 	{
-		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(101);
 		Object->SetState(EffectState::RunEffect);
 		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
 		RunTime = 0;
@@ -1372,7 +1436,7 @@ void Player::RunAttackUpdate(float _Time)
 
 	if (EffectCheck == 1 && RunTime > 0.3)
 	{
-		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(101);
 		Object->SetState(EffectState::RunEffect);
 		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
 		RunTime = 0;
@@ -1426,6 +1490,12 @@ void Player::RunAttackUpdate(float _Time)
 		return;
 	}
 
+	if (CurPos_y - 25.0f > GetTransform()->GetLocalPosition().y)
+	{
+		DownCheck = false;
+		ChangeState(PlayerState::Fail);
+		return;
+	}
 
 
 	if (true == GameEngineInput::IsPress("PlayerRock"))
@@ -2462,6 +2532,178 @@ void Player::DownAttackPreUpdate(float _Time)
 		ChangeState(PlayerState::DownAttack);
 		return;
 	}
+}
+
+void Player::MapOutUpdate(float _Time)
+{
+	if (CheckCamera == true)
+	{
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
+		}
+		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
+		}
+
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
+	{
+		GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
+	}
+	if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
+	{
+		GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
+	}
+
+
+	if (JumpCheck == true)
+	{
+		if (GetLiveTime() < 0.5)
+		{
+			GetTransform()->AddLocalPosition(float4::Up * 1200 * _Time);
+		}
+		if (GetLiveTime() > 0.5)
+		{
+
+			GravitySpeed = 800;
+			//GetTransform()->AddLocalPosition(float4::Down * 400 * _Time);
+			ChangeState(PlayerState::Jump);
+			return;
+		
+
+		}
+	}
+	
+
+	if (Gravity == false && test == true)
+	{
+
+		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(101);
+		Object->SetState(EffectState::JumpEffect);
+		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
+		test = false;
+		DashCheck = true;
+		RunTime = 0;
+		ChangeState(PlayerState::Idle);
+		return;
+	}
+
+
+
+
+
+}
+
+void Player::FailUpdate(float _Time)
+{
+	if (CheckCamera == true)
+	{
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
+		}
+		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
+		}
+
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
+	{
+		GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
+	}
+	if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
+	{
+		GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
+	}
+
+	
+	if (Gravity == false /*&& test == true*/)
+	{
+
+		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+		Object->SetState(EffectState::JumpEffect);
+		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
+		test = false;
+		DashCheck = true;
+		RunTime = 0;
+		GravitySpeed = 450;
+		ChangeState(PlayerState::Idle);
+		return;
+	}
+
+}
+
+void Player::HitUpdate(float _Time)
+{
+	
+
+	if (CheckCamera == true)
+	{
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
+		}
+		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
+		}
+
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
+	{
+		GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
+	}
+	if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
+	{
+		GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
+	}
+
+
+	if (JumpCheck == true)
+	{
+		if (GetLiveTime() < 0.2)
+		{
+			GetTransform()->AddLocalPosition(float4::Up * 800 * _Time);
+		}
+		if (GetLiveTime() > 0.2)
+		{
+			JumpCheck = false;
+			return;
+		}
+	}
+
+
+	if (Render0->IsAnimationEnd())
+	{
+		//Render0->ColorOptionValue.MulColor = { 1.0f,1.0f,1.0f,1.0f };
+		ChangeState(PlayerState::Idle);
+		return;
+	}
+
+
+	
+	
+	/*if (GetLiveTime() > 0.1)
+	{
+		Render0->ColorOptionValue.MulColor *= 1.0f;
+		ResetLiveTime();
+	}*/
+
+	/*if (HitNumber == 7)
+	{
+		HitCheck = true;
+		ChangeState(PlayerState::Idle);
+		return;
+	}*/
+
+
+
 }
 
 void Player::DiagonalUpAttackUpdate(float _Time)

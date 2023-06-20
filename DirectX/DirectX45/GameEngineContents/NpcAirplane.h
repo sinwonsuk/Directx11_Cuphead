@@ -49,12 +49,14 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Front;
 	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Reg;
 	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Spin;
-
 	std::shared_ptr<class GameEngineSpriteRenderer> Npc;
 	std::shared_ptr<class GameEngineSpriteRenderer> C_Left_Clouds;
 	std::shared_ptr<class GameEngineSpriteRenderer> D_Left_Clouds;
 	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
+
 	std::shared_ptr<class GameEngineCollision> Collision;
+
+	std::shared_ptr<class GameEngineCollision> DownCollision;
 	bool ph3_main_boss_Check =false;
 
 	bool fdasd = false;

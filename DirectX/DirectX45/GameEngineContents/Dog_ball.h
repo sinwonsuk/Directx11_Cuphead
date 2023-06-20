@@ -28,7 +28,11 @@ protected:
 private:
 //	NpcAirplaneState StateValue = NpcAirplaneState::Intro;
 
+	std::shared_ptr<class GameEngineCollision> LeftCollision;
 
+	std::shared_ptr<class GameEngineCollision> RightCollision;
+
+	std::shared_ptr<class GameEngineCollision> MiddleCollision;
 	std::shared_ptr<class GameEngineSpriteRenderer> Left_Ball;
 	std::shared_ptr<class GameEngineSpriteRenderer> Middle_Ball;
 	std::shared_ptr<class GameEngineSpriteRenderer> Right_Ball;

@@ -34,6 +34,9 @@ enum class PlayerState
 	DuckAttackPre, 
 	DownAttack,
 	DownAttackPre,
+	MapOut,
+	Fail,
+	Hit
 };
 // Ό³Έν :
 class Player : public GameEngineActor
@@ -85,6 +88,11 @@ public:
 	void UpAimAttackPreUpdate(float _Time);
 	void DownAttackUpdate(float _Time);
 	void DownAttackPreUpdate(float _Time);
+	void MapOutUpdate(float _Time); 
+	void FailUpdate(float _Time);
+	void HitUpdate(float _Time);
+
+
 	bool GetGravity()
 	{
 		return Gravity;
@@ -94,6 +102,16 @@ public:
 		Gravity = _Gravity;
 		return Gravity;
 	}
+	bool GetJumpCheck()
+	{
+		return JumpCheck;
+	}
+	std::shared_ptr<class GameEngineCollision> GetCollision()
+	{
+		return Collision;
+	}
+
+
 	std::shared_ptr<class GameEngineSpriteRenderer> GetPlayer()
 	{
 		return Render0;
@@ -116,6 +134,9 @@ private:
 	int GravityCheck = 0; 
 	int RightCheck = 0;
 	int LeftCheck = 0;
+	int HitNumber = 0;
+
+	float HitTime = 0;
 	float Speed = 300;
 	float GravitySpeed = 450;
 	float JumpSpeed = 1200;
@@ -126,8 +147,11 @@ private:
 	bool CheckCamera = false;
 	bool test = false;
 	bool DashCheck = true;
-
+	bool DownCheck = false;
+	bool HitCheck = false;
+	bool dfgdfg = false;
 	bool DashEffectCheck = false;
+	float CurPos_y = 0;
 	int EffectCheck = 0; 
 	int Frame = 0;
 	float BulletTime = 0;

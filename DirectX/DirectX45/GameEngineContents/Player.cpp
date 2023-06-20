@@ -23,14 +23,14 @@ Player::~Player()
 
 void Player::Update(float _DeltaTime)
 {
-
+	
 	
 
 	if (Gravity == true && StateValue != PlayerState::Dash)
 	{
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
 	}
-	
+	HitTime += _DeltaTime;
 	BulletTime += _DeltaTime;
 	RunTime += _DeltaTime; 
 
@@ -102,7 +102,7 @@ void Player::Update(float _DeltaTime)
 	RightCheck = 0;
 	LeftCheck = 0;*/
 
-
+	
 	
 	if (GetTransform()->GetLocalScale().x > 0 && StateValue != PlayerState::Dash)
 	{
@@ -119,14 +119,59 @@ void Player::Update(float _DeltaTime)
 			GetTransform()->SetLocalPositiveScaleX();		
 		}
 	}
-	
-	
-	
+	if (HitCheck == true)
+	{
+		if (HitTime < 0.1f)
+		{
+			Render0->ColorOptionValue.MulColor = { 0.0f,0.0f,0.0f,0.001f };
 
+		}
+		if (HitTime > 0.1f)
+		{
+			Render0->ColorOptionValue.MulColor = { 1.0f,1.0f,1.0f,1.0f };
+			HitTime = 0;
+			++HitNumber;
+		}
+
+
+		if (HitNumber == 15)
+		{
+			HitCheck =false;
+			HitNumber = 0;
+			HitTime = 0;
+		}
+
+
+	}
 
 
 
 	UpdateState(_DeltaTime);
+
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::AABBBOX2D, ColType::AABBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+		ResetLiveTime();
+		GravitySpeed = 450.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
+
+	
+
 }
 
 void Player::Start()
@@ -199,7 +244,10 @@ void Player::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DiagonalDownAttackPre").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DownAttack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DownAttackPre").GetFullPath());
-		
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Hit_Ground").GetFullPath());
+
+
+
 		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttackPre").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAimAttack").GetFullPath());
@@ -209,8 +257,8 @@ void Player::Start()
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
 	Render0 = CreateComponent<GameEngineSpriteRenderer>(100);
 	
-
-
+	//Render0->PushCameraRender(100);
+	
 	
 
 	Render0->CreateAnimation({ .AnimationName = "Idle", .SpriteName = "Idle", .FrameInter =0.06f,.Loop = true, .ScaleToTexture = true,});
@@ -243,13 +291,18 @@ void Player::Start()
 	Render0->CreateAnimation({ .AnimationName = "UpAimAttackPre", .SpriteName = "UpAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "DownAttack", .SpriteName = "DownAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "DownAttackPre", .SpriteName = "DownAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
-
+	Render0->CreateAnimation({ .AnimationName = "Hit_Ground", .SpriteName = "Hit_Ground",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
 	Render0->ChangeAnimation("Idle");
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->AddLocalPosition({ 0.0f, -30.0f, 0.0f });
 	Collision->GetTransform()->SetLocalScale({ 100.0f, 110.0f, 100.0f });
 	Collision->SetOrder((int)CollisionType::Player);
+
+
+	
+
+
 	
 }
 

@@ -41,7 +41,7 @@ protected:
 
 private:
 	float4 MoveDir = { 1,0 };
-
+	std::shared_ptr<class GameEngineCollision> Collision;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
 	int Check = 0;

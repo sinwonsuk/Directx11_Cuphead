@@ -92,6 +92,8 @@ void GameEngineRenderer::RenderTransformUpdate(GameEngineCamera* _Camera)
 		return;
 	}
 
+	// RenderCamera = _Camera;
+
 	GetTransform()->SetCameraMatrix(_Camera->GetView(), _Camera->GetProjection());
 }
 
@@ -188,16 +190,6 @@ void GameEngineRenderer::SetPipeLine(const std::string_view& _Name, int _index)
 
 	Unit->SetPipeLine(_Name);
 
-	{
-		const GameEngineShaderResHelper& Res = Unit->Pipe->GetVertexShader()->GetShaderResHelper();
-		Unit->ShaderResHelper.Copy(Res);
-	}
-
-	{
-		const GameEngineShaderResHelper& Res = Unit->Pipe->GetPixelShader()->GetShaderResHelper();
-		Unit->ShaderResHelper.Copy(Res);
-	}
-
 	if (true == Unit->ShaderResHelper.IsConstantBuffer("TransformData"))
 	{
 		const TransformData& Data = GetTransform()->GetTransDataRef();
@@ -210,6 +202,7 @@ void GameEngineRenderer::SetPipeLine(const std::string_view& _Name, int _index)
 
 void GameEngineRenderer::PushCameraRender(int _CameraOrder)
 {
+
 	GetLevel()->PushCameraRenderer(DynamicThis<GameEngineRenderer>(), _CameraOrder);
 }
 

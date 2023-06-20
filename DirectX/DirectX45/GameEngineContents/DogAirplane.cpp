@@ -75,6 +75,7 @@ void DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Buldog_Death_intro").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("acada").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Death_Front").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_GetReady").GetFullPath());
 	}
 
 	GirlDog = CreateComponent<GameEngineSpriteRenderer>();
@@ -193,9 +194,15 @@ void DogAirplane::Start()
 	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,81 });
 	bulldogIdle->On();
 
+	Ready = CreateComponent<GameEngineSpriteRenderer>();
+	Ready->CreateAnimation({ .AnimationName = "FightText_GetReady", .SpriteName = "FightText_GetReady", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
+	Ready->ChangeAnimation("FightText_GetReady");
+	Ready->SetScaleRatio(3.0f);
+	Ready->On();
+
+
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 300.0f, 250.0f, 300.0f });
-
 	Collision->SetOrder((int)CollisionType::BossBody);
 
 }
@@ -203,6 +210,11 @@ void DogAirplane::Start()
 
 void DogAirplane::Update(float _Delta)
 {		
+
+	if (Ready->IsAnimationEnd())
+	{
+		Ready->Off();
+	}
 	
 
 	if (StateValue != DogAirplaneState::BossAttackPase1)
@@ -214,6 +226,8 @@ void DogAirplane::Update(float _Delta)
 
 	if (Collision->Collision((int)CollisionType::Bullet))
 	{
+
+
 		Hp -= 1.0;
 
 		if (CollisonCheck == false)
@@ -234,7 +248,7 @@ void DogAirplane::Update(float _Delta)
 		CollisonCheck = false;
 	}
 
-	
+	//bulldogIdle->ColorOptionValue.PlusColor = { 0,0,0,-1 };
 
 
 	

@@ -3,6 +3,8 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.cpp"
+
+
 Ph2_DogAirpalne::Ph2_DogAirpalne()
 {
 }
@@ -61,7 +63,7 @@ void Ph2_DogAirpalne::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph2_jetpack_smoke_c").GetFullPath());
 
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_bow_big_spark").GetFullPath());
-	
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph2_dog_death").GetFullPath());
 
 
 
@@ -104,14 +106,14 @@ void Ph2_DogAirpalne::Start()
 	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_side_back", .SpriteName = "SD_Attack_side_back", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true, });
 	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_3_4_back", .SpriteName = "SD_Attack_3_4_back", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true,  });
 	Ph2_Boss->CreateAnimation({ .AnimationName = "SD_Attack_3_4_back_back", .SpriteName = "SD_Attack_3_4_back_back", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true  });
-
+	Ph2_Boss->CreateAnimation({ .AnimationName = "ph2_dog_death", .SpriteName = "ph2_dog_death", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 
 	Ph2_Boss->ChangeAnimation("ph2_dog_a_intro");
 
 	for (size_t i = 0; i < 20; i++)
 	{
 		
-		ph2_jetpack_smoke_a1 = CreateComponent<GameEngineSpriteRenderer>();
+		std::shared_ptr<class GameEngineSpriteRenderer> ph2_jetpack_smoke_a1 = CreateComponent<GameEngineSpriteRenderer>();
 		ph2_jetpack_smoke_a1->CreateAnimation({ .AnimationName = "ph2_jetpack_smoke_a", .SpriteName = "ph2_jetpack_smoke_a", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph2_jetpack_smoke_a1->ChangeAnimation("ph2_jetpack_smoke_a");
 		ph2_jetpack_smoke_a1->SetScaleRatio(1.2f);
@@ -127,7 +129,7 @@ void Ph2_DogAirpalne::Start()
 	Attack_Effect->ChangeAnimation("SD_bow_big_spark");
 	Attack_Effect->Off();
 	
-
+	
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 300.0f, 250.0f, 300.0f });
 
@@ -138,24 +140,31 @@ void Ph2_DogAirpalne::Start()
 void Ph2_DogAirpalne::Update(float _Delta)
 {
 	
-	
+
+
 		Collision->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition()});
 	
 
 		if (Collision->Collision((int)CollisionType::Bullet))
 		{
-			
 			if (CollisonCheck == false)
 			{
+
 				Ph2_Boss->ColorOptionValue.PlusColor = { 1,1,1,0 };
 				Ph2_Boss->ResetLiveTime();
 				CollisonCheck = true;
 
 			}
 			std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
-
+			Hp -= 1;
 			collision->Death();
 		}
+
+
+
+
+
+
 
 		if (CollisonCheck == true && Ph2_Boss->GetLiveTime() > 0.05f)
 		{
@@ -163,8 +172,7 @@ void Ph2_DogAirpalne::Update(float _Delta)
 			CollisonCheck = false;
 		}
 
-
-	
+		
 
 	
 

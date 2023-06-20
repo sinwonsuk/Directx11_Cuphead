@@ -5,6 +5,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include "Player.h"
+#include "EnumClass.cpp"
 ph2_Boss_Weapon::ph2_Boss_Weapon()
 {
 }
@@ -22,7 +23,6 @@ void ph2_Boss_Weapon::Start()
 		NewDir.Move("ContentResources");
 		NewDir.Move("Texture");
 		NewDir.Move("DogAirplane");
-
 
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_bow").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("SD_bow_First").GetFullPath());
@@ -54,10 +54,20 @@ void ph2_Boss_Weapon::Start()
 	Bullet_First->ChangeAnimation("SD_bow_First");
 	Bullet_First->Off();
 
+
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 90.0f, 94.0f, 300.0f });
+	Collision->SetOrder((int)CollisionType::BossAttack);
+
 }
 
 void ph2_Boss_Weapon::Update(float _Delta)
 {
+	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition()});
+
+	
+
+
 	/*TransformData date = Player::MainPlayer->GetTransform()->GetTransDataRef();
 	TransformData date1 = Bullet_First->GetTransform()->GetTransDataRef();*/
 

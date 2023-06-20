@@ -3,6 +3,8 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCamera.h>
+#include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.cpp"
 
 Dog_ball::Dog_ball()
 {
@@ -41,6 +43,18 @@ void Dog_ball::Start()
 	Right_Ball->CreateAnimation({ .AnimationName = "ph1_dog_ball", .SpriteName = "ph1_dog_ball", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Right_Ball->ChangeAnimation("ph1_dog_ball");
 	
+	LeftCollision = CreateComponent<GameEngineCollision>();
+	
+	LeftCollision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 300.0f });
+	LeftCollision->SetOrder((int)CollisionType::BossAttack);
+
+	RightCollision = CreateComponent<GameEngineCollision>();
+	RightCollision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 300.0f });
+	RightCollision->SetOrder((int)CollisionType::BossAttack);
+
+	MiddleCollision = CreateComponent<GameEngineCollision>();
+	MiddleCollision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 300.0f });
+	MiddleCollision->SetOrder((int)CollisionType::BossAttack);
 
 
 }
@@ -48,19 +62,25 @@ void Dog_ball::Start()
 
 void Dog_ball::Update(float _Delta)
 {
+	LeftCollision->GetTransform()->SetLocalPosition({ Left_Ball->GetTransform()->GetLocalPosition() });
+
+	MiddleCollision->GetTransform()->SetLocalPosition({ Middle_Ball->GetTransform()->GetLocalPosition() });
+
+	RightCollision->GetTransform()->SetLocalPosition({ Right_Ball->GetTransform()->GetLocalPosition() });
+
 	Gravity += float4::Down * 30.0f * _Delta;
 
-	if (Gravity.y > 1500)
+	if (Gravity.y > 1500.0f)
 	{
-		Gravity.y = 1500;
+		Gravity.y = 1500.0f;
 	}
 
 
 	GetTransform()->AddLocalPosition({ Gravity });
 
-	Left_Ball->GetTransform()->AddLocalPosition(LeftMoveDir *_Delta *650);
-	Middle_Ball->GetTransform()->AddLocalPosition(MiddleMoveDir *_Delta * 650);
-	Right_Ball->GetTransform()->AddLocalPosition( RightMoveDir *_Delta * 650);
+	Left_Ball->GetTransform()->AddLocalPosition(LeftMoveDir *_Delta *650.0f);
+	Middle_Ball->GetTransform()->AddLocalPosition(MiddleMoveDir *_Delta * 650.0f);
+	Right_Ball->GetTransform()->AddLocalPosition( RightMoveDir *_Delta * 650.0f);
 }
 
 void Dog_ball::Render(float _Delta)

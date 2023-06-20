@@ -82,7 +82,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_laser_warning_low = nullptr;
 	
 	bool dirCheck = false;
-
+	bool LaserCheck = false;
 	float4 MoveDir = { 0,0 };
 	std::shared_ptr<class GameEngineCollision> Collision;
 	std::shared_ptr<class GameEngineSpriteRenderer> Sfx;

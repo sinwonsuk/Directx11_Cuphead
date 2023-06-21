@@ -44,7 +44,7 @@ void ph3_Laser::Start()
 	}
 
 
-	//Top
+	//Topn
 	{
 		ph3_laser_warning_top = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_laser_warning_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_top", .SpriteName = "ph3_laser_warning_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });

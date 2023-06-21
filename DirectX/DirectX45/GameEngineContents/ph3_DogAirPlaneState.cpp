@@ -209,7 +209,7 @@ void Ph3_DogAirplane::Pase1_AttackUpdate(float _Time)
 			TopLaserCheck = true;
 
 			ChangeState(Ph3_DogAirPlaneState::Pase1_Attack_Reverse);
-			//ResetLiveTime();
+			ResetLiveTime();
 		}		
 	}
 

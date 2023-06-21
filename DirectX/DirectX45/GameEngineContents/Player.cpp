@@ -298,7 +298,7 @@ void Player::Start()
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->AddLocalPosition({ 0.0f, -30.0f, 0.0f });
-	Collision->GetTransform()->SetLocalScale({ 100.0f, 110.0f, 100.0f });
+	Collision->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::Player);
 
 

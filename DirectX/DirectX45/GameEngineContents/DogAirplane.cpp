@@ -228,7 +228,7 @@ void DogAirplane::Update(float _Delta)
 	{
 
 
-		Hp -= 1.0;
+		Hp -= 1;
 
 		if (CollisonCheck == false)
 		{

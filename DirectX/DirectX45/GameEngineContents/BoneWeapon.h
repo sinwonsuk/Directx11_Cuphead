@@ -24,7 +24,7 @@ public:
 		return Time;
 	}
 
-	float SetCheck(const float& _Check)
+	int SetCheck(const int& _Check)
 	{
 		Check = _Check;
 		return Check;

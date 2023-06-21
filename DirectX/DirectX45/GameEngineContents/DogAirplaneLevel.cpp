@@ -18,7 +18,7 @@ DogAirplaneLevel::~DogAirplaneLevel()
 void DogAirplaneLevel::Update(float _DeltaTime)
 {
 
-	switch (ad)
+	/*switch (ad)
 	{
 	case 0:
 	{
@@ -54,7 +54,7 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 
 	default:
 		break;
-	}
+	}*/
 
 
 
@@ -209,19 +209,19 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetSortType(0, SortType::ZSort);
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
-	GameEngineLevel::IsDebugSwitch();
+	//GameEngineLevel::IsDebugSwitch();
 
-	
-	//CreateNewCamera
+	//
+	////CreateNewCamera
 
-	std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
+	//std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
+	//
 	
-	
-	BackGround = CreateActor<DogAirplaneBackground>();
+	//BackGround = CreateActor<DogAirplaneBackground>();
 
 	Npc = CreateActor<NpcAirplane>();
 
-	Ph1_DogAirplane = CreateActor<DogAirplane>();
+	//Ph1_DogAirplane = CreateActor<DogAirplane>();
 
 	player = CreateActor<Player>();
 	player->GetTransform()->AddLocalPosition({ 0,0,0 });
@@ -231,35 +231,35 @@ void DogAirplaneLevel::Start()
 
 
 
-	{
-		Ph2_DogAirpalne_Left = GetLevel()->CreateActor<Ph2_DogAirpalne>(4);
-		Ph2_DogAirpalne_Left->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ -700.0f,0.0f,82.0f });
-		Ph2_DogAirpalne_Left->Get_jetpack()->GetTransform()->AddLocalPosition({ -750.0f,-50.0f,82.0f });
-		Ph2_DogAirpalne_Left->ChangeState(Ph2_DogAirPlaneState::LeftIntro);
-	}
+	//{
+	//	Ph2_DogAirpalne_Left = GetLevel()->CreateActor<Ph2_DogAirpalne>(4);
+	//	Ph2_DogAirpalne_Left->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ -700.0f,0.0f,82.0f });
+	//	Ph2_DogAirpalne_Left->Get_jetpack()->GetTransform()->AddLocalPosition({ -750.0f,-50.0f,82.0f });
+	//	Ph2_DogAirpalne_Left->ChangeState(Ph2_DogAirPlaneState::LeftIntro);
+	//}
 
-	{
-		Ph2_DogAirpalne_Top = GetLevel()->CreateActor<Ph2_DogAirpalne>(4);
-		Ph2_DogAirpalne_Top->ChangeState(Ph2_DogAirPlaneState::UpIntro);
-		Ph2_DogAirpalne_Top->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 0.0f,400.0f,82.0f });
-		Ph2_DogAirpalne_Top->Get_jetpack()->GetTransform()->AddLocalPosition({ 0.0f,350.0f,82.0f });
-	}
+	//{
+	//	Ph2_DogAirpalne_Top = GetLevel()->CreateActor<Ph2_DogAirpalne>(4);
+	//	Ph2_DogAirpalne_Top->ChangeState(Ph2_DogAirPlaneState::UpIntro);
+	//	Ph2_DogAirpalne_Top->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 0.0f,400.0f,82.0f });
+	//	Ph2_DogAirpalne_Top->Get_jetpack()->GetTransform()->AddLocalPosition({ 0.0f,350.0f,82.0f });
+	//}
 
-	{
-		Ph2_DogAirpalne_Right = GetLevel()->CreateActor<Ph2_DogAirpalne>(4);
-		Ph2_DogAirpalne_Right->ChangeState(Ph2_DogAirPlaneState::RightIntro);
-		Ph2_DogAirpalne_Right->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 700.0f,0.0f,82.0f });
-		Ph2_DogAirpalne_Right->Get_jetpack()->GetTransform()->AddLocalPosition({ 750.0f,-50.0f,82.0f });
-	}
+	//{
+	//	Ph2_DogAirpalne_Right = GetLevel()->CreateActor<Ph2_DogAirpalne>(4);
+	//	Ph2_DogAirpalne_Right->ChangeState(Ph2_DogAirPlaneState::RightIntro);
+	//	Ph2_DogAirpalne_Right->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 700.0f,0.0f,82.0f });
+	//	Ph2_DogAirpalne_Right->Get_jetpack()->GetTransform()->AddLocalPosition({ 750.0f,-50.0f,82.0f });
+	//}
 
-	{
-		Ph2_DogAirpalne_Bottom = GetLevel()->CreateActor<Ph2_DogAirpalne>(4);
-		Ph2_DogAirpalne_Bottom->ChangeState(Ph2_DogAirPlaneState::DownIntro);
-		Ph2_DogAirpalne_Bottom->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 0.0f,-400.0f,82.0f });
-		Ph2_DogAirpalne_Bottom->Get_jetpack()->GetTransform()->AddLocalPosition({ 0.0f, -450.0f,82.0f });
-	}
-	
-	
+	//{
+	//	Ph2_DogAirpalne_Bottom = GetLevel()->CreateActor<Ph2_DogAirpalne>(4);
+	//	Ph2_DogAirpalne_Bottom->ChangeState(Ph2_DogAirPlaneState::DownIntro);
+	//	Ph2_DogAirpalne_Bottom->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 0.0f,-400.0f,82.0f });
+	//	Ph2_DogAirpalne_Bottom->Get_jetpack()->GetTransform()->AddLocalPosition({ 0.0f, -450.0f,82.0f });
+	//}
+	//
+	//
 
 
 

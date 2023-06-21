@@ -2569,7 +2569,7 @@ void Player::MapOutUpdate(float _Time)
 		{
 
 			GravitySpeed = 800;
-			//GetTransform()->AddLocalPosition(float4::Down * 400 * _Time);
+			//HitCheck = false;
 			ChangeState(PlayerState::Jump);
 			return;
 		

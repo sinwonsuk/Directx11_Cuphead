@@ -163,6 +163,8 @@ void Player::Update(float _DeltaTime)
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
 	{
+
+		HitCheck = true;
 		ResetLiveTime();
 		GravitySpeed = 450.0f;
 		JumpCheck = true;

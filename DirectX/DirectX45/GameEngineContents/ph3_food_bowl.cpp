@@ -4,6 +4,9 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.cpp"
+
 ph3_food_bowl::ph3_food_bowl()
 {
 }
@@ -62,10 +65,17 @@ void ph3_food_bowl::Start()
 		Bullet->ChangeAnimation("ph3_dog_bowl_drop_yellow");
 	}
 
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 300.0f });
+
+	Collision->SetOrder((int)CollisionType::BossAttack);
+
 }
 
 void ph3_food_bowl::Update(float _Delta)
 {
+	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
+
 	if (HeightCheck == false)
 	{
 		Bullet->GetTransform()->AddLocalRotation({ 0,0 ,200 * _Delta });

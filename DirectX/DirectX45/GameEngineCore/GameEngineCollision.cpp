@@ -20,11 +20,6 @@ void GameEngineCollision::Start()
 
 std::shared_ptr<GameEngineCollision> GameEngineCollision::Collision(int _TargetGroup, ColType _ThisColType, ColType _OtherColtype)
 {
-
-
-
-
-
 	if (false == this->IsUpdate())
 	{
 		return nullptr;

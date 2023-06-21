@@ -164,7 +164,6 @@ public:
 
 protected:
 	void SpriteRenderInit();
-
 	float4 AtlasData;
 	float4 Clip = float4::One;
 

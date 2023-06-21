@@ -202,7 +202,6 @@ void GameEngineRenderer::SetPipeLine(const std::string_view& _Name, int _index)
 
 void GameEngineRenderer::PushCameraRender(int _CameraOrder)
 {
-
 	GetLevel()->PushCameraRenderer(DynamicThis<GameEngineRenderer>(), _CameraOrder);
 }
 

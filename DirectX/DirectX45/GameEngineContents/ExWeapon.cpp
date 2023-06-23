@@ -38,38 +38,38 @@ void ExWeapon::Start()
 
 
 
-	/*Bullet = CreateComponent<GameEngineSpriteRenderer>();
+	Bullet = CreateComponent<GameEngineSpriteRenderer>();
 
 	Bullet->CreateAnimation({ .AnimationName = "Peashooter_EX_Loop", .SpriteName = "Peashooter_EX_Loop.png", .FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true,.FrameIndex = {2,3,4,5,6,7} });
 	Bullet->CreateAnimation({ .AnimationName = "Peashooter_EX_Death", .SpriteName = "Peashooter_EX_Death.png", .FrameInter = 0.05f, .Loop = false,.ScaleToTexture = true, });
 	Bullet->ChangeAnimation("Peashooter_EX_Loop");
 	Bullet->SetScaleRatio(0.8f);
 
-	Sfx = CreateComponent<GameEngineSpriteRenderer>();
+	/*Sfx = CreateComponent<GameEngineSpriteRenderer>();
 	Sfx->CreateAnimation({ .AnimationName = "EX_ChargeUp", .SpriteName = "EX_ChargeUp", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
 	Sfx->ChangeAnimation("EX_ChargeUp");
-	Sfx->SetScaleRatio(0.8f);
+	Sfx->SetScaleRatio(0.8f);*/
 
-	Sfx_Dust = CreateComponent<GameEngineSpriteRenderer>();
-	Sfx_Dust->CreateAnimation({ .AnimationName = "EX_Dust", .SpriteName = "EX_Dust", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
-	Sfx_Dust->ChangeAnimation("EX_Dust");
+	//Sfx_Dust = CreateComponent<GameEngineSpriteRenderer>();
+	//Sfx_Dust->CreateAnimation({ .AnimationName = "EX_Dust", .SpriteName = "EX_Dust", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
+	//Sfx_Dust->ChangeAnimation("EX_Dust");
 
-	Sfx_Dust->SetScaleRatio(0.8f);
+	//Sfx_Dust->SetScaleRatio(0.8f);
 
-	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 50.0f });
-	Collision->SetOrder((int)CollisionType::Bullet);*/
+	//Collision = CreateComponent<GameEngineCollision>();
+	//Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 50.0f });
+	//Collision->SetOrder((int)CollisionType::Bullet);
 
 }
 
 void ExWeapon::Update(float _Delta)
 {
-	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
+	/*Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 
 	if (CollisionCheck == false)
 	{
 		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
-	}
+	}*/
 
 
 

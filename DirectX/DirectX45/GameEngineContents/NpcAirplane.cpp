@@ -188,12 +188,13 @@ void NpcAirplane::Update(float _Delta)
 		float4 b = a-ad;
 		test = b.NormalizeReturn();
 
+		Player::MainPlayer->GetTransform()->AddLocalPosition({ test * 1.3f });
 		Npc->GetTransform()->AddLocalPosition({ test * 1.3f });
 		Npc_Airplane_Back->GetTransform()->AddLocalPosition({ test * 1.3f });
 		Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ test * 1.3f });
 		Npc_Airplane_Front->GetTransform()->AddLocalPosition({ test * 1.3f });
 		Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ test * 1.3f });
-		Player::MainPlayer->GetTransform()->AddLocalPosition({ test * 1.3f });
+		
 		Player_Pos_Y_Check -= test.y * 1.4f;
 
 		if (Npc->GetTransform()->GetLocalPosition().y < -225.0f)
@@ -205,11 +206,9 @@ void NpcAirplane::Update(float _Delta)
 
 	TransformData date13= Npc->GetTransform()->GetTransDataRef(); 
 
-	if (DogAirplane::Finish == false)
-	{
-		collision(_Delta);
-	}
+	collision(_Delta);
 	
+
 
 	
 	UpdateState(_Delta); 

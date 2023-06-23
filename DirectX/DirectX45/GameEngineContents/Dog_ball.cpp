@@ -34,26 +34,33 @@ void Dog_ball::Start()
 	Left_Ball = CreateComponent<GameEngineSpriteRenderer>();
 	Left_Ball->CreateAnimation({ .AnimationName = "ph1_dog_ball", .SpriteName = "ph1_dog_ball", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Left_Ball->ChangeAnimation("ph1_dog_ball");
-	
+	Left_Ball->GetTransform()->AddLocalPosition({ 0.0f, 0.0f, -100.0f });
+
+
 	Middle_Ball = CreateComponent<GameEngineSpriteRenderer>();
 	Middle_Ball->CreateAnimation({ .AnimationName = "ph1_dog_ball", .SpriteName = "ph1_dog_ball", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Middle_Ball->ChangeAnimation("ph1_dog_ball");
+	Middle_Ball->GetTransform()->AddLocalPosition({ 0.0f, 0.0f, -100.0f });
 
 	Right_Ball = CreateComponent<GameEngineSpriteRenderer>();
 	Right_Ball->CreateAnimation({ .AnimationName = "ph1_dog_ball", .SpriteName = "ph1_dog_ball", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Right_Ball->ChangeAnimation("ph1_dog_ball");
-	
+	Right_Ball->GetTransform()->AddLocalPosition({ 0.0f, 0.0f, -100.0f });
+
 	LeftCollision = CreateComponent<GameEngineCollision>();
 	
 	LeftCollision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 300.0f });
+	
 	LeftCollision->SetOrder((int)CollisionType::BossAttack);
 
 	RightCollision = CreateComponent<GameEngineCollision>();
 	RightCollision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 300.0f });
+	
 	RightCollision->SetOrder((int)CollisionType::BossAttack);
 
 	MiddleCollision = CreateComponent<GameEngineCollision>();
 	MiddleCollision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 300.0f });
+
 	MiddleCollision->SetOrder((int)CollisionType::BossAttack);
 
 
@@ -70,9 +77,9 @@ void Dog_ball::Update(float _Delta)
 
 	Gravity += float4::Down * 30.0f * _Delta;
 
-	if (Gravity.y > 1500.0f)
+	if (Gravity.y > 500.0f)
 	{
-		Gravity.y = 1500.0f;
+		Gravity.y = 500.0f;
 	}
 
 

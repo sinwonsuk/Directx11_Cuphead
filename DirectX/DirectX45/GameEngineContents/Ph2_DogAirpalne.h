@@ -108,8 +108,8 @@ private:
 	float Pos_y = 0.0f;
 	float test = 0;
 	bool WeaponCheck = false;
-
-	int Hp = 20; 
+	int tests = 0;
+	int Hp = 1; 
 
 	int RotationAnimation = 0;
 	int IntroCheck = 0;

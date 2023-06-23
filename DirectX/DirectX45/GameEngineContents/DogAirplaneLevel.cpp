@@ -191,14 +191,7 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 		}
 	}
 }
-	/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
-	{
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,0});
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 0,0,0 });
-		RotationCheck = 0;
-		TransformData data = GetTransform()->GetTransDataRef();
-		int a = 0;
-	}*/
+	
 
 
 
@@ -209,7 +202,7 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetSortType(0, SortType::ZSort);
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
-	//GameEngineLevel::IsDebugSwitch();
+	GameEngineLevel::IsDebugSwitch();
 
 	//
 	////CreateNewCamera
@@ -220,14 +213,14 @@ void DogAirplaneLevel::Start()
 	BackGround = CreateActor<DogAirplaneBackground>();
 
 	Npc = CreateActor<NpcAirplane>();
-
+	Ph3_DogAirpalne = CreateActor<Ph3_DogAirplane>();
 	Ph1_DogAirplane = CreateActor<DogAirplane>();
 
 	player = CreateActor<Player>();
 	player->GetTransform()->AddLocalPosition({ 0,0,0 });
 
 
-	Ph3_DogAirpalne = CreateActor<Ph3_DogAirplane>();
+	
 
 
 

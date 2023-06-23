@@ -6,6 +6,8 @@
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include "ph3_DogAirPlane.h"
+#include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.cpp"
 
 
 ph3_Dog_Npc* ph3_Dog_Npc::ph3_Npc;
@@ -87,13 +89,41 @@ void ph3_Dog_Npc::Start()
 	ph3_tongue_rotate_camera_tongue->ChangeAnimation("ph3_tongue_rotate_camera_tongue");
 	ph3_tongue_rotate_camera_tongue->On();
 
+
+	ph3_leader_sideways_death = CreateComponent<GameEngineSpriteRenderer>();
+	ph3_leader_sideways_death->CreateAnimation({ .AnimationName = "ph3_leader_sideways_death", .SpriteName = "ph3_leader_sideways_death", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true ,.FrameIndex = {0,1,2,3,4,5,4,3,2,1} });
+	ph3_leader_sideways_death->ChangeAnimation("ph3_leader_sideways_death");
+	ph3_leader_sideways_death->Off();
+
+	ph3_leader_sideways_death_tears = CreateComponent<GameEngineSpriteRenderer>();
+	ph3_leader_sideways_death_tears->CreateAnimation({ .AnimationName = "ph3_leader_sideways_death_tears", .SpriteName = "ph3_leader_sideways_death_tears", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
+	ph3_leader_sideways_death_tears->ChangeAnimation("ph3_leader_sideways_death_tears");
+	ph3_leader_sideways_death_tears->Off();
+
+
+	ph3_dogcopter_sideways_death_tongue = CreateComponent<GameEngineSpriteRenderer>();
+	ph3_dogcopter_sideways_death_tongue->CreateAnimation({ .AnimationName = "ph3_dogcopter_sideways_death_tongue", .SpriteName = "ph3_dogcopter_sideways_death_tongue", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true /*,.FrameIndex = {0,1,2,3,4,5,6,5,4,3,2,1}*/ });
+	ph3_dogcopter_sideways_death_tongue->ChangeAnimation("ph3_dogcopter_sideways_death_tongue");
+	ph3_dogcopter_sideways_death_tongue->Off();
+
+
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 300.0f, 250.0f, 300.0f });
+	Collision->SetOrder((int)CollisionType::BossBody);
 	
 
-	
+
 }
 
 void ph3_Dog_Npc::Update(float _Delta)
 {
+
+	
+
+
+
+
+
 	if (Ph3_DogAirplane::ph3_mainBoss->Get_ph3_dogcopter_rotate_camera()->GetCurrentFrame() == 15)
 	{
 		ph3_main_boss_Check = true;
@@ -104,6 +134,42 @@ void ph3_Dog_Npc::Update(float _Delta)
 		{
 		case 0:
 		{
+			if (Collision->Collision((int)CollisionType::Bullet))
+			{
+				if (CollisonCheck == false)
+				{
+
+					ph3_leader_sideways_body->ColorOptionValue.PlusColor = { 1,1,1,0 };
+					ph3_leader_sideways_arms_backer->ColorOptionValue.PlusColor = { 1,1,1,0 };
+					ph3_leader_sideways_body_Attack->ColorOptionValue.PlusColor = { 1,1,1,0 };
+					ph3_leader_sideways_arms->ColorOptionValue.PlusColor = { 1,1,1,0 };
+					ResetLiveTime();
+					CollisonCheck = true;
+
+				}
+
+				Ph3_DogAirplane::Hp -= 1;
+
+				std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+
+				if (collision != nullptr)
+				{
+					collision->Off();
+				}
+			}
+
+			if (CollisonCheck == true && GetLiveTime() > 0.03f)
+			{
+
+				ph3_leader_sideways_body->ColorOptionValue.PlusColor = { 0,0,0,0 };
+				ph3_leader_sideways_arms_backer->ColorOptionValue.PlusColor = { 0,0,0,0 };
+				ph3_leader_sideways_body_Attack->ColorOptionValue.PlusColor = { 0,0,0,0 };
+				ph3_leader_sideways_arms->ColorOptionValue.PlusColor = { 0,0,0,0 };
+
+				CollisonCheck = false;
+			}
+
+
 			if (ph3_tongue_rotate_camera_tongue->IsAnimationEnd())
 			{
 				ph3_tongue_rotate_camera_tongue->Off();
@@ -153,15 +219,59 @@ void ph3_Dog_Npc::Update(float _Delta)
 		break;
 		case 2:
 		{
-			
+
+			if (Ph3_DogAirplane::Hp < 0)
+			{
+				
+				ph3_leader_sideways_body_Finish->Off();
+				ph3_leader_sideways_body_Finish_0->Off();
+				ph3_leader_sideways_arms->Off();
+				ph3_leader_sideways_body_Attack->Off();
+				ph3_leader_sideways_arms_backer->Off();
+				ph3_leader_sideways_body->Off();
+				ph3_tongue_rotate_camera_tongue->Off(); 
+				ph3_dogcopter_sideways_death_tongue->On();
+				ph3_leader_sideways_death->On();
+				ph3_leader_sideways_death_tears->On(); 
+				return; 
+			}
+			if (Collision->Collision((int)CollisionType::Bullet))
+			{
+				if (CollisonCheck == false)
+				{
+
+					ph3_leader_sideways_body->ColorOptionValue.PlusColor = { 1,1,1,0 };
+					ph3_leader_sideways_arms_backer->ColorOptionValue.PlusColor = { 1,1,1,0 };
+					ph3_leader_sideways_body_Attack->ColorOptionValue.PlusColor = { 1,1,1,0 };
+					ph3_leader_sideways_arms->ColorOptionValue.PlusColor = { 1,1,1,0 };
+					ResetLiveTime();
+					CollisonCheck = true;
+
+				}
+
+				Ph3_DogAirplane::Hp -= 1;
+
+				std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+
+				if (collision != nullptr)
+				{
+					collision->Off();
+				}
+			}
+
+			if (CollisonCheck == true && GetLiveTime() > 0.03f)
+			{
+
+				ph3_leader_sideways_body->ColorOptionValue.PlusColor = { 0,0,0,0 };
+				ph3_leader_sideways_arms_backer->ColorOptionValue.PlusColor = { 0,0,0,0 };
+				ph3_leader_sideways_body_Attack->ColorOptionValue.PlusColor = { 0,0,0,0 };
+				ph3_leader_sideways_arms->ColorOptionValue.PlusColor = { 0,0,0,0 };
+
+				CollisonCheck = false;
+			}
 
 			if (test == false)
 			{
-				
-				
-
-				
-
 				ph3_leader_sideways_body_Finish->Off(); 
 				ph3_tongue_rotate_camera_tongue->On();
 				ph3_leader_sideways_body->On();
@@ -200,24 +310,24 @@ void ph3_Dog_Npc::Update(float _Delta)
 				ph3_leader_sideways_body_Finish_0->Off();
 				ph3_leader_sideways_body_Finish->On();
 			}
-
-
-	
-		
+			
 		}
 		break;
 		case 3:
 		{
+			
 
-			if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
-			{
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
-				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
-				//GetTransform()->SetLocalPosition({ 0,0 });
-				RotationCheck = 0;
-			}
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
+
+
+			//if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
+			//{
+			//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
+			//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
+			//	//GetTransform()->SetLocalPosition({ 0,0 });
+			//	RotationCheck = 0;
+			//}
+			//GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
+			//GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
 
 		}
 		break;

@@ -4,8 +4,11 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include "ph3_Laser.h"
+#include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.cpp"
+#include "IdleWeapon.h"
 Ph3_DogAirplane* Ph3_DogAirplane::ph3_mainBoss;
-
+int Ph3_DogAirplane::Hp = 20;
 Ph3_DogAirplane::Ph3_DogAirplane()
 {
 }
@@ -72,6 +75,15 @@ void Ph3_DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_body_Finish").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_body_Finish_0").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_dogcopter_rotate_camera_out").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_dogcopter_sideways_death_tongue").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_death_tears").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_death").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_dogcopter_sideways_death").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_dogcopter_death_blades").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_KO").GetFullPath());
+
 		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_beam_top").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_aura_top").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_laser_warning_particle_top").GetFullPath());
@@ -86,7 +98,8 @@ void Ph3_DogAirplane::Start()
 
 	}
 
-
+	Object = GetLevel()->CreateActor<Boss_Finish>(50);
+	Object->Off(); 
 
 
 	Ph3_Boss_Intro = CreateComponent<GameEngineSpriteRenderer>();
@@ -393,6 +406,7 @@ void Ph3_DogAirplane::Start()
 
 		ph3_dogcopter_rotated_idle = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_dogcopter_rotated_idle->CreateAnimation({ .AnimationName = "ph3_dogcopter_rotated_idle", .SpriteName = "ph3_dogcopter_rotated_idle", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true ,.FrameIndex = {0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1} });
+		ph3_dogcopter_rotated_idle->CreateAnimation({ .AnimationName = "ph3_dogcopter_sideways_death", .SpriteName = "ph3_dogcopter_sideways_death", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true ,.FrameIndex = {0,1,2,3,4,5,6,5,4,3,2,1 } });
 		ph3_dogcopter_rotated_idle->ChangeAnimation("ph3_dogcopter_rotated_idle");
 		ph3_dogcopter_rotated_idle->GetTransform()->AddLocalPosition({ 0,0,12 });
 		ph3_dogcopter_rotated_idle->Off();
@@ -400,6 +414,7 @@ void Ph3_DogAirplane::Start()
 
 		ph3_dogcopter_rotate_camera_out_blades = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_dogcopter_rotate_camera_out_blades->CreateAnimation({ .AnimationName = "ph3_dogcopter_rotate_camera_out_blades", .SpriteName = "ph3_dogcopter_rotate_camera_out_blades", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true /*,.FrameIndex = {0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1}*/ });
+		ph3_dogcopter_rotate_camera_out_blades->CreateAnimation({ .AnimationName = "ph3_dogcopter_death_blades", .SpriteName = "ph3_dogcopter_death_blades", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true /*,.FrameIndex = {0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1}*/ });
 		ph3_dogcopter_rotate_camera_out_blades->ChangeAnimation("ph3_dogcopter_rotate_camera_out_blades");
 		ph3_dogcopter_rotate_camera_out_blades->GetTransform()->AddLocalPosition({ -100,0,0 });
 		ph3_dogcopter_rotate_camera_out_blades->Off();
@@ -412,75 +427,60 @@ void Ph3_DogAirplane::Start()
 
 	}
 
+	FightText_KO = CreateComponent<GameEngineSpriteRenderer>(100);
+	FightText_KO->CreateAnimation({ .AnimationName = "FightText_KO", .SpriteName = "FightText_KO", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true /*,.FrameIndex = {0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1}*/ });
+	FightText_KO->ChangeAnimation("FightText_KO");
+	FightText_KO->GetTransform()->AddLocalPosition({ 0,0,-300.0f});
+	FightText_KO->Off();
+
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 250.0f,200.0f, 300.0f });
+
+	Collision->SetOrder((int)CollisionType::BossBody);
+	Collision->GetTransform()->SetLocalPosition({ 0.0f,150.0f,0.0f });
 
 
 }
 
 void Ph3_DogAirplane::Update(float _Delta)
 {
-	//switch (RotationCheck)
-	//{
-	//case 0:
-	//{
-	//	if (GetTransform()->GetTransDataRef().Rotation.z < -90.0f)
-	//	{		
-	//		break;
-	//	}
-	//	GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
-	//	GetTransform()->AddLocalPosition({ 150.0f * _Delta,1500.0f * _Delta ,0 });
-	//}
-	//break;
-
-	//case 1:
-	//{
-	//	if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -179.0f)
-	//	{			
-	//		break;
-	//	}
-	//	 GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
-	//	 GetTransform()->AddLocalPosition({ 150.0f * _Delta,-1500.0f * _Delta ,0 });
-	//}
-	//break;
-	//case 2:
-	//{		
-	//	if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z < -269.0f)
-	//	{			
-	//		break;
-	//	}
-
-	//	GetTransform()->AddLocalRotation({ 0,0,-500.0f * _Delta });
-	//	GetTransform()->AddLocalPosition({ 150.0f * _Delta,1500.0f * _Delta ,0 });
-	//}
-	//break;
-	//case 3:
-	//{
-	//	//if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
-	//	//{
-	//	//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
-	//	//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
-	//	//	//GetTransform()->SetLocalPosition({ 0,0 });
-	//	//	RotationCheck = 0;
-	//	//}
-	//	//GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
-	//	//GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({3,0,0 });
-	//}
-	//break;
-
-	//default:
-	//	break;
-	//}
-
-	///*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
-	//{
-	//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,0});
-	//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 0,0,0 });
-	//	RotationCheck = 0;
-	//	TransformData data = GetTransform()->GetTransDataRef();
-	//	int a = 0;
-	//}*/
-
-
 	
+	
+
+
+
+
+
+	if (Collision->Collision((int)CollisionType::Bullet))
+	{
+		if (CollisonCheck == false)
+		{
+
+			Idle_Body->ColorOptionValue.PlusColor = { 1,1,1,0 };
+			Idle_Body->ResetLiveTime();
+			CollisonCheck = true;
+			
+		}
+
+		Hp -= 1;
+		
+		std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+
+		if (collision != nullptr)
+		{
+			collision->Off();
+		}
+	}
+
+	if (CollisonCheck == true && Idle_Body->GetLiveTime() > 0.03f)
+	{
+		
+		Idle_Body->ColorOptionValue.PlusColor = { 0,0,0,0 };
+		CollisonCheck = false;
+	}
+
+
+
 	UpdateState(_Delta);
 }
 

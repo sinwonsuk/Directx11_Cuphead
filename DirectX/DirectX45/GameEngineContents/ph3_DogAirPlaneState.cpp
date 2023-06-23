@@ -4,10 +4,11 @@
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngineCore/GameEngineCollision.h>
 #include "ph3_Laser.h"
 #include "ph3_Dog_Npc.h"
 #include "ph3_food_bowl.h"
-
+#include "Boss_Finish.h"
 void Ph3_DogAirplane::ChangeState(Ph3_DogAirPlaneState _State)
 {
 	Ph3_DogAirPlaneState NextState = _State;
@@ -75,6 +76,10 @@ void Ph3_DogAirplane::ChangeState(Ph3_DogAirPlaneState _State)
 	case Ph3_DogAirPlaneState::Left_Rotation_Attack:
 
 		break;
+	case Ph3_DogAirPlaneState::Death:
+
+		break;
+
 	default:
 		break;
 	}
@@ -146,7 +151,9 @@ void Ph3_DogAirplane::UpdateState(float _Time)
 	case Ph3_DogAirPlaneState::Left_Rotation_Attack:
 		Left_Rotation_Attack_Update(_Time);
 		break;
-
+	case Ph3_DogAirPlaneState::Death:
+		DeathUpdate(_Time);
+		break;
 	default:
 		break;
 	}
@@ -463,6 +470,8 @@ void Ph3_DogAirplane::Pase3_Attack_Reverse_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Update(float _Time)
 {
+	Collision->Off(); 
+
 	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 10)
 	{
 		ph3_paw_merge->Off();
@@ -583,7 +592,7 @@ void Ph3_DogAirplane::Rotation_Laser_Attack_Update(float _Time)
 {
 	//TransformData data 
 	
-	
+	Collision->On(); 
 	//GetTransform()->SetLocalRotation({ 0,0,0 });
 
 	TransformData date = GetTransform()->GetTransDataRef();
@@ -872,6 +881,7 @@ void Ph3_DogAirplane::Rotation_Pase3_Laser_Attack_Reverse_Update(float _Time)
 
 void Ph3_DogAirplane::Left_Rotation_Update(float _Time)
 {
+	Collision->Off();
 
 	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 10)
 	{
@@ -927,12 +937,44 @@ void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
 		ResetLiveTime();
 		return;
 	}
+	if (Hp < 0)
+	{
+		ph3_dogcopter_rotated_idle->ChangeAnimation("ph3_dogcopter_sideways_death");
+		//FightText_KO->On();
+	//	GameEngineTime::GlobalTime.SetGlobalTimeScale(0.0f);
+
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+		Object->On();
+
+		
+		ChangeState(Ph3_DogAirPlaneState::Death);
+		return; 
+	}
+
+
 }
 
 void Ph3_DogAirplane::Right_Rotation_Attack_Update(float _Time)
 {
 
 
+}
 
 
+void Ph3_DogAirplane::DeathUpdate(float _Time)
+{
+	GameEngineTime::GlobalTime.SetRenderOrderTimeScale(50, 1.0f);
+	GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(50, 1.0f);
+
+
+
+	/*if (FightText_KO->IsAnimationEnd())
+	{
+		GameEngineTime::GlobalTime.SetGlobalTimeScale(1.0f);
+
+
+	}*/
+
+	
 }

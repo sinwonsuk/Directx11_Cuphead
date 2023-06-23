@@ -30,7 +30,7 @@ public:
 
 		return DirCheck;
 	}
-	int SetAttackCheck(int _AttackCheck)
+	int SetAttackCheck(const int& _AttackCheck)
 	{
 		AttackCheck = _AttackCheck;
 

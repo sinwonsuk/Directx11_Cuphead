@@ -138,7 +138,7 @@ void ph3_Laser::Start()
 	}
 
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 0.0f, 0.0f, 0.0f });
+	Collision->GetTransform()->SetLocalScale({ 0.0f, 0.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
 	//Collision->Off(); 
 	
@@ -175,10 +175,18 @@ void ph3_Laser::Update(float _Delta)
 					if (ph3_laser_warning_aura_top->IsAnimationEnd())
 					{
 						Collision->On(); 
-						Collision->GetTransform()->SetLocalScale({ 1200.0f, 100.0f, 300.0f });
+						Collision->GetTransform()->SetLocalScale({ 1200.0f, 25.0f, 300.0f });
 						Collision->GetTransform()->SetLocalRotation({ 0.0f, 0.0f, -45.0f });
-						Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y - 280.0f, ph3_beam_top->GetTransform()->GetLocalPosition().z });
+						Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y, ph3_beam_top->GetTransform()->GetLocalPosition().z });
+						ResetLiveTime();
 					}
+
+					if (GetLiveTime() > 0.3f)
+					{
+						Collision->Off();
+					}
+
+
 					if (ph3_beam_top->IsAnimationEnd())
 					{
 						ph3_beam_top->Off();
@@ -216,11 +224,18 @@ void ph3_Laser::Update(float _Delta)
 				if (ph3_laser_warning_electric_mid->IsAnimationEnd())
 				{
 					Collision->On();
-					Collision->GetTransform()->SetLocalScale({ 1200.0f, 100.0f, 300.0f });
+					Collision->GetTransform()->SetLocalScale({ 1200.0f, 25.0f, 300.0f });
 					Collision->GetTransform()->SetLocalRotation({ 0.0f, 0.0f, -45.0f });
 					Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y-280.0f, ph3_beam_top->GetTransform()->GetLocalPosition().z });
-					
+					ResetLiveTime();
 				}
+			
+
+			    if (GetLiveTime() > 0.3f)
+			    {
+				   Collision->Off();
+			    }
+
 
 				if (ph3_beam_mid->IsAnimationEnd())
 				{
@@ -256,9 +271,16 @@ void ph3_Laser::Update(float _Delta)
 				if (ph3_laser_Right_warning_aura_low->IsAnimationEnd())
 				{
 					Collision->On();
-					Collision->GetTransform()->SetLocalScale({ 1000.0f, 100.0f, 300.0f });
+					Collision->GetTransform()->SetLocalScale({ 1200.0f, 50.0f, 300.0f });
 					Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y-220.0f,ph3_beam_top->GetTransform()->GetLocalPosition().z });
+					ResetLiveTime();
 				}
+
+				if (GetLiveTime() > 0.3f)
+				{
+					Collision->Off();
+				}
+
 				if (ph3_beam_low->IsAnimationEnd())
 				{
 					ph3_beam_low->Off();
@@ -267,6 +289,7 @@ void ph3_Laser::Update(float _Delta)
 					ph3_laser_warning_low->Off();
 					LaserCheck = true;
 					Collision->Off();
+
 				}
 			}
 			
@@ -317,11 +340,16 @@ void ph3_Laser::Update(float _Delta)
 				if (ph3_laser_warning_aura_top->IsAnimationEnd())
 				{
 					Collision->On();
-					Collision->GetTransform()->SetLocalScale({ 1000.0f, 100.0f, 300.0f });
+					Collision->GetTransform()->SetLocalScale({ 1200.0f, 25.0f, 300.0f });
 					Collision->GetTransform()->SetLocalRotation({ 0.0f, 0.0f, -135.0f });
 					Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y, ph3_beam_top->GetTransform()->GetLocalPosition().z });
+					ResetLiveTime(); 
 				}
 
+				if (GetLiveTime() > 0.3f)
+				{
+					Collision->Off();
+				}
 
 				if (ph3_beam_top->IsAnimationEnd())
 				{
@@ -373,10 +401,15 @@ void ph3_Laser::Update(float _Delta)
 				if (ph3_laser_warning_electric_mid->IsAnimationEnd())
 				{
 					Collision->On();
-					Collision->GetTransform()->SetLocalScale({ 1000.0f, 100.0f, 300.0f });
+					Collision->GetTransform()->SetLocalScale({ 1200.0f, 25.0f, 300.0f });
 					Collision->GetTransform()->SetLocalRotation({ 0.0f, 0.0f, -135.0f });
 					Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y-220.0f, ph3_beam_top->GetTransform()->GetLocalPosition().z });
+					ResetLiveTime();
+				}
 
+				if (GetLiveTime() > 0.3f)
+				{
+					Collision->Off();
 				}
 
 				if (ph3_beam_mid->IsAnimationEnd())
@@ -433,9 +466,16 @@ void ph3_Laser::Update(float _Delta)
 
 				if (ph3_laser_warning_aura_top->IsAnimationEnd())
 				{
-					Collision->GetTransform()->SetLocalScale({ 1200.0f, 100.0f, 300.0f });
+					Collision->On();
+					Collision->GetTransform()->SetLocalScale({ 1200.0f, 25.0f, 300.0f });
 					Collision->GetTransform()->SetLocalRotation({ 0.0f, 0.0f, -135.0f });
 					Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition() });
+					ResetLiveTime();
+				}
+
+				if (GetLiveTime() > 0.3f)
+				{
+					Collision->Off();
 				}
 
 				if (ph3_beam_top->IsAnimationEnd())
@@ -491,10 +531,15 @@ void ph3_Laser::Update(float _Delta)
 				if (ph3_laser_warning_aura_top->IsAnimationEnd())
 				{
 					Collision->On();
-					Collision->GetTransform()->SetLocalScale({ 1200.0f, 100.0f, 300.0f });
+					Collision->GetTransform()->SetLocalScale({ 1200.0f, 25.0f, 300.0f });
 					Collision->GetTransform()->SetLocalRotation({ 0.0f, 0.0f, -45.0f });
 					Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition() });
-					
+					ResetLiveTime();
+				}
+
+				if (GetLiveTime() > 0.3f)
+				{
+					Collision->Off();
 				}
 
 				if (ph3_beam_top->IsAnimationEnd())
@@ -546,12 +591,16 @@ void ph3_Laser::Update(float _Delta)
 				if (ph3_laser_warning_electric_mid->IsAnimationEnd())
 				{
 					Collision->On();
-					Collision->GetTransform()->SetLocalScale({ 1200.0f, 100.0f, 300.0f });
+					Collision->GetTransform()->SetLocalScale({ 1200.0f, 25.0f, 300.0f });
 					Collision->GetTransform()->SetLocalRotation({ 0.0f, 0.0f, -135.0f });
 					Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y - 240.0f, ph3_beam_top->GetTransform()->GetLocalPosition().z });
-
+					ResetLiveTime();
 				}
 
+				if (GetLiveTime() > 0.3f)
+				{
+					Collision->Off();
+				}
 				if (ph3_beam_mid->IsAnimationEnd())
 				{
 					ph3_beam_mid->Off();
@@ -593,8 +642,15 @@ void ph3_Laser::Update(float _Delta)
 				if (ph3_laser_Right_warning_aura_low->IsAnimationEnd())
 				{
 					Collision->On();
-					Collision->GetTransform()->SetLocalScale({ 1000.0f, 100.0f, 300.0f });
+					Collision->GetTransform()->SetLocalScale({ 1000.0f, 50.0f, 300.0f });
 					Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y - 220.0f,ph3_beam_top->GetTransform()->GetLocalPosition().z });
+					ResetLiveTime();
+
+				}
+
+				if (GetLiveTime() > 0.3f)
+				{
+					Collision->Off();
 				}
 				if (ph3_beam_low->IsAnimationEnd())
 				{

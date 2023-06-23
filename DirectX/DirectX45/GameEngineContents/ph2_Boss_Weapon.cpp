@@ -56,14 +56,14 @@ void ph2_Boss_Weapon::Start()
 
 
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 90.0f, 94.0f, 300.0f });
+	Collision->GetTransform()->SetLocalScale({ 90.0f, 94.0f, 100.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
-
+	Collision->Off();
 }
 
 void ph2_Boss_Weapon::Update(float _Delta)
 {
-	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition()});
+	
 
 	
 
@@ -73,28 +73,36 @@ void ph2_Boss_Weapon::Update(float _Delta)
 
 	Bullet->GetTransform()->SetLocalPosition({ Bullet_First->GetTransform()->GetLocalPosition() });
 
+
+	
 	if (MoveDirCheck == false)
 	{
 		float4 MoveDir1 = { Player::MainPlayer->GetTransform()->GetLocalPosition() - Bullet_First->GetTransform()->GetLocalPosition() };
 		MoveDir1.Normalize();
 
 		MoveDir = MoveDir1.NormalizeReturn();
-
+		Collision->Off();
 		MoveDirCheck = true;
 	}
-	
 
-	if (GetLiveTime() > 0.2)
+	Bullet_First->GetTransform()->AddLocalPosition({ MoveDir * 2 });
+	Collision->GetTransform()->SetLocalPosition({ Bullet_First->GetTransform()->GetLocalPosition() });
+
+
+	if (MoveDirCheck == true)
 	{
-		Bullet_First->GetTransform()->AddLocalPosition({ MoveDir*2 });
-
+		Collision->On();
 	}
+
+		
 
 
 	switch (AttackCheck)
 	{
 	case 0:
 	{
+		
+
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_bow_First");
@@ -116,6 +124,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 		break;
 	case 1:
 	{
+		
 
 		if (AnimationCheck == false)
 		{
@@ -137,6 +146,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 
 	case 2:
 	{
+		
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_bow_pink_First");
@@ -156,6 +166,8 @@ void ph2_Boss_Weapon::Update(float _Delta)
 		break;
 	case 3:
 	{
+		
+
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_wow_pink_First");
@@ -175,6 +187,8 @@ void ph2_Boss_Weapon::Update(float _Delta)
 		break;
 	case 4:
 	{
+		
+
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_bow_First");
@@ -196,7 +210,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 5:
 	{
-
+		
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_wow_First");
@@ -216,6 +230,8 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 6:
 	{
+		
+
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_bow_First");
@@ -237,6 +253,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 7:
 	{
+		
 
 		if (AnimationCheck == false)
 		{
@@ -257,6 +274,8 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 8:
 	{
+
+		
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_bow_First");
@@ -278,6 +297,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 9:
 	{
+	
 
 		if (AnimationCheck == false)
 		{
@@ -298,6 +318,8 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 10:
 	{
+	
+
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_bow_First");
@@ -319,6 +341,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 11:
 	{
+	
 
 		if (AnimationCheck == false)
 		{

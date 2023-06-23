@@ -137,8 +137,8 @@ private:
 	int HitNumber = 0;
 
 	float HitTime = 0;
-	float Speed = 300;
-	float GravitySpeed = 450;
+	float Speed = 400;
+	float GravitySpeed = 1000;
 	float JumpSpeed = 1200;
 	bool Gravity = true;
 	bool RightMove = true;

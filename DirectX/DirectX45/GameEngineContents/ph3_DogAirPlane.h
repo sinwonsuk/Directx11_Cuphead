@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include "Boss_Finish.h"
 enum class Ph3_DogAirPlaneState
 {
 	Intro,
@@ -23,14 +23,13 @@ enum class Ph3_DogAirPlaneState
 	Left_Rotation,
 	Left_Rotation_Attack,
 	Right_Rotation_Attack,
-	
-
+	Death, 
 };
 
 class Ph3_DogAirplane : public GameEngineActor
 {
 public:
-
+	static  int Hp; 
 	static Ph3_DogAirplane* ph3_mainBoss;
 	Ph3_DogAirplane();
 	~Ph3_DogAirplane();
@@ -74,10 +73,9 @@ public:
 	void Left_Rotation_Attack_Update(float _Time);
 	void Right_Rotation_Attack_Update(float _Time);
 
-	void LeftIdleUpdate(float _Time);
-	void UpIdleUpdate(float _Time);
-	void RightIdleUpdate(float _Time);
-	void DownIdleUpdate(float _Time);
+	void DeathUpdate(float _Time);
+	
+
 
 	int GetBowlCheck()
 	{
@@ -93,7 +91,10 @@ public:
 	{
 		return RotationCheck; 
 	}
-
+	std::shared_ptr<class GameEngineCollision> GetCollision()
+	{
+		return Collision; 
+	}
 
 protected:
 	void Start();
@@ -167,17 +168,19 @@ private:
 
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dogcopter_rotate_camera_out_blades;
 
-
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dogcopter_rotate_camera_out;
 
+	std::shared_ptr<class GameEngineSpriteRenderer> FightText_KO;
 
-
-
+	std::shared_ptr<Boss_Finish> Object;
 
 	std::shared_ptr<class GameEngineCollision> Collision;
 
 	float4 trsd = { 0,0,-500 };
 	float4 tsdds = { 150,1500,0 };
+
+
+	bool CollisonCheck = false;
 	bool TopLaserCheck = false;
 	bool MidLaserCheck = false;
 	bool LowLaserCheck = false;

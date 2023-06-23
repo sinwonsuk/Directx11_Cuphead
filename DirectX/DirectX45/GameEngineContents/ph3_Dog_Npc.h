@@ -59,7 +59,13 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> noumIntro3;
 	std::shared_ptr<class GameEngineCollision> Collision;
 
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_dogcopter_sideways_death_tongue;
 
+	
+		std::shared_ptr<class GameEngineSpriteRenderer> ph3_leader_sideways_death_tears;
+	std::shared_ptr<class GameEngineSpriteRenderer> ph3_leader_sideways_death;
+
+	bool CollisonCheck = false;
 	int RotationCheck = 0;
 	bool test = false;
 };

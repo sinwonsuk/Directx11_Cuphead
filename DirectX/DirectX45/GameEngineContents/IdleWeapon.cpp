@@ -5,7 +5,9 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.cpp"
 #include "DogAirplane.h"
+#include "ph3_DogAirPlane.h"
 #include "UserInterface.h"
+
 IdleWeapon::IdleWeapon()
 {
 }
@@ -55,16 +57,17 @@ void IdleWeapon::Update(float _Delta)
 		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
 	}
 
+
+
 	if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
 	{
 		UserInterface::Cut += 0.1;
 		Bullet->ChangeAnimation("Peashooter_Death");	
-		CollisionCheck = true;
-		
+		CollisionCheck = true;		
 	}
 	
-
-	if (GetLiveTime() > 10)
+	
+	if (GetLiveTime() > 5)
 	{
 		this->Death(); 
 	}

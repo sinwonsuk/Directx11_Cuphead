@@ -78,17 +78,17 @@ void DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_GetReady").GetFullPath());
 	}
 
-	GirlDog = CreateComponent<GameEngineSpriteRenderer>();
+	GirlDog = CreateComponent<GameEngineSpriteRenderer>(0);
 	GirlDog->CreateAnimation({ .AnimationName = "Chinook_Pilot_Saluki", .SpriteName = "Chinook_Pilot_Saluki", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	GirlDog->ChangeAnimation("Chinook_Pilot_Saluki");
 	GirlDog->GetTransform()->AddLocalPosition({ 130,0, 81 }); 
 	 
-	dogcopter = CreateComponent<GameEngineSpriteRenderer>();
+	dogcopter = CreateComponent<GameEngineSpriteRenderer>(0);
 	dogcopter->CreateAnimation({ .AnimationName = "ph1_dogcopter_intro", .SpriteName = "ph1_dogcopter_intro", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	dogcopter->ChangeAnimation("ph1_dogcopter_intro");
 	dogcopter->GetTransform()->AddLocalPosition({ 130,0,82 });
 
-	bulldogIntro = CreateComponent<GameEngineSpriteRenderer>();
+	bulldogIntro = CreateComponent<GameEngineSpriteRenderer>(0);
 	bulldogIntro->CreateAnimation({ .AnimationName = "ph1_bulldog_intro", .SpriteName = "ph1_bulldog_intro", .FrameInter = 0.07f,.Loop = false, .ScaleToTexture = true, });
 	bulldogIntro->ChangeAnimation("ph1_bulldog_intro");
 	bulldogIntro->GetTransform()->AddLocalPosition({ 0,0,89 });
@@ -194,9 +194,11 @@ void DogAirplane::Start()
 	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,81 });
 	bulldogIdle->On();
 
-	Ready = CreateComponent<GameEngineSpriteRenderer>();
+	Ready = CreateComponent<GameEngineSpriteRenderer>(120);
 	Ready->CreateAnimation({ .AnimationName = "FightText_GetReady", .SpriteName = "FightText_GetReady", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
+	Ready->GetTransform()->AddLocalPosition({ 0,0,-150.0f });
 	Ready->ChangeAnimation("FightText_GetReady");
+
 	Ready->SetScaleRatio(3.0f);
 	Ready->On();
 

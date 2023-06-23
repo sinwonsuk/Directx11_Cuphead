@@ -4,6 +4,7 @@
 class IdleWeapon : public GameEngineActor
 {
 public:
+
 	// constrcuter destructer
 	IdleWeapon();
 	~IdleWeapon();

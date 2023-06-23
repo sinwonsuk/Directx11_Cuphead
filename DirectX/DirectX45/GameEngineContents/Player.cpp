@@ -101,8 +101,14 @@ void Player::Update(float _DeltaTime)
 	/*GravityCheck = 0;
 	RightCheck = 0;
 	LeftCheck = 0;*/
+	Collision->GetTransform()->SetLocalPosition({ 0.0f, -30.0f, 0.0f });
+	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });
 
-	
+	if (true == GameEngineInput::IsPress("PlayerMoveDown"))
+	{
+		Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 300.0f });
+		Collision->GetTransform()->SetLocalPosition({ 0.0f, -60.0f, 0.0f });
+	}
 	
 	if (GetTransform()->GetLocalScale().x > 0 && StateValue != PlayerState::Dash)
 	{
@@ -148,29 +154,6 @@ void Player::Update(float _DeltaTime)
 
 	UpdateState(_DeltaTime);
 
-	if (HitCheck == false)
-	{
-		if (Collision->Collision((int)CollisionType::BossAttack, ColType::AABBBOX2D, ColType::AABBBOX2D))
-		{
-			HitTime = 0;
-			ResetLiveTime();
-			HitCheck = true;
-			JumpCheck = true;
-			ChangeState(PlayerState::Hit);
-			return;
-		}
-	}
-
-	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
-	{
-
-		HitCheck = true;
-		ResetLiveTime();
-		GravitySpeed = 450.0f;
-		JumpCheck = true;
-		ChangeState(PlayerState::MapOut);
-		return;
-	}
 
 	
 
@@ -298,14 +281,8 @@ void Player::Start()
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->AddLocalPosition({ 0.0f, -30.0f, 0.0f });
-	Collision->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 300.0f });
+	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::Player);
-
-
-	
-
-
-	
 }
 
 void Player::AnimationCheck(const std::string_view& _AnimationName)
@@ -322,5 +299,5 @@ void Player::AnimationCheck(const std::string_view& _AnimationName, bool Force, 
 // 이건 디버깅용도나 
 void Player::Render(float _Delta)
 {
-	// GetTransform()->AddLocalRotation({0.0f, 0.0f, 360.0f * _Delta});
+	 GetTransform()->AddLocalRotation({0.0f, 0.0f, 360.0f * _Delta});
 };

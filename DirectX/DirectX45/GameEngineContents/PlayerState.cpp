@@ -6,6 +6,8 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include "PlayerRunEffect.h"
 #include "IdleWeapon.h"
+#include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.cpp"
 void Player::ChangeState(PlayerState _State)
 {
 	PlayerState NextState = _State;
@@ -285,7 +287,7 @@ void Player::IdleUpdate(float _Time)
 		return;
 	}
 
-	if (true == GameEngineInput::IsPress("PlayerJump"))
+	if (true == GameEngineInput::IsDown("PlayerJump"))
 	{
 		DownCheck = false;
 		ResetLiveTime(); 
@@ -293,14 +295,7 @@ void Player::IdleUpdate(float _Time)
 		ChangeState(PlayerState::Jump);
 		return;
 	}
-	if (true == GameEngineInput::IsPress("PlayerJump"))
-	{
-		DownCheck = false;
-		ResetLiveTime();
-		JumpCheck = true;
-		ChangeState(PlayerState::Jump);
-		return;
-	}
+	
 	if (true == GameEngineInput::IsPress("PlayerMoveDown"))
 	{
 		DownCheck = false;
@@ -325,6 +320,33 @@ void Player::IdleUpdate(float _Time)
 		ChangeState(PlayerState::IdleAttackPre);
 		return;
 	}
+
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 600.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
+
+
+
 }
 
 void Player::RunUpdate(float _Time)
@@ -433,7 +455,29 @@ void Player::RunUpdate(float _Time)
 		return;
 	}
 	
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
 
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::JumpUpdate(float _Time)
@@ -477,14 +521,13 @@ void Player::JumpUpdate(float _Time)
 	if (JumpCheck == true)
 	{
 		if (GetLiveTime() < 0.25)
-		{
-			GetTransform()->AddLocalPosition(float4::Up * 1200 * _Time);
+		{	
+			GetTransform()->AddLocalPosition(float4::Up * 1400.0f * _Time);
 		}
 		if (GetLiveTime() > 0.25)
 		{
 			JumpCheck = false;
-			//test = true;
-			ResetLiveTime();
+	
 
 		}
 	}
@@ -636,9 +679,7 @@ void Player::JumpUpdate(float _Time)
 	
 		
 
-	
-	
-	if (Gravity == false /*&& test == true*/)
+	if (Gravity == false && GetLiveTime () > 0.2f)
 	{
 
 		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(101);
@@ -647,12 +688,35 @@ void Player::JumpUpdate(float _Time)
 		test = false;
 		DashCheck = true;
 		RunTime = 0;
-		GravitySpeed = 450;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
 		ChangeState(PlayerState::Idle);
 		return;
 	}
 
-	
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 
 
 
@@ -673,6 +737,29 @@ void Player::DuckUpdate(float _Time)
 		return;
 	}
 
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::ParryUpdate(float _Time)
@@ -902,6 +989,31 @@ void Player::ParryUpdate(float _Time)
 		ChangeState(PlayerState::Idle);
 		return;
 	}
+
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
+
 }
 
 void Player::UpAimUpdate(float _Time)
@@ -939,7 +1051,29 @@ void Player::UpAimUpdate(float _Time)
 		return;
 	}
 
-	
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 
 }
 
@@ -977,7 +1111,29 @@ void Player::DownAimUpdate(float _Time)
 		ChangeState(PlayerState::DownAttackPre);
 		return;
 	}
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
 
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::IdleAimUpdate(float _Time)
@@ -1030,7 +1186,29 @@ void Player::IdleAimUpdate(float _Time)
 		return;
 	}
 	
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
 
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::DiagonalUpAimUpdate(float _Time)
@@ -1060,7 +1238,29 @@ void Player::DiagonalUpAimUpdate(float _Time)
 		ChangeState(PlayerState::DiagonalUpAttackPre);
 		return;
 	}
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
 
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::DiagonalDownAimUpdate(float _Time)
@@ -1090,7 +1290,29 @@ void Player::DiagonalDownAimUpdate(float _Time)
 		ChangeState(PlayerState::DiagonalDownAttackPre);
 		return;
 	}
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
 
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::DashUpdate(float _Time)
@@ -1145,7 +1367,29 @@ void Player::DashUpdate(float _Time)
 		ChangeState(PlayerState::Idle);
 		return;
 	}
-	
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::IdleAttackUpdate(float _Time)
@@ -1269,6 +1513,30 @@ void Player::IdleAttackUpdate(float _Time)
 		ChangeState(PlayerState::Idle);
 		return;
 	}
+
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::IdleAttackPreUpdate(float _Time)
@@ -1336,6 +1604,32 @@ void Player::IdleAttackPreUpdate(float _Time)
 		ChangeState(PlayerState::Idleattack);
 		return; 
 	}
+
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
+
+
 }
 
 void Player::RunAttackUpdate(float _Time)
@@ -1522,6 +1816,32 @@ void Player::RunAttackUpdate(float _Time)
 		
 		return;
 	}
+
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
+
+
 }
 
 
@@ -1673,7 +1993,29 @@ void Player::DiagonalUpRunAttackUpdate(float _Time)
 		return;
 	}
 
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
 
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 
 }
 
@@ -1722,6 +2064,32 @@ void Player::UpUpdate(float _Time)
 		return;
 	}
 
+
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
+
+
 }
 
 
@@ -1766,6 +2134,7 @@ void Player::UpAttackUpdate(float _Time)
 		
 		ResetLiveTime();
 		JumpCheck = true;
+
 		ChangeState(PlayerState::Jump);
 		return;
 	}
@@ -1793,7 +2162,29 @@ void Player::UpAttackUpdate(float _Time)
 		return;
 	}
 
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
 
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 
 }
 
@@ -1858,6 +2249,30 @@ void Player::UpAttackPre(float _Time)
 		ChangeState(PlayerState::Up);
 		return;
 	}
+
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::DuckAttackUpdate(float _Time)
@@ -1891,6 +2306,30 @@ void Player::DuckAttackUpdate(float _Time)
 	if (true == GameEngineInput::IsUp("PlayerAttack"))
 	{
 		ChangeState(PlayerState::Duck);
+		return;
+	}
+
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
 		return;
 	}
 	
@@ -1934,6 +2373,29 @@ void Player::DuckAttackPreUpdate(float _Time)
 		return;
 	}
 
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 
 }
 
@@ -2048,7 +2510,29 @@ void Player::DiagonalDownAttackUpdate(float _Time)
 		return;
 	}
 	
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
 
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 void Player::DiagonalDownAttackPreUpdate(float _Time)
 {
@@ -2169,6 +2653,29 @@ void Player::DiagonalDownAttackPreUpdate(float _Time)
 		return;
 	}
 
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 
@@ -2245,7 +2752,29 @@ void Player::IdleAimAttackUpdate(float _Time)
 	}
 
 	
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
 
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 	
 
 }
@@ -2304,6 +2833,29 @@ void Player::IdleAimAttackPreUpdate(float _Time)
 		return;
 	}
 
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::UpAimAttackUpdate(float _Time)
@@ -2355,7 +2907,29 @@ void Player::UpAimAttackUpdate(float _Time)
 		return;
 	}
 	
-	
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::UpAimAttackPreUpdate(float _Time)
@@ -2412,7 +2986,29 @@ void Player::UpAimAttackPreUpdate(float _Time)
 		ChangeState(PlayerState::UpAimAttack);
 		return;
 	}
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
 
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::DownAttackUpdate(float _Time)
@@ -2468,7 +3064,29 @@ void Player::DownAttackUpdate(float _Time)
 		ChangeState(PlayerState::UpAimAttack);
 		return;
 	}
-	
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::DownAttackPreUpdate(float _Time)
@@ -2532,6 +3150,29 @@ void Player::DownAttackPreUpdate(float _Time)
 		ChangeState(PlayerState::DownAttack);
 		return;
 	}
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::MapOutUpdate(float _Time)
@@ -2567,13 +3208,10 @@ void Player::MapOutUpdate(float _Time)
 		}
 		if (GetLiveTime() > 0.5)
 		{
-
 			GravitySpeed = 800;
 			//HitCheck = false;
 			ChangeState(PlayerState::Jump);
 			return;
-		
-
 		}
 	}
 	
@@ -2625,17 +3263,40 @@ void Player::FailUpdate(float _Time)
 	if (Gravity == false /*&& test == true*/)
 	{
 
-		std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
+	/*	std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
 		Object->SetState(EffectState::JumpEffect);
-		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });
+		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });*/
 		test = false;
 		DashCheck = true;
 		RunTime = 0;
-		GravitySpeed = 450;
+		GravitySpeed = 650.0f;
 		ChangeState(PlayerState::Idle);
 		return;
 	}
 
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
+	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+
+		HitCheck = true;
+		ResetLiveTime();
+		GravitySpeed = 650.0f;
+		JumpCheck = true;
+		ChangeState(PlayerState::MapOut);
+		return;
+	}
 }
 
 void Player::HitUpdate(float _Time)
@@ -2664,12 +3325,26 @@ void Player::HitUpdate(float _Time)
 		GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 	}
 
+	//if (JumpCheck == true)
+	//{
+	//	if (GetLiveTime() < 0.5)
+	//	{
+	//		GetTransform()->AddLocalPosition(float4::Up * 1200 * _Time);
+	//	}
+	//	if (GetLiveTime() > 0.5)
+	//	{
+	//		GravitySpeed = 800;
+	//		//HitCheck = false;
+	//		ChangeState(PlayerState::Jump);
+	//		return;
+	//	}
+	//}
 
 	if (JumpCheck == true)
 	{
 		if (GetLiveTime() < 0.2)
 		{
-			GetTransform()->AddLocalPosition(float4::Up * 800 * _Time);
+			GetTransform()->AddLocalPosition(float4::Up * 900 * _Time);
 		}
 		if (GetLiveTime() > 0.2)
 		{

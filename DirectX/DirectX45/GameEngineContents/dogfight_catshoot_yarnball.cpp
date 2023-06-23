@@ -38,7 +38,7 @@ void dogfight_catshoot_yarnball::Start()
 	Bullet->GetTransform()->SetLocalPosition({ 0,0,50 });
 
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 174.0f, 154.0f, 300.0f });
+	Collision->GetTransform()->SetLocalScale({ 60.0f, 60.0f, 300.0f });
 
 	Collision->SetOrder((int)CollisionType::BossAttack);
 

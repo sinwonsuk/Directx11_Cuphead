@@ -34,7 +34,7 @@ void BoneWeapon::Start()
 	Bullet->ChangeAnimation("WhiteBone");
 	
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 121.0f, 94.0f, 300.0f });
+	Collision->GetTransform()->SetLocalScale({ 20.0f, 20.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
 
 

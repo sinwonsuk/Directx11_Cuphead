@@ -165,6 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BoneWeapon.h" />
+    <ClInclude Include="Boss_Finish.h" />
     <ClInclude Include="ContentsCore.h">
       <SubType>
       </SubType>
@@ -205,6 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoneWeapon.cpp" />
+    <ClCompile Include="Boss_Finish.cpp" />
     <ClCompile Include="ContentsCore.cpp">
       <SubType>
       </SubType>

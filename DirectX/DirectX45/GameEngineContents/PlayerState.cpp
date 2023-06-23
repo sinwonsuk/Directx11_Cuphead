@@ -8,6 +8,7 @@
 #include "IdleWeapon.h"
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.cpp"
+#include "ExWeapon.cpp"
 void Player::ChangeState(PlayerState _State)
 {
 	PlayerState NextState = _State;
@@ -117,7 +118,21 @@ void Player::ChangeState(PlayerState _State)
 	case PlayerState::Hit:
 		AnimationCheck("Hit_Ground");
 		break;
-
+	case PlayerState::Ex_DiagonalDown:
+		AnimationCheck("Ex_DiagonalDown");
+		break;
+	case PlayerState::Ex_DiagonalUp:
+		AnimationCheck("Ex_DiagonalUp");
+		break;
+	case PlayerState::Ex_Down:
+		AnimationCheck("Ex_Down");
+		break;
+	case PlayerState::Ex_Straight:
+		AnimationCheck("Ex_Straight");
+		break;
+	case PlayerState::Ex_Up:
+		AnimationCheck("Ex_Up");
+		break;
 	default:
 		break;
 	}
@@ -241,6 +256,22 @@ void Player::UpdateState(float _Time)
 	case PlayerState::Hit:
 		HitUpdate(_Time); 
 		break;
+	case PlayerState::Ex_DiagonalDown:
+		Ex_DiagonalDown_Update(_Time);
+		break;
+	case PlayerState::Ex_DiagonalUp:
+		Ex_DiagonalUp_Update(_Time);
+		break;
+	case PlayerState::Ex_Down:
+		Ex_Down_Update(_Time);
+		break;
+	case PlayerState::Ex_Straight:
+		Ex_Straight_Update(_Time);
+		break;
+	case PlayerState::Ex_Up:
+		Ex_Up_Update(_Time);
+		break;
+
 	default:
 		break;
 	}
@@ -318,6 +349,12 @@ void Player::IdleUpdate(float _Time)
 	{
 		DownCheck = false;
 		ChangeState(PlayerState::IdleAttackPre);
+		return;
+	}
+	if (true == GameEngineInput::IsPress("PlayerExAttack"))
+	{
+		DownCheck = false;
+		ChangeState(PlayerState::Ex_Straight);
 		return;
 	}
 
@@ -781,7 +818,6 @@ void Player::ParryUpdate(float _Time)
 			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 			Object->SetMoveDir(float4::Left);
 		}
-		BulletTime = 0;
 		BulletTime = 0;
 	}
 
@@ -3378,6 +3414,64 @@ void Player::HitUpdate(float _Time)
 	}*/
 
 
+
+}
+
+void Player::Ex_DiagonalDown_Update(float _Time)
+{
+
+}
+
+void Player::Ex_DiagonalUp_Update(float _Time)
+{
+
+}
+
+void Player::Ex_Down_Update(float _Time)
+{
+
+}
+
+void Player::Ex_Straight_Update(float _Time)
+{
+	
+
+	if (ExBulletTime > 0.5 && Ex_Attack_Check ==true)
+	{		
+			std::shared_ptr<ExWeapon> Object = GetLevel()->CreateActor<ExWeapon>(3);
+
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50.0f,GetTransform()->GetLocalPosition().y + 20.0f });
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				GetTransform()->AddLocalPosition({ -10.0f * _Time,0,0 });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y});
+				Object->GetSfx_Dust()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x-60.0f,GetTransform()->GetLocalPosition().y });
+				Object->SetMoveDir(float4::Right);
+
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				GetTransform()->AddLocalPosition({ 10.0f * _Time,0,0 });
+			/*	Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
+
+				Object->SetMoveDir(float4::Left);*/
+			}
+			Ex_Attack_Check = false;
+	}
+
+	if (Render0->IsAnimationEnd())
+	{
+		Ex_Attack_Check = true;
+		ChangeState(PlayerState::Idle);
+		return; 
+	}
+
+
+}
+
+void Player::Ex_Up_Update(float _Time)
+{
 
 }
 

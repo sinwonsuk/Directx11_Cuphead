@@ -4,8 +4,6 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.cpp"
-#include "DogAirplane.h"
-#include "ph3_DogAirPlane.h"
 #include "UserInterface.h"
 
 IdleWeapon::IdleWeapon()

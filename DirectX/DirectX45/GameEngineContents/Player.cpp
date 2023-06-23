@@ -33,6 +33,7 @@ void Player::Update(float _DeltaTime)
 	HitTime += _DeltaTime;
 	BulletTime += _DeltaTime;
 	RunTime += _DeltaTime; 
+	ExBulletTime += _DeltaTime; 
 
 	float RotSpeed = 180.0f;
 
@@ -176,7 +177,7 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerRock", 'C');
 		GameEngineInput::CreateKey("PlayerAttack", 'X');
 		GameEngineInput::CreateKey("PlayerDash", VK_LSHIFT);
-
+		GameEngineInput::CreateKey("PlayerExAttack", 'V');
 
 		GameEngineInput::CreateKey("PlayerScaleY+", 'Y');
 		GameEngineInput::CreateKey("PlayerScaleY-", 'U');
@@ -231,6 +232,13 @@ void Player::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DownAttackPre").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Hit_Ground").GetFullPath());
 
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ex_DiagonalDown").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ex_DiagonalUp").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ex_Down").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ex_Straight").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ex_Up").GetFullPath());
+
+
 
 
 		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttack").GetFullPath());
@@ -277,6 +285,15 @@ void Player::Start()
 	Render0->CreateAnimation({ .AnimationName = "DownAttack", .SpriteName = "DownAttack",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "DownAttackPre", .SpriteName = "DownAttackPre",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "Hit_Ground", .SpriteName = "Hit_Ground",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+
+	Render0->CreateAnimation({ .AnimationName = "Ex_DiagonalDown", .SpriteName = "Ex_DiagonalDown",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Ex_DiagonalUp", .SpriteName = "Ex_DiagonalUp",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Ex_Down", .SpriteName = "Ex_Down",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Ex_Straight", .SpriteName = "Ex_Straight",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Ex_Up", .SpriteName = "Ex_Up",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
+
+
+
 	Render0->ChangeAnimation("Idle");
 
 	Collision = CreateComponent<GameEngineCollision>();
@@ -290,7 +307,7 @@ void Player::AnimationCheck(const std::string_view& _AnimationName)
 	Render0->ChangeAnimation(_AnimationName);
 }
 
-void Player::AnimationCheck(const std::string_view& _AnimationName, bool Force, int Frame)
+void Player::AnimationCheck(const std::string_view& _AnimationName, bool Force, size_t Frame)
 {
 	Render0->ChangeAnimation(_AnimationName, Force , Frame);
 }

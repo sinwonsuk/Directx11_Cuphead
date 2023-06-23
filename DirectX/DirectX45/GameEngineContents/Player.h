@@ -36,7 +36,12 @@ enum class PlayerState
 	DownAttackPre,
 	MapOut,
 	Fail,
-	Hit
+	Hit,
+	Ex_DiagonalDown,
+	Ex_DiagonalUp,
+	Ex_Down,
+	Ex_Straight, 
+	Ex_Up, 
 };
 // Ό³Έν :
 class Player : public GameEngineActor
@@ -56,7 +61,7 @@ public:
 	void ChangeState(PlayerState _State);
 	void UpdateState(float _Time);
 	void AnimationCheck(const std::string_view& _AnimationName);
-	void AnimationCheck(const std::string_view& _AnimationName,bool Force, int Frame);
+	void AnimationCheck(const std::string_view& _AnimationName,bool Force, size_t Frame);
 
 	void IdleUpdate(float _Time);
 	void RunUpdate(float _Time);
@@ -92,6 +97,11 @@ public:
 	void FailUpdate(float _Time);
 	void HitUpdate(float _Time);
 
+	void Ex_DiagonalDown_Update(float _Time);
+	void Ex_DiagonalUp_Update(float _Time);
+	void Ex_Down_Update(float _Time);
+	void Ex_Straight_Update(float _Time);
+	void Ex_Up_Update(float _Time);
 
 	bool GetGravity()
 	{
@@ -149,12 +159,13 @@ private:
 	bool DashCheck = true;
 	bool DownCheck = false;
 	bool HitCheck = false;
-	bool dfgdfg = false;
+	bool Ex_Attack_Check = true;
 	bool DashEffectCheck = false;
 	float CurPos_y = 0;
 	int EffectCheck = 0; 
-	int Frame = 0;
+	size_t Frame = 0;
 	float BulletTime = 0;
+	float ExBulletTime = 0; 
 	float RunTime = 0;
 	int Bulletlocation = 0;
 

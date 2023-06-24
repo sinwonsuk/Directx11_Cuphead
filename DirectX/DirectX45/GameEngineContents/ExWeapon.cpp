@@ -4,7 +4,7 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
 
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 #include "UserInterface.h"
 ExWeapon::ExWeapon()
 {
@@ -52,11 +52,10 @@ void ExWeapon::Start()
 	Sfx->CreateAnimation({ .AnimationName = "EX_ChargeUp", .SpriteName = "EX_ChargeUp", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
 	Sfx->ChangeAnimation("EX_ChargeUp");
 	Sfx->SetScaleRatio(0.8f);
-
 	Sfx_Dust = CreateComponent<GameEngineSpriteRenderer>();
 	Sfx_Dust->CreateAnimation({ .AnimationName = "EX_Dust", .SpriteName = "EX_Dust", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
 	Sfx_Dust->ChangeAnimation("EX_Dust");
-
+	
 	Sfx_Dust->SetScaleRatio(0.8f);
 
 	Collision = CreateComponent<GameEngineCollision>();
@@ -69,8 +68,6 @@ void ExWeapon::Update(float _Delta)
 {
 	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 
-	
-
 	if (CollisionCheck == false)
 	{
 		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
@@ -78,22 +75,27 @@ void ExWeapon::Update(float _Delta)
 
 
 
-	//if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
-	//{
-	//	UserInterface::Cut += 0.1;
-	//	Bullet->ChangeAnimation("Peashooter_Death");
-	//	CollisionCheck = true;
-	//}
+	if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
+	{
+		Bullet->ChangeAnimation("Peashooter_EX_Death");
+		CollisionCheck = true;
+	}
+	if (Sfx_Dust->IsAnimationEnd())
+	{
+		Sfx_Dust->Death();
+	}
 
+	if (Sfx->IsAnimationEnd())
+	{
+		Sfx->Death();
+	}
 
 	if (GetLiveTime() > 5)
 	{
 		this->Death();
 	}
 
+	
 
-	if (Sfx->IsAnimationEnd())
-	{
-		Sfx->Death();
-	}
+
 }

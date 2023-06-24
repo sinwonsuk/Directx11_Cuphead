@@ -1,6 +1,4 @@
 #pragma once
-#include "PrecompileHeader.h"
-
 
 enum class DogAirplaneType
 {
@@ -8,12 +6,12 @@ enum class DogAirplaneType
 	Cloulds,
 	Ground,
 
-	
+
 	Boss,
 	BulDogIntro,
-	DogCopterIntro, 
+	DogCopterIntro,
 	ChinookIntro,
-	Airplane, 
+	Airplane,
 	AirplaneSpin,
 	BulDogIdle,
 	Player,
@@ -23,7 +21,7 @@ enum class CollisionType
 {
 	Player,
 	Bullet,
-	NpcAirPlane, 
+	NpcAirPlane,
 	BossBody,
 	MapOut,
 	BossAttack,

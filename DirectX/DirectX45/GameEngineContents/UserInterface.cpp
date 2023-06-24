@@ -2,10 +2,11 @@
 #include "UserInterface.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 #include <GameEngineCore/GameEngineUIRenderer.h>
 
 float UserInterface::Cut = 0.0f;
+int UserInterface::CardNumber = 0;
 UserInterface::UserInterface()
 {
 
@@ -124,9 +125,150 @@ void UserInterface::Start()
 
 void UserInterface::Update(float _Delta)
 {
-	
-	
+	if (PrevConsumeCard != CardNumber)
+	{
+		switch (CardNumber)
+		{
+		case 0:
+		{
+			if (Cut <= 0.0f)
+			{
+				Cut = 0.0f;
+				CardNumber = 0;
+				BackCard->ImageClippingY(Cut, ClipYDir::Top);
+				BackCard->On();
+				FlipCard->ChangeAnimation("FlipCard");
+				FlipCard->Off();
+			}
 
+			else 
+			{
+				CardNumber = 0;
+
+				
+				BackCard->Off();
+				FlipCard->ChangeAnimation("FlipCard");
+				FlipCard->Off();
+
+				BackCard2->Off();
+				FlipCard2->ChangeAnimation("FlipCard");
+				FlipCard2->Off();
+
+				BackCard->ImageClippingY(Cut, ClipYDir::Top);
+				BackCard->On();
+			}
+
+		}
+		break;
+
+		case 1:
+		{
+
+			if (Cut <= 0.0f)
+			{
+				Cut = 0.0f;
+				CardNumber = 1;
+				BackCard2->ImageClippingY(Cut, ClipYDir::Top);
+				BackCard2->On();
+				FlipCard2->ChangeAnimation("FlipCard");
+				FlipCard2->Off();
+			}
+
+			else
+			{
+				CardNumber = 1;
+
+				BackCard2->Off();
+				FlipCard2->ChangeAnimation("FlipCard");
+				FlipCard2->Off();
+
+				BackCard3->Off();
+				FlipCard3->ChangeAnimation("FlipCard");
+				FlipCard3->Off();
+
+				BackCard2->ImageClippingY(Cut, ClipYDir::Top);
+				BackCard2->On();
+			}
+		}
+		break;
+		case 2:
+		{
+			if (Cut <= 0.0f)
+			{
+				Cut = 0.0f;
+				CardNumber = 2;
+				BackCard3->ImageClippingY(Cut, ClipYDir::Top);
+				BackCard3->On();
+				FlipCard3->ChangeAnimation("FlipCard");
+				FlipCard3->Off();
+			}
+
+			else
+			{
+				CardNumber = 2;
+
+				BackCard3->Off();
+				FlipCard3->ChangeAnimation("FlipCard");
+				FlipCard3->Off();
+
+				BackCard4->Off();
+				FlipCard4->ChangeAnimation("FlipCard");
+				FlipCard4->Off();
+
+				BackCard3->ImageClippingY(Cut, ClipYDir::Top);
+				BackCard3->On();
+			}
+		}
+		break;
+		case 3:
+		{
+			if (Cut <= 0.0f)
+			{
+				Cut = 0.0f;
+				CardNumber = 3;
+				BackCard4->ImageClippingY(Cut, ClipYDir::Top);
+				BackCard4->On();
+				FlipCard4->ChangeAnimation("FlipCard");
+				FlipCard4->Off();
+			}
+
+			else
+			{
+				CardNumber = 3;
+
+				BackCard4->Off();
+				FlipCard4->ChangeAnimation("FlipCard");
+				FlipCard4->Off();
+
+				BackCard5->Off();
+				FlipCard5->ChangeAnimation("FlipCard");
+				FlipCard5->Off();
+
+				BackCard4->ImageClippingY(Cut, ClipYDir::Top);
+				BackCard4->On();
+			}
+
+		}
+		break;
+
+		case 4:
+		{
+			
+				Cut = 0.0f;
+				CardNumber = 4;
+				BackCard5->ImageClippingY(Cut, ClipYDir::Top);
+				BackCard5->On();
+				FlipCard5->ChangeAnimation("FlipCard");
+				FlipCard5->Off();
+			
+
+			
+		}
+		break;
+		default:
+			break;
+		}
+	}
 
 	switch (CardNumber)	
 	{
@@ -134,6 +276,7 @@ void UserInterface::Update(float _Delta)
 		{
 			if (Cut >= 1.0f)
 			{
+
 				BackCard->Off();
 				BackCard2->On();
 				Cut = 0.0f;
@@ -149,9 +292,11 @@ void UserInterface::Update(float _Delta)
 		{
 			if (Cut >= 1.0f)
 			{
+		
 				BackCard2->Off();
 				BackCard3->On();
 				FlipCard2->On();
+
 				Cut = 0.0f;
 				++CardNumber;
 				break;
@@ -163,6 +308,7 @@ void UserInterface::Update(float _Delta)
 		{
 			if (Cut >= 1.0f)
 			{
+	
 				BackCard3->Off();
 				BackCard4->On();
 				FlipCard3->On();
@@ -177,6 +323,7 @@ void UserInterface::Update(float _Delta)
 		{
 			if (Cut >= 1.0f)
 			{
+	
 				BackCard4->Off();
 				BackCard5->On();
 				FlipCard4->On();
@@ -205,14 +352,8 @@ void UserInterface::Update(float _Delta)
 		break;
 	}
 	
+	
 
-
-
-
-
-
-
-
-
+	PrevConsumeCard = CardNumber;
 
 }

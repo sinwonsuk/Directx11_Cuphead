@@ -3,7 +3,7 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCamera.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 
 DogAirplaneBackground* DogAirplaneBackground::Background;
 

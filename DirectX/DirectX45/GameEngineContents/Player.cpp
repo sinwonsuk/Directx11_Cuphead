@@ -9,11 +9,11 @@
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "IdleWeapon.h"
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 Player* Player::MainPlayer;
 Player::Player()
 {
-	
+	MainPlayer = this;
 }
 
 Player::~Player()
@@ -26,10 +26,10 @@ void Player::Update(float _DeltaTime)
 	
 	
 
-	/*if (Gravity == true && StateValue != PlayerState::Dash)
+	if (Gravity == true && StateValue != PlayerState::Dash)
 	{
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
-	}*/
+	}
 	HitTime += _DeltaTime;
 	BulletTime += _DeltaTime;
 	RunTime += _DeltaTime; 
@@ -41,10 +41,20 @@ void Player::Update(float _DeltaTime)
 
 	float ScaleSpeed = 10.0f;
 	
+	//if (GetTransform()->GetLocalPosition().y < -200)
+	//{
+	//	int a = 0;
+	//}
+
+	//TransformData data = GetTransform()->GetTransDataRef();
+
 	//std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("TestMap.png");
-	//GameEnginePixelColor Pixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x, -GetTransform()->GetLocalPosition().y+65.0f);
-	//GameEnginePixelColor RightPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+40.0f, -GetTransform()->GetLocalPosition().y+55.0f);
-	//GameEnginePixelColor LeftPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x -40.0f, -GetTransform()->GetLocalPosition().y + 55.0f);
+	//GameEnginePixelColor Pixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+640.0f , -GetTransform()->GetLocalPosition().y + 360.0f );
+	//GameEnginePixelColor RightPixel = testMap->GetPixel(Player::MainPlayer->GetTransform()->GetLocalPosition().x + 40.0f +640.0f, -Player::MainPlayer->GetTransform()->GetLocalPosition().y + 55.0f + 425.0f);
+	//GameEnginePixelColor LeftPixel = testMap->GetPixel(Player::MainPlayer->GetTransform()->GetLocalPosition().x - 40.0f +640.0f, -Player::MainPlayer->GetTransform()->GetLocalPosition().y + 55.0f + 425.0f);
+
+	//
+
 
 
 
@@ -59,15 +69,7 @@ void Player::Update(float _DeltaTime)
 	//		++GravityCheck;			
 	//	}		
 
-	//	if (ColorChar[i] == RightPixel.ColorChar[i])
-	//	{
-	//		++RightCheck;
-	//	}
-
-	//	if (ColorChar[i] == LeftPixel.ColorChar[i])
-	//	{
-	//		++LeftCheck;
-	//	}
+	//	
 
 	//}
 
@@ -90,18 +92,19 @@ void Player::Update(float _DeltaTime)
 
 	//if (GravityCheck == 4)
 	//{
-	//	Gravity = true;
+	//	Gravity = false;
 	//}
 	//if (GravityCheck != 4)
 	//{
-	//	Gravity = false;
+	//	Gravity = true;
 	//}
 
 
 
-	/*GravityCheck = 0;
-	RightCheck = 0;
-	LeftCheck = 0;*/
+	//GravityCheck = 0;
+	//RightCheck = 0;
+	//LeftCheck = 0;
+
 	Collision->GetTransform()->SetLocalPosition({ 0.0f, -30.0f, 0.0f });
 	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });
 
@@ -111,15 +114,22 @@ void Player::Update(float _DeltaTime)
 		Collision->GetTransform()->SetLocalPosition({ 0.0f, -60.0f, 0.0f });
 	}
 	
-	if (GetTransform()->GetLocalScale().x > 0 && StateValue != PlayerState::Dash)
+	if (GetTransform()->GetLocalScale().x > 0 && StateValue != PlayerState::Dash && StateValue != PlayerState::Ex_Straight
+		&& StateValue != PlayerState::Ex_DiagonalUp && StateValue != PlayerState::Ex_Up
+		)
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 		{
 			GetTransform()->SetLocalNegativeScaleX();
 		}
 	}
+	
 
-	if (GetTransform()->GetLocalScale().x < 0 && StateValue != PlayerState::Dash)
+	if (GetTransform()->GetLocalScale().x < 0 && StateValue != PlayerState::Dash && StateValue != PlayerState::Ex_Straight
+		&& StateValue != PlayerState::Ex_DiagonalUp && StateValue != PlayerState::Ex_Up	
+		)
+
+
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
 		{
@@ -147,12 +157,8 @@ void Player::Update(float _DeltaTime)
 			HitNumber = 0;
 			HitTime = 0;
 		}
-
-
 	}
-
-
-
+	
 	UpdateState(_DeltaTime);
 
 
@@ -163,7 +169,7 @@ void Player::Update(float _DeltaTime)
 void Player::Start()
 {
 
-	MainPlayer = this;
+	
 
 	if (false == GameEngineInput::IsKey("PlayerMoveLeft"))
 	{

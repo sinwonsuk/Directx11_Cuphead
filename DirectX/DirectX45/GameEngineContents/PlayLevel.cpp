@@ -62,17 +62,18 @@ void PlayLevel::Start()
 
 		Window->Test = std::bind(&PlayLevel::PlayerCreate, this);
 	}
+
 	{
 		std::shared_ptr<Player> Object = CreateActor<Player>(3);
-		Object->GetTransform()->SetLocalPosition({ -400,0 });
+		Object->GetTransform()->SetLocalPosition({ 0,600 });
 	}
 	{
 		std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>(2);
 	}
 
-	{
-		std::shared_ptr<TestObject> Object = CreateActor<TestObject>(1);
-	}
+	//{
+	//	std::shared_ptr<TestObject> Object = CreateActor<TestObject>(1);
+	//}
 
 
 }

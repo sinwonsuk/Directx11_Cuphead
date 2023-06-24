@@ -3,7 +3,7 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 #include "UserInterface.h"
 
 IdleWeapon::IdleWeapon()
@@ -59,7 +59,7 @@ void IdleWeapon::Update(float _Delta)
 
 	if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
 	{
-		UserInterface::Cut += 0.1;
+		UserInterface::Cut += 0.5;
 		Bullet->ChangeAnimation("Peashooter_Death");	
 		CollisionCheck = true;		
 	}

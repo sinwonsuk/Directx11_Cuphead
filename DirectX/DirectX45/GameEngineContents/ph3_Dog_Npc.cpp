@@ -7,7 +7,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include "ph3_DogAirPlane.h"
 #include <GameEngineCore/GameEngineCollision.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 
 
 ph3_Dog_Npc* ph3_Dog_Npc::ph3_Npc;

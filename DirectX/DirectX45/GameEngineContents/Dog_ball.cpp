@@ -4,7 +4,7 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineCollision.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 
 Dog_ball::Dog_ball()
 {

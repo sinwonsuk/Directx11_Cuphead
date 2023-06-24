@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineLevel.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 #include "Player.h"
 #include "ph3_DogAirPlane.h"
 #include "DogAirplane.h"
@@ -176,7 +176,7 @@ void NpcAirplane::Update(float _Delta)
 		A->ad = 1;
 	}
 
-	/*if (AirPlaneLevel->Get_Ph2_DogAirpalne_Bottom()->GetHp() <0 &&
+	if (AirPlaneLevel->Get_Ph2_DogAirpalne_Bottom()->GetHp() <0 &&
 		AirPlaneLevel->Get_Ph2_DogAirpalne_Top()->GetHp() < 0 &&
 		AirPlaneLevel->Get_Ph2_DogAirpalne_Right()->GetHp() < 0 &&
 		AirPlaneLevel->Get_Ph2_DogAirpalne_Left()->GetHp() < 0 	&&
@@ -202,7 +202,7 @@ void NpcAirplane::Update(float _Delta)
 			Player_Pos_Y_Check = -150.0f;
 			AirPlaneLevel->ad = 2;
 		}
-    }*/
+    }
 
 	TransformData date13= Npc->GetTransform()->GetTransDataRef(); 
 

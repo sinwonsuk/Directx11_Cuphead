@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCollision.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 
 ph3_Laser::ph3_Laser()
 {

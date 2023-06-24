@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include "ph3_Laser.h"
 #include <GameEngineCore/GameEngineCollision.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 #include "IdleWeapon.h"
 Ph3_DogAirplane* Ph3_DogAirplane::ph3_mainBoss;
 int Ph3_DogAirplane::Hp = 20;

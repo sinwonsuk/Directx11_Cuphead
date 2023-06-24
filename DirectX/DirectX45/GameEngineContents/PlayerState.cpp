@@ -7,8 +7,9 @@
 #include "PlayerRunEffect.h"
 #include "IdleWeapon.h"
 #include <GameEngineCore/GameEngineCollision.h>
-#include "EnumClass.cpp"
-#include "ExWeapon.cpp"
+#include "UserInterface.h"
+#include "EnumClass.h"
+#include "ExWeapon.h"
 void Player::ChangeState(PlayerState _State)
 {
 	PlayerState NextState = _State;
@@ -351,13 +352,16 @@ void Player::IdleUpdate(float _Time)
 		ChangeState(PlayerState::IdleAttackPre);
 		return;
 	}
-	if (true == GameEngineInput::IsPress("PlayerExAttack"))
+	if (UserInterface::CardNumber > 0)
 	{
-		DownCheck = false;
-		ChangeState(PlayerState::Ex_Straight);
-		return;
+		if (true == GameEngineInput::IsPress("PlayerExAttack"))
+		{
+			UserInterface::CardNumber -= 1;
+			DownCheck = false;
+			ChangeState(PlayerState::Ex_Straight);
+			return;
+		}
 	}
-
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
@@ -438,6 +442,26 @@ void Player::RunUpdate(float _Time)
 		RunTime = 0;
 		EffectCheck = 0;
 	}
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveRight") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_DiagonalUp);
+			return;
+		}
+
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveLeft") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_DiagonalUp);
+			return;
+		}
+	}
+
+
 
 	if (true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerAttack"))
 	{
@@ -453,7 +477,17 @@ void Player::RunUpdate(float _Time)
 		ChangeState(PlayerState::Fail);
 		return;
 	}
-
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Straight);
+			return;
+		}
+	}
+	
 
 	if (true == GameEngineInput::IsPress("PlayerDash"))
 	{
@@ -1054,7 +1088,25 @@ void Player::ParryUpdate(float _Time)
 
 void Player::UpAimUpdate(float _Time)
 {
-	
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Up);
+			return;
+		}
+
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Up);
+			return;
+		}
+		
+	}
 	if (true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		ChangeState(PlayerState::DiagonalUpAim);
@@ -1174,6 +1226,17 @@ void Player::DownAimUpdate(float _Time)
 
 void Player::IdleAimUpdate(float _Time)
 {
+	if (UserInterface::CardNumber > 0)
+	{
+
+		if (true == GameEngineInput::IsPress("PlayerExAttack"))
+		{
+			DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Straight);
+			return;
+		}
+	}
 	if (true == GameEngineInput::IsUp("PlayerRock"))
 	{
 		ChangeState(PlayerState::Idle);
@@ -1249,6 +1312,26 @@ void Player::IdleAimUpdate(float _Time)
 
 void Player::DiagonalUpAimUpdate(float _Time)
 {
+
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveRight") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_DiagonalUp);
+			return;
+		}
+
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveLeft") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_DiagonalUp);
+			return;
+		}
+	}
+
 	if (true == GameEngineInput::IsUp("PlayerRock"))
 	{
 		ChangeState(PlayerState::Idle);
@@ -1505,9 +1588,16 @@ void Player::IdleAttackUpdate(float _Time)
 	}
 	
 	
-
-	
-
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Straight);
+			return;
+		}
+	}
 
 	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveRight"))
 	{
@@ -1597,8 +1687,16 @@ void Player::IdleAttackPreUpdate(float _Time)
 		BulletTime = 0;
 	}
 
-
-
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Straight);
+			return;
+		}
+	}
 	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveRight"))
 	{
 		ChangeState(PlayerState::RunAttack);
@@ -1820,6 +1918,32 @@ void Player::RunAttackUpdate(float _Time)
 		return;
 	}
 
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveRight") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_DiagonalUp);
+			return;
+		}
+
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveLeft") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_DiagonalUp);
+			return;
+		}
+	}
+	if (true == GameEngineInput::IsPress("PlayerExAttack"))
+	{
+		DownCheck = false;
+		ChangeState(PlayerState::Ex_Straight);
+		return;
+	}
+
+
 	if (CurPos_y - 25.0f > GetTransform()->GetLocalPosition().y)
 	{
 		DownCheck = false;
@@ -1993,8 +2117,24 @@ void Player::DiagonalUpRunAttackUpdate(float _Time)
 		ChangeState(PlayerState::Dash);
 		return;
 	}
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveRight") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_DiagonalUp);
+			return;
+		}
 
-
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveLeft") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_DiagonalUp);
+			return;
+		}
+	}
 	if (GameEngineInput::IsUp("PlayerMoveUp"))
 	{
 		ChangeState(PlayerState::RunAttack);
@@ -2057,6 +2197,17 @@ void Player::DiagonalUpRunAttackUpdate(float _Time)
 
 void Player::UpUpdate(float _Time)
 {
+
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Up);
+			return;
+		}
+	}
 	
 	if (GameEngineInput::IsPress("PlayerMoveRight") && GameEngineInput::IsPress("PlayerAttack"))
 	{
@@ -2165,6 +2316,18 @@ void Player::UpAttackUpdate(float _Time)
 		return;
 	}
 
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Up);
+			return;
+		}
+
+	}
+
 	if (GameEngineInput::IsPress("PlayerJump"))
 	{
 		
@@ -2252,6 +2415,19 @@ void Player::UpAttackPre(float _Time)
 		ChangeState(PlayerState::UpAttack);
 		return; 
 	}
+
+
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Up);
+			return;
+		}
+	}
+
 	if (GameEngineInput::IsPress("PlayerMoveRight") && GameEngineInput::IsPress("PlayerAttack"))
 	{
 		ChangeState(PlayerState::DiagonalUpRunAttack);
@@ -2745,6 +2921,18 @@ void Player::IdleAimAttackUpdate(float _Time)
 
 	}
 
+	if (UserInterface::CardNumber > 0)
+	{
+
+		if (true == GameEngineInput::IsPress("PlayerExAttack"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Straight);
+			return;
+		}
+	}
+
 	if (true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
 		ChangeState(PlayerState::DiagonalUpAttack);
@@ -2834,6 +3022,18 @@ void Player::IdleAimAttackPreUpdate(float _Time)
 			Object->SetMoveDir(float4::Left);
 		}
 		BulletTime = 0;
+	}
+
+
+	if (UserInterface::CardNumber > 0)
+	{
+		if (true == GameEngineInput::IsPress("PlayerExAttack"))
+		{
+			//DownCheck = false;
+			UserInterface::CardNumber -= 1;
+			ChangeState(PlayerState::Ex_Straight);
+			return;
+		}
 	}
 
 	if (true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveLeft"))
@@ -2927,6 +3127,13 @@ void Player::UpAimAttackUpdate(float _Time)
 		return;
 	}
 
+	if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+	{
+		//DownCheck = false;
+		ChangeState(PlayerState::Ex_Up);
+		return;
+	}
+
 	if (true == GameEngineInput::IsUp("PlayerRock"))
 	{
 		ChangeState(PlayerState::IdleAimAttack);
@@ -3000,6 +3207,14 @@ void Player::UpAimAttackPreUpdate(float _Time)
 		ChangeState(PlayerState::DiagonalUpAttack);
 		return;
 	}
+
+	if (true == GameEngineInput::IsPress("PlayerExAttack") && true == GameEngineInput::IsPress("PlayerMoveUp"))
+	{
+		//DownCheck = false;
+		ChangeState(PlayerState::Ex_Up);
+		return;
+	}
+
 
 	if (true == GameEngineInput::IsUp("PlayerRock"))
 	{
@@ -3424,7 +3639,53 @@ void Player::Ex_DiagonalDown_Update(float _Time)
 
 void Player::Ex_DiagonalUp_Update(float _Time)
 {
+	if (Render0->GetCurrentFrame() > 5)
+	{
+		if (ExBulletTime > 0.5 && Ex_Attack_Check == true)
+		{
+			std::shared_ptr<ExWeapon> Object = GetLevel()->CreateActor<ExWeapon>(3);
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				GetTransform()->AddLocalPosition({ -30.0f * _Time,0,0 });
 
+
+				Object->GetSfx()->GetTransform()->SetLocalRotation({ 0.0f,0.0f,45.0f });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalRotation({ 0.0f,0.0f,45.0f });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0.0f,0.0f,45.0f });
+
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 60.0f,GetTransform()->GetLocalPosition().y + 25.0f });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 5.0f,GetTransform()->GetLocalPosition().y, -100.0f });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 80.0f,GetTransform()->GetLocalPosition().y - 10.0f, -100.0f });
+				Object->SetMoveDir({ 1.0f,1.0f,0.0f,1.0f });
+
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				GetTransform()->AddLocalPosition({ 30.0f * _Time,0,0 });
+
+				Object->GetSfx()->GetTransform()->SetLocalRotation({ 0.0f,0.0f,135.0f });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalRotation({ 0.0f,0.0f,135.0f });
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0.0f,0.0f,135.0f });
+
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60.0f,GetTransform()->GetLocalPosition().y + 25.0f });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60.0f,GetTransform()->GetLocalPosition().y - 10.0f , -100.0f });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 40.0f,GetTransform()->GetLocalPosition().y - 10.0f , -100.0f });
+				Object->SetMoveDir({ -1.0f,1.0f,0.0f,1.0f });
+
+			}
+			Ex_Attack_Check = false;
+		}
+	}
+
+
+
+
+	if (Render0->IsAnimationEnd())
+	{
+		Ex_Attack_Check = true;
+		ChangeState(PlayerState::Idle);
+		return;
+	}
 }
 
 void Player::Ex_Down_Update(float _Time)
@@ -3435,32 +3696,37 @@ void Player::Ex_Down_Update(float _Time)
 void Player::Ex_Straight_Update(float _Time)
 {
 	
-
-	if (ExBulletTime > 0.5 && Ex_Attack_Check ==true)
-	{		
+	if (Render0->GetCurrentFrame() > 5)
+	{
+		if (ExBulletTime > 0.5 && Ex_Attack_Check == true)
+		{
 			std::shared_ptr<ExWeapon> Object = GetLevel()->CreateActor<ExWeapon>(3);
 
-			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50.0f,GetTransform()->GetLocalPosition().y + 20.0f });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 50.0f,GetTransform()->GetLocalPosition().y -10.0f});
 			if (GetTransform()->GetLocalScale().x > 0)
 			{
-				GetTransform()->AddLocalPosition({ -10.0f * _Time,0,0 });
-				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x-5.0f,GetTransform()->GetLocalPosition().y});
-				Object->GetSfx_Dust()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x-60.0f,GetTransform()->GetLocalPosition().y });
+				GetTransform()->AddLocalPosition({ -30.0f * _Time,0,0 });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 5.0f,GetTransform()->GetLocalPosition().y, -100.0f });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60.0f,GetTransform()->GetLocalPosition().y, -100.0f });
 				Object->SetMoveDir(float4::Right);
 
 			}
 			if (GetTransform()->GetLocalScale().x < 0)
 			{
-				GetTransform()->AddLocalPosition({ 10.0f * _Time,0,0 });
+				GetTransform()->AddLocalPosition({ 30.0f * _Time,0,0 });
 
-				Object->GetTransform()->SetLocalRotation({ 0,0,180 });
-				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
-			
 
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10.0f, -100.0f });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x +60.0f,GetTransform()->GetLocalPosition().y , -100.0f });
 				Object->SetMoveDir(float4::Left);
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
+				Object->GetSfx()->GetTransform()->SetLocalRotation({ 0,0,180 });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalRotation({ 0,0,180 });
 			}
 			Ex_Attack_Check = false;
+		}
 	}
+	
 
 	if (Render0->IsAnimationEnd())
 	{
@@ -3474,6 +3740,49 @@ void Player::Ex_Straight_Update(float _Time)
 
 void Player::Ex_Up_Update(float _Time)
 {
+	if (Render0->GetCurrentFrame() > 5)
+	{
+		if (ExBulletTime > 0.5 && Ex_Attack_Check == true)
+		{
+			std::shared_ptr<ExWeapon> Object = GetLevel()->CreateActor<ExWeapon>(3);
+
+		
+			if (GetTransform()->GetLocalScale().x > 0)
+			{
+				GetTransform()->AddLocalPosition({ -30.0f * _Time,0,0 });
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20.0f,GetTransform()->GetLocalPosition().y + 80.0f});
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 20.0f,GetTransform()->GetLocalPosition().y + 80.0f, -100.0f });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20.0f,GetTransform()->GetLocalPosition().y - 80.0f, -100.0f });
+				Object->SetMoveDir(float4::Up);
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90.0f });
+				Object->GetSfx()->GetTransform()->SetLocalRotation({ 0,0,90.0f });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalRotation({ 0,0,90.0f });
+
+
+			}
+			if (GetTransform()->GetLocalScale().x < 0)
+			{
+				GetTransform()->AddLocalPosition({ 30.0f * _Time,0,0 });
+
+				Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20.0f,GetTransform()->GetLocalPosition().y +80.0f  });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 20.0f,GetTransform()->GetLocalPosition().y + 80.0f, - 100.0f });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x -20.0f,GetTransform()->GetLocalPosition().y - 80.0f,-100.0f });
+				Object->SetMoveDir(float4::Up);
+				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,90.0f });
+				Object->GetSfx()->GetTransform()->SetLocalRotation({ 0,0,90.0f });
+				Object->GetSfx_Dust()->GetTransform()->SetLocalRotation({ 0,0,90.0f });
+			}
+			Ex_Attack_Check = false;
+		}
+	}
+
+	
+	if (Render0->IsAnimationEnd())
+	{
+		Ex_Attack_Check = true;
+		ChangeState(PlayerState::Idle);
+		return;
+	}
 
 }
 

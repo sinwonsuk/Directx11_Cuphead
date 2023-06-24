@@ -2,7 +2,7 @@
 #include "Ph2_DogAirpalne.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 
 
 Ph2_DogAirpalne::Ph2_DogAirpalne()

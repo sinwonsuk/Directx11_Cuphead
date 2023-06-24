@@ -2,7 +2,7 @@
 #include "dogfight_catshoot_yarnball.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 dogfight_catshoot_yarnball::dogfight_catshoot_yarnball()
 {
 

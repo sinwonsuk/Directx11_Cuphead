@@ -5,7 +5,7 @@
 #include "ph2_Boss_Weapon.h"
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCollision.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 void Ph2_DogAirpalne::ChangeState(Ph2_DogAirPlaneState _State)
 {
 	Ph2_DogAirPlaneState NextState = _State;

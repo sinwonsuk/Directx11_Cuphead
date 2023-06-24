@@ -8,7 +8,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineSprite.h>
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 #include "IdleWeapon.h"
 #include "Dog_ball.h"
 int DogAirplane::Hp = 20;

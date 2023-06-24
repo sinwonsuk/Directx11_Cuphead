@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include "Player.h"
-#include "EnumClass.cpp"
+#include "EnumClass.h"
 ph2_Boss_Weapon::ph2_Boss_Weapon()
 {
 }

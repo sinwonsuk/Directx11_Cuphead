@@ -59,6 +59,7 @@
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="Boss_Finish.h" />
     <ClInclude Include="ExWeapon.h" />
+    <ClInclude Include="EnumClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -102,9 +103,6 @@
     </ClCompile>
     <ClCompile Include="TestObject.cpp">
       <Filter>Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="EnumClass.cpp">
-      <Filter>Object\test</Filter>
     </ClCompile>
     <ClCompile Include="NpcAirplane.cpp">
       <Filter>Object\DogAirplane</Filter>

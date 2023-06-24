@@ -64,11 +64,11 @@ void PlayLevel::Start()
 	}
 
 	{
-		std::shared_ptr<Player> Object = CreateActor<Player>(3);
+		std::shared_ptr<Player> Object = CreateActor<Player>();
 		Object->GetTransform()->SetLocalPosition({ 0,600 });
 	}
 	{
-		std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>(2);
+		std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>();
 	}
 
 	//{

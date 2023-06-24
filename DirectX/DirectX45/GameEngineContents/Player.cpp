@@ -13,7 +13,7 @@
 Player* Player::MainPlayer;
 Player::Player()
 {
-	MainPlayer = this;
+	
 }
 
 Player::~Player()
@@ -24,7 +24,7 @@ Player::~Player()
 void Player::Update(float _DeltaTime)
 {
 	
-	
+	MainPlayer = this;
 
 	if (Gravity == true && StateValue != PlayerState::Dash)
 	{
@@ -41,69 +41,77 @@ void Player::Update(float _DeltaTime)
 
 	float ScaleSpeed = 10.0f;
 	
-	//if (GetTransform()->GetLocalPosition().y < -200)
-	//{
-	//	int a = 0;
-	//}
+	if (GetTransform()->GetLocalPosition().y < -200)
+	{
+		int a = 0;
+	}
 
-	//TransformData data = GetTransform()->GetTransDataRef();
+	TransformData data = GetTransform()->GetTransDataRef();
 
-	//std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("TestMap.png");
-	//GameEnginePixelColor Pixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+640.0f , -GetTransform()->GetLocalPosition().y + 360.0f );
-	//GameEnginePixelColor RightPixel = testMap->GetPixel(Player::MainPlayer->GetTransform()->GetLocalPosition().x + 40.0f +640.0f, -Player::MainPlayer->GetTransform()->GetLocalPosition().y + 55.0f + 425.0f);
-	//GameEnginePixelColor LeftPixel = testMap->GetPixel(Player::MainPlayer->GetTransform()->GetLocalPosition().x - 40.0f +640.0f, -Player::MainPlayer->GetTransform()->GetLocalPosition().y + 55.0f + 425.0f);
+	std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("TestMap.png");
+	GameEnginePixelColor Pixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+640.0f , -GetTransform()->GetLocalPosition().y + 360.0+80.0f );
+	GameEnginePixelColor RightPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+40.0f  +640.0f, -GetTransform()->GetLocalPosition().y  + 360.0f);
+	GameEnginePixelColor LeftPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x-40.0f  +640.0f, -GetTransform()->GetLocalPosition().y  + 360.0f);
 
-	//
-
-
-
-
-	//// 마젠타색 임시 변수 
-	//unsigned char ColorChar[4] = {255,0,255,255};
-
-	//
-	//for (size_t i = 0; i < 4; i++)
-	//{
-	//	if(ColorChar[i] == Pixel.ColorChar[i])
-	//	{
-	//		++GravityCheck;			
-	//	}		
-
-	//	
-
-	//}
-
-	//if (RightCheck == 4)
-	//{
-	//	RightMove = false;
-	//}
-	//if (RightCheck != 4)
-	//{
-	//	RightMove = true;
-	//}
-	//if (LeftCheck == 4)
-	//{
-	//	LeftMove = false;
-	//}
-	//if (LeftCheck != 4)
-	//{
-	//	LeftMove = true;
-	//}
-
-	//if (GravityCheck == 4)
-	//{
-	//	Gravity = false;
-	//}
-	//if (GravityCheck != 4)
-	//{
-	//	Gravity = true;
-	//}
+	
 
 
 
-	//GravityCheck = 0;
-	//RightCheck = 0;
-	//LeftCheck = 0;
+
+	// 마젠타색 임시 변수 
+	unsigned char ColorChar[4] = {255,0,255,255};
+
+	
+	for (size_t i = 0; i < 4; i++)
+	{
+		if(ColorChar[i] == Pixel.ColorChar[i])
+		{
+			++GravityCheck;			
+		}		
+
+		if (ColorChar[i] == RightPixel.ColorChar[i])
+		{
+			++RightCheck;
+		}
+
+		if (ColorChar[i] == LeftPixel.ColorChar[i])
+		{
+			++LeftCheck;
+		}
+
+	}
+
+	if (RightCheck == 4)
+	{
+		RightMove = false;
+	}
+	if (RightCheck != 4)
+	{
+		RightMove = true;
+	}
+	if (LeftCheck == 4)
+	{
+		LeftMove = false;
+	}
+	if (LeftCheck != 4)
+	{
+		LeftMove = true;
+	}
+
+	if (GravityCheck == 4)
+	{
+		Gravity = false;
+	}
+	if (GravityCheck != 4)
+	{
+		Gravity = true;
+	}
+
+
+
+	GravityCheck = 0;
+	RightCheck = 0;
+	LeftCheck = 0;
 
 	Collision->GetTransform()->SetLocalPosition({ 0.0f, -30.0f, 0.0f });
 	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });

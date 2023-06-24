@@ -30,7 +30,7 @@ private:
 
 	bool RightMove = false; 
 	bool LeftMove = false;
-
+	int fdf = 0;
 	int GravityCheck = 0;
 	int RightCheck = 0;
 	int LeftCheck = 0;

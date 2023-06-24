@@ -69,7 +69,7 @@ void ExWeapon::Update(float _Delta)
 {
 	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 
-	int a = 0;
+	
 
 	if (CollisionCheck == false)
 	{

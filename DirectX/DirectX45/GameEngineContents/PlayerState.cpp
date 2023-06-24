@@ -3444,18 +3444,20 @@ void Player::Ex_Straight_Update(float _Time)
 			if (GetTransform()->GetLocalScale().x > 0)
 			{
 				GetTransform()->AddLocalPosition({ -10.0f * _Time,0,0 });
-			/*	Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y});
-				Object->GetSfx_Dust()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x-60.0f,GetTransform()->GetLocalPosition().y });*/
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x-5.0f,GetTransform()->GetLocalPosition().y});
+				Object->GetSfx_Dust()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x-60.0f,GetTransform()->GetLocalPosition().y });
 				Object->SetMoveDir(float4::Right);
 
 			}
 			if (GetTransform()->GetLocalScale().x < 0)
 			{
 				GetTransform()->AddLocalPosition({ 10.0f * _Time,0,0 });
-			/*	Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
-				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 
-				Object->SetMoveDir(float4::Left);*/
+				Object->GetTransform()->SetLocalRotation({ 0,0,180 });
+				Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y - 10 });
+			
+
+				Object->SetMoveDir(float4::Left);
 			}
 			Ex_Attack_Check = false;
 	}

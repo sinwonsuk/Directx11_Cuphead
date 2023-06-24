@@ -3,6 +3,7 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
+
 #include "EnumClass.cpp"
 #include "UserInterface.h"
 ExWeapon::ExWeapon()
@@ -20,10 +21,12 @@ void ExWeapon::Start()
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("ContentResources");
 		NewDir.Move("ContentResources");
+
+
 		NewDir.Move("Texture");
 
 		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\Peashooter_EX_Death.png").GetFullPath(), 5, 2);
-		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\Peashooter_EX_Loop.png").GetFullPath(), 5, 2);		
+		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\Peashooter_EX_Loop.png").GetFullPath(), 5, 2);
 	}
 	if (nullptr == GameEngineSprite::Find("EX_Dust"))
 	{
@@ -45,31 +48,33 @@ void ExWeapon::Start()
 	Bullet->ChangeAnimation("Peashooter_EX_Loop");
 	Bullet->SetScaleRatio(0.8f);
 
-	/*Sfx = CreateComponent<GameEngineSpriteRenderer>();
+	Sfx = CreateComponent<GameEngineSpriteRenderer>();
 	Sfx->CreateAnimation({ .AnimationName = "EX_ChargeUp", .SpriteName = "EX_ChargeUp", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
 	Sfx->ChangeAnimation("EX_ChargeUp");
-	Sfx->SetScaleRatio(0.8f);*/
+	Sfx->SetScaleRatio(0.8f);
 
-	//Sfx_Dust = CreateComponent<GameEngineSpriteRenderer>();
-	//Sfx_Dust->CreateAnimation({ .AnimationName = "EX_Dust", .SpriteName = "EX_Dust", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
-	//Sfx_Dust->ChangeAnimation("EX_Dust");
+	Sfx_Dust = CreateComponent<GameEngineSpriteRenderer>();
+	Sfx_Dust->CreateAnimation({ .AnimationName = "EX_Dust", .SpriteName = "EX_Dust", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
+	Sfx_Dust->ChangeAnimation("EX_Dust");
 
-	//Sfx_Dust->SetScaleRatio(0.8f);
+	Sfx_Dust->SetScaleRatio(0.8f);
 
-	//Collision = CreateComponent<GameEngineCollision>();
-	//Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 50.0f });
-	//Collision->SetOrder((int)CollisionType::Bullet);
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 50.0f });
+	Collision->SetOrder((int)CollisionType::Bullet);
 
 }
 
 void ExWeapon::Update(float _Delta)
 {
-	/*Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
+	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
+
+	int a = 0;
 
 	if (CollisionCheck == false)
 	{
 		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
-	}*/
+	}
 
 
 
@@ -87,8 +92,8 @@ void ExWeapon::Update(float _Delta)
 	}
 
 
-	/*if (Sfx->IsAnimationEnd())
+	if (Sfx->IsAnimationEnd())
 	{
 		Sfx->Death();
-	}*/
+	}
 }

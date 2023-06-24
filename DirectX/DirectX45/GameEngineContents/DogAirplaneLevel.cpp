@@ -202,7 +202,7 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetSortType(0, SortType::ZSort);
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
-	GameEngineLevel::IsDebugSwitch();
+	//GameEngineLevel::IsDebugSwitch();
 
 	//
 	////CreateNewCamera
@@ -212,7 +212,7 @@ void DogAirplaneLevel::Start()
 	
 	//BackGround = CreateActor<DogAirplaneBackground>();
 
-	Npc = CreateActor<NpcAirplane>();
+	//Npc = CreateActor<NpcAirplane>();
 	/*Ph3_DogAirpalne = CreateActor<Ph3_DogAirplane>();
 	Ph1_DogAirplane = CreateActor<DogAirplane>();*/
 

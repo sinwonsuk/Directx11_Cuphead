@@ -26,10 +26,10 @@ void Player::Update(float _DeltaTime)
 	
 	
 
-	if (Gravity == true && StateValue != PlayerState::Dash)
+	/*if (Gravity == true && StateValue != PlayerState::Dash)
 	{
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
-	}
+	}*/
 	HitTime += _DeltaTime;
 	BulletTime += _DeltaTime;
 	RunTime += _DeltaTime; 

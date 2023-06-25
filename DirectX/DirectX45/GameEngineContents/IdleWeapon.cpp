@@ -5,7 +5,8 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.h"
 #include "UserInterface.h"
-
+#include "Player.h"
+#include "ph3_DogAirPlane.h"
 IdleWeapon::IdleWeapon()
 {
 }
@@ -50,72 +51,120 @@ void IdleWeapon::Update(float _Delta)
 
 	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 
-	if (CollisionCheck == false)
-	{
-		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
-	}
-
-	std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("Tutorial_ColMap.png");
 	
-	GameEnginePixelColor Pixel = testMap->GetPixel(Bullet->GetTransform()->GetLocalPosition().x + 640.0f, -Bullet->GetTransform()->GetLocalPosition().y + 360.0f);
-	
-
-	TransformData Data = Bullet->GetTransform()->GetTransDataRef();
-
-
-	unsigned char ColorChar[4] = { 0,0,0,255 };
-
-	for (size_t i = 0; i < 4; i++)
-	{
-		if (ColorChar[i] == Pixel.ColorChar[i])
+		if (CollisionCheck == false)
 		{
-			++ColorCheck;
+			Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
 		}
 
-		if (ColorCheck == 4)
+		if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
 		{
-			CollisionColor = true;		
+			UserInterface::Cut += 0.5f;
+			Bullet->ChangeAnimation("Peashooter_Death");
+			CollisionCheck = true;
 		}
-		if (ColorCheck != 4)
+	
+
+		if (Ph3_DogAirplane::ph3_mainBoss != nullptr)
 		{
-			CollisionColor = false;
+			if (Ph3_DogAirplane::ph3_mainBoss->UpdateCheck == true)
+			{
+				if (Collision->Collision((int)CollisionType::BossBody))
+				{
+					Ph3_DogAirplane::Hp -= 1;
+
+					if (collisionCheck == false)
+					{
+						Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ColorOptionValue.PlusColor = { 1,1,1,0 };
+						Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ResetLiveTime();
+						collisionCheck = true;
+
+					}
+					std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+
+					collision->Death();
+				}
+
+
+
+				if (collisionCheck == true && Ph3_DogAirplane::ph3_mainBoss->Idle_Body->GetLiveTime() > 0.05f)
+				{
+					Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ColorOptionValue.PlusColor = { 0,0,0,0 };
+					collisionCheck = false;
+				}
+
+
+			}
 		}
 
-		
-	}
-	ColorCheck = 0;
 
-	if (CollisionColor == true)
-	{
-		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * -1500.0f });
-	}
 
-	if (CollisionColor == true && ColorCollisionCheck ==false)
-	{
-		Bullet->ChangeAnimation("Peashooter_Death");	
-		ColorCollisionCheck = true;
-	}
-	
 
-	if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
-	{
-		UserInterface::Cut += 0.5;
-		Bullet->ChangeAnimation("Peashooter_Death");	
-		CollisionCheck = true;		
-	}
-	
-	
 	if (GetLiveTime() > 5)
 	{
 
-		this->Death(); 
+		this->Death();
 	}
-	
-	
+
+
 	if (Sfx->IsAnimationEnd())
 	{
 		Sfx->Death();
 	}
+
+
+
+
+
+
+
+	if (Player::MainPlayer->GetTutorialCheck() == true)
+	{
+		
+
+		std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("Tutorial_ColMap.png");
+
+		GameEnginePixelColor Pixel = testMap->GetPixel(Bullet->GetTransform()->GetLocalPosition().x + 640.0f, -Bullet->GetTransform()->GetLocalPosition().y + 360.0f);
+
+
+		TransformData Data = Bullet->GetTransform()->GetTransDataRef();
+
+
+		unsigned char ColorChar[4] = { 0,0,0,255 };
+
+		for (size_t i = 0; i < 4; i++)
+		{
+			if (ColorChar[i] == Pixel.ColorChar[i])
+			{
+				++ColorCheck;
+			}
+
+			if (ColorCheck == 4)
+			{
+				CollisionColor = true;
+			}
+			if (ColorCheck != 4)
+			{
+				CollisionColor = false;
+			}
+
+
+		}
+		ColorCheck = 0;
+
+		if (CollisionColor == true)
+		{
+			Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * -1500.0f });
+		}
+
+		if (CollisionColor == true && ColorCollisionCheck == false)
+		{
+			Bullet->ChangeAnimation("Peashooter_Death");
+			ColorCollisionCheck = true;
+		}
+	}
+
+	
 
 	
 

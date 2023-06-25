@@ -433,11 +433,10 @@ void Ph3_DogAirplane::Start()
 	FightText_KO->GetTransform()->AddLocalPosition({ 0,0,-300.0f});
 	FightText_KO->Off();
 
+	
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 250.0f,200.0f, 300.0f });
-
+	Collision->GetTransform()->SetLocalScale({ 300.0f, 250.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::BossBody);
-	Collision->GetTransform()->SetLocalPosition({ 0.0f,150.0f,0.0f });
 
 
 }
@@ -445,31 +444,44 @@ void Ph3_DogAirplane::Start()
 void Ph3_DogAirplane::Update(float _Delta)
 {
 	
-	
+	UpdateCheck = true;
 
 
+	/*if (Collision->Collision((int)CollisionType::Bullet))
+	{
+		Hp -= 1;
+
+		if (CollisonCheck == false)
+		{
+			Idle_Body->ColorOptionValue.PlusColor = { 1,1,1,0 };
+			Idle_Body->ResetLiveTime();
+			CollisonCheck = true;
+
+		}
+		std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+
+		collision->Death();
+	}
+
+	if (CollisonCheck == true && Idle_Body->GetLiveTime() > 0.05f)
+	{
+		Idle_Body->ColorOptionValue.PlusColor = { 0,0,0,0 };
+		CollisonCheck = false;
+	}*/
 
 
-
-	if (Collision->Collision((int)CollisionType::Bullet))
+	/*if (Collision->Collision((int)CollisionType::Bullet))
 	{
 		if (CollisonCheck == false)
 		{
 
 			Idle_Body->ColorOptionValue.PlusColor = { 1,1,1,0 };
 			Idle_Body->ResetLiveTime();
+			Hp -= 1;
 			CollisonCheck = true;
 			
 		}
-
-		Hp -= 1;
 		
-		std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
-
-		if (collision != nullptr)
-		{
-			collision->Off();
-		}
 	}
 
 	if (CollisonCheck == true && Idle_Body->GetLiveTime() > 0.03f)
@@ -477,7 +489,7 @@ void Ph3_DogAirplane::Update(float _Delta)
 		
 		Idle_Body->ColorOptionValue.PlusColor = { 0,0,0,0 };
 		CollisonCheck = false;
-	}
+	}*/
 
 
 

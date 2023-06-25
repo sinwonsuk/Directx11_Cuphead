@@ -44,6 +44,7 @@ private:
 	int ColorCheck = 0;
 	bool ColorCollisionCheck = false;
 	bool CollisionColor = false;
+	bool collisionCheck = false;
 	bool CollisionCheck = false;
 	bool Check = false;
 };

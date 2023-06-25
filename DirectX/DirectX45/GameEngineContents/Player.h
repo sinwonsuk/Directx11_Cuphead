@@ -118,6 +118,10 @@ public:
 	{
 		return JumpCheck;
 	}
+	bool GetTutorialCheck()
+	{
+		return TuritualCheck;
+	}
 	std::shared_ptr<class GameEngineCollision> GetCollision()
 	{
 		return Collision;
@@ -142,10 +146,13 @@ protected:
 private:
 	PlayerState StateValue = PlayerState::Idle;
 	float Angle = 0.0f;
+
+
 	std::shared_ptr<class GameEngineSpriteRenderer> Render0;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
 	std::shared_ptr<class GameEngineCollision> Collision;
+
 	int DownBlockCheck = 0; 
 	int GravityCheck = 0; 
 	int RightCheck = 0;
@@ -162,7 +169,7 @@ private:
 	bool LeftMove = true;
 	bool JumpCheck = false;
 	bool CheckCamera = false;
-	bool TuritualCheck = true;
+	bool TuritualCheck = false;
 	bool test = false;
 	bool DashCheck = true;
 	bool DownCheck = false;

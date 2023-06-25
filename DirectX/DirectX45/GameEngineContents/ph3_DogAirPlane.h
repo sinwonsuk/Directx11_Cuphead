@@ -29,6 +29,8 @@ enum class Ph3_DogAirPlaneState
 class Ph3_DogAirplane : public GameEngineActor
 {
 public:
+	std::shared_ptr<class GameEngineSpriteRenderer> Idle_Body;
+	bool UpdateCheck = false;
 	static  int Hp; 
 	static Ph3_DogAirplane* ph3_mainBoss;
 	Ph3_DogAirplane();
@@ -142,7 +144,7 @@ private:
 	
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_paw_merge;
 	std::shared_ptr<class GameEngineSpriteRenderer> Idle_Arom;
-	std::shared_ptr<class GameEngineSpriteRenderer> Idle_Body;
+	
     std::shared_ptr<class GameEngineSpriteRenderer> Idle_Arom_Hand;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_Left_laser_mid;
@@ -179,7 +181,7 @@ private:
 	float4 trsd = { 0,0,-500 };
 	float4 tsdds = { 150,1500,0 };
 
-
+	
 	bool CollisonCheck = false;
 	bool TopLaserCheck = false;
 	bool MidLaserCheck = false;

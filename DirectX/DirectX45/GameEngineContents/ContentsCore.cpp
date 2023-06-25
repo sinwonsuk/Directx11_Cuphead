@@ -38,8 +38,8 @@ void ContentsCore::GameStart()
 	GameEngineCore::CreateLevel<TitleLevel>();
 	GameEngineCore::CreateLevel<PlayLevel>();
 	GameEngineCore::CreateLevel<giantStageLevel>();
-	//GameEngineCore::CreateLevel<DogAirplaneLevel>();
-	GameEngineCore::ChangeLevel("PlayLevel");
+	GameEngineCore::CreateLevel<DogAirplaneLevel>();
+	GameEngineCore::ChangeLevel("DogAirplaneLevel");
 }
 
 void ContentsCore::GameEnd() 

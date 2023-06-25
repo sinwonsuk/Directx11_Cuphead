@@ -8,6 +8,7 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include "TutorialMap.h"
 #include "IdleWeapon.h"
 #include "EnumClass.h"
 Player* Player::MainPlayer;
@@ -26,6 +27,7 @@ void Player::Update(float _DeltaTime)
 	
 	MainPlayer = this;
 
+	
 	if (Gravity == true && StateValue != PlayerState::Dash)
 	{
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
@@ -196,6 +198,7 @@ void Player::Update(float _DeltaTime)
 
 void Player::Start()
 {
+	
 
 	
 

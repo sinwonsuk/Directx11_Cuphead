@@ -18,16 +18,16 @@ void TutorialMap::Start()
 
 	Render1 = CreateComponent<GameEngineUIRenderer>();
 	Render1->SetScaleToTexture("TutorialBackGround.png");
-	Render1->GetTransform()->AddLocalPosition({ 0,-80.0f });
+	Render1->GetTransform()->AddLocalPosition({ 0,-80.0f,100.0f });
 
 	Render3 = CreateComponent<GameEngineSpriteRenderer>();
 	Render3->SetTexture("Tutorial_BackLayer_001.png");
-	Render3->GetTransform()->AddLocalPosition({ 0,-80.0f });
+	Render3->GetTransform()->AddLocalPosition({ 0,-80.0f,0.0f });
 
 	//Render3->SetScaleToTexture("Tutorial_BackLayer_001.png");
 
 
-	Render3->GetTransform()->AddLocalScale({ 1340.0f,760.0f });
+	Render3->GetTransform()->AddLocalScale({ 2000.0f,760.0f });
 
 	Render2 = CreateComponent<GameEngineSpriteRenderer>();
 	Render2->SetScaleToTexture("Tutorial_Map.png");

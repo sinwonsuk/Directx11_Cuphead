@@ -41,6 +41,7 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 	break;
 	case 2:
 	{
+
 		Ph2_DogAirpalne_Left->Off();
 		Ph2_DogAirpalne_Right->Off();
 		Ph2_DogAirpalne_Top->Off();
@@ -206,6 +207,8 @@ void DogAirplaneLevel::Start()
 
 	//
 	////CreateNewCamera
+	player = CreateActor<Player>();
+	player->GetTransform()->AddLocalPosition({ 0,0,0 });
 
 	std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
 	
@@ -213,16 +216,11 @@ void DogAirplaneLevel::Start()
 	//BackGround = CreateActor<DogAirplaneBackground>();
 
 	Npc = CreateActor<NpcAirplane>();
-	Ph3_DogAirpalne = CreateActor<Ph3_DogAirplane>();
-	Ph1_DogAirplane = CreateActor<DogAirplane>();
 
-	player = CreateActor<Player>();
-	player->GetTransform()->AddLocalPosition({ 0,0,0 });
 
 
 	
-
-
+	Ph1_DogAirplane = CreateActor<DogAirplane>();
 
 	{
 		Ph2_DogAirpalne_Left = GetLevel()->CreateActor<Ph2_DogAirpalne>(4);
@@ -253,7 +251,7 @@ void DogAirplaneLevel::Start()
 	}
 	
 	
-
+	Ph3_DogAirpalne = CreateActor<Ph3_DogAirplane>();
 
 
 }

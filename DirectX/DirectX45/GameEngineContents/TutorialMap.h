@@ -14,7 +14,7 @@ public:
 	TutorialMap(TutorialMap&& _Other) noexcept = delete;
 	TutorialMap& operator=(const TutorialMap& _Other) = delete;
 	TutorialMap& operator=(TutorialMap&& _Other) noexcept = delete;
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Render3;
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -26,7 +26,7 @@ private:
 	float Angle = 0.0f;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
-	std::shared_ptr<class GameEngineSpriteRenderer> Render3;
+	
 	bool test = false;
 
 	bool RightMove = false; 

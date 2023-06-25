@@ -288,6 +288,9 @@ void Player::UpdateState(float _Time)
 
 void Player::IdleUpdate(float _Time)
 {
+
+	
+
 	if (DownCheck == false)
 	{
 		CurPos_y = GetTransform()->GetLocalPosition().y;
@@ -397,37 +400,60 @@ void Player::IdleUpdate(float _Time)
 
 void Player::RunUpdate(float _Time)
 {
+	if (true != GameEngineInput::IsPress("PlayerMoveRight"))
+	{
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
+		{
+			GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
+		}
+	}
+	if (true != GameEngineInput::IsPress("PlayerMoveLeft"))
+	{
+		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
+		{
+			GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
+		}
+	}
+
+	if (CheckCamera == true)
+	{	
+
+		
+			if (true == GameEngineInput::IsPress("PlayerMoveLeft")  && RightMove == true)
+			{
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
+			}
+		
+
+			if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
+			{
+				GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
+			}
+		
+	}
 
 	if (DownCheck == false)
 	{
 		CurPos_y = GetTransform()->GetLocalPosition().y;
 		DownCheck = true;
 	}
+
+	if (true == GameEngineInput::IsUp("PlayerMoveLeft"))
+	{
+
+		ChangeState(PlayerState::Idle);
+		return;
+	}
+	if (true == GameEngineInput::IsUp("PlayerMoveRight"))
+	{
+		ChangeState(PlayerState::Idle);
+		return;
+	}
+
+
 	
 
-	if (CheckCamera == true)
-	{
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
-		{
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
-		}
-		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
-		{
-			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
-		}
-
-	}
-
-
-	if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
-	{
-		GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
-	}
-	if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
-	{
-		GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
-	}
-
+	
 
 
 	if (RunTime > 0.5)
@@ -513,16 +539,7 @@ void Player::RunUpdate(float _Time)
 	}
 
 
-	if (true == GameEngineInput::IsUp("PlayerMoveLeft"))
-	{
-		ChangeState(PlayerState::Idle);
-		return;
-	}
-	if (true == GameEngineInput::IsUp("PlayerMoveRight"))
-	{
-		ChangeState(PlayerState::Idle);
-		return;
-	}
+	
 	if (true == GameEngineInput::IsPress("PlayerJump"))
 	{
 		ResetLiveTime();
@@ -562,11 +579,11 @@ void Player::JumpUpdate(float _Time)
 
 	if (CheckCamera == true)
 	{
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") )
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
 		}
-		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
+		if (true == GameEngineInput::IsPress("PlayerMoveRight") )
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 		}

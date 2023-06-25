@@ -122,7 +122,10 @@ public:
 	{
 		return Collision;
 	}
-
+	PlayerState GetStateValue()
+	{
+		return StateValue; 
+	}
 
 	std::shared_ptr<class GameEngineSpriteRenderer> GetPlayer()
 	{

@@ -26,6 +26,7 @@ private:
 	float Angle = 0.0f;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
+	std::shared_ptr<class GameEngineSpriteRenderer> Render3;
 	bool test = false;
 
 	bool RightMove = false; 

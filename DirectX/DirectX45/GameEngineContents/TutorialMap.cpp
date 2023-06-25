@@ -1,6 +1,7 @@
 #include "PrecompileHeader.h"
 #include "TutorialMap.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
+#include <GameEngineCore/GameEngineUIRenderer.h>
 #include "Player.h"
 TutorialMap::TutorialMap()
 {
@@ -12,18 +13,32 @@ TutorialMap::~TutorialMap()
 
 void TutorialMap::Start()
 {
+	/*Render1 = CreateComponent<GameEngineUIRenderer>();
+	Render1->SetScaleToTexture("TutorialBackGround.png");*/
 
+	Render1 = CreateComponent<GameEngineUIRenderer>();
+	Render1->SetScaleToTexture("TutorialBackGround.png");
+	Render1->GetTransform()->AddLocalPosition({ 0,-80.0f });
+
+	Render3 = CreateComponent<GameEngineSpriteRenderer>();
+	Render3->SetTexture("Tutorial_BackLayer_001.png");
+	Render3->GetTransform()->AddLocalPosition({ 0,-80.0f });
+
+	//Render3->SetScaleToTexture("Tutorial_BackLayer_001.png");
+
+
+	Render3->GetTransform()->AddLocalScale({ 1340.0f,760.0f });
 
 	Render2 = CreateComponent<GameEngineSpriteRenderer>();
 	Render2->SetScaleToTexture("Tutorial_Map.png");
-
-	/*Render1 = CreateComponent<GameEngineSpriteRenderer>();
-	Render1->SetScaleToTexture("TutorialBackGround.png");*/
+	Render2->GetTransform()->SetLocalPosition({ 2450.0f,0.0f });
+	
 
 }
 
 void TutorialMap::Update(float _Delta)
 {
+	Render3->GetTransform()->SetLocalPosition({ Player::MainPlayer->GetTransform()->GetLocalPosition().x,-80.0f,0.0f });
 	//if (Player::MainPlayer->GetTransform()->GetLocalPosition().y < -200)
 	//{
 	//	int a = 0;

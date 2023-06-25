@@ -407,11 +407,11 @@ void Player::RunUpdate(float _Time)
 
 	if (CheckCamera == true)
 	{
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
 		}
-		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 		}
@@ -562,11 +562,11 @@ void Player::JumpUpdate(float _Time)
 
 	if (CheckCamera == true)
 	{
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
 		}
-		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 		}
@@ -845,12 +845,18 @@ void Player::DuckUpdate(float _Time)
 
 void Player::ParryUpdate(float _Time)
 {
+
+	
+
 	if (Collision->Collision((int)CollisionType::TutorialObject, ColType::AABBBOX2D, ColType::AABBBOX2D))
 	{
-		ChangeState(PlayerState::PinkObject);
-		return;
+		if (true == GameEngineInput::IsPress("PlayerJump"))
+		{
+			JumpCheck = true;
+			ResetLiveTime();
+			return;
+		}
 	}
-	 
 
 
 	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.15)
@@ -875,11 +881,11 @@ void Player::ParryUpdate(float _Time)
 
 	if (CheckCamera == true)
 	{
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
 		}
-		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 		}
@@ -1090,6 +1096,7 @@ void Player::ParryUpdate(float _Time)
 		}
 	}
 
+	
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
 	{
 
@@ -1910,11 +1917,11 @@ void Player::RunAttackUpdate(float _Time)
 
 	if (CheckCamera == true)
 	{
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
 		}
-		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 		}
@@ -2129,11 +2136,11 @@ void Player::DiagonalUpRunAttackUpdate(float _Time)
 
 	if (CheckCamera == true)
 	{
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
 		}
-		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 		}
@@ -3467,11 +3474,11 @@ void Player::MapOutUpdate(float _Time)
 {
 	if (CheckCamera == true)
 	{
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
 		}
-		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 		}
@@ -3525,13 +3532,14 @@ void Player::MapOutUpdate(float _Time)
 
 void Player::FailUpdate(float _Time)
 {
+
 	if (TuritualCheck == true)
 	{
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
 		}
-		if (true == GameEngineInput::IsPress("PlayerMoveRight"))
+		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
 		{
 			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 		}
@@ -3679,7 +3687,55 @@ void Player::HitUpdate(float _Time)
 
 void Player::PinkObjectUpdate(float _Time)
 {
+	
+		
+	
+	
 
+	if (CheckCamera == true)
+	{
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
+		}
+		if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
+		}
+
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
+	{
+		GetTransform()->AddLocalPosition(float4::Left * Speed * _Time);
+	}
+	if (true == GameEngineInput::IsPress("PlayerMoveRight") && RightMove == true)
+	{
+		GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
+	}
+
+	if (JumpCheck == true)
+	{
+		if (GetLiveTime() < 0.3)
+		{
+			GetTransform()->AddLocalPosition(float4::Up * 1300.0f * _Time);
+		}
+		if (GetLiveTime() > 0.3)
+		{
+			JumpCheck = false;
+		}
+	}
+
+	if (GetLiveTime() > 0.3)
+	{
+		test = false;
+		DashCheck = true;
+		RunTime = 0;
+	
+		GravitySpeed = 650.0f;
+		ChangeState(PlayerState::Jump);
+		return;
+	}
 }
 
 void Player::Ex_DiagonalDown_Update(float _Time)

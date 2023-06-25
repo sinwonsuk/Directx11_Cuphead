@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "TestObject.h"
 #include "TutorialMap.h"
+#include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineVideo.h>
@@ -51,9 +52,22 @@ void PlayLevel::Start()
 		}
 	}
 
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Texture");
+		NewDir.Move("Character");
+		if (nullptr == GameEngineSprite::Find("ParryEffect"))
+		{
+			GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ParryEffect").GetFullPath());
+		}
+	}
 
 
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
+	GetMainCamera()->GetTransform()->AddLocalPosition({ 0.0f,-80.0f,0.0f });
+	GetCamera(100)->GetTransform()->AddLocalPosition({ 0.0f,-80.0f,0.0f });
 	//GetMainCamera()->GetTransform()->AddLocalPosition({ 3488.0f,0.0f,0.0f });
 	//GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -1000.0f});
 
@@ -75,23 +89,25 @@ void PlayLevel::Start()
 	}
 	{
 		std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>();
-		Object->GetTransform()->SetLocalPosition({ 2450.0f,0 });
+	//	Object->GetTransform()->SetLocalPosition({ 2450.0f,0 });
 	}
 
 	{
-		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>();
-		Object->GetTransform()->SetLocalPosition({ 3540.0f,-10.0f });
+		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>(10);
+		Object->GetTransform()->SetLocalPosition({0.0f,0.0f });
 	}
 
-	{
-		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>();
+	/*{
+		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>(10);
 		Object->GetTransform()->SetLocalPosition({ 3345.0f,-10.0f });
 	}
 
 	{
-		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>();
+		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>(10);
 		Object->GetTransform()->SetLocalPosition({ 3150.0f,-10.0f });
-	}
+
+	}*/
+
 
 	/*{
 		std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>();

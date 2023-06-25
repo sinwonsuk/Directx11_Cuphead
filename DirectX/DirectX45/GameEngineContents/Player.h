@@ -42,6 +42,7 @@ enum class PlayerState
 	Ex_Down,
 	Ex_Straight, 
 	Ex_Up, 
+	PinkObject, 
 };
 // Ό³Έν :
 class Player : public GameEngineActor
@@ -96,6 +97,7 @@ public:
 	void MapOutUpdate(float _Time); 
 	void FailUpdate(float _Time);
 	void HitUpdate(float _Time);
+	void PinkObjectUpdate(float _Time);
 
 	void Ex_DiagonalDown_Update(float _Time);
 	void Ex_DiagonalUp_Update(float _Time);
@@ -141,6 +143,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
 	std::shared_ptr<class GameEngineCollision> Collision;
+	int DownBlockCheck = 0; 
 	int GravityCheck = 0; 
 	int RightCheck = 0;
 	int LeftCheck = 0;
@@ -150,17 +153,20 @@ private:
 	float Speed = 400;
 	float GravitySpeed = 1000;
 	float JumpSpeed = 1200;
+	bool Block = false;
 	bool Gravity = true;
 	bool RightMove = true;
 	bool LeftMove = true;
 	bool JumpCheck = false;
 	bool CheckCamera = false;
+	bool TuritualCheck = true;
 	bool test = false;
 	bool DashCheck = true;
 	bool DownCheck = false;
 	bool HitCheck = false;
 	bool Ex_Attack_Check = true;
 	bool DashEffectCheck = false;
+	bool TutorialObjectCheck = false;
 	float CurPos_y = 0;
 	int EffectCheck = 0; 
 	size_t Frame = 0;

@@ -206,6 +206,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TutorialMap.h" />
+    <ClInclude Include="TutorialObject.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +260,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TutorialMap.cpp" />
+    <ClCompile Include="TutorialObject.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

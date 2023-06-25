@@ -15,7 +15,7 @@ void TutorialMap::Start()
 
 
 	Render2 = CreateComponent<GameEngineSpriteRenderer>();
-	Render2->SetScaleToTexture("TestMap.png");
+	Render2->SetScaleToTexture("Tutorial_Map.png");
 
 	/*Render1 = CreateComponent<GameEngineSpriteRenderer>();
 	Render1->SetScaleToTexture("TutorialBackGround.png");*/

@@ -134,6 +134,9 @@ void Player::ChangeState(PlayerState _State)
 	case PlayerState::Ex_Up:
 		AnimationCheck("Ex_Up");
 		break;
+	case PlayerState::PinkObject:
+		AnimationCheck("Jump");
+		break;
 	default:
 		break;
 	}
@@ -272,7 +275,9 @@ void Player::UpdateState(float _Time)
 	case PlayerState::Ex_Up:
 		Ex_Up_Update(_Time);
 		break;
-
+	case PlayerState::PinkObject:
+		PinkObjectUpdate(_Time);
+		break;
 	default:
 		break;
 	}
@@ -591,15 +596,13 @@ void Player::JumpUpdate(float _Time)
 
 	if (JumpCheck == true)
 	{
-		if (GetLiveTime() < 0.25)
+		if (GetLiveTime() < 0.3)
 		{	
-			GetTransform()->AddLocalPosition(float4::Up * 1400.0f * _Time);
+			GetTransform()->AddLocalPosition(float4::Up * 1500.0f * _Time);
 		}
-		if (GetLiveTime() > 0.25)
+		if (GetLiveTime() > 0.3)
 		{
 			JumpCheck = false;
-	
-
 		}
 	}
 	if (true == GameEngineInput::IsPress("PlayerAttack") && true == GameEngineInput::IsPress("PlayerMoveUp") && true == GameEngineInput::IsPress("PlayerMoveRight") && BulletTime > 0.13)
@@ -808,6 +811,13 @@ void Player::DuckUpdate(float _Time)
 		return;
 	}
 
+	if (true == GameEngineInput::IsPress("PlayerJump"))
+	{
+		Gravity = true;
+		ChangeState(PlayerState::Fail);		
+		return;
+	}
+
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
@@ -835,6 +845,13 @@ void Player::DuckUpdate(float _Time)
 
 void Player::ParryUpdate(float _Time)
 {
+	if (Collision->Collision((int)CollisionType::TutorialObject, ColType::AABBBOX2D, ColType::AABBBOX2D))
+	{
+		ChangeState(PlayerState::PinkObject);
+		return;
+	}
+	 
+
 
 	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.15)
 	{
@@ -1436,8 +1453,21 @@ void Player::DiagonalDownAimUpdate(float _Time)
 
 void Player::DashUpdate(float _Time)
 {
+	if (CheckCamera == true)
+	{
+		if (GetTransform()->GetLocalScale().x < 0)
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * Speed * 2.5f * _Time);			
+		}
+		if (GetTransform()->GetLocalScale().x > 0)
+		{
+			GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Right * Speed * 2.5f* _Time);
+		}
+
+	}
+
 	
-	
+
 
 	if (GetTransform()->GetLocalScale().x > 0)
 	{
@@ -1451,8 +1481,11 @@ void Player::DashUpdate(float _Time)
 			DashEffectCheck = true;
 		}
 	
-
-		GetTransform()->AddLocalPosition(float4::Right * Speed * 2 * _Time);
+		if (RightMove == true)
+		{
+			GetTransform()->AddLocalPosition(float4::Right * Speed * 2.5f * _Time);
+		}
+		
 	}
 
 	if (GetTransform()->GetLocalScale().x < 0)
@@ -1466,7 +1499,11 @@ void Player::DashUpdate(float _Time)
 			Object->GetTransform()->SetLocalNegativeScaleX();
 			DashEffectCheck = true;
 		}
-		GetTransform()->AddLocalPosition(float4::Left * Speed * 2 * _Time);
+		if (LeftMove == true)
+		{
+			GetTransform()->AddLocalPosition(float4::Left * Speed * 2.5f * _Time);
+		}
+	
 		
 	}
 	if (Render0->IsAnimationEnd() && Gravity != false)
@@ -1474,7 +1511,7 @@ void Player::DashUpdate(float _Time)
 	
 		JumpCheck = false;
 		DashEffectCheck = false;
-		ResetLiveTime();
+		//ResetLiveTime();
 		ChangeState(PlayerState::Jump);
 		return;
 	}
@@ -3488,7 +3525,7 @@ void Player::MapOutUpdate(float _Time)
 
 void Player::FailUpdate(float _Time)
 {
-	if (CheckCamera == true)
+	if (TuritualCheck == true)
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 		{
@@ -3510,14 +3547,22 @@ void Player::FailUpdate(float _Time)
 		GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 	}
 
-	
-	if (Gravity == false /*&& test == true*/)
+	if (Block == true)
 	{
+		Gravity = true;
+		GravitySpeed = 650.0f;
 
-	/*	std::shared_ptr<PlayerRunEffect> Object = GetLevel()->CreateActor<PlayerRunEffect>(3);
-		Object->SetState(EffectState::JumpEffect);
-		Object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x,GetTransform()->GetLocalPosition().y - 100 });*/
-		test = false;
+
+		if (GravityCheck == true)
+		{
+			ChangeState(PlayerState::Idle);
+			return;
+		}
+	
+	}
+	
+	if (Gravity == false && Block == false)
+	{
 		DashCheck = true;
 		RunTime = 0;
 		GravitySpeed = 650.0f;
@@ -3629,6 +3674,11 @@ void Player::HitUpdate(float _Time)
 	}*/
 
 
+
+}
+
+void Player::PinkObjectUpdate(float _Time)
+{
 
 }
 

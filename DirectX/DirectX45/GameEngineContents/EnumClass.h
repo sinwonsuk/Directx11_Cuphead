@@ -5,8 +5,6 @@ enum class DogAirplaneType
 	Sky,
 	Cloulds,
 	Ground,
-
-
 	Boss,
 	BulDogIntro,
 	DogCopterIntro,
@@ -25,4 +23,5 @@ enum class CollisionType
 	BossBody,
 	MapOut,
 	BossAttack,
+	TutorialObject,
 };

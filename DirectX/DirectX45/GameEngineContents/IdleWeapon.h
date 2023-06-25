@@ -41,6 +41,9 @@ private:
 	std::shared_ptr<class GameEngineCollision> Collision;
 	std::shared_ptr<class GameEngineSpriteRenderer> Sfx;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
+	int ColorCheck = 0;
+	bool ColorCollisionCheck = false;
+	bool CollisionColor = false;
 	bool CollisionCheck = false;
 	bool Check = false;
 };

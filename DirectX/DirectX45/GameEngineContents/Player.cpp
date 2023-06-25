@@ -40,79 +40,99 @@ void Player::Update(float _DeltaTime)
 	float Speed = 200.0f;
 
 	float ScaleSpeed = 10.0f;
-	
-	if (GetTransform()->GetLocalPosition().y < -200)
+
+	if (TuritualCheck == false)
 	{
-		int a = 0;
+		CheckCamera = false;
 	}
 
-	TransformData data = GetTransform()->GetTransDataRef();
 
-	std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("TestMap.png");
-	GameEnginePixelColor Pixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+640.0f , -GetTransform()->GetLocalPosition().y + 360.0+80.0f );
-	GameEnginePixelColor RightPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x+40.0f  +640.0f, -GetTransform()->GetLocalPosition().y  + 360.0f);
-	GameEnginePixelColor LeftPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x-40.0f  +640.0f, -GetTransform()->GetLocalPosition().y  + 360.0f);
-
-	
-
-
-
-
-	// 마젠타색 임시 변수 
-	unsigned char ColorChar[4] = {255,0,255,255};
-
-	
-	for (size_t i = 0; i < 4; i++)
+	if (TuritualCheck == true)
 	{
-		if(ColorChar[i] == Pixel.ColorChar[i])
-		{
-			++GravityCheck;			
-		}		
+		CheckCamera = true;
+		std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("Tutorial_ColMap.png");
+		//2009,368
 
-		if (ColorChar[i] == RightPixel.ColorChar[i])
+			//GameEnginePixelColor Pixel = testMap->GetPixel( 2009,368 );
+		GameEnginePixelColor Pixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x + 640.0f, -GetTransform()->GetLocalPosition().y + 360.0 + 80.0f);
+		GameEnginePixelColor RightPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x + 40.0f + 640.0f, -GetTransform()->GetLocalPosition().y + 360.0f + 65.0f);
+		GameEnginePixelColor LeftPixel = testMap->GetPixel(GetTransform()->GetLocalPosition().x - 40.0f + 640.0f, -GetTransform()->GetLocalPosition().y + 360.0f + 65.0f);
+
+		// 마젠타색 임시 변수 
+		unsigned char ColorChar[4] = { 0,0,0,255 };
+
+		unsigned char ColorChar1[4] = { 0,0,255,255 };
+
+	
+		
+		for (size_t i = 0; i < 4; i++)
 		{
-			++RightCheck;
+
+			if (ColorChar1[i] == Pixel.ColorChar[i])
+			{
+				++DownBlockCheck;
+			}
+			if (ColorChar[i] == Pixel.ColorChar[i])
+			{
+				++GravityCheck;
+			}
+
+			if (ColorChar[i] == RightPixel.ColorChar[i])
+			{
+				++RightCheck;
+			}
+
+			if (ColorChar[i] == LeftPixel.ColorChar[i])
+			{
+				++LeftCheck;
+			}
+
+		}
+		if (DownBlockCheck == 4)
+		{
+			Gravity = false;
+			Block = true; 
+		}
+		if (DownBlockCheck != 4)
+		{
+			Block = false;
+		}
+		if (RightCheck == 4)
+		{
+			RightMove = false;
+			CheckCamera = false;
+		}
+		if (RightCheck != 4)
+		{
+			RightMove = true;
+		}
+		if (LeftCheck == 4)
+		{
+			LeftMove = false;
+			CheckCamera = false;
+		}
+		if (LeftCheck != 4)
+		{
+			LeftMove = true;
 		}
 
-		if (ColorChar[i] == LeftPixel.ColorChar[i])
+		if (GravityCheck == 4)
 		{
-			++LeftCheck;
+			Gravity = false;
+		}
+		if (GravityCheck != 4 && DownBlockCheck !=4)
+		{
+			Gravity = true;
 		}
 
-	}
-
-	if (RightCheck == 4)
-	{
-		RightMove = false;
-	}
-	if (RightCheck != 4)
-	{
-		RightMove = true;
-	}
-	if (LeftCheck == 4)
-	{
-		LeftMove = false;
-	}
-	if (LeftCheck != 4)
-	{
-		LeftMove = true;
-	}
-
-	if (GravityCheck == 4)
-	{
-		Gravity = false;
-	}
-	if (GravityCheck != 4)
-	{
-		Gravity = true;
-	}
+		GravityCheck = 0;
+		RightCheck = 0;
+		LeftCheck = 0;
+		DownBlockCheck = 0; 
 
 
 
-	GravityCheck = 0;
-	RightCheck = 0;
-	LeftCheck = 0;
-
+	}
 	Collision->GetTransform()->SetLocalPosition({ 0.0f, -30.0f, 0.0f });
 	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });
 

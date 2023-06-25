@@ -7,7 +7,7 @@
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCoreWindow.h>
-
+#include  "TutorialObject.h"
 PlayLevel::PlayLevel() 
 {
 }
@@ -23,12 +23,17 @@ void PlayLevel::Update(float _DeltaTime)
 
 void PlayLevel::PlayerCreate(/*Playlevel* this*/)
 {
-	std::shared_ptr<Player> Object = CreateActor<Player>(3);
+	//std::shared_ptr<Player> Object = CreateActor<Player>(3);
+
+
+
 
 }
 
 void PlayLevel::Start()
 {
+	GameEngineLevel::IsDebugSwitch();
+
 
 	{
 		GameEngineDirectory NewDir;
@@ -49,6 +54,7 @@ void PlayLevel::Start()
 
 
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
+	//GetMainCamera()->GetTransform()->AddLocalPosition({ 3488.0f,0.0f,0.0f });
 	//GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -1000.0f});
 
 
@@ -65,12 +71,32 @@ void PlayLevel::Start()
 
 	{
 		std::shared_ptr<Player> Object = CreateActor<Player>();
-		Object->GetTransform()->SetLocalPosition({ 0,600 });
+		Object->GetTransform()->SetLocalPosition({ 0.0f,0.0f });
 	}
 	{
 		std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>();
+		Object->GetTransform()->SetLocalPosition({ 2450.0f,0 });
 	}
 
+	{
+		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>();
+		Object->GetTransform()->SetLocalPosition({ 3540.0f,-10.0f });
+	}
+
+	{
+		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>();
+		Object->GetTransform()->SetLocalPosition({ 3345.0f,-10.0f });
+	}
+
+	{
+		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>();
+		Object->GetTransform()->SetLocalPosition({ 3150.0f,-10.0f });
+	}
+
+	/*{
+		std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>();
+		Object->GetTransform()->SetLocalPosition({ 2450.0f,0 });
+	}*/
 	//{
 	//	std::shared_ptr<TestObject> Object = CreateActor<TestObject>(1);
 	//}

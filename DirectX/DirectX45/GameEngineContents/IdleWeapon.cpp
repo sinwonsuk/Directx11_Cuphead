@@ -55,7 +55,47 @@ void IdleWeapon::Update(float _Delta)
 		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
 	}
 
+	std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("Tutorial_ColMap.png");
+	
+	GameEnginePixelColor Pixel = testMap->GetPixel(Bullet->GetTransform()->GetLocalPosition().x + 640.0f, -Bullet->GetTransform()->GetLocalPosition().y + 360.0f);
+	
 
+	TransformData Data = Bullet->GetTransform()->GetTransDataRef();
+
+
+	unsigned char ColorChar[4] = { 0,0,0,255 };
+
+	for (size_t i = 0; i < 4; i++)
+	{
+		if (ColorChar[i] == Pixel.ColorChar[i])
+		{
+			++ColorCheck;
+		}
+
+		if (ColorCheck == 4)
+		{
+			CollisionColor = true;		
+		}
+		if (ColorCheck != 4)
+		{
+			CollisionColor = false;
+		}
+
+		
+	}
+	ColorCheck = 0;
+
+	if (CollisionColor == true)
+	{
+		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * -1500.0f });
+	}
+
+	if (CollisionColor == true && ColorCollisionCheck ==false)
+	{
+		Bullet->ChangeAnimation("Peashooter_Death");	
+		ColorCollisionCheck = true;
+	}
+	
 
 	if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
 	{
@@ -67,6 +107,7 @@ void IdleWeapon::Update(float _Delta)
 	
 	if (GetLiveTime() > 5)
 	{
+
 		this->Death(); 
 	}
 	

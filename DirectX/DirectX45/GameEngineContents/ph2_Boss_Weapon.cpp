@@ -56,7 +56,7 @@ void ph2_Boss_Weapon::Start()
 
 
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 90.0f, 94.0f, 100.0f });
+	Collision->GetTransform()->SetLocalScale({ 30.0f, 30.0f, 100.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
 	Collision->Off();
 }

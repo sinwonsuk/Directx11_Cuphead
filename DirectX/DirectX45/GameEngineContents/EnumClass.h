@@ -21,7 +21,11 @@ enum class CollisionType
 	Bullet,
 	NpcAirPlane,
 	BossBody,
+	Ph3BossBody,
 	MapOut,
 	BossAttack,
 	TutorialObject,
+	PinkObject,
+	TutorialTarget,
+	TutorialObject2,
 };

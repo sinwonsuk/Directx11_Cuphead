@@ -296,6 +296,8 @@ void GameEngineSpriteRenderer::ChangeAnimation(const std::string_view& _Name, si
 {
 	std::shared_ptr<AnimationInfo> Find = FindAnimation(_Name);
 
+	
+
 	if (nullptr == Find)
 	{
 		MsgAssert("이러한 이름의 애니메이션은 존재하지 않습니다" + std::string(_Name));

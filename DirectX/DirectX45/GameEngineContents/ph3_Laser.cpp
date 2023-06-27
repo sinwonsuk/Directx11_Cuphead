@@ -44,37 +44,37 @@ void ph3_Laser::Start()
 	}
 
 
-	//Topn
+	//Top
 	{
 		ph3_laser_warning_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_top", .SpriteName = "ph3_laser_warning_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
+		ph3_laser_warning_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_top", .SpriteName = "ph3_laser_warning_top", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_top->ChangeAnimation("ph3_laser_warning_top");
 		ph3_laser_warning_top->Off();
 		ph3_laser_warning_top->GetTransform()->AddLocalPosition({ 160,-115 });
 
 		ph3_beam_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_beam_top->CreateAnimation({ .AnimationName = "ph3_beam_top", .SpriteName = "ph3_beam_top", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+		ph3_beam_top->CreateAnimation({ .AnimationName = "ph3_beam_top", .SpriteName = "ph3_beam_top", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph3_beam_top->ChangeAnimation("ph3_beam_top");
 		ph3_beam_top->GetTransform()->AddLocalPosition({ 30,0,0 });
 		ph3_beam_top->Off();
 
 
 		ph3_laser_warning_aura_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_aura_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_aura_top", .SpriteName = "ph3_laser_warning_aura_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
+		ph3_laser_warning_aura_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_aura_top", .SpriteName = "ph3_laser_warning_aura_top", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_aura_top->ChangeAnimation("ph3_laser_warning_aura_top");
 		ph3_laser_warning_aura_top->GetTransform()->AddLocalPosition({ -180, 190 });
 		ph3_laser_warning_aura_top->Off(); 
 
 
 		ph3_laser_warning_particle_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_particle_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_particle_top", .SpriteName = "ph3_laser_warning_particle_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
+		ph3_laser_warning_particle_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_particle_top", .SpriteName = "ph3_laser_warning_particle_top", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_particle_top->ChangeAnimation("ph3_laser_warning_particle_top");
 
 		ph3_laser_warning_particle_top->GetTransform()->AddLocalPosition({ -180,190 });
 		ph3_laser_warning_particle_top->Off();
 
 		ph3_laser_warning_ring_top = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_ring_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_ring_top", .SpriteName = "ph3_laser_warning_ring_top", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
+		ph3_laser_warning_ring_top->CreateAnimation({ .AnimationName = "ph3_laser_warning_ring_top", .SpriteName = "ph3_laser_warning_ring_top", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_ring_top->ChangeAnimation("ph3_laser_warning_ring_top");
 		ph3_laser_warning_ring_top->Off();
 
@@ -84,26 +84,26 @@ void ph3_Laser::Start()
 	// mid
 	{
 		ph3_laser_warning_mid = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_mid->CreateAnimation({ .AnimationName = "ph3_laser_warning_mid", .SpriteName = "ph3_laser_warning_mid", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+		ph3_laser_warning_mid->CreateAnimation({ .AnimationName = "ph3_laser_warning_mid", .SpriteName = "ph3_laser_warning_mid", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph3_laser_warning_mid->ChangeAnimation("ph3_laser_warning_mid");
 		ph3_laser_warning_mid->GetTransform()->AddLocalPosition({ 0,-190,-50 });
 		ph3_laser_warning_mid->Off(); 
 
 		ph3_laser_warning_particle_mid = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_particle_mid->CreateAnimation({ .AnimationName = "ph3_laser_warning_particle_mid", .SpriteName = "ph3_laser_warning_particle_mid", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+		ph3_laser_warning_particle_mid->CreateAnimation({ .AnimationName = "ph3_laser_warning_particle_mid", .SpriteName = "ph3_laser_warning_particle_mid", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph3_laser_warning_particle_mid->ChangeAnimation("ph3_laser_warning_particle_mid");
 		ph3_laser_warning_particle_mid->GetTransform()->AddLocalPosition({ -320,60 });
 		ph3_laser_warning_particle_mid->Off(); 
 
 
 		ph3_beam_mid = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_beam_mid->CreateAnimation({ .AnimationName = "ph3_beam_mid", .SpriteName = "ph3_beam_mid", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+		ph3_beam_mid->CreateAnimation({ .AnimationName = "ph3_beam_mid", .SpriteName = "ph3_beam_mid", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph3_beam_mid->ChangeAnimation("ph3_beam_mid");
 		ph3_beam_mid->GetTransform()->AddLocalPosition({ 30,0,-50 });
 		ph3_beam_mid->Off();
 
 		ph3_laser_warning_electric_mid = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_electric_mid->CreateAnimation({ .AnimationName = "ph3_laser_warning_electric_mid", .SpriteName = "ph3_laser_warning_electric_mid", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true });
+		ph3_laser_warning_electric_mid->CreateAnimation({ .AnimationName = "ph3_laser_warning_electric_mid", .SpriteName = "ph3_laser_warning_electric_mid", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph3_laser_warning_electric_mid->ChangeAnimation("ph3_laser_warning_electric_mid");
 		ph3_laser_warning_electric_mid->GetTransform()->AddLocalPosition({ -327,67 });
 		ph3_laser_warning_electric_mid->Off(); 
@@ -111,27 +111,27 @@ void ph3_Laser::Start()
 	// low
 	{
 		ph3_beam_low = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_beam_low->CreateAnimation({ .AnimationName = "ph3_beam_low", .SpriteName = "ph3_beam_low", .FrameInter = 0.065f,.Loop = false, .ScaleToTexture = true });
+		ph3_beam_low->CreateAnimation({ .AnimationName = "ph3_beam_low", .SpriteName = "ph3_beam_low", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph3_beam_low->ChangeAnimation("ph3_beam_low");
 		ph3_beam_low->GetTransform()->AddLocalPosition({ 0,0,-10 });
 		ph3_beam_low->Off(); 
 
 		ph3_laser_Right_warning_aura_low = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_Right_warning_aura_low->CreateAnimation({ .AnimationName = "ph3_laser_warning_aura_Low", .SpriteName = "ph3_laser_warning_aura_Low", .FrameInter = 0.065f,.Loop = false, .ScaleToTexture = true });
+		ph3_laser_Right_warning_aura_low->CreateAnimation({ .AnimationName = "ph3_laser_warning_aura_Low", .SpriteName = "ph3_laser_warning_aura_Low", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph3_laser_Right_warning_aura_low->ChangeAnimation("ph3_laser_warning_aura_Low");
 		ph3_laser_Right_warning_aura_low->GetTransform()->AddLocalPosition({ 390,-220 });
 		ph3_laser_Right_warning_aura_low->Off(); 
 
 
 		ph3_laser_Left__warning_aura_low = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_Left__warning_aura_low->CreateAnimation({ .AnimationName = "ph3_laser_warning_aura_Low", .SpriteName = "ph3_laser_warning_aura_Low", .FrameInter = 0.065f,.Loop = false, .ScaleToTexture = true });
+		ph3_laser_Left__warning_aura_low->CreateAnimation({ .AnimationName = "ph3_laser_warning_aura_Low", .SpriteName = "ph3_laser_warning_aura_Low", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph3_laser_Left__warning_aura_low->ChangeAnimation("ph3_laser_warning_aura_Low");
 		ph3_laser_Left__warning_aura_low->GetTransform()->AddLocalPosition({ -390,-220 });
 		ph3_laser_Left__warning_aura_low->Off(); 
 
 
 		ph3_laser_warning_low = CreateComponent<GameEngineSpriteRenderer>();
-		ph3_laser_warning_low->CreateAnimation({ .AnimationName = "ph3_laser_warning_low", .SpriteName = "ph3_laser_warning_low", .FrameInter = 0.065f,.Loop = true, .ScaleToTexture = true });
+		ph3_laser_warning_low->CreateAnimation({ .AnimationName = "ph3_laser_warning_low", .SpriteName = "ph3_laser_warning_low", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_low->ChangeAnimation("ph3_laser_warning_low");
 		ph3_laser_warning_low->GetTransform()->AddLocalPosition({ 0,-220,-10 });
 		ph3_laser_warning_low->Off(); 

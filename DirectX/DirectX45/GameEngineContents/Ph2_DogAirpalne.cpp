@@ -131,7 +131,7 @@ void Ph2_DogAirpalne::Start()
 	
 	
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 300.0f, 250.0f, 300.0f });
+	Collision->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 300.0f });
 
 	Collision->SetOrder((int)CollisionType::BossBody);
 

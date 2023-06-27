@@ -10,6 +10,7 @@
 #include "UserInterface.h"
 #include "EnumClass.h"
 #include "ExWeapon.h"
+#include "TimeFlow.h"
 void Player::ChangeState(PlayerState _State)
 {
 	PlayerState NextState = _State;
@@ -874,6 +875,30 @@ void Player::ParryUpdate(float _Time)
 			return;
 		}
 	}
+
+	
+	if (Collision->Collision((int)CollisionType::PinkObject, ColType::AABBBOX2D, ColType::AABBBOX2D) && PinkObject ==false)
+	{
+		JumpCheck = true;
+		ResetLiveTime();
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		TimeFlow::Time = 0.0f;
+		PinkObject = true;
+		
+	}
+
+	
+
+	if (TimeFlow::Time > 1 && PinkObject ==true)
+	{
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 1.0f);
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 1.0f);
+		PinkObject = false;
+		ChangeState(PlayerState::PinkObject);
+		return;
+	}
+
 
 
 	if (true == GameEngineInput::IsPress("PlayerAttack") && BulletTime > 0.15)
@@ -1997,13 +2022,7 @@ void Player::RunAttackUpdate(float _Time)
 			return;
 		}
 	}
-	if (true == GameEngineInput::IsPress("PlayerExAttack"))
-	{
-		DownCheck = false;
-		ChangeState(PlayerState::Ex_Straight);
-		return;
-	}
-
+	
 
 	if (CurPos_y - 25.0f > GetTransform()->GetLocalPosition().y)
 	{
@@ -3516,7 +3535,7 @@ void Player::MapOutUpdate(float _Time)
 	{
 		if (GetLiveTime() < 0.5)
 		{
-			GetTransform()->AddLocalPosition(float4::Up * 1200 * _Time);
+			GetTransform()->AddLocalPosition(float4::Up * 1300.0f * _Time);
 		}
 		if (GetLiveTime() > 0.5)
 		{
@@ -3705,7 +3724,6 @@ void Player::HitUpdate(float _Time)
 void Player::PinkObjectUpdate(float _Time)
 {
 	
-		
 	
 	
 

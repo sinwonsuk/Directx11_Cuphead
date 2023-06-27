@@ -7,6 +7,7 @@
 #include "UserInterface.h"
 #include "Player.h"
 #include "ph3_DogAirPlane.h"
+#include "TutorialObject.h"
 IdleWeapon::IdleWeapon()
 {
 }
@@ -56,7 +57,8 @@ void IdleWeapon::Update(float _Delta)
 		{
 			Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
 		}
-
+		
+		
 		if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
 		{
 			UserInterface::Cut += 0.5f;
@@ -64,37 +66,59 @@ void IdleWeapon::Update(float _Delta)
 			CollisionCheck = true;
 		}
 	
+		if (TutorialObject::Object != nullptr)
+		{
+
+			if (Collision->Collision((int)CollisionType::TutorialTarget) && CollisionCheck == false)
+			{
+				TutorialObject::Object->Gettutorial_target()->ColorOptionValue.PlusColor = { 1.0f,1.0f,1.0f,0.0f };
+				TutorialObject::Object->GetPyramid_Topper()->ColorOptionValue.PlusColor = { 1.0f,1.0f,1.0f,0.0f };
+				TutorialObject::Object->Gettutorial_target()->ResetLiveTime();
+				TutorialObject::Object->TargetHp -= 1;
+				UserInterface::Cut += 0.5f;
+
+				Bullet->ChangeAnimation("Peashooter_Death");
+				CollisionCheck = true;
+				Collision->Off();
+			}
+
+			if (CollisionCheck == true && TutorialObject::Object->Gettutorial_target()->GetLiveTime() > 0.05f)
+			{
+				TutorialObject::Object->Gettutorial_target()->ColorOptionValue.PlusColor = { 0.0f,0.0f,0.0f,0.0f };
+				TutorialObject::Object->GetPyramid_Topper()->ColorOptionValue.PlusColor = { 0.0f,0.0f,0.0f,0.0f };
+			}
+		}
+
+
+
 
 		if (Ph3_DogAirplane::ph3_mainBoss != nullptr)
 		{
-			if (Ph3_DogAirplane::ph3_mainBoss->UpdateCheck == true)
-			{
-				if (Collision->Collision((int)CollisionType::BossBody))
+			
+				if (Collision->Collision((int)CollisionType::Ph3BossBody))
 				{
 					Ph3_DogAirplane::Hp -= 1;
 
-					if (collisionCheck == false)
+					if (CollisionCheck == false)
 					{
 						Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ColorOptionValue.PlusColor = { 1,1,1,0 };
 						Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ResetLiveTime();
-						collisionCheck = true;
-
+						UserInterface::Cut += 0.5f;
+						Bullet->ChangeAnimation("Peashooter_Death");
+						CollisionCheck = true;
 					}
 					std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
-
 					collision->Death();
 				}
 
+			
 
-
-				if (collisionCheck == true && Ph3_DogAirplane::ph3_mainBoss->Idle_Body->GetLiveTime() > 0.05f)
+				if (CollisionCheck == true && Ph3_DogAirplane::ph3_mainBoss->Idle_Body->GetLiveTime() > 0.05f)
 				{
 					Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ColorOptionValue.PlusColor = { 0,0,0,0 };
-					collisionCheck = false;
+				
 				}
-
-
-			}
+		
 		}
 
 

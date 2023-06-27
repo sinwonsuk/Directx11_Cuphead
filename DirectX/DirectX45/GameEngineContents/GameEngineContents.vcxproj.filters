@@ -61,6 +61,7 @@
     <ClInclude Include="ExWeapon.h" />
     <ClInclude Include="EnumClass.h" />
     <ClInclude Include="TutorialObject.h" />
+    <ClInclude Include="TimeFlow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -140,6 +141,7 @@
     <ClCompile Include="Boss_Finish.cpp" />
     <ClCompile Include="ExWeapon.cpp" />
     <ClCompile Include="TutorialObject.cpp" />
+    <ClCompile Include="TimeFlow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

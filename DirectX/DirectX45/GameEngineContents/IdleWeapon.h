@@ -28,9 +28,12 @@ public:
 	{
 		return Bullet;
 	}
-
-
-
+	bool SetCollisionCheck(const bool& _CollisionCheck)
+	{
+		CollisionCheck = _CollisionCheck; 
+		return CollisionCheck;
+	}
+	
 
 protected:
 	void Start();

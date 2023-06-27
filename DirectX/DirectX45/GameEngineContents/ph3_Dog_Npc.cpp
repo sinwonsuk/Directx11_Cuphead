@@ -189,6 +189,7 @@ void ph3_Dog_Npc::Update(float _Delta)
 				ph3_leader_sideways_body_Attack->Off();
 				ph3_leader_sideways_arms->Off();
 				ph3_leader_sideways_body_Finish_0->On();
+				Collision->Off();
 			}
 
 			if (ph3_leader_sideways_body_Finish_0->IsAnimationEnd())
@@ -204,7 +205,7 @@ void ph3_Dog_Npc::Update(float _Delta)
 		case 1:
 		{
 
-			
+			Collision->Off(); 
 			
 
 			ph3_leader_sideways_body->Off(); 
@@ -219,7 +220,7 @@ void ph3_Dog_Npc::Update(float _Delta)
 		break;
 		case 2:
 		{
-
+			Collision->On();
 			if (Ph3_DogAirplane::Hp < 0)
 			{
 				

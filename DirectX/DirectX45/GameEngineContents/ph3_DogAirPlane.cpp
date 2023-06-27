@@ -436,7 +436,7 @@ void Ph3_DogAirplane::Start()
 	
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 300.0f, 250.0f, 300.0f });
-	Collision->SetOrder((int)CollisionType::BossBody);
+	Collision->SetOrder((int)CollisionType::Ph3BossBody);
 
 
 }
@@ -444,7 +444,7 @@ void Ph3_DogAirplane::Start()
 void Ph3_DogAirplane::Update(float _Delta)
 {
 	
-	UpdateCheck = true;
+	
 
 
 	/*if (Collision->Collision((int)CollisionType::Bullet))

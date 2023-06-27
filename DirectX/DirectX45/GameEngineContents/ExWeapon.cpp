@@ -6,6 +6,7 @@
 
 #include "EnumClass.h"
 #include "UserInterface.h"
+#include "Player.h"
 ExWeapon::ExWeapon()
 {
 }
@@ -80,6 +81,57 @@ void ExWeapon::Update(float _Delta)
 		Bullet->ChangeAnimation("Peashooter_EX_Death");
 		CollisionCheck = true;
 	}
+
+
+
+	if (Player::MainPlayer->GetTutorialCheck() == true)
+	{
+
+
+		std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("Tutorial_ColMap.png");
+
+		GameEnginePixelColor Pixel = testMap->GetPixel(Bullet->GetTransform()->GetLocalPosition().x + 640.0f, -Bullet->GetTransform()->GetLocalPosition().y + 360.0f);
+
+
+		TransformData Data = Bullet->GetTransform()->GetTransDataRef();
+
+
+		unsigned char ColorChar[4] = { 0,0,0,255 };
+
+		for (size_t i = 0; i < 4; i++)
+		{
+			if (ColorChar[i] == Pixel.ColorChar[i])
+			{
+				++ColorCheck;
+			}
+
+			if (ColorCheck == 4)
+			{
+				CollisionColor = true;
+			}
+			if (ColorCheck != 4)
+			{
+				CollisionColor = false;
+			}
+
+
+		}
+		ColorCheck = 0;
+
+		if (CollisionColor == true)
+		{
+			Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * -1500.0f });
+		}
+
+		if (CollisionColor == true && ColorCollisionCheck == false)
+		{
+			Bullet->ChangeAnimation("Peashooter_EX_Death");
+			ColorCollisionCheck = true;
+		}
+	}
+
+
+
 	if (Sfx_Dust->IsAnimationEnd())
 	{
 		Sfx_Dust->Death();

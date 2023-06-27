@@ -1,11 +1,17 @@
 #include "PrecompileHeader.h"
 #include "TutorialObject.h"
+#include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineUIRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include "EnumClass.h"
 #include "Player.h"
+#include "UserInterface.h"
+#include "IdleWeapon.h"
+
+TutorialObject* TutorialObject::Object;
+
 TutorialObject::TutorialObject()
 {
 
@@ -18,7 +24,7 @@ TutorialObject::~TutorialObject()
 
 void TutorialObject::Start()
 {
-
+	Object = this;
 
 	CollisionEffectIntro = CreateComponent<GameEngineSpriteRenderer>();
 	CollisionEffectIntro->SetScaleToTexture("Ground_ParryEffect_002.png"); 
@@ -57,6 +63,24 @@ void TutorialObject::Start()
 	CollisionEffect3->Off();
 
 
+	Pyramid_Topper = CreateComponent<GameEngineSpriteRenderer>();
+	Pyramid_Topper->SetScaleToTexture("tutorial_pyramid_topper.png");
+	
+	Pyramid_Topper->GetTransform()->AddLocalPosition({ 2800.0f,-50.0f });
+	Pyramid_Topper->SetScaleRatio(0.5f);
+	Pyramid_Topper->GetTransform()->SetLocalScale({ 200.0f,190.0f });
+
+	tutorial_target = CreateComponent<GameEngineSpriteRenderer>();
+	tutorial_target->CreateAnimation({ .AnimationName = "tutorial_target", .SpriteName = "tutorial_target", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true });
+	tutorial_target->ChangeAnimation("tutorial_target");
+	tutorial_target->GetTransform()->AddLocalPosition({ 2800.0f,74.0f });
+
+	Explosion = CreateComponent<GameEngineSpriteRenderer>();
+	Explosion->CreateAnimation({ .AnimationName = "boss_explosion", .SpriteName = "boss_explosion", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true });
+	Explosion->ChangeAnimation("boss_explosion");
+	Explosion->GetTransform()->AddLocalPosition({ 2800.0f,34.0f });
+	Explosion->Off(); 
+
 	Render1 = CreateComponent<GameEngineSpriteRenderer>();
 	Render1->SetScaleToTexture("tutorial_pink_sphere_2.png");
 
@@ -76,6 +100,17 @@ void TutorialObject::Start()
 	Render3->GetTransform()->SetLocalPosition({ 3537.0f,-10.0f });
 	Render3->SetScaleRatio(1.2f);
 	Render3->Off(); 
+
+	tutorial_target_Collision = CreateComponent<GameEngineCollision>();
+	tutorial_target_Collision->GetTransform()->SetLocalScale({ 40.0f, 40.0f, 300.0f });
+	tutorial_target_Collision->GetTransform()->SetLocalPosition({ 2800.0f,74.0f });
+	tutorial_target_Collision->SetOrder((int)CollisionType::TutorialTarget);
+
+	Collision4 = CreateComponent<GameEngineCollision>();
+	Collision4->GetTransform()->SetLocalScale({ 190.0f, 100.0f, 300.0f });
+	Collision4->GetTransform()->SetLocalPosition({ 2800.0f,-40.0f });
+	Collision4->SetOrder((int)CollisionType::TutorialObject2);
+
 
 	Collision1 = CreateComponent<GameEngineCollision>();
 	Collision1->GetTransform()->SetLocalScale({ 10.0f, 10.0f, 300.0f });
@@ -98,12 +133,33 @@ void TutorialObject::Start()
 
 void TutorialObject::Update(float _Delta)
 {
+	
+	if (Collision4->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D) )
+	{
+		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * 400 * _Delta);
+		Player::MainPlayer->GetTransform()->AddLocalPosition(float4::Left * 400 * _Delta);
+
+	}
+
+	/*if (tutorial_target_Collision->Collision((int)CollisionType::Bullet) && TargetCollisionCheck == true)
+	{
+		
+		IdleWeapon* Weapon = (IdleWeapon*)tutorial_target_Collision->GetActor();
+
+		Weapon->GetBullet()->ChangeAnimation("Peashooter_Death");
+		TargetCollisionCheck = false;
+	}*/
+
+
+
 	if (Player::MainPlayer->GetStateValue() == PlayerState::Parry)
 	{
 		if (true == GameEngineInput::IsPress("PlayerJump"))
 		{
 			if (Collision1->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D) && LeftCollisionCheck == false)
 			{		
+				
+
 				CollisionEffectIntro->On(); 
 				CollisionEffect->ChangeAnimation("ParryEffect");
 				CollisionEffect->Off(); 
@@ -165,6 +221,7 @@ void TutorialObject::Update(float _Delta)
 		Render2->On();
 		Render3->Off(); 
 		ResetLiveTime();
+		UserInterface::CardNumber += 1;
 		LeftCollisionCheck = false;
 	}
 	if (GetLiveTime() > 0.2f && MiddleCollisionCheck == true)
@@ -175,6 +232,7 @@ void TutorialObject::Update(float _Delta)
 		Render2->Off();
 		Render3->On();
 		ResetLiveTime();
+		UserInterface::CardNumber += 1;
 		MiddleCollisionCheck = false;
 	}
 	if (GetLiveTime() > 0.2f && RightCollisionCheck == true)
@@ -185,7 +243,16 @@ void TutorialObject::Update(float _Delta)
 		Render2->Off();
 		Render3->Off();
 		ResetLiveTime();
+		UserInterface::CardNumber += 1;
+
 		RightCollisionCheck = false;
+	}
+	if (TargetHp < 0)
+	{
+		tutorial_target->Off();
+		Pyramid_Topper->Off();
+		Explosion->On();
+		Collision4->Off();
 	}
 
 	if (CollisionEffect->IsAnimationEnd())
@@ -201,7 +268,10 @@ void TutorialObject::Update(float _Delta)
 	{
 		CollisionEffect3->Off();
 	}
-
+	if (Explosion->IsAnimationEnd())
+	{
+		Explosion->Off(); 
+	}
 
 
 }

@@ -163,6 +163,7 @@ void Ph3_DogAirplane::UpdateState(float _Time)
 
 void Ph3_DogAirplane::IntroUpdate(float _Time)
 {
+	Collision->Off();
 	if (Ph3_Boss_Intro->IsAnimationEnd())
 	{
 		Ph3_Boss_Intro->Off(); 
@@ -179,6 +180,7 @@ void Ph3_DogAirplane::IntroUpdate(float _Time)
 
 void Ph3_DogAirplane::IdleUpdate(float _Time)
 {
+	Collision->On(); 
 	if (GetLiveTime() > 1)
 	{
 		ph3_left_paw_hole_top->On(); 
@@ -592,7 +594,7 @@ void Ph3_DogAirplane::Rotation_Laser_Attack_Update(float _Time)
 {
 	//TransformData data 
 	
-	Collision->On(); 
+Collision->On(); 
 	//GetTransform()->SetLocalRotation({ 0,0,0 });
 
 	TransformData date = GetTransform()->GetTransDataRef();
@@ -958,7 +960,7 @@ void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
 void Ph3_DogAirplane::Right_Rotation_Attack_Update(float _Time)
 {
 
-
+	
 }
 
 

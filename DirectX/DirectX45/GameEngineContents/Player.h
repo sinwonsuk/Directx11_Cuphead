@@ -135,7 +135,7 @@ public:
 	{
 		return Render0;
 	}
-
+	bool RightMove = true;
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -165,7 +165,8 @@ private:
 	float JumpSpeed = 1200;
 	bool Block = false;
 	bool Gravity = true;
-	bool RightMove = true;
+	
+	bool PinkObject = false;
 	bool LeftMove = true;
 	bool JumpCheck = false;
 	bool CheckCamera = false;

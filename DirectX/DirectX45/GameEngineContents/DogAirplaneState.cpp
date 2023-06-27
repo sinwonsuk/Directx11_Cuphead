@@ -304,9 +304,6 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 		
 
 		Collision->GetTransform()->SetLocalPosition({-600,CollisionMove });
-
-
-
 	
 		if (bulldogIdle->GetCurrentFrame() == 41 && BoneCheck == 0)
 		{
@@ -315,8 +312,12 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
 			if (PinkBone == 0)
 			{
+
 				Object->GetBullet()->ChangeAnimation("PinkBone"); 
+				Object->GetCollision()->Off();
+				Object->GetPinkCollision()->On();
 			}
+
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y+40 });
 			Object->SetCheck(0);
 		}
@@ -327,6 +328,8 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 			if (PinkBone == 1)
 			{
 				Object->GetBullet()->ChangeAnimation("PinkBone");
+				Object->GetCollision()->Off();
+				Object->GetPinkCollision()->On();
 			}
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 80 });
 			Object->SetCheck(0);
@@ -338,6 +341,8 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 			if (PinkBone == 2)
 			{
 				Object->GetBullet()->ChangeAnimation("PinkBone");
+				Object->GetCollision()->Off();
+				Object->GetPinkCollision()->On();
 			}
 			Object->SetTime(0.3f);
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 190 });
@@ -362,6 +367,8 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 			if (PinkBone == 0)
 			{
 				Object->GetBullet()->ChangeAnimation("PinkBone");
+				Object->GetCollision()->Off();
+				Object->GetPinkCollision()->On();
 			}
 
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y+40 });
@@ -374,6 +381,8 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 			if (PinkBone == 1)
 			{
 				Object->GetBullet()->ChangeAnimation("PinkBone");
+				Object->GetCollision()->Off();
+				Object->GetPinkCollision()->On();
 			}
 
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 80 });
@@ -388,6 +397,8 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 			if (PinkBone == 2)
 			{
 				Object->GetBullet()->ChangeAnimation("PinkBone");
+				Object->GetCollision()->Off();
+				Object->GetPinkCollision()->On();
 
 			}
 			Object->SetTime(0.3f);

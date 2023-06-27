@@ -6,7 +6,7 @@
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include "UserInterface.h"
-
+#include "TimeFlow.h"
 DogAirplaneLevel::DogAirplaneLevel()
 {
 }
@@ -17,7 +17,7 @@ DogAirplaneLevel::~DogAirplaneLevel()
 
 void DogAirplaneLevel::Update(float _DeltaTime)
 {
-
+	sd += _DeltaTime;
 	switch (ad)
 	{
 	case 0:
@@ -209,9 +209,10 @@ void DogAirplaneLevel::Start()
 	////CreateNewCamera
 	player = CreateActor<Player>();
 	player->GetTransform()->AddLocalPosition({ 0,0,0 });
-
-	std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
-	
+	std::shared_ptr<TimeFlow> Object = CreateActor<TimeFlow>(10);
+	{
+		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
+	}
 	
 	//BackGround = CreateActor<DogAirplaneBackground>();
 

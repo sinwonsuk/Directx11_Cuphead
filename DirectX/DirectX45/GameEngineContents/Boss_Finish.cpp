@@ -13,7 +13,7 @@ Boss_Finish::~Boss_Finish()
 void Boss_Finish::Start()
 {
 	Finish = CreateComponent<GameEngineUIRenderer>();
-	Finish->CreateAnimation({ .AnimationName = "FightText_KO", .SpriteName = "FightText_KO", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true, });
+	Finish->CreateAnimation({ .AnimationName = "FightText_KO", .SpriteName = "FightText_KO", .FrameInter = 0.07f, .Loop = false, .ScaleToTexture = true, });
 	Finish->ChangeAnimation("FightText_KO");
 	Finish->SetScaleRatio(2.5f);
 }

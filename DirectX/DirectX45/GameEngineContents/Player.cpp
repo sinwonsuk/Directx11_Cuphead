@@ -32,6 +32,8 @@ void Player::Update(float _DeltaTime)
 	{
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
 	}
+
+
 	HitTime += _DeltaTime;
 	BulletTime += _DeltaTime;
 	RunTime += _DeltaTime; 
@@ -274,8 +276,8 @@ void Player::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ex_Down").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ex_Straight").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ex_Up").GetFullPath());
-
-
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("tutorial_target").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("boss_explosion").GetFullPath());
 
 
 		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttack").GetFullPath());

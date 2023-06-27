@@ -34,6 +34,17 @@ public:
 	{
 		return Bullet;
 	}
+	std::shared_ptr<class GameEngineCollision> GetCollision()
+	{
+		return Collision;
+	}
+	std::shared_ptr<class GameEngineCollision> GetPinkCollision()
+	{
+		return PinkCollision;
+	}
+
+
+
 
 protected:
 	void Start();
@@ -41,9 +52,13 @@ protected:
 
 private:
 	float4 MoveDir = { 1,0 };
-
+	bool CollisionCheck = false;
 	std::shared_ptr<class GameEngineCollision> Collision;
+	std::shared_ptr<class GameEngineCollision> PinkCollision;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
+	int BulletCheck = 0;
+	int a = 0;
+	int b = 0;
 	int Check = 0;
 	float Time = 0;
 

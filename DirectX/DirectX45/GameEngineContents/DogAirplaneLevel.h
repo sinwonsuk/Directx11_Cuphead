@@ -26,7 +26,7 @@ public:
 
 	std::shared_ptr<class GameEngineVideo> Video;
 	int ad = 0;
-
+	float sd = 0;
 
 	std::shared_ptr<Ph2_DogAirpalne> Get_Ph2_DogAirpalne_Left()
 	{

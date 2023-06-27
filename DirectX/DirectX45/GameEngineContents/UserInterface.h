@@ -14,6 +14,7 @@ public:
 	UserInterface& operator=(UserInterface&& _Other) noexcept = delete;
 	static float Cut;
 	static int CardNumber;
+
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -46,7 +47,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> FrontCard;
 	int	ConsumeCard = 0;
 	int PrevConsumeCard = 0;
-
+	int PlusCard = 0;
 };
 
 

@@ -9,6 +9,7 @@
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include  "TutorialObject.h"
+#include "UserInterface.h"
 PlayLevel::PlayLevel() 
 {
 }
@@ -33,7 +34,7 @@ void PlayLevel::PlayerCreate(/*Playlevel* this*/)
 
 void PlayLevel::Start()
 {
-	//GameEngineLevel::IsDebugSwitch();
+	GameEngineLevel::IsDebugSwitch();
 
 
 	{
@@ -68,7 +69,7 @@ void PlayLevel::Start()
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 	GetMainCamera()->GetTransform()->AddLocalPosition({ 0.0f,-80.0f,0.0f });
 	GetCamera(100)->GetTransform()->AddLocalPosition({ 0.0f,-80.0f,0.0f });
-	//GetMainCamera()->GetTransform()->AddLocalPosition({ 3488.0f,0.0f,0.0f });
+	//GetMainCamera()->GetTransform()->AddLocalPosition({ 2888.0f,0.0f,0.0f });
 	//GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -1000.0f});
 
 
@@ -87,6 +88,13 @@ void PlayLevel::Start()
 		std::shared_ptr<Player> Object = CreateActor<Player>();
 		Object->GetTransform()->SetLocalPosition({ 0.0f,0.0f });
 	}
+
+	{
+		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
+		Object->GetTransform()->AddLocalPosition({ 0,-80.0f });
+		
+	}
+
 	{
 		std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>();
 	//	Object->GetTransform()->SetLocalPosition({ 2450.0f,0 });

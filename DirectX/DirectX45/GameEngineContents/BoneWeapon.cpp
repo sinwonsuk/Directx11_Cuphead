@@ -4,6 +4,8 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.h"
+#include "TimeFlow.h"
+#include "DogAirplaneLevel.h"
 BoneWeapon::BoneWeapon()
 {
 }
@@ -37,11 +39,34 @@ void BoneWeapon::Start()
 	Collision->GetTransform()->SetLocalScale({ 20.0f, 20.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
 
-
+	PinkCollision = CreateComponent<GameEngineCollision>();
+	PinkCollision->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 300.0f });
+	PinkCollision->SetOrder((int)CollisionType::PinkObject);
+	PinkCollision->Off();
 }
 
 void BoneWeapon::Update(float _Delta)
 {
+	
+	
+	/*if (PinkCollision->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D)&& CollisionCheck==false)
+	{
+		CollisionCheck = true;
+		ResetLiveTime();
+		
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0,0.0f);
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0,0.0f);
+
+		TimeFlow::Time = 0.0f;
+	}
+	
+	if (TimeFlow::Time > 1 && CollisionCheck ==true)
+	{
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 1.0f);
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 1.0f);
+	}*/
+
+	PinkCollision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 
 	switch (Check)
@@ -107,9 +132,9 @@ void BoneWeapon::Update(float _Delta)
 
 	
 
-	/*if (GetLiveTime() > 3)
+	if (GetLiveTime() > 7)
 	{
 		this->Death();
-	}*/
+	}
 
 }

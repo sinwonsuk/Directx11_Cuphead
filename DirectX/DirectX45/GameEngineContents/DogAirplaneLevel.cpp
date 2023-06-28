@@ -214,7 +214,7 @@ void DogAirplaneLevel::Start()
 		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
 	}
 	
-	//BackGround = CreateActor<DogAirplaneBackground>();
+	BackGround = CreateActor<DogAirplaneBackground>();
 
 	Npc = CreateActor<NpcAirplane>();
 

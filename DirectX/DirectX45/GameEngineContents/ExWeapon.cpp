@@ -7,6 +7,7 @@
 #include "EnumClass.h"
 #include "UserInterface.h"
 #include "Player.h"
+#include "ph3_DogAirPlane.h"
 ExWeapon::ExWeapon()
 {
 }
@@ -69,6 +70,7 @@ void ExWeapon::Update(float _Delta)
 {
 	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 
+
 	if (CollisionCheck == false)
 	{
 		Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
@@ -130,6 +132,30 @@ void ExWeapon::Update(float _Delta)
 		}
 	}
 
+
+	if (Ph3_DogAirplane::ph3_mainBoss != nullptr)
+	{
+
+		if (Collision->Collision((int)CollisionType::Ph3BossBody))
+		{
+			Ph3_DogAirplane::Hp -= 3;
+
+			if (CollisionCheck == false)
+			{
+				Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ColorOptionValue.PlusColor = { 1,1,1,0 };
+				Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ResetLiveTime();
+				Bullet->ChangeAnimation("Peashooter_EX_Death");
+				CollisionCheck = true;
+			}
+			std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+			collision->Death();
+		}
+
+		if (CollisionCheck == true && Ph3_DogAirplane::ph3_mainBoss->Idle_Body->GetLiveTime() > 0.05f)
+		{
+			Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ColorOptionValue.PlusColor = { 0,0,0,0 };
+		}
+	}
 
 
 	if (Sfx_Dust->IsAnimationEnd())

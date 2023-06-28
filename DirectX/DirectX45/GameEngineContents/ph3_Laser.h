@@ -36,13 +36,16 @@ public:
 		return MoveDir;
 	}
 
-	std::shared_ptr<class GameEngineSpriteRenderer> Get_ph3_beam_top()
+	std::shared_ptr<class GameEngineSpriteRenderer> GetParryEffect()
 	{
-		return ph3_beam_top; 
+		return ParryEffect;
 	}
 
 
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Get_ph3_beam_top()
+	{
+		return ph3_beam_top;
+	}
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Get_ph3_beam_mid()
 	{
@@ -53,7 +56,10 @@ public:
 	{
 		return ph3_beam_low;
 	}
-
+	std::shared_ptr<class GameEngineCollision> GetPinkCollision()
+	{
+		return PinkCollision;
+	}
 
 	LaserDir laserDir = LaserDir::Right_Mid;
 
@@ -84,10 +90,15 @@ private:
 	bool dirCheck = false;
 	bool LaserCheck = false;
 	float4 MoveDir = { 0,0 };
+
+
+	std::shared_ptr<class GameEngineCollision> PinkCollision;
+	std::shared_ptr<class GameEngineSpriteRenderer> ParryEffect;
+
 	std::shared_ptr<class GameEngineCollision> Collision;
 	std::shared_ptr<class GameEngineSpriteRenderer> Sfx;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
-
+	
 	
 };
 

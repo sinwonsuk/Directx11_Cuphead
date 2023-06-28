@@ -59,6 +59,17 @@ void ph2_Boss_Weapon::Start()
 	Collision->GetTransform()->SetLocalScale({ 30.0f, 30.0f, 100.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
 	Collision->Off();
+
+	PinkCollision = CreateComponent<GameEngineCollision>();
+	PinkCollision->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 300.0f });
+	PinkCollision->SetOrder((int)CollisionType::Ph2_Dog_Boss_Pink_Bullet);
+	PinkCollision->Off();
+
+	ParryEffect = CreateComponent<GameEngineSpriteRenderer>();
+	ParryEffect->CreateAnimation({ .AnimationName = "ParryEffect", .SpriteName = "ParryEffect", .FrameInter = 0.08f, .Loop = false, .ScaleToTexture = true, });
+	ParryEffect->ChangeAnimation("ParryEffect");
+	ParryEffect->Off();
+
 }
 
 void ph2_Boss_Weapon::Update(float _Delta)
@@ -82,16 +93,18 @@ void ph2_Boss_Weapon::Update(float _Delta)
 
 		MoveDir = MoveDir1.NormalizeReturn();
 		Collision->Off();
+		PinkCollision->Off(); 
 		MoveDirCheck = true;
 	}
 
 	Bullet_First->GetTransform()->AddLocalPosition({ MoveDir * 2 });
 	Collision->GetTransform()->SetLocalPosition({ Bullet_First->GetTransform()->GetLocalPosition() });
-
+	PinkCollision->GetTransform()->SetLocalPosition({ Bullet_First->GetTransform()->GetLocalPosition() });
 
 	if (MoveDirCheck == true)
 	{
-		Collision->On();
+		//Collision->On();
+		PinkCollision->Off();
 	}
 
 		
@@ -101,7 +114,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	{
 	case 0:
 	{
-		
+		Collision->On();
 
 		if (AnimationCheck == false)
 		{
@@ -124,7 +137,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 		break;
 	case 1:
 	{
-		
+		Collision->On();
 
 		if (AnimationCheck == false)
 		{
@@ -146,7 +159,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 
 	case 2:
 	{
-		
+		PinkCollision->On(); 
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_bow_pink_First");
@@ -167,7 +180,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	case 3:
 	{
 		
-
+		PinkCollision->On();
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_wow_pink_First");
@@ -188,7 +201,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	case 4:
 	{
 		
-
+		Collision->On();
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_bow_First");
@@ -210,7 +223,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 5:
 	{
-		
+		Collision->On();
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_wow_First");
@@ -231,7 +244,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	case 6:
 	{
 		
-
+		Collision->On();
 		if (AnimationCheck == false)
 		{
 			Bullet_First->ChangeAnimation("SD_bow_First");
@@ -253,7 +266,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 7:
 	{
-		
+		Collision->On();
 
 		if (AnimationCheck == false)
 		{
@@ -274,7 +287,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 8:
 	{
-
+		Collision->On();
 		
 		if (AnimationCheck == false)
 		{
@@ -297,7 +310,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 9:
 	{
-	
+		Collision->On();
 
 		if (AnimationCheck == false)
 		{
@@ -318,7 +331,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 10:
 	{
-	
+		Collision->On();
 
 		if (AnimationCheck == false)
 		{
@@ -341,7 +354,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	break;
 	case 11:
 	{
-	
+		Collision->On();
 
 		if (AnimationCheck == false)
 		{
@@ -364,6 +377,10 @@ void ph2_Boss_Weapon::Update(float _Delta)
 		break;
 	}
 
+	if (ParryEffect->IsAnimationEnd())
+	{
+		ParryEffect->Off();
+	}
 
 
 }

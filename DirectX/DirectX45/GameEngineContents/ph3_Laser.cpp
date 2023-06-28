@@ -140,8 +140,18 @@ void ph3_Laser::Start()
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 0.0f, 0.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
-	//Collision->Off(); 
+
+	PinkCollision = CreateComponent<GameEngineCollision>();
+	PinkCollision->GetTransform()->SetLocalScale({ 0.0f, 0.0f, 300.0f });
+	PinkCollision->SetOrder((int)CollisionType::Ph3_Dog_Boss_Pink_Bullet);
+	PinkCollision->Off(); 
+
 	
+	ParryEffect = CreateComponent<GameEngineSpriteRenderer>();
+	ParryEffect->CreateAnimation({ .AnimationName = "ParryEffect", .SpriteName = "ParryEffect", .FrameInter = 0.08f, .Loop = false, .ScaleToTexture = true, });
+	ParryEffect->ChangeAnimation("ParryEffect");
+	ParryEffect->Off();
+
 
 }
 
@@ -270,15 +280,15 @@ void ph3_Laser::Update(float _Delta)
 
 				if (ph3_laser_Right_warning_aura_low->IsAnimationEnd())
 				{
-					Collision->On();
-					Collision->GetTransform()->SetLocalScale({ 1200.0f, 50.0f, 300.0f });
-					Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y-220.0f,ph3_beam_top->GetTransform()->GetLocalPosition().z });
+					PinkCollision->On();
+					PinkCollision->GetTransform()->SetLocalScale({ 1200.0f, 50.0f, 300.0f });
+					PinkCollision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y-220.0f,ph3_beam_top->GetTransform()->GetLocalPosition().z });
 					ResetLiveTime();
 				}
 
 				if (GetLiveTime() > 0.3f)
 				{
-					Collision->Off();
+					PinkCollision->Off();
 				}
 
 				if (ph3_beam_low->IsAnimationEnd())
@@ -288,7 +298,7 @@ void ph3_Laser::Update(float _Delta)
 					ph3_laser_Right_warning_aura_low->Off();
 					ph3_laser_warning_low->Off();
 					LaserCheck = true;
-					Collision->Off();
+					PinkCollision->Off();
 
 				}
 			}
@@ -641,16 +651,16 @@ void ph3_Laser::Update(float _Delta)
 				}
 				if (ph3_laser_Right_warning_aura_low->IsAnimationEnd())
 				{
-					Collision->On();
-					Collision->GetTransform()->SetLocalScale({ 1000.0f, 50.0f, 300.0f });
-					Collision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y - 220.0f,ph3_beam_top->GetTransform()->GetLocalPosition().z });
+					PinkCollision->On();
+					PinkCollision->GetTransform()->SetLocalScale({ 1000.0f, 50.0f, 300.0f });
+					PinkCollision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y - 220.0f,ph3_beam_top->GetTransform()->GetLocalPosition().z });
 					ResetLiveTime();
 
 				}
 
 				if (GetLiveTime() > 0.3f)
 				{
-					Collision->Off();
+					PinkCollision->Off();
 				}
 				if (ph3_beam_low->IsAnimationEnd())
 				{
@@ -658,7 +668,7 @@ void ph3_Laser::Update(float _Delta)
 					ph3_laser_Right_warning_aura_low->Off();
 					ph3_laser_Right_warning_aura_low->Off();
 					ph3_laser_warning_low->Off();
-					Collision->Off();
+					PinkCollision->Off();
 					LaserCheck = true;
 				}
 			}
@@ -668,5 +678,8 @@ void ph3_Laser::Update(float _Delta)
 		default:
 			break;
 		}
-	
+	if(ParryEffect->IsAnimationEnd())
+	{
+		ParryEffect->Off(); 
+	}
 }

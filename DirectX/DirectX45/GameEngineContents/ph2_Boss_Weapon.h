@@ -20,10 +20,29 @@ public:
 	{
 		return Sfx;
 	}
-	std::shared_ptr<class GameEngineSpriteRenderer> GetBullet()
+	std::shared_ptr<class GameEngineSpriteRenderer> GetBullet_First()
 	{
 		return Bullet_First;
 	}
+
+	std::shared_ptr<class GameEngineSpriteRenderer> GetParryEffect()
+	{
+		return ParryEffect;
+	}
+	std::shared_ptr<class GameEngineSpriteRenderer> GetBullet()
+	{
+		return Bullet;
+	}
+
+
+	std::shared_ptr<class GameEngineCollision> GetPinkCollision()
+	{
+		return PinkCollision; 
+	}
+
+
+
+
 	int SetDirCheck(int _Dircheck)
 	{
 		DirCheck = _Dircheck;
@@ -45,6 +64,8 @@ protected:
 private:
 	
 	std::shared_ptr<class GameEngineCollision> Collision;
+	std::shared_ptr<class GameEngineCollision> PinkCollision;
+	std::shared_ptr<class GameEngineSpriteRenderer> ParryEffect;
 	std::shared_ptr<class GameEngineSpriteRenderer> Sfx;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet_First;

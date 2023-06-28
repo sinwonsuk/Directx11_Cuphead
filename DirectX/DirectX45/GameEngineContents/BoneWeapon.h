@@ -42,7 +42,10 @@ public:
 	{
 		return PinkCollision;
 	}
-
+	std::shared_ptr<class GameEngineSpriteRenderer> GetParryEffect()
+	{
+		return ParryEffect;
+	}
 
 
 
@@ -53,6 +56,7 @@ protected:
 private:
 	float4 MoveDir = { 1,0 };
 	bool CollisionCheck = false;
+	std::shared_ptr<class GameEngineSpriteRenderer> ParryEffect;
 	std::shared_ptr<class GameEngineCollision> Collision;
 	std::shared_ptr<class GameEngineCollision> PinkCollision;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;

@@ -26,6 +26,8 @@ enum class CollisionType
 	BossAttack,
 	TutorialObject,
 	PinkObject,
+	Ph2_Dog_Boss_Pink_Bullet,
+	Ph3_Dog_Boss_Pink_Bullet,
 	TutorialTarget,
 	TutorialObject2,
 };

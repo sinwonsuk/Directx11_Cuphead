@@ -11,6 +11,9 @@
 #include "EnumClass.h"
 #include "ExWeapon.h"
 #include "TimeFlow.h"
+#include "BoneWeapon.h"
+#include "ph2_Boss_Weapon.h"
+#include "ph3_Laser.h"
 void Player::ChangeState(PlayerState _State)
 {
 	PlayerState NextState = _State;
@@ -382,6 +385,20 @@ void Player::IdleUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+
+
+
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -552,6 +569,16 @@ void Player::RunUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -797,6 +824,16 @@ void Player::JumpUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -847,6 +884,16 @@ void Player::DuckUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -875,22 +922,83 @@ void Player::ParryUpdate(float _Time)
 			return;
 		}
 	}
-
+	std::shared_ptr<GameEngineCollision> Test_Collision = Collision->Collision((int)CollisionType::PinkObject, ColType::AABBBOX2D, ColType::AABBBOX2D);
 	
-	if (Collision->Collision((int)CollisionType::PinkObject, ColType::AABBBOX2D, ColType::AABBBOX2D) && PinkObject ==false)
+
+	if (Test_Collision&& PinkObject ==false)
 	{
 		JumpCheck = true;
 		ResetLiveTime();
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
 		TimeFlow::Time = 0.0f;
+		UserInterface::CardNumber += 1;
+		ph2_Boss_Weapon* Ph2_Boss_Bullet = (ph2_Boss_Weapon*)Test_Collision->GetActor();
+
+		BoneWeapon* weapon = (BoneWeapon*)Test_Collision->GetActor();
+
+		if (weapon != nullptr)
+		{
+			weapon->GetParryEffect()->On();
+			weapon->GetBullet()->Off();
+			weapon->GetParryEffect()->GetTransform()->SetLocalPosition(weapon->GetBullet()->GetTransform()->GetLocalPosition());
+			weapon->GetPinkCollision()->Off();
+		}
+		
+		
+
 		PinkObject = true;
 		
 	}
 
-	
+	std::shared_ptr<GameEngineCollision> TestCollision = Collision->Collision((int)CollisionType::Ph2_Dog_Boss_Pink_Bullet, ColType::AABBBOX2D, ColType::AABBBOX2D);
 
-	if (TimeFlow::Time > 1 && PinkObject ==true)
+
+	if (TestCollision && PinkObject == false)
+	{
+		JumpCheck = true;
+		ResetLiveTime();
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		TimeFlow::Time = 0.0f;
+		UserInterface::CardNumber += 1;
+		ph2_Boss_Weapon* Ph2_Boss_Bullet = (ph2_Boss_Weapon*)TestCollision->GetActor();
+
+		if (Ph2_Boss_Bullet != nullptr)
+		{
+			Ph2_Boss_Bullet->GetParryEffect()->GetTransform()->SetLocalPosition(Ph2_Boss_Bullet->GetBullet()->GetTransform()->GetLocalPosition());
+			Ph2_Boss_Bullet->GetParryEffect()->On();
+			Ph2_Boss_Bullet->GetPinkCollision()->Off();
+			Ph2_Boss_Bullet->GetBullet()->Off();
+		}
+		PinkObject = true;
+	}
+
+	std::shared_ptr<GameEngineCollision> ph3_Boss_Collision = Collision->Collision((int)CollisionType::Ph3_Dog_Boss_Pink_Bullet, ColType::AABBBOX2D, ColType::AABBBOX2D);
+
+	if (ph3_Boss_Collision && PinkObject == false)
+	{
+		JumpCheck = true;
+		ResetLiveTime();
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		TimeFlow::Time = 0.0f;
+		UserInterface::CardNumber += 1;
+		ph3_Laser* Ph3_Boss_Bullet = (ph3_Laser*)ph3_Boss_Collision->GetActor();
+
+		if (Ph3_Boss_Bullet != nullptr)
+		{
+			Ph3_Boss_Bullet->GetParryEffect()->On();
+			Ph3_Boss_Bullet->GetParryEffect()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x, GetTransform()->GetLocalPosition().y-50.0f });
+			/*Ph3_Boss_Bullet->GetParryEffect()->GetTransform()->SetLocalPosition(Ph3_Boss_Bullet->GetBullet()->GetTransform()->GetLocalPosition());
+			Ph3_Boss_Bullet->GetParryEffect()->On();
+			Ph3_Boss_Bullet->GetPinkCollision()->Off();
+			Ph3_Boss_Bullet->GetBullet()->Off();*/
+		}
+		PinkObject = true;
+	}
+
+	if (TimeFlow::Time > 0.2 && PinkObject ==true)
 	{
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 1.0f);
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 1.0f);
@@ -1111,6 +1219,11 @@ void Player::ParryUpdate(float _Time)
 		BulletTime = 0;
 	}
 
+	if (Render0->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Fail);
+		return;
+	}
 
 
 	if (Gravity == false /*&& test == true*/)
@@ -1125,7 +1238,7 @@ void Player::ParryUpdate(float _Time)
 		return;
 	}
 
-	if (HitCheck == false)
+	if (HitCheck == false && PinkObject == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
@@ -1216,6 +1329,16 @@ void Player::UpAimUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -1268,6 +1391,16 @@ void Player::DownAimUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -1362,6 +1495,16 @@ void Player::IdleAimUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -1434,6 +1577,16 @@ void Player::DiagonalUpAimUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -1478,6 +1631,16 @@ void Player::DiagonalDownAimUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -1575,6 +1738,16 @@ void Player::DashUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -1737,6 +1910,16 @@ void Player::IdleAttackUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -1828,6 +2011,16 @@ void Player::IdleAttackPreUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -2068,6 +2261,16 @@ void Player::RunAttackUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -2260,6 +2463,16 @@ void Player::DiagonalUpRunAttackUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -2335,6 +2548,16 @@ void Player::UpUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -2452,6 +2675,16 @@ void Player::UpAttackUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -2553,6 +2786,16 @@ void Player::UpAttackPre(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -2604,6 +2847,16 @@ void Player::DuckAttackUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -2668,6 +2921,16 @@ void Player::DuckAttackPreUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -2805,6 +3068,16 @@ void Player::DiagonalDownAttackUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -2956,6 +3229,16 @@ void Player::DiagonalDownAttackPreUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -3067,6 +3350,16 @@ void Player::IdleAimAttackUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -3160,6 +3453,16 @@ void Player::IdleAimAttackPreUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -3233,6 +3536,16 @@ void Player::UpAimAttackUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -3328,6 +3641,16 @@ void Player::UpAimAttackPreUpdate(float _Time)
 			ChangeState(PlayerState::Hit);
 			return;
 		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
 	}
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
@@ -3398,6 +3721,16 @@ void Player::DownAttackUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -3484,6 +3817,16 @@ void Player::DownAttackPreUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();
@@ -3617,6 +3960,16 @@ void Player::FailUpdate(float _Time)
 	if (HitCheck == false)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
 			HitTime = 0;
 			ResetLiveTime();

@@ -643,7 +643,7 @@ void Ph2_DogAirpalne::AttackUpdate(float _Time)
 		{
 			RandomWeapon = GameEngineRandom::MainRandom.RandomInt(0, 11);
 			std::shared_ptr<ph2_Boss_Weapon> Object = GetLevel()->CreateActor<ph2_Boss_Weapon>();
-			Object->GetBullet()->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x,Ph2_Boss->GetTransform()->GetLocalPosition().y,-400.0f  });
+			Object->GetBullet_First()->GetTransform()->SetLocalPosition({ Ph2_Boss->GetTransform()->GetLocalPosition().x,Ph2_Boss->GetTransform()->GetLocalPosition().y,-400.0f  });
 			Object->SetAttackCheck(RandomWeapon);
 			WeaponCheck = true;
 		}

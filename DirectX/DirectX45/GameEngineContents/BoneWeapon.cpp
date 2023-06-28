@@ -35,6 +35,14 @@ void BoneWeapon::Start()
 
 	Bullet->ChangeAnimation("WhiteBone");
 	
+
+	ParryEffect = CreateComponent<GameEngineSpriteRenderer>();
+	ParryEffect->CreateAnimation({ .AnimationName = "ParryEffect", .SpriteName = "ParryEffect", .FrameInter = 0.08f, .Loop = false, .ScaleToTexture = true, });
+	ParryEffect->ChangeAnimation("ParryEffect");
+
+	ParryEffect->Off(); 
+
+
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 20.0f, 20.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
@@ -68,7 +76,7 @@ void BoneWeapon::Update(float _Delta)
 
 	PinkCollision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
-
+	
 	switch (Check)
 	{
 	case 0:
@@ -129,7 +137,10 @@ void BoneWeapon::Update(float _Delta)
 	}
 
 
-
+	if (ParryEffect->IsAnimationEnd())
+	{
+		ParryEffect->Off(); 
+	}
 	
 
 	if (GetLiveTime() > 7)

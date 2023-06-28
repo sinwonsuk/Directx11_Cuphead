@@ -45,6 +45,7 @@ private:
 	//std::shared_ptr<class GameEngineSpriteRenderer> FlipCard;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> FrontCard;
+	bool Test = false;
 	int	ConsumeCard = 0;
 	int PrevConsumeCard = 0;
 	int PlusCard = 0;

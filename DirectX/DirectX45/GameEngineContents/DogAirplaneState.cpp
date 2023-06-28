@@ -453,7 +453,7 @@ void DogAirplane::BossJumpUpdate(float _Time)
 	}
 	if (bulldogIdle->IsAnimationEnd())
 	{
-		bulldogAttackPase1 = GameEngineRandom::MainRandom.RandomInt(0, 1);
+		bulldogAttackPase1 = GameEngineRandom::MainRandom.RandomInt(0, 0);
 		//hfghgfg
 	}
 

@@ -183,7 +183,9 @@
     <ClInclude Include="GiantBoss.h" />
     <ClInclude Include="giantStageLevel.h" />
     <ClInclude Include="IdleWeapon.h" />
+    <ClInclude Include="IntroLevel.h" />
     <ClInclude Include="NpcAirplane.h" />
+    <ClInclude Include="OverWorld.h" />
     <ClInclude Include="ph2_Boss_Weapon.h" />
     <ClInclude Include="Ph2_DogAirpalne.h" />
     <ClInclude Include="ph3_DogAirPlane.h" />
@@ -229,8 +231,10 @@
     <ClCompile Include="GiantBossState.cpp" />
     <ClCompile Include="giantStageLevel.cpp" />
     <ClCompile Include="IdleWeapon.cpp" />
+    <ClCompile Include="IntroLevel.cpp" />
     <ClCompile Include="NpcAirplane.cpp" />
     <ClCompile Include="NpcAirPlaneState.cpp" />
+    <ClCompile Include="OverWorld.cpp" />
     <ClCompile Include="ph2_Boss_Weapon.cpp" />
     <ClCompile Include="Ph2_DogAirpalne.cpp" />
     <ClCompile Include="Ph2_DogAirPlaneState.cpp" />

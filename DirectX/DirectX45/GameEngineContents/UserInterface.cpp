@@ -126,6 +126,12 @@ void UserInterface::Start()
 
 void UserInterface::Update(float _Delta)
 {
+
+	if (CardNumber < 5)
+	{
+		Test = false;
+	}
+
 	if (PrevConsumeCard != CardNumber)
 	{
 		switch (CardNumber)
@@ -253,19 +259,41 @@ void UserInterface::Update(float _Delta)
 		break;
 
 		case 4:
-		{			
-				Cut = 0.0f;
+		{
+		    if(Cut <= 0.0f)
+
+		    {		       
+		    	Cut = 0.0f;
+		    	CardNumber = 4;
+		    	BackCard5->ImageClippingY(Cut, ClipYDir::Top);
+		    	BackCard5->On();
+		    	FlipCard5->ChangeAnimation("FlipCard");
+		    	FlipCard5->Off();
+		    }
+
+			else
+			{
+				
 				CardNumber = 4;
-				BackCard5->ImageClippingY(Cut, ClipYDir::Top);
-				BackCard5->On();
+				//BackCard5->ImageClippingY(Cut, ClipYDir::Top);
+				BackCard5->Off();
 				FlipCard5->ChangeAnimation("FlipCard");
-				FlipCard5->Off();		
+				FlipCard5->Off();
+			}
+
+
+
 		}
 		break;
 		default:
 			break;
 		}
 	}
+
+
+
+
+
 	if (PlusCard != CardNumber)
 	{
 		switch (CardNumber)
@@ -287,10 +315,13 @@ void UserInterface::Update(float _Delta)
 				CardNumber = 1;
 				Cut = 1.0f;
 
+
 				BackCard->ImageClippingY(Cut, ClipYDir::Top);
-				BackCard->On();
-				FlipCard->ChangeAnimation("FlipCard");
+				BackCard->Off();
 				FlipCard->On();
+
+			/*	FlipCard->ChangeAnimation("FlipCard");
+				FlipCard->On();*/
 
 
 				BackCard2->On();
@@ -324,9 +355,12 @@ void UserInterface::Update(float _Delta)
 				Cut = 1.0f;
 
 				BackCard2->ImageClippingY(Cut, ClipYDir::Top);
-				BackCard2->On();
-				FlipCard2->ChangeAnimation("FlipCard");
+				BackCard2->Off();
+
 				FlipCard2->On();
+
+			/*	FlipCard2->ChangeAnimation("FlipCard");
+				FlipCard2->On();*/
 
 				BackCard3->On();
 				BackCard3->ImageClippingY(PrevCut, ClipYDir::Top);
@@ -352,15 +386,14 @@ void UserInterface::Update(float _Delta)
 			else
 			{
 				float PrevCut = Cut;
-				CardNumber = 13;
+				CardNumber = 3;
+
 				Cut = 1.0f;
 				BackCard3->ImageClippingY(Cut, ClipYDir::Top);
-				BackCard3->On();
-
-
-				FlipCard3->ChangeAnimation("FlipCard");
+				BackCard3->Off();
 				FlipCard3->On();
 
+			
 				BackCard4->On();
 				BackCard4->ImageClippingY(PrevCut, ClipYDir::Top);
 				BackCard4->On();
@@ -384,15 +417,15 @@ void UserInterface::Update(float _Delta)
 			}
 			else
 			{
+				float Cutad = Cut;
 				float PrevCut = Cut;
 				CardNumber = 4;
 				Cut = 1.0f;
 				BackCard4->ImageClippingY(Cut, ClipYDir::Top);
-				BackCard4->On();
-
-
-				FlipCard4->ChangeAnimation("FlipCard");
+				BackCard4->Off();
 				FlipCard4->On();
+
+		
 
 				BackCard5->On();
 				BackCard5->ImageClippingY(PrevCut, ClipYDir::Top);
@@ -407,16 +440,20 @@ void UserInterface::Update(float _Delta)
 		break;
 
 		case 5:
-		{
-			if (Cut <= 0.0f)
+		{		
+			if (Test == false)
 			{
+				float PrevCut = Cut;
 				CardNumber = 5;
-				Cut = 0.0f;
+				Cut = 1.0f;
 				BackCard5->ImageClippingY(Cut, ClipYDir::Top);
-				BackCard5->On();
-				FlipCard5->ChangeAnimation("FlipCard");
+				BackCard5->Off();
 				FlipCard5->On();
+
+
+
 			}
+
 		}
 		break;
 		default:
@@ -510,12 +547,15 @@ void UserInterface::Update(float _Delta)
 		break;
 	}
 	
-	if (CardNumber >=5 )
+	
+	if (CardNumber >=5)
 	{
 		CardNumber = 5;
+		Cut = 0.0f;
+		Test = true;
 	}
-
-
+	
+	
 
 
 	PlusCard = CardNumber;

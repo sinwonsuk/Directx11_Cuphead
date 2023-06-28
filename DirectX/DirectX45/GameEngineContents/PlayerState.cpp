@@ -990,10 +990,6 @@ void Player::ParryUpdate(float _Time)
 		{
 			Ph3_Boss_Bullet->GetParryEffect()->On();
 			Ph3_Boss_Bullet->GetParryEffect()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x, GetTransform()->GetLocalPosition().y-50.0f });
-			/*Ph3_Boss_Bullet->GetParryEffect()->GetTransform()->SetLocalPosition(Ph3_Boss_Bullet->GetBullet()->GetTransform()->GetLocalPosition());
-			Ph3_Boss_Bullet->GetParryEffect()->On();
-			Ph3_Boss_Bullet->GetPinkCollision()->Off();
-			Ph3_Boss_Bullet->GetBullet()->Off();*/
 		}
 		PinkObject = true;
 	}
@@ -1054,11 +1050,11 @@ void Player::ParryUpdate(float _Time)
 
 	if (JumpCheck == true)
 	{
-		if (GetLiveTime() < 0.25)
+		if (GetLiveTime() < 0.25f)
 		{
 			GetTransform()->AddLocalPosition(float4::Up * 1200 * _Time);
 		}
-		if (GetLiveTime() > 0.25)
+		if (GetLiveTime() > 0.25f)
 		{
 			ResetLiveTime();
 			JumpCheck = false;
@@ -1108,6 +1104,7 @@ void Player::ParryUpdate(float _Time)
 		}
 		if (GetTransform()->GetLocalScale().x < 0)
 		{
+
 			Object->GetSfx()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 60,GetTransform()->GetLocalPosition().y + 25 });
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 40,GetTransform()->GetLocalPosition().y + 0 });
 			Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,135 });

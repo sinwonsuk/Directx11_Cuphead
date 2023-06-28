@@ -98,11 +98,17 @@ void GameEngineTexture::ResLoad(const std::string_view& _Path)
 
 	if (Ext == ".TGA")
 	{
-		MsgAssert("아직 로드할 수 없는 포맷입니다." + std::string(_Path.data()));
+		if (S_OK != DirectX::LoadFromTGAFile(Path.c_str(), DirectX::TGA_FLAGS_NONE, &Data, Image))
+		{
+			MsgAssert("TGA 포맷 로드 실패." + std::string(_Path.data()));
+		}
 	}
 	else if (Ext == ".DDS")
 	{
-		MsgAssert("아직 로드할 수 없는 포맷입니다." + std::string(_Path.data()));
+		if (S_OK != DirectX::LoadFromDDSFile(Path.c_str(), DirectX::DDS_FLAGS_NONE, &Data, Image))
+		{
+			MsgAssert("DDS 포맷 로드 실패." + std::string(_Path.data()));
+		}
 	}
 	else if (S_OK != DirectX::LoadFromWICFile(Path.c_str(), DirectX::WIC_FLAGS_NONE, &Data, Image))
 	{
@@ -192,9 +198,6 @@ void GameEngineTexture::ResCreate(const D3D11_TEXTURE2D_DESC& _Value)
 // 바깥에 나갔다면 무슨색깔 리턴할지에 대한 컬러도 넣어줘야 한다.
 GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixelColor DefaultColor)
 {
-
-	
-
 	if (0 > _X)
 	{
 		return DefaultColor;
@@ -280,17 +283,6 @@ GameEnginePixelColor GameEngineTexture::GetPixel(int _X, int _Y, GameEnginePixel
 	case DXGI_FORMAT_R8G8B8A8_TYPELESS:
 		break;
 	case DXGI_FORMAT_R8G8B8A8_UNORM:
-	{
-		int Index = _Y * static_cast<int>(GetWidth()) + _X;
-		ColorPtr = ColorPtr + (Index * 4);
-		GameEnginePixelColor Return;
-		Return.r = ColorPtr[2];
-		Return.g = ColorPtr[1];
-		Return.b = ColorPtr[0];
-		Return.a = ColorPtr[3];
-		return Return;
-	}
-
 		break;
 	case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
 		break;
@@ -573,3 +565,13 @@ void GameEngineTexture::ReLoad()
 
 	ResLoad(GetPath());
 }
+
+//void GameEngineTexture::SetPixel(int _X, int _Y, GameEnginePixelColor DefaultColor)
+//{
+//	const DirectX::Image* Ptr = Image.GetImages();
+//
+//	//Ptr->pixels[0] = 0;
+//	//Ptr->pixels[1] = 0;
+//	//Ptr->pixels[2] = 0;
+//	//Ptr->pixels[3] = 0;
+//}

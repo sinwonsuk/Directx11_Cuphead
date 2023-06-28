@@ -203,7 +203,7 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetSortType(0, SortType::ZSort);
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
-	//GameEngineLevel::IsDebugSwitch();
+	GameEngineLevel::IsDebugSwitch();
 
 	//
 	////CreateNewCamera

@@ -298,7 +298,7 @@ void ph3_Dog_Npc::Update(float _Delta)
 				ph3_leader_sideways_body_Attack->On();
 				ph3_leader_sideways_arms->On();
 			}
-			if (Ph3_DogAirplane::ph3_mainBoss->GetBowlCheck() == 8)
+		/*	if (Ph3_DogAirplane::ph3_mainBoss->GetBowlCheck() == 8)
 			{
 				ph3_leader_sideways_arms_backer->Off();
 				ph3_leader_sideways_body_Attack->Off();
@@ -310,7 +310,7 @@ void ph3_Dog_Npc::Update(float _Delta)
 			{
 				ph3_leader_sideways_body_Finish_0->Off();
 				ph3_leader_sideways_body_Finish->On();
-			}
+			}*/
 			
 		}
 		break;

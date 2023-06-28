@@ -54,8 +54,9 @@ void OverWorld::Start()
 
 
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
-	GetMainCamera()->GetTransform()->AddLocalPosition({ 0.0f,-80.0f,0.0f });
-	GetCamera(100)->GetTransform()->AddLocalPosition({ 0.0f,-80.0f,0.0f });
+	GetMainCamera()->GetTransform()->AddLocalPosition({ 0.0f,0.0f,0.0f });
+	GetCamera(100)->GetTransform()->AddLocalPosition({ 0.0f,0.0f,0.0f });
+
 }
 
 void OverWorld::LevelChangeStart()

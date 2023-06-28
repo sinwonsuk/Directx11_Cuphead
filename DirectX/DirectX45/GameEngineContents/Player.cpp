@@ -137,8 +137,8 @@ void Player::Update(float _DeltaTime)
 
 
 	}
-	Collision->GetTransform()->SetLocalPosition({ 0.0f, -30.0f, 0.0f });
-	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });
+	/*Collision->GetTransform()->SetLocalPosition({ 0.0f, -30.0f, 0.0f });
+	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });*/
 
 	if (true == GameEngineInput::IsPress("PlayerMoveDown"))
 	{

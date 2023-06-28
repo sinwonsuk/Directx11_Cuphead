@@ -109,7 +109,7 @@ private:
 	float test = 0;
 	bool WeaponCheck = false;
 	int tests = 0;
-	int Hp = 1; 
+	int Hp = 10; 
 
 	int RotationAnimation = 0;
 	int IntroCheck = 0;

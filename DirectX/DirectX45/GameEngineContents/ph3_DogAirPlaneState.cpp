@@ -909,6 +909,24 @@ void Ph3_DogAirplane::Left_Rotation_Update(float _Time)
 
 void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
 {
+
+	if (Hp < 0)
+	{
+		ph3_dogcopter_rotated_idle->ChangeAnimation("ph3_dogcopter_sideways_death");
+		//FightText_KO->On();
+	//	GameEngineTime::GlobalTime.SetGlobalTimeScale(0.0f);
+
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+		Object->On();
+
+
+		ChangeState(Ph3_DogAirPlaneState::Death);
+		return;
+	}
+
+
+
 	if (GetLiveTime() > 1.0)
 	{
 
@@ -934,25 +952,8 @@ void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
 			
 			ResetLiveTime();
 	}
-	if (BowlCheck == 8)
-	{
-		ResetLiveTime();
-		return;
-	}
-	if (Hp < 0)
-	{
-		ph3_dogcopter_rotated_idle->ChangeAnimation("ph3_dogcopter_sideways_death");
-		//FightText_KO->On();
-	//	GameEngineTime::GlobalTime.SetGlobalTimeScale(0.0f);
-
-		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
-		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
-		Object->On();
-
-		
-		ChangeState(Ph3_DogAirPlaneState::Death);
-		return; 
-	}
+	
+	
 
 
 }

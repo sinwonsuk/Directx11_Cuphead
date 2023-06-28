@@ -627,6 +627,32 @@ void Player::JumpUpdate(float _Time)
 		GetTransform()->AddLocalPosition(float4::Right * Speed * _Time);
 	}
 
+	if (HitCheck == false)
+	{
+		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			TransformData Date = Collision->GetTransform()->GetTransDataRef(); 
+
+
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+
+		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
+		{
+			HitTime = 0;
+			ResetLiveTime();
+			HitCheck = true;
+			JumpCheck = true;
+			ChangeState(PlayerState::Hit);
+			return;
+		}
+	}
+
 	if (true == GameEngineInput::IsPress("PlayerDash") && DashCheck == true)
 	{
 		DashCheck = false;
@@ -813,28 +839,7 @@ void Player::JumpUpdate(float _Time)
 		return;
 	}
 
-	if (HitCheck == false)
-	{
-		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
-		{
-			HitTime = 0;
-			ResetLiveTime();
-			HitCheck = true;
-			JumpCheck = true;
-			ChangeState(PlayerState::Hit);
-			return;
-		}
-
-		else if (Collision->Collision((int)CollisionType::PinkObject, ColType::OBBBOX2D, ColType::OBBBOX2D))
-		{
-			HitTime = 0;
-			ResetLiveTime();
-			HitCheck = true;
-			JumpCheck = true;
-			ChangeState(PlayerState::Hit);
-			return;
-		}
-	}
+	
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
 	{

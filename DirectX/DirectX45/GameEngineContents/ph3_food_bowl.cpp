@@ -66,8 +66,7 @@ void ph3_food_bowl::Start()
 	}
 
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 300.0f });
-
+	Collision->GetTransform()->SetLocalScale({10.0f, 10.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
 
 }

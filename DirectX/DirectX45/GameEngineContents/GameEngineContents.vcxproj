@@ -172,6 +172,8 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Crown_Bepi_Map.h" />
+    <ClInclude Include="Crown_Bepi_Level.h" />
     <ClInclude Include="DogAirplane.h" />
     <ClInclude Include="DogAirplaneBackground.h" />
     <ClInclude Include="DogAirplaneLevel.h" />
@@ -221,6 +223,8 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Crown_Bepi_Map.cpp" />
+    <ClCompile Include="Crown_Bepi_Level.cpp" />
     <ClCompile Include="DogAirplane.cpp" />
     <ClCompile Include="DogAirplaneBackground.cpp" />
     <ClCompile Include="DogAirplaneLevel.cpp" />

@@ -6,6 +6,7 @@
 #include "giantStageLevel.h"
 #include "DogAirplaneLevel.h"
 #include "OverWorld.h"
+#include "Crown_Bepi_Level.h"
 #include <GameEngineCore/GameEngineCoreWindow.h>
 
 ContentsCore::ContentsCore() 
@@ -36,11 +37,12 @@ void ContentsCore::GameStart()
 	ContentsResourcesCreate();
 
 	GameEngineCore::CreateLevel<OverWorld>();
+	GameEngineCore::CreateLevel<Crown_Bepi_Level>();
 	//GameEngineCore::CreateLevel<TitleLevel>();
 	GameEngineCore::CreateLevel<PlayLevel>();
 	//GameEngineCore::CreateLevel<giantStageLevel>();
 	//GameEngineCore::CreateLevel<DogAirplaneLevel>();
-	GameEngineCore::ChangeLevel("OverWorld");
+	GameEngineCore::ChangeLevel("Crown_Bepi_Level");
 }
 
 void ContentsCore::GameEnd() 

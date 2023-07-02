@@ -5,6 +5,7 @@
 #include "TitleLevel.h"
 #include "giantStageLevel.h"
 #include "DogAirplaneLevel.h"
+#include "OverWorld.h"
 #include <GameEngineCore/GameEngineCoreWindow.h>
 
 ContentsCore::ContentsCore() 
@@ -34,12 +35,12 @@ void ContentsCore::GameStart()
 
 	ContentsResourcesCreate();
 
-	
-	GameEngineCore::CreateLevel<TitleLevel>();
+	GameEngineCore::CreateLevel<OverWorld>();
+	//GameEngineCore::CreateLevel<TitleLevel>();
 	GameEngineCore::CreateLevel<PlayLevel>();
-	GameEngineCore::CreateLevel<giantStageLevel>();
-	GameEngineCore::CreateLevel<DogAirplaneLevel>();
-	GameEngineCore::ChangeLevel("DogAirplaneLevel");
+	//GameEngineCore::CreateLevel<giantStageLevel>();
+	//GameEngineCore::CreateLevel<DogAirplaneLevel>();
+	GameEngineCore::ChangeLevel("OverWorld");
 }
 
 void ContentsCore::GameEnd() 

@@ -17,7 +17,7 @@ DogAirplaneLevel::~DogAirplaneLevel()
 
 void DogAirplaneLevel::Update(float _DeltaTime)
 {
-	sd += _DeltaTime;
+	/*sd += _DeltaTime;
 	switch (ad)
 	{
 	case 0:
@@ -58,7 +58,7 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 	}
 
 
-
+*/
 
 
 
@@ -203,7 +203,7 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetSortType(0, SortType::ZSort);
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
-	GameEngineLevel::IsDebugSwitch();
+	//GameEngineLevel::IsDebugSwitch();
 
 	//
 	////CreateNewCamera
@@ -214,14 +214,14 @@ void DogAirplaneLevel::Start()
 		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
 	}
 	
-	BackGround = CreateActor<DogAirplaneBackground>();
+	//BackGround = CreateActor<DogAirplaneBackground>();
 
 	Npc = CreateActor<NpcAirplane>();
 
 
 
 	
-	Ph1_DogAirplane = CreateActor<DogAirplane>();
+	/*Ph1_DogAirplane = CreateActor<DogAirplane>();
 
 	{
 		Ph2_DogAirpalne_Left = GetLevel()->CreateActor<Ph2_DogAirpalne>(4);
@@ -249,7 +249,7 @@ void DogAirplaneLevel::Start()
 		Ph2_DogAirpalne_Bottom->ChangeState(Ph2_DogAirPlaneState::DownIntro);
 		Ph2_DogAirpalne_Bottom->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 0.0f,-400.0f,82.0f });
 		Ph2_DogAirpalne_Bottom->Get_jetpack()->GetTransform()->AddLocalPosition({ 0.0f, -450.0f,82.0f });
-	}
+	}*/
 	
 	
 	Ph3_DogAirpalne = CreateActor<Ph3_DogAirplane>();

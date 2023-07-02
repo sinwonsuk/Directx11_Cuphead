@@ -185,7 +185,9 @@
     <ClInclude Include="IdleWeapon.h" />
     <ClInclude Include="IntroLevel.h" />
     <ClInclude Include="NpcAirplane.h" />
+    <ClInclude Include="OverHead_Player.h" />
     <ClInclude Include="OverWorld.h" />
+    <ClInclude Include="OverWorld_Map.h" />
     <ClInclude Include="ph2_Boss_Weapon.h" />
     <ClInclude Include="Ph2_DogAirpalne.h" />
     <ClInclude Include="ph3_DogAirPlane.h" />
@@ -234,7 +236,10 @@
     <ClCompile Include="IntroLevel.cpp" />
     <ClCompile Include="NpcAirplane.cpp" />
     <ClCompile Include="NpcAirPlaneState.cpp" />
+    <ClCompile Include="OverHead_Player.cpp" />
+    <ClCompile Include="OverHead_Player_State.cpp" />
     <ClCompile Include="OverWorld.cpp" />
+    <ClCompile Include="OverWorld_Map.cpp" />
     <ClCompile Include="ph2_Boss_Weapon.cpp" />
     <ClCompile Include="Ph2_DogAirpalne.cpp" />
     <ClCompile Include="Ph2_DogAirPlaneState.cpp" />

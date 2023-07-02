@@ -140,6 +140,7 @@ void ph3_Laser::Start()
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 0.0f, 0.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
+	Collision->Off();
 
 	PinkCollision = CreateComponent<GameEngineCollision>();
 	PinkCollision->GetTransform()->SetLocalScale({ 0.0f, 0.0f, 300.0f });

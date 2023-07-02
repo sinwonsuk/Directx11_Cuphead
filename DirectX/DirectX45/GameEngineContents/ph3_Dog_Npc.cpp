@@ -231,9 +231,11 @@ void ph3_Dog_Npc::Update(float _Delta)
 				ph3_leader_sideways_arms_backer->Off();
 				ph3_leader_sideways_body->Off();
 				ph3_tongue_rotate_camera_tongue->Off(); 
+				ph3_tongue_rotate_camera->Off();
 				ph3_dogcopter_sideways_death_tongue->On();
 				ph3_leader_sideways_death->On();
 				ph3_leader_sideways_death_tears->On(); 
+				break;
 				return; 
 			}
 			if (Collision->Collision((int)CollisionType::Bullet))
@@ -298,6 +300,7 @@ void ph3_Dog_Npc::Update(float _Delta)
 				ph3_leader_sideways_body_Attack->On();
 				ph3_leader_sideways_arms->On();
 			}
+
 		/*	if (Ph3_DogAirplane::ph3_mainBoss->GetBowlCheck() == 8)
 			{
 				ph3_leader_sideways_arms_backer->Off();

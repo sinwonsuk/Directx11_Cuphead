@@ -603,7 +603,9 @@ void Player::RunUpdate(float _Time)
 
 void Player::JumpUpdate(float _Time)
 {
-	
+	TransformData Date3 = Render0->GetTransform()->GetTransDataRef();
+	TransformData Date1 = GetTransform()->GetTransDataRef();
+	TransformData Date2 = Collision->GetTransform()->GetTransDataRef();
 
 	if (CheckCamera == true)
 	{
@@ -631,7 +633,11 @@ void Player::JumpUpdate(float _Time)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
-			TransformData Date = Collision->GetTransform()->GetTransDataRef(); 
+			GameEngineTime::GlobalTime.SetGlobalTimeScale(0.0f);
+			Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D);
+			TransformData Date3 = Render0->GetTransform()->GetTransDataRef();
+			TransformData Date1 = GetTransform()->GetTransDataRef();
+			TransformData Date2 = Collision->GetTransform()->GetTransDataRef(); 
 
 
 			HitTime = 0;

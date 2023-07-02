@@ -66,14 +66,14 @@ void ph3_food_bowl::Start()
 	}
 
 	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({10.0f, 10.0f, 300.0f });
+	Collision->GetTransform()->SetLocalScale({30.0f, 30.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::BossAttack);
 
 }
 
 void ph3_food_bowl::Update(float _Delta)
 {
-	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
+	
 
 	if (HeightCheck == false)
 	{
@@ -277,6 +277,7 @@ void ph3_food_bowl::Update(float _Delta)
 		break;
 	}
 
+	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 	if (GetLiveTime() > 5)
 	{
 		this->Death(); 

@@ -175,35 +175,35 @@ void NpcAirplane::Update(float _Delta)
 		DogAirplaneLevel* A = (DogAirplaneLevel*)GetLevel();
 		A->ad = 1;
 	}
-
-	if (AirPlaneLevel->Get_Ph2_DogAirpalne_Bottom()->GetHp() <0 &&
-		AirPlaneLevel->Get_Ph2_DogAirpalne_Top()->GetHp() < 0 &&
-		AirPlaneLevel->Get_Ph2_DogAirpalne_Right()->GetHp() < 0 &&
-		AirPlaneLevel->Get_Ph2_DogAirpalne_Left()->GetHp() < 0 	&&
-		AirPlaneLevel->ad ==1
-		)
-	{
-		float4 a = { 0,-230.0f };
-		float4  ad = { Npc->GetTransform()->GetLocalPosition().x, Npc->GetTransform()->GetLocalPosition().y };
-		float4 b = a-ad;
-		test = b.NormalizeReturn();
-
-		Player::MainPlayer->GetTransform()->AddLocalPosition({ test * 1.3f });
-		Npc->GetTransform()->AddLocalPosition({ test * 1.3f });
-		Npc_Airplane_Back->GetTransform()->AddLocalPosition({ test * 1.3f });
-		Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ test * 1.3f });
-		Npc_Airplane_Front->GetTransform()->AddLocalPosition({ test * 1.3f });
-		Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ test * 1.3f });
-		
-		Player_Pos_Y_Check -= test.y * 1.4f;
-
-		if (Npc->GetTransform()->GetLocalPosition().y < -225.0f)
+	
+		/*if (AirPlaneLevel->Get_Ph2_DogAirpalne_Bottom()->GetHp() < 0 &&
+			AirPlaneLevel->Get_Ph2_DogAirpalne_Top()->GetHp() < 0 &&
+			AirPlaneLevel->Get_Ph2_DogAirpalne_Right()->GetHp() < 0 &&
+			AirPlaneLevel->Get_Ph2_DogAirpalne_Left()->GetHp() < 0 &&
+			AirPlaneLevel->ad == 1
+			)
 		{
-			Player_Pos_Y_Check = -150.0f;
-			AirPlaneLevel->ad = 2;
-		}
-    }
+			float4 a = { 0,-230.0f };
+			float4  ad = { Npc->GetTransform()->GetLocalPosition().x, Npc->GetTransform()->GetLocalPosition().y };
+			float4 b = a - ad;
+			test = b.NormalizeReturn();
 
+			Player::MainPlayer->GetTransform()->AddLocalPosition({ test * 1.3f });
+			Npc->GetTransform()->AddLocalPosition({ test * 1.3f });
+			Npc_Airplane_Back->GetTransform()->AddLocalPosition({ test * 1.3f });
+			Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ test * 1.3f });
+			Npc_Airplane_Front->GetTransform()->AddLocalPosition({ test * 1.3f });
+			Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ test * 1.3f });
+
+			Player_Pos_Y_Check -= test.y * 1.4f;
+
+			if (Npc->GetTransform()->GetLocalPosition().y < -225.0f)
+			{
+				Player_Pos_Y_Check = -150.0f;
+				AirPlaneLevel->ad = 2;
+			}
+		}*/
+	
 	TransformData date13= Npc->GetTransform()->GetTransDataRef(); 
 
 	collision(_Delta);

@@ -24,10 +24,15 @@ Player::~Player()
 
 void Player::Update(float _DeltaTime)
 {
-	
+	if (true == GameEngineInput::IsPress("Start"))
+	{
+		GameEngineTime::GlobalTime.SetGlobalTimeScale(1.0f);
+	}
 	MainPlayer = this;
-
+	//Collision->GetTransform()->SetLocalRotation({Render0->GetTransform()->GetLocalRotation() });
+	//Collision->GetTransform()->SetLocalPosition(Render0->GetTransform()->GetWorldPosition());
 	
+
 	if (Gravity == true && StateValue != PlayerState::Dash)
 	{
 		GetTransform()->AddLocalPosition({ 0, -GravitySpeed * _DeltaTime });
@@ -193,7 +198,7 @@ void Player::Update(float _DeltaTime)
 	
 	UpdateState(_DeltaTime);
 
-
+//	Collision->GetTransform()->SetLocalPosition(Render0->GetTransform()->GetWorldPosition());
 	
 
 }
@@ -217,7 +222,7 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerAttack", 'X');
 		GameEngineInput::CreateKey("PlayerDash", VK_LSHIFT);
 		GameEngineInput::CreateKey("PlayerExAttack", 'V');
-
+		GameEngineInput::CreateKey("Start", 'B');
 		GameEngineInput::CreateKey("PlayerScaleY+", 'Y');
 		GameEngineInput::CreateKey("PlayerScaleY-", 'U');
 		GameEngineInput::CreateKey("PlayerScaleZ+", 'H');
@@ -339,6 +344,8 @@ void Player::Start()
 	Collision->GetTransform()->AddLocalPosition({ 0.0f, -30.0f, 0.0f });
 	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::Player);
+
+	Collision->GetTransform()->SetParent(this->GetTransform(), false);
 }
 
 void Player::AnimationCheck(const std::string_view& _AnimationName)

@@ -63,7 +63,11 @@
     <ClInclude Include="TutorialObject.h" />
     <ClInclude Include="TimeFlow.h" />
     <ClInclude Include="IntroLevel.h" />
-    <ClInclude Include="OverWorld.h" />
+    <ClInclude Include="OverWorld.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="OverHead_Player.h" />
+    <ClInclude Include="OverWorld_Map.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -145,7 +149,12 @@
     <ClCompile Include="TutorialObject.cpp" />
     <ClCompile Include="TimeFlow.cpp" />
     <ClCompile Include="IntroLevel.cpp" />
-    <ClCompile Include="OverWorld.cpp" />
+    <ClCompile Include="OverWorld.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="OverHead_Player.cpp" />
+    <ClCompile Include="OverHead_Player_State.cpp" />
+    <ClCompile Include="OverWorld_Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

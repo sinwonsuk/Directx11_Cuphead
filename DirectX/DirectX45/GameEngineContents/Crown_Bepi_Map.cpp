@@ -17,15 +17,15 @@ void Crown_Bepi_Map::Start()
 
 	clown_bg_sky = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_sky->SetScaleToTexture("clown_bg_sky.png");
-	clown_bg_sky->GetTransform()->AddLocalPosition({ 0.0f,300.0f,100.0f });
+	clown_bg_sky->GetTransform()->AddLocalPosition({ 0.0f,300.0f,300.0f });
 
 	clown_bg_low_cloud = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_low_cloud->SetScaleToTexture("clown_bg_low_cloud.png");
-	clown_bg_low_cloud->GetTransform()->AddLocalPosition({ 0.0f,270.0f,100.0f });
+	clown_bg_low_cloud->GetTransform()->AddLocalPosition({ 0.0f,270.0f,290.0f });
 
 	clown_bg_top_clouds = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_top_clouds->SetScaleToTexture("clown_bg_top_clouds.png");
-	clown_bg_top_clouds->GetTransform()->AddLocalPosition({ 0.0f,270.0f,100.0f });
+	clown_bg_top_clouds->GetTransform()->AddLocalPosition({ 0.0f,270.0f,280.0f });
 
 	MainMap = CreateComponent<GameEngineSpriteRenderer>();
 	MainMap->SetScaleToTexture("clown_bg_main.png");
@@ -33,66 +33,66 @@ void Crown_Bepi_Map::Start()
 
 	clown_bg_cloud = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cloud->SetScaleToTexture("clown_bg_cloud_0003.png");
-	clown_bg_cloud->GetTransform()->AddLocalPosition({ -600.0f,300.0f,100.0f });
+	clown_bg_cloud->GetTransform()->AddLocalPosition({ -600.0f,300.0f,270.0f });
 
 	clown_bg_cloud2 = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cloud2->SetScaleToTexture("clown_bg_cloud_0002.png");
-	clown_bg_cloud2->GetTransform()->AddLocalPosition({ -250.0f,330.0f,100.0f });
+	clown_bg_cloud2->GetTransform()->AddLocalPosition({ -250.0f,330.0f,260.0f });
 
 
 
 	clown_bg_balloon = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_balloon->SetScaleToTexture("clown_bg_balloon.png");
-	clown_bg_balloon->GetTransform()->AddLocalPosition({ 60.0f,280.0f,100.0f });
+	clown_bg_balloon->GetTransform()->AddLocalPosition({ 60.0f,280.0f,250.0f });
 
 	clown_bg_moon = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_moon->SetScaleToTexture("clown_bg_moon.png");
-	clown_bg_moon->GetTransform()->AddLocalPosition({ -140.0f,200.0f,100.0f });
+	clown_bg_moon->GetTransform()->AddLocalPosition({ -140.0f,200.0f,240.0f });
 
 
 
 
 	clown_bg_back_coaster = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_back_coaster->SetScaleToTexture("clown_bg_back_coaster.png");
-	clown_bg_back_coaster->GetTransform()->AddLocalPosition({ 620.0f,500.0f,100.0f });
+	clown_bg_back_coaster->GetTransform()->AddLocalPosition({ 620.0f,500.0f,230.0f });
 
 
 	clown_bg_cart_blue = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cart_blue->SetScaleToTexture("clown_bg_cart_blue.png");
-	clown_bg_cart_blue->GetTransform()->AddLocalPosition({ 308.0f,300.0f,100.0f });
+	clown_bg_cart_blue->GetTransform()->AddLocalPosition({ 308.0f,300.0f,220.0f });
 
 	clown_bg_cart_blue2 = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cart_blue2->SetScaleToTexture("clown_bg_cart_blue.png");
-	clown_bg_cart_blue2->GetTransform()->AddLocalPosition({ 412.0f,50.0f,100.0f });
+	clown_bg_cart_blue2->GetTransform()->AddLocalPosition({ 412.0f,50.0f,210.0f });
 
 	clown_bg_cart_blue3 = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cart_blue3->SetScaleToTexture("clown_bg_cart_blue.png");
-	clown_bg_cart_blue3->GetTransform()->AddLocalPosition({ 157.0f,155.0f,100.0f });
+	clown_bg_cart_blue3->GetTransform()->AddLocalPosition({ 157.0f,155.0f,200.0f });
 
 
 	clown_bg_cart_red = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cart_red->SetScaleToTexture("clown_bg_cart_red.png");
-	clown_bg_cart_red->GetTransform()->AddLocalPosition({ 415.0f,290.0f,100.0f });
+	clown_bg_cart_red->GetTransform()->AddLocalPosition({ 415.0f,290.0f,190.0f });
 	
 
 	clown_bg_cart_red2 = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cart_red2->SetScaleToTexture("clown_bg_cart_red.png");
-	clown_bg_cart_red2->GetTransform()->AddLocalPosition({ 308.0f,150.0f,100.0f });
+	clown_bg_cart_red2->GetTransform()->AddLocalPosition({ 308.0f,150.0f,180.0f });
 
 	clown_bg_cart_red3 = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cart_red3->SetScaleToTexture("clown_bg_cart_red.png");
-	clown_bg_cart_red3->GetTransform()->AddLocalPosition({ 200.0f,260.0f,100.0f });
+	clown_bg_cart_red3->GetTransform()->AddLocalPosition({ 200.0f,260.0f,170.0f });
 
 
 
 
 	clown_bg_cart_yellow = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cart_yellow->SetScaleToTexture("clown_bg_cart_yellow.png");
-	clown_bg_cart_yellow->GetTransform()->AddLocalPosition({ 457.0f,155.0f,100.0f });
+	clown_bg_cart_yellow->GetTransform()->AddLocalPosition({ 457.0f,155.0f,160.0f });
 
 	clown_bg_cart_yellow2 = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cart_yellow2->SetScaleToTexture("clown_bg_cart_yellow.png");
-	clown_bg_cart_yellow2->GetTransform()->AddLocalPosition({ 200.0f,50.0f,100.0f });
+	clown_bg_cart_yellow2->GetTransform()->AddLocalPosition({ 200.0f,50.0f,150.0f });
 
 
 	clown_bg_ferris_Circle = CreateComponent<GameEngineSpriteRenderer>();
@@ -105,15 +105,15 @@ void Crown_Bepi_Map::Start()
 
 	clown_bg_mid_coaster = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_mid_coaster->SetScaleToTexture("clown_bg_mid_coaster.png");
-	clown_bg_mid_coaster->GetTransform()->AddLocalPosition({ 160.0f,-70.0f,100.0f });
+	clown_bg_mid_coaster->GetTransform()->AddLocalPosition({ 160.0f,-70.0f,90.0f });
 
 	clown_bg_back_mist = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_back_mist->SetScaleToTexture("clown_bg_back_mist_0001.png");
-	clown_bg_back_mist->GetTransform()->AddLocalPosition({ 0.0f,-70.0f,100.0f });
+	clown_bg_back_mist->GetTransform()->AddLocalPosition({ 0.0f,-70.0f,80.0f });
 	
 	clown_bg_track = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_track->SetScaleToTexture("clown_bg_track 1.png");
-	clown_bg_track->GetTransform()->AddLocalPosition({ 0.0f,-270.0f,100.0f });
+	clown_bg_track->GetTransform()->AddLocalPosition({ 0.0f,-270.0f,70.0f });
 
 	
 	

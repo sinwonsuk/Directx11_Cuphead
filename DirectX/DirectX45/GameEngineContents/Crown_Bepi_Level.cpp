@@ -6,6 +6,8 @@
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include "Crown_Bepi_Map.h"
+#include "Ph1_Bepi.h"
+//#include "Bepi_Duck.h"
 Crown_Bepi_Level::Crown_Bepi_Level()
 {
 }
@@ -40,6 +42,10 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Side_Move").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Up_Idle").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Up_Move").GetFullPath());
+
+
+
+
 	}
 
 	if (nullptr == GameEngineSprite::Find("Beppi_Bg"))
@@ -52,11 +58,29 @@ void Crown_Bepi_Level::Start()
 	
 
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Beppi_Bg").GetFullPath());
-	
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Beppi_Intro").GetFullPath());	
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Beppi_Idle").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Beppi_Rush_Attack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Beppi_End").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("duck_body").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("duck_head").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("duck_spin").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("p_duck_body").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("p_duck_head").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("p_duck_spin").GetFullPath());
 
 	}
-
-
+	if (nullptr == GameEngineSprite::Find("FightText_GetReady"))
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Texture");
+		NewDir.Move("DogAirplane");
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_GetReady").GetFullPath());
+	}
+	
 
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 	GetMainCamera()->SetSortType(0, SortType::ZSort);
@@ -65,6 +89,13 @@ void Crown_Bepi_Level::Start()
 		std::shared_ptr<Crown_Bepi_Map> Object = CreateActor<Crown_Bepi_Map>();
 	}
 
+	//{
+	//	std::shared_ptr<Bepi_Duck> Object = CreateActor<Bepi_Duck>();
+	//}
+
+	{
+		std::shared_ptr<Ph1_Bepi> Object = CreateActor<Ph1_Bepi>();
+	}
 }
 
 void Crown_Bepi_Level::LevelChangeStart()

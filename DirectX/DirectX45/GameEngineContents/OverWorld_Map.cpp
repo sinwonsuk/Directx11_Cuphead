@@ -17,9 +17,6 @@ void OverWorld_Map::Start()
 	Map->SetScaleToTexture("Overworld_Map.png");
 	Map->GetTransform()->AddLocalPosition({ 0.0f,0.0f,100.0f });
 
-	
-
-
 	House = CreateComponent<GameEngineSpriteRenderer>();
 	House->CreateAnimation({ .AnimationName = "House", .SpriteName = "To_WaittingRoom.png", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	House->GetTransform()->AddLocalPosition({ -1210.0f , 400.0f,90.0f });
@@ -35,6 +32,10 @@ void OverWorld_Map::Start()
 	Left_Map_Layer = CreateComponent<GameEngineSpriteRenderer>();
 	Left_Map_Layer->SetScaleToTexture("Overworld_Bush_Left.png");
 	Left_Map_Layer->GetTransform()->AddLocalPosition({ -651,65,-55.0f });
+
+
+
+
 
 
 

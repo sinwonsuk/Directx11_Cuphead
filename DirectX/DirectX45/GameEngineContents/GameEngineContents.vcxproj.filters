@@ -70,6 +70,8 @@
     <ClInclude Include="OverWorld_Map.h" />
     <ClInclude Include="Crown_Bepi_Level.h" />
     <ClInclude Include="Crown_Bepi_Map.h" />
+    <ClInclude Include="Ph1_Bepi.h" />
+    <ClInclude Include="Bepi_Duck.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -159,6 +161,9 @@
     <ClCompile Include="OverWorld_Map.cpp" />
     <ClCompile Include="Crown_Bepi_Level.cpp" />
     <ClCompile Include="Crown_Bepi_Map.cpp" />
+    <ClCompile Include="Ph1_Bepi.cpp" />
+    <ClCompile Include="Beppi_State.cpp" />
+    <ClCompile Include="Bepi_Duck.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

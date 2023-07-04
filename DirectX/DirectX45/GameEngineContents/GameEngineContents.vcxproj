@@ -166,6 +166,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bepi_Duck.h" />
     <ClInclude Include="BoneWeapon.h" />
     <ClInclude Include="Boss_Finish.h" />
     <ClInclude Include="ContentsCore.h">
@@ -190,6 +191,7 @@
     <ClInclude Include="OverHead_Player.h" />
     <ClInclude Include="OverWorld.h" />
     <ClInclude Include="OverWorld_Map.h" />
+    <ClInclude Include="Ph1_Bepi.h" />
     <ClInclude Include="ph2_Boss_Weapon.h" />
     <ClInclude Include="Ph2_DogAirpalne.h" />
     <ClInclude Include="ph3_DogAirPlane.h" />
@@ -217,6 +219,8 @@
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bepi_Duck.cpp" />
+    <ClCompile Include="Beppi_State.cpp" />
     <ClCompile Include="BoneWeapon.cpp" />
     <ClCompile Include="Boss_Finish.cpp" />
     <ClCompile Include="ContentsCore.cpp">
@@ -244,6 +248,7 @@
     <ClCompile Include="OverHead_Player_State.cpp" />
     <ClCompile Include="OverWorld.cpp" />
     <ClCompile Include="OverWorld_Map.cpp" />
+    <ClCompile Include="Ph1_Bepi.cpp" />
     <ClCompile Include="ph2_Boss_Weapon.cpp" />
     <ClCompile Include="Ph2_DogAirpalne.cpp" />
     <ClCompile Include="Ph2_DogAirPlaneState.cpp" />

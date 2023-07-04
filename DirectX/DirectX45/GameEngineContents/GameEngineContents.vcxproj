@@ -208,6 +208,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PrecompileHeader.h" />
+    <ClInclude Include="Rollercoaster.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="TimeFlow.h" />
     <ClInclude Include="TitleLevel.h">
@@ -273,6 +274,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Rollercoaster.cpp" />
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TimeFlow.cpp" />
     <ClCompile Include="TitleLevel.cpp">

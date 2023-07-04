@@ -113,7 +113,7 @@ void Crown_Bepi_Map::Start()
 	
 	clown_bg_track = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_track->SetScaleToTexture("clown_bg_track 1.png");
-	clown_bg_track->GetTransform()->AddLocalPosition({ 0.0f,-270.0f,70.0f });
+	clown_bg_track->GetTransform()->AddLocalPosition({ 0.0f,-270.0f,50.0f });
 
 	
 	

@@ -7,6 +7,7 @@
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include "Crown_Bepi_Map.h"
 #include "Ph1_Bepi.h"
+#include "Rollercoaster.h"
 //#include "Bepi_Duck.h"
 Crown_Bepi_Level::Crown_Bepi_Level()
 {
@@ -63,14 +64,30 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Beppi_Rush_Attack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Beppi_End").GetFullPath());
 
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("duck_body").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("duck_head").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("duck_spin").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("duck_body").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("p_duck_spin").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("p_duck_body").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("p_duck_head").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("p_duck_spin").GetFullPath());
 
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Back").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Back2").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Front").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Frontcart").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Frontcart2").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Midcart_Blue").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Midcart_Red").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Midcart2").GetFullPath());
+		
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Passenger").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Passenger2").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Seat").GetFullPath());
 	}
+
 	if (nullptr == GameEngineSprite::Find("FightText_GetReady"))
 	{
 		GameEngineDirectory NewDir;
@@ -88,14 +105,16 @@ void Crown_Bepi_Level::Start()
 	{
 		std::shared_ptr<Crown_Bepi_Map> Object = CreateActor<Crown_Bepi_Map>();
 	}
-
+	{
+		std::shared_ptr<Rollercoaster> Object = CreateActor<Rollercoaster>();
+	}
 	//{
 	//	std::shared_ptr<Bepi_Duck> Object = CreateActor<Bepi_Duck>();
 	//}
 
-	{
+	/*{
 		std::shared_ptr<Ph1_Bepi> Object = CreateActor<Ph1_Bepi>();
-	}
+	}*/
 }
 
 void Crown_Bepi_Level::LevelChangeStart()

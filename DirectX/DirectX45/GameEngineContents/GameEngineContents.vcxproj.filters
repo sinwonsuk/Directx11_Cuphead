@@ -68,10 +68,13 @@
     </ClInclude>
     <ClInclude Include="OverHead_Player.h" />
     <ClInclude Include="OverWorld_Map.h" />
-    <ClInclude Include="Crown_Bepi_Level.h" />
     <ClInclude Include="Crown_Bepi_Map.h" />
     <ClInclude Include="Ph1_Bepi.h" />
     <ClInclude Include="Bepi_Duck.h" />
+    <ClInclude Include="Rollercoaster.h" />
+    <ClInclude Include="Crown_Bepi_Level.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -159,11 +162,14 @@
     <ClCompile Include="OverHead_Player.cpp" />
     <ClCompile Include="OverHead_Player_State.cpp" />
     <ClCompile Include="OverWorld_Map.cpp" />
-    <ClCompile Include="Crown_Bepi_Level.cpp" />
     <ClCompile Include="Crown_Bepi_Map.cpp" />
     <ClCompile Include="Ph1_Bepi.cpp" />
     <ClCompile Include="Beppi_State.cpp" />
     <ClCompile Include="Bepi_Duck.cpp" />
+    <ClCompile Include="Rollercoaster.cpp" />
+    <ClCompile Include="Crown_Bepi_Level.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

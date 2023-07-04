@@ -8,6 +8,7 @@
 #include "Crown_Bepi_Map.h"
 #include "Ph1_Bepi.h"
 #include "Rollercoaster.h"
+#include "Ph2_Bepi.h"
 //#include "Bepi_Duck.h"
 Crown_Bepi_Level::Crown_Bepi_Level()
 {
@@ -86,6 +87,19 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Passenger").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Passenger2").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Rollercoaster_Seat").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase2_Intro").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("LeftHeliumBottle").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("RightHeliumBottle").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Helium_Tank").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("HeliumPipes_Intro").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("HeliumPipes_Idle").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase2_Idle_Head").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase2_Body_Back").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase2_Body_Front").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Dogs_Appear").GetFullPath());
+
 	}
 
 	if (nullptr == GameEngineSprite::Find("FightText_GetReady"))
@@ -105,13 +119,18 @@ void Crown_Bepi_Level::Start()
 	{
 		std::shared_ptr<Crown_Bepi_Map> Object = CreateActor<Crown_Bepi_Map>();
 	}
-	{
+	/*{
 		std::shared_ptr<Rollercoaster> Object = CreateActor<Rollercoaster>();
-	}
+	}*/
+	
+	
 	//{
 	//	std::shared_ptr<Bepi_Duck> Object = CreateActor<Bepi_Duck>();
 	//}
-
+	// 
+	{
+		std::shared_ptr<Ph2_Bepi> Object = CreateActor<Ph2_Bepi>();
+	}
 	/*{
 		std::shared_ptr<Ph1_Bepi> Object = CreateActor<Ph1_Bepi>();
 	}*/

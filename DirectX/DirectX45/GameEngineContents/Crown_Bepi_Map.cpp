@@ -31,6 +31,15 @@ void Crown_Bepi_Map::Start()
 	MainMap->SetScaleToTexture("clown_bg_main.png");
 	MainMap->GetTransform()->AddLocalPosition({ 0.0f,-40.0f,100.0f });
 
+	clown_bg_main2 = CreateComponent<GameEngineSpriteRenderer>();
+	clown_bg_main2->SetScaleToTexture("clown_bg_main2.png");
+	clown_bg_main2->GetTransform()->AddLocalPosition({ 0.0f,-280.0f,80.0f });
+
+
+
+
+
+
 	clown_bg_cloud = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_cloud->SetScaleToTexture("clown_bg_cloud_0003.png");
 	clown_bg_cloud->GetTransform()->AddLocalPosition({ -600.0f,300.0f,270.0f });
@@ -115,7 +124,11 @@ void Crown_Bepi_Map::Start()
 	clown_bg_track->SetScaleToTexture("clown_bg_track 1.png");
 	clown_bg_track->GetTransform()->AddLocalPosition({ 0.0f,-270.0f,50.0f });
 
-	
+	clown_bg_track_top = CreateComponent<GameEngineSpriteRenderer>();
+	clown_bg_track_top->SetScaleToTexture("clown_bg_track_top.png");
+	clown_bg_track_top->GetTransform()->AddLocalPosition({ 0.0f,-250.0f,-1.0f });
+
+
 	
 	
 

@@ -192,6 +192,8 @@
     <ClInclude Include="OverWorld.h" />
     <ClInclude Include="OverWorld_Map.h" />
     <ClInclude Include="Ph1_Bepi.h" />
+    <ClInclude Include="Ph2_Bepi.h" />
+    <ClInclude Include="Ph2_Bepi_Weapon.h" />
     <ClInclude Include="ph2_Boss_Weapon.h" />
     <ClInclude Include="Ph2_DogAirpalne.h" />
     <ClInclude Include="ph3_DogAirPlane.h" />
@@ -250,6 +252,9 @@
     <ClCompile Include="OverWorld.cpp" />
     <ClCompile Include="OverWorld_Map.cpp" />
     <ClCompile Include="Ph1_Bepi.cpp" />
+    <ClCompile Include="Ph2_Bepi.cpp" />
+    <ClCompile Include="Ph2_Bepi_Weapon.cpp" />
+    <ClCompile Include="Ph2_Beppi_State.cpp" />
     <ClCompile Include="ph2_Boss_Weapon.cpp" />
     <ClCompile Include="Ph2_DogAirpalne.cpp" />
     <ClCompile Include="Ph2_DogAirPlaneState.cpp" />

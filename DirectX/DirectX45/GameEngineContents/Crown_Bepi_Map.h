@@ -59,7 +59,8 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_cart_yellow;
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_cart_yellow2;
 
-	
+	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_track_top;
+	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_main2;
 
 	float yellow = 0.0f;
 

@@ -9,7 +9,9 @@
 #include "Ph1_Bepi.h"
 #include "Rollercoaster.h"
 #include "Ph2_Bepi.h"
-//#include "Bepi_Duck.h"
+#include "Ph3_Bepi.h"
+#include "Ph3_Bepi_Weapon_Green.h"
+
 Crown_Bepi_Level::Crown_Bepi_Level()
 {
 }
@@ -100,6 +102,19 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase2_Body_Front").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Dogs_Appear").GetFullPath());
 
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Horseshoe_Green").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("HorseShoe_Gold").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Green_Horse_Attack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Yellow_Horse_Attack").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase3_Idle").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Green_Horse_Head").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Yellow_Horse_Head").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Green_Horse_Body").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Yellow_Horse_Body").GetFullPath());
+
+
+
+
 	}
 
 	if (nullptr == GameEngineSprite::Find("FightText_GetReady"))
@@ -128,8 +143,14 @@ void Crown_Bepi_Level::Start()
 	//	std::shared_ptr<Bepi_Duck> Object = CreateActor<Bepi_Duck>();
 	//}
 	// 
-	{
+	/*{
 		std::shared_ptr<Ph2_Bepi> Object = CreateActor<Ph2_Bepi>();
+	}*/
+	{
+		std::shared_ptr<Ph3_Bepi> Object = CreateActor<Ph3_Bepi>();
+	}
+	{
+		std::shared_ptr<Ph3_Bepi_Weapon_Green> Object = CreateActor<Ph3_Bepi_Weapon_Green>();
 	}
 	/*{
 		std::shared_ptr<Ph1_Bepi> Object = CreateActor<Ph1_Bepi>();

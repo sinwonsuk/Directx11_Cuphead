@@ -72,7 +72,7 @@ void Ph2_Bepi::BossIntroUpdate(float _Time)
 {
 	if (GetTransform()->GetLocalPosition().y < -300.0f)
 	{
-		GetTransform()->AddLocalPosition({ 0,1.0f });
+		GetTransform()->AddLocalPosition({ 0,1.0f* _Time* 500 });
 	}
 	TransformData date = GetTransform()->GetTransDataRef();
 	//GetTransform()->AddLocalPosition({ 0,1.0f });

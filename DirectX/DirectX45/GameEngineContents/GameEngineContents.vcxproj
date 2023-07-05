@@ -196,6 +196,9 @@
     <ClInclude Include="Ph2_Bepi_Weapon.h" />
     <ClInclude Include="ph2_Boss_Weapon.h" />
     <ClInclude Include="Ph2_DogAirpalne.h" />
+    <ClInclude Include="Ph3_Bepi.h" />
+    <ClInclude Include="Ph3_Bepi_Weapon.h" />
+    <ClInclude Include="Ph3_Bepi_Weapon_Green.h" />
     <ClInclude Include="ph3_DogAirPlane.h" />
     <ClInclude Include="ph3_Dog_Npc.h" />
     <ClInclude Include="ph3_food_bowl.h" />
@@ -258,6 +261,10 @@
     <ClCompile Include="ph2_Boss_Weapon.cpp" />
     <ClCompile Include="Ph2_DogAirpalne.cpp" />
     <ClCompile Include="Ph2_DogAirPlaneState.cpp" />
+    <ClCompile Include="Ph3_Bepi.cpp" />
+    <ClCompile Include="Ph3_Bepi_State.cpp" />
+    <ClCompile Include="Ph3_Bepi_Weapon.cpp" />
+    <ClCompile Include="Ph3_Bepi_Weapon_Green.cpp" />
     <ClCompile Include="ph3_DogAirPlane.cpp" />
     <ClCompile Include="ph3_DogAirPlaneState.cpp" />
     <ClCompile Include="ph3_Dog_Npc.cpp" />

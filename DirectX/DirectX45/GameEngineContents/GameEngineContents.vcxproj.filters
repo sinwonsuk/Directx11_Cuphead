@@ -77,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="Ph2_Bepi.h" />
     <ClInclude Include="Ph2_Bepi_Weapon.h" />
+    <ClInclude Include="Ph3_Bepi.h" />
+    <ClInclude Include="Ph3_Bepi_Weapon.h" />
+    <ClInclude Include="Ph3_Bepi_Weapon_Green.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -175,6 +178,10 @@
     <ClCompile Include="Ph2_Bepi.cpp" />
     <ClCompile Include="Ph2_Beppi_State.cpp" />
     <ClCompile Include="Ph2_Bepi_Weapon.cpp" />
+    <ClCompile Include="Ph3_Bepi.cpp" />
+    <ClCompile Include="Ph3_Bepi_State.cpp" />
+    <ClCompile Include="Ph3_Bepi_Weapon.cpp" />
+    <ClCompile Include="Ph3_Bepi_Weapon_Green.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

@@ -13,8 +13,6 @@ Ph2_Bepi_Weapon::~Ph2_Bepi_Weapon()
 {
 	
 
-
-
 }
 
 void Ph2_Bepi_Weapon::Start()

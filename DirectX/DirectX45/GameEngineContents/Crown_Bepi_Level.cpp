@@ -11,7 +11,7 @@
 #include "Ph2_Bepi.h"
 #include "Ph3_Bepi.h"
 #include "Ph3_Bepi_Weapon_Green.h"
-
+#include "Ph4_Bepi.h"
 Crown_Bepi_Level::Crown_Bepi_Level()
 {
 }
@@ -112,6 +112,16 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Green_Horse_Body").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Yellow_Horse_Body").GetFullPath());
 
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Swing_Rope_Back").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Swing_Platform_Back").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Swing_Rope").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Swing_Platform").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Intro").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Lights").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Idle").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Attack_Start").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Attack_Middle").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Attack_End").GetFullPath());
 
 
 
@@ -134,6 +144,11 @@ void Crown_Bepi_Level::Start()
 	{
 		std::shared_ptr<Crown_Bepi_Map> Object = CreateActor<Crown_Bepi_Map>();
 	}
+
+	{
+		std::shared_ptr<Ph4_Bepi> Object = CreateActor<Ph4_Bepi>();
+	}
+
 	/*{
 		std::shared_ptr<Rollercoaster> Object = CreateActor<Rollercoaster>();
 	}*/
@@ -146,12 +161,14 @@ void Crown_Bepi_Level::Start()
 	/*{
 		std::shared_ptr<Ph2_Bepi> Object = CreateActor<Ph2_Bepi>();
 	}*/
-	{
-		std::shared_ptr<Ph3_Bepi> Object = CreateActor<Ph3_Bepi>();
-	}
-	{
+	//{
+	//	std::shared_ptr<Ph3_Bepi> Object = CreateActor<Ph3_Bepi>();
+	//}
+	/*{
 		std::shared_ptr<Ph3_Bepi_Weapon_Green> Object = CreateActor<Ph3_Bepi_Weapon_Green>();
-	}
+	}*/
+
+
 	/*{
 		std::shared_ptr<Ph1_Bepi> Object = CreateActor<Ph1_Bepi>();
 	}*/

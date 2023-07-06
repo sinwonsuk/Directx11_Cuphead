@@ -46,9 +46,13 @@ void Ph4_Bepi::Start()
 	Phase4_Intro = CreateComponent<GameEngineSpriteRenderer>();
 	Phase4_Intro->CreateAnimation({ .AnimationName = "Phase4_Intro", .SpriteName = "Phase4_Intro", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true });
 	Phase4_Intro->ChangeAnimation("Phase4_Intro");
-	Phase4_Intro->GetTransform()->AddLocalPosition({ 0.0f,465.0f });
+	Phase4_Intro->GetTransform()->AddLocalPosition({ 0.0f,415.0f });
 	
-
+	Phase4_Intro_Spin = CreateComponent<GameEngineSpriteRenderer>();
+	Phase4_Intro_Spin->CreateAnimation({ .AnimationName = "Phase4_Spin", .SpriteName = "Phase4_Spin", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true });
+	Phase4_Intro_Spin->ChangeAnimation("Phase4_Spin");
+	Phase4_Intro_Spin->GetTransform()->AddLocalPosition({ 0.0f,365.0f });
+	Phase4_Intro_Spin->Off(); 
 	
 
 
@@ -66,7 +70,11 @@ void Ph4_Bepi::Start()
 
 void Ph4_Bepi::Update(float _Delta)
 {
-	Phase4_Intro->GetTransform()->AddLocalRotation({ 1,0,0 });
+	if (Phase4_Intro->IsAnimationEnd())
+	{
+		Phase4_Intro->Off(); 
+		Phase4_Intro_Spin->On();
+	}
 	UpdateState(_Delta);
 }
 

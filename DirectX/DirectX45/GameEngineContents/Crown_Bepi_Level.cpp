@@ -122,7 +122,7 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Attack_Start").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Attack_Middle").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Attack_End").GetFullPath());
-
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Spin").GetFullPath());
 
 
 	}

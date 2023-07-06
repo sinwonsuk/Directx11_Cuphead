@@ -61,6 +61,7 @@ private:
 	Ph4_Bepi_State StateValue = Ph4_Bepi_State::BossIntro;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro;
+	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro_Spin;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Lights;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Idle;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Attack_Start;

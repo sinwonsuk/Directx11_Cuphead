@@ -33,5 +33,6 @@ enum class CollisionType
 	BepiMap,
 	PinkDuck,
 	RollerCoaster,
-	ph2_Bepi_Attack
+	ph2_Bepi_Attack,
+	ph2_Bepi_Attack_Pink,
 };

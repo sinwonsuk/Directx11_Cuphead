@@ -127,50 +127,117 @@ void Ph2_Bepi::BossIdleUpdate(float _Time)
 	if (GetLiveTime() > 2)
 	{
 		AttackCheck = GameEngineRandom::MainRandom.RandomInt(0, 5);
-
+		AttackColor = GameEngineRandom::MainRandom.RandomInt(0, 3);
 		switch (AttackCheck)
 		{
 		case 0:
 		{
-			std::shared_ptr<Ph2_Bepi_Weapon> Object = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
-			Object->GetTransform()->AddLocalPosition({ -560.0f,-20.0f });
+			if (AttackColor == 1)
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object->GetTransform()->AddLocalPosition({ -560.0f,-20.0f });
+				Object->color = Color::Pink;
+			}
+			else
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object->GetTransform()->AddLocalPosition({ -560.0f,-20.0f });
+			}
+			
 		}
 		break;
 		case 1:
 		{
-			std::shared_ptr<Ph2_Bepi_Weapon> Object1 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
-			Object1->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
-			Object1->directon = Dir::Left;
-			Object1->GetTransform()->AddLocalPosition({ 560.0f,-20.0f });
+			if (AttackColor == 1)
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object1 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object1->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
+				Object1->directon = Dir::Left;
+				Object1->color = Color::Pink;
+				Object1->GetTransform()->AddLocalPosition({ 560.0f,-20.0f });
+
+			}
+			else
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object1 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object1->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
+				Object1->directon = Dir::Left;
+				Object1->GetTransform()->AddLocalPosition({ 560.0f,-20.0f });
+			}
+		
 		}
 		break;
 		case 2:
 		{
-			std::shared_ptr<Ph2_Bepi_Weapon> Object3 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
-			Object3->GetTransform()->AddLocalPosition({ -520.0f,245.0f });
+			if (AttackColor == 1)
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object3 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object3->GetTransform()->AddLocalPosition({ -520.0f,245.0f });
+				Object3->color = Color::Pink;
+			}
+			else
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object3 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object3->GetTransform()->AddLocalPosition({ -520.0f,245.0f });
+			}
+		
 		}
 		break;
 		case 3:
 		{
-			std::shared_ptr<Ph2_Bepi_Weapon> Object4 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
-			Object4->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
-			Object4->directon = Dir::Left;
-			Object4->GetTransform()->AddLocalPosition({ 520.0f,245.0f });
+			if (AttackColor == 1)
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object4 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object4->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
+				Object4->directon = Dir::Left;
+				Object4->color = Color::Pink;
+				Object4->GetTransform()->AddLocalPosition({ 520.0f,245.0f });
+
+			}
+			else
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object4 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object4->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
+				Object4->directon = Dir::Left;
+				Object4->GetTransform()->AddLocalPosition({ 520.0f,245.0f });
+			}
+		
 		}
 		break;
 		case 4:
 		{
-			std::shared_ptr<Ph2_Bepi_Weapon> Object5 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
-			Object5->GetTransform()->AddLocalPosition({ -300.0f,250.0f });
+			if (AttackColor == 1)
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object5 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object5->GetTransform()->AddLocalPosition({ -300.0f,250.0f });
+				Object5->color = Color::Pink;
+			}
+			else
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object5 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object5->GetTransform()->AddLocalPosition({ -300.0f,250.0f });
+			}
+		
 		}
 		break;
 		case 5:
 		{
+			if (AttackColor == 1)
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object6 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object6->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
+				Object6->color = Color::Pink;
+				Object6->directon = Dir::Left;
+				Object6->GetTransform()->AddLocalPosition({ 300.0f,250.0f });
 
-			std::shared_ptr<Ph2_Bepi_Weapon> Object6 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
-			Object6->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
-			Object6->directon = Dir::Left;
-			Object6->GetTransform()->AddLocalPosition({ 300.0f,250.0f });
+			}
+			else
+			{
+				std::shared_ptr<Ph2_Bepi_Weapon> Object6 = GetLevel()->CreateActor<Ph2_Bepi_Weapon>();
+				Object6->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
+				Object6->directon = Dir::Left;
+				Object6->GetTransform()->AddLocalPosition({ 300.0f,250.0f });
+			}
 		}
 		break;
 	

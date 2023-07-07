@@ -155,7 +155,11 @@ void Crown_Bepi_Level::Start()
 
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_bg_light_on").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_bg_light_off").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_bg_light_off").GetFullPath());
+		
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("pink_balloon_dog_death").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("pink_balloon_dog_chomp").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("pink_balloon_dog_intro").GetFullPath());
+
 	}
 
 	if (nullptr == GameEngineSprite::Find("FightText_GetReady"))

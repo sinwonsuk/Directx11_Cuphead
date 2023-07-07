@@ -69,7 +69,7 @@ private:
 	
 	
 	int AttackCheck = 0;
-
+	int AttackColor = 0; 
 	
 	Ph2_Bepi_State StateValue = Ph2_Bepi_State::BossIntro;
 

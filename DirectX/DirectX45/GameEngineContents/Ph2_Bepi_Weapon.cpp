@@ -36,7 +36,21 @@ void Ph2_Bepi_Weapon::Start()
 	Bullet_Destroy->ChangeAnimation("Dogs_Appear");
 	Bullet_Destroy->Off();
 
+	/*Pink_Bullet_Stop = CreateComponent<GameEngineSpriteRenderer>();
+	Pink_Bullet_Stop->CreateAnimation({ .AnimationName = "Dogs_Appear", .SpriteName = "Dogs_Appear", .FrameInter = 0.1f, .Loop = false, .ScaleToTexture = true ,.FrameIndex = {0,1,2,3,4,5,6,7,8,9,10,11,12} });
+	Pink_Bullet_Stop->ChangeAnimation("Dogs_Appear");
+	Pink_Bullet_Stop->Off(); 
 
+	Pink_Bullet = CreateComponent<GameEngineSpriteRenderer>();
+	Pink_Bullet->CreateAnimation({ .AnimationName = "Dogs_Appear", .SpriteName = "Dogs_Appear", .FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true ,.FrameIndex = {13,14,15,16,17,18,19,20} });
+	Pink_Bullet->ChangeAnimation("Dogs_Appear");
+	Pink_Bullet->Off();
+
+
+	Pink_Bullet_Destroy = CreateComponent<GameEngineSpriteRenderer>();
+	Pink_Bullet_Destroy->CreateAnimation({ .AnimationName = "Dogs_Appear", .SpriteName = "Dogs_Appear", .FrameInter = 0.1f, .Loop = false, .ScaleToTexture = true ,.FrameIndex = {21,22,23,24,25,26,27} });
+	Pink_Bullet_Destroy->ChangeAnimation("Dogs_Appear");
+	Pink_Bullet_Destroy->Off();*/
 
 
 	Collision = CreateComponent<GameEngineCollision>();
@@ -88,10 +102,6 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 
 			for (size_t i = 0; i < collision.size(); i++)
 			{
-				//collision[i].get().
-
-
-
 				collision[i].get()->Off();
 			}
 		
@@ -103,6 +113,14 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 		}
 	}
 	
+
+	switch (switch_on)
+	{
+	default:
+		break;
+	}
+
+
 
 
 	switch (directon)

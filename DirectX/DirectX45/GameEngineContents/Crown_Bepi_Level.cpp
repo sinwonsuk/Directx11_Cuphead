@@ -155,6 +155,7 @@ void Crown_Bepi_Level::Start()
 
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_bg_light_on").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_bg_light_off").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_bg_light_off").GetFullPath());
 	}
 
 	if (nullptr == GameEngineSprite::Find("FightText_GetReady"))

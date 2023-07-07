@@ -1,5 +1,19 @@
 #pragma once
 #include <GameEngineCore\GameEngineLevel.h>
+#include "Ph1_Bepi.h"
+#include "Ph2_Bepi.h"
+#include "Ph3_Bepi.h"
+#include "Ph4_Bepi.h"
+
+enum class Pase
+{
+	Pase1,
+	Pase2,
+	Pase3,
+	Pase4,
+
+};
+
 
 // Ό³Έν :
 class Crown_Bepi_Level : public GameEngineLevel
@@ -16,6 +30,7 @@ public:
 	Crown_Bepi_Level& operator=(Crown_Bepi_Level&& _Other) noexcept = delete;
 
 
+	Pase PaseCheck = Pase::Pase1;
 
 protected:
 	void Update(float _DeltaTime) override;
@@ -26,6 +41,11 @@ protected:
 
 
 private:
+	
+	std::shared_ptr<Ph1_Bepi> ph1_Bepi;
+	std::shared_ptr<Ph2_Bepi> ph2_Bepi;
+	std::shared_ptr<Ph3_Bepi> ph3_Bepi;
+	std::shared_ptr<Ph4_Bepi> ph4_Bepi;
 
 
 

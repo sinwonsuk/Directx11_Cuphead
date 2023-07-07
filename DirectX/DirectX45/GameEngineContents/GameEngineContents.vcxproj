@@ -204,6 +204,8 @@
     <ClInclude Include="ph3_food_bowl.h" />
     <ClInclude Include="ph3_Laser.h" />
     <ClInclude Include="Ph4_Bepi.h" />
+    <ClInclude Include="Ph4_Bepi_Weapon.h" />
+    <ClInclude Include="Ph4_Swing_Platform.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -273,6 +275,8 @@
     <ClCompile Include="ph3_Laser.cpp" />
     <ClCompile Include="Ph4_Bepi.cpp" />
     <ClCompile Include="Ph4_Bepi_State.cpp" />
+    <ClCompile Include="Ph4_Bepi_Weapon.cpp" />
+    <ClCompile Include="Ph4_Swing_Platform.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>

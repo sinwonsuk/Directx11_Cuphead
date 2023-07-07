@@ -28,6 +28,11 @@ public:
 	{
 		return Bullet;
 	}
+	std::shared_ptr<class GameEngineCollision> GetCollision()
+	{
+		return Collision;
+	}
+
 	bool SetCollisionCheck(const bool& _CollisionCheck)
 	{
 		CollisionCheck = _CollisionCheck; 

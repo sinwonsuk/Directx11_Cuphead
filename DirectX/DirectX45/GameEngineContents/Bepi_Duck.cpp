@@ -4,6 +4,7 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.h"
 
 Bepi_Duck::Bepi_Duck()
 {
@@ -31,6 +32,7 @@ void Bepi_Duck::Start()
 	P_DuckHead = CreateComponent<GameEngineSpriteRenderer>();
 	P_DuckHead->CreateAnimation({ .AnimationName = "p_duck_head", .SpriteName = "p_duck_head", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	P_DuckHead->ChangeAnimation("p_duck_head");
+	P_DuckHead->GetTransform()->AddLocalPosition({ -55.0f,-135.0f });
 	P_DuckHead->Off();
 
 
@@ -46,15 +48,31 @@ void Bepi_Duck::Start()
 
 	GetTransform()->AddLocalPosition({ 1100.0f,300.0f });
 
+
+	PinkCollision = CreateComponent<GameEngineCollision>();
+	PinkCollision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 50.0f });
+	PinkCollision->GetTransform()->AddLocalPosition({ 0.0f,-170.0f });
+
+	PinkCollision->SetOrder((int)CollisionType::PinkDuck);
+	PinkCollision->SetColType(ColType::AABBBOX2D);
+
+	ParryEffect = CreateComponent<GameEngineSpriteRenderer>();
+	ParryEffect->CreateAnimation({ .AnimationName = "ParryEffect", .SpriteName = "ParryEffect", .FrameInter = 0.08f, .Loop = false, .ScaleToTexture = true, });
+	ParryEffect->ChangeAnimation("ParryEffect");
+	ParryEffect->GetTransform()->AddLocalPosition({ 0.0f,-170.0f });
+	ParryEffect->Off();
+
 }
+
 
 void Bepi_Duck::Update(float _Delta)
 {
 	
-	switch (ColorCheck)
+	switch (Check)
 	{
-	case 0:
+	case DuckCheck::Idle:
 	{
+		PinkCollision->Off(); 
 		if (GetTransform()->GetLocalPosition().y > 400.0f)
 		{
 			MoveDir = { -1,-1, };
@@ -70,13 +88,32 @@ void Bepi_Duck::Update(float _Delta)
 	}
 	break;
 
-	case 1:
+	case DuckCheck::Pink:
 	{
+		if (CollisionCheck == false)
+		{
+			PinkCollision->On();
+		
+			CollisionCheck = true;
+		}
+
+		DuckHead->Off();
+		DuckBody->Off();
+		P_DuckHead->On();
+		P_DuckBody->On();
+
+		if (GetTransform()->GetLocalPosition().y > 400.0f)
+		{
+			MoveDir = { -1,-1, };
+		}
 
 
+		if (GetTransform()->GetLocalPosition().y < 200.0f)
+		{
+			MoveDir = { -1,1, };
+		}
 
-
-
+		GetTransform()->AddLocalPosition({ MoveDir * 200.0f * _Delta });
 	}
 	break;
 
@@ -90,6 +127,11 @@ void Bepi_Duck::Update(float _Delta)
 
 	}
 
+	if (ParryEffect->IsAnimationEnd())
+	{
+		ParryEffect->Off(); 
+		//PinkCollision->Off(); 
+	}
 }
 
 void Bepi_Duck::Render(float _Delta)

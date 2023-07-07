@@ -95,10 +95,10 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Ready;
 
 	std::shared_ptr<class GameEngineCollision> Collision;
-
+	std::shared_ptr<class GameEngineCollision> Collision2;
 	int FinishCheck = 0;
-
-	
+	bool CollisonCheck = false;
+	int Random_Duck = 0; 
 	
 
 };

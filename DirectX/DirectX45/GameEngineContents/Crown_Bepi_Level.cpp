@@ -7,11 +7,12 @@
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include "Crown_Bepi_Map.h"
 #include "Ph1_Bepi.h"
-#include "Rollercoaster.h"
 #include "Ph2_Bepi.h"
 #include "Ph3_Bepi.h"
-#include "Ph3_Bepi_Weapon_Green.h"
 #include "Ph4_Bepi.h"
+#include "Ph4_Swing_Platform.h"
+#include "Player.h"
+#include "TimeFlow.h"
 Crown_Bepi_Level::Crown_Bepi_Level()
 {
 }
@@ -22,10 +23,37 @@ Crown_Bepi_Level::~Crown_Bepi_Level()
 
 void Crown_Bepi_Level::Update(float _DeltaTime)
 {
+	/*switch (PaseCheck)
+	{
+	case Pase::Pase1:
+	{
+		ph1_Bepi->On();
+		ph2_Bepi->Off(); 
+
+
+	}
+		break;
+	case Pase::Pase2:
+
+		ph1_Bepi->Off();
+		ph2_Bepi->On();
+
+		break;
+	case Pase::Pase3:
+		break;
+	case Pase::Pase4:
+		break;
+	default:
+		break;
+	}*/
+
+
 }
 
 void Crown_Bepi_Level::Start()
 {
+	//GameEngineLevel::IsDebugSwitch();
+
 	if (nullptr == GameEngineSprite::Find("DD_Idle"))
 	{
 		GameEngineDirectory NewDir;
@@ -123,8 +151,10 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Attack_Middle").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Attack_End").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_Spin").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("umbrella_bk").GetFullPath());
 
-
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_bg_light_on").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_bg_light_off").GetFullPath());
 	}
 
 	if (nullptr == GameEngineSprite::Find("FightText_GetReady"))
@@ -142,36 +172,45 @@ void Crown_Bepi_Level::Start()
 	GetMainCamera()->SetSortType(0, SortType::ZSort);
 
 	{
+		std::shared_ptr<Player> Object = CreateActor<Player>();
+	}
+	{
 		std::shared_ptr<Crown_Bepi_Map> Object = CreateActor<Crown_Bepi_Map>();
 	}
 
+	/*{
+		ph1_Bepi = CreateActor<Ph1_Bepi>();
+	}*/
+	
 	{
-		std::shared_ptr<Ph4_Bepi> Object = CreateActor<Ph4_Bepi>();
+		ph2_Bepi = CreateActor<Ph2_Bepi>();
 	}
 
-	/*{
-		std::shared_ptr<Rollercoaster> Object = CreateActor<Rollercoaster>();
-	}*/
+
+	//{
+	//	std::shared_ptr<Ph4_Bepi> Object = CreateActor<Ph4_Bepi>();
+	//}
+
+	//{
+	//	std::shared_ptr<Ph4_Swing_Platform> Object = CreateActor<Ph4_Swing_Platform>();
+	//}
+	
 	
 	
 	//{
 	//	std::shared_ptr<Bepi_Duck> Object = CreateActor<Bepi_Duck>();
 	//}
 	// 
-	/*{
-		std::shared_ptr<Ph2_Bepi> Object = CreateActor<Ph2_Bepi>();
-	}*/
+	
 	//{
 	//	std::shared_ptr<Ph3_Bepi> Object = CreateActor<Ph3_Bepi>();
 	//}
-	/*{
-		std::shared_ptr<Ph3_Bepi_Weapon_Green> Object = CreateActor<Ph3_Bepi_Weapon_Green>();
-	}*/
 
-
-	/*{
-		std::shared_ptr<Ph1_Bepi> Object = CreateActor<Ph1_Bepi>();
-	}*/
+	{
+		std::shared_ptr<TimeFlow> Object = CreateActor<TimeFlow>(10);
+	}
+	
+	
 }
 
 void Crown_Bepi_Level::LevelChangeStart()

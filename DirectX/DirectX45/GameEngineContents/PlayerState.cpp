@@ -14,6 +14,7 @@
 #include "BoneWeapon.h"
 #include "ph2_Boss_Weapon.h"
 #include "ph3_Laser.h"
+#include "Bepi_Duck.h"
 void Player::ChangeState(PlayerState _State)
 {
 	PlayerState NextState = _State;
@@ -603,9 +604,7 @@ void Player::RunUpdate(float _Time)
 
 void Player::JumpUpdate(float _Time)
 {
-	TransformData Date3 = Render0->GetTransform()->GetTransDataRef();
-	TransformData Date1 = GetTransform()->GetTransDataRef();
-	TransformData Date2 = Collision->GetTransform()->GetTransDataRef();
+	
 
 	if (CheckCamera == true)
 	{
@@ -633,7 +632,7 @@ void Player::JumpUpdate(float _Time)
 	{
 		if (Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D))
 		{
-			GameEngineTime::GlobalTime.SetGlobalTimeScale(0.0f);
+			
 			Collision->Collision((int)CollisionType::BossAttack, ColType::OBBBOX2D, ColType::OBBBOX2D);
 			TransformData Date3 = Render0->GetTransform()->GetTransDataRef();
 			TransformData Date1 = GetTransform()->GetTransDataRef();
@@ -945,7 +944,6 @@ void Player::ParryUpdate(float _Time)
 		TimeFlow::Time = 0.0f;
 		UserInterface::CardNumber += 1;
 		ph2_Boss_Weapon* Ph2_Boss_Bullet = (ph2_Boss_Weapon*)Test_Collision->GetActor();
-
 		BoneWeapon* weapon = (BoneWeapon*)Test_Collision->GetActor();
 
 		if (weapon != nullptr)
@@ -1004,7 +1002,32 @@ void Player::ParryUpdate(float _Time)
 		}
 		PinkObject = true;
 	}
+	std::shared_ptr<GameEngineCollision> ph1_Pink_Duck = Collision->Collision((int)CollisionType::PinkDuck, ColType::AABBBOX2D, ColType::AABBBOX2D);
 
+	if (ph1_Pink_Duck && PinkObject == false)
+	{
+		JumpCheck = true;
+		ResetLiveTime();
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		TimeFlow::Time = 0.0f;
+		UserInterface::CardNumber += 1;
+		
+		Bepi_Duck* weapon = (Bepi_Duck*)ph1_Pink_Duck->GetActor();
+
+		if (weapon != nullptr)
+		{
+			weapon->GetParryEffect()->On();
+			weapon->GetBullet()->Off();
+			//weapon->GetParryEffect()->GetTransform()->SetLocalPosition(weapon->GetBullet()->GetTransform()->GetLocalPosition());
+			weapon->GetPinkCollision()->Off();
+		}
+
+
+
+		PinkObject = true;
+
+	}
 	if (TimeFlow::Time > 0.2 && PinkObject ==true)
 	{
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 1.0f);

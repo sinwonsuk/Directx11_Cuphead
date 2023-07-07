@@ -14,7 +14,7 @@ public:
 	Rollercoaster& operator=(const Rollercoaster& _Other) = delete;
 	Rollercoaster& operator=(Rollercoaster&& _Other) noexcept = delete;
 
-
+	int MoveCheck = 0;
 
 protected:
 	void Start();
@@ -29,11 +29,10 @@ private:
 	float4 MoveDir = { -1,-1 };
 	float4 MoveDir2 = { -1,1 };
 	float Speed = 400;
-	std::shared_ptr<class GameEngineCollision> LeftCollision;
-
-	std::shared_ptr<class GameEngineCollision> RightCollision;
-
-	std::shared_ptr<class GameEngineCollision> MiddleCollision;
+	std::shared_ptr<class GameEngineCollision> Collision;
+	std::shared_ptr<class GameEngineCollision> Collision2;
+	std::shared_ptr<class GameEngineCollision> Collision3;
+	std::shared_ptr<class GameEngineCollision> Collision4;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Rollercoaster_Back;
 	std::shared_ptr<class GameEngineSpriteRenderer> Rollercoaster_Back2;
@@ -80,7 +79,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Rollercoaster_Seat_2;
 	std::shared_ptr<class GameEngineSpriteRenderer> Rollercoaster_Seat_3;
 	std::shared_ptr<class GameEngineSpriteRenderer> Rollercoaster_Seat_4;
-	int MoveCheck = 0;
+	
 	bool test = false;
 
 };

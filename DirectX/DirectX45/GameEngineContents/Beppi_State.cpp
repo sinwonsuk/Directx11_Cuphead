@@ -4,7 +4,7 @@
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCollision.h>
-
+#include "Crown_Bepi_Level.h"
 void Ph1_Bepi::ChangeState(Ph1_Beppi_State _State)
 {
 	Ph1_Beppi_State NextState = _State;
@@ -492,7 +492,9 @@ void Ph1_Bepi::BossFinsihUpdate(float _Time)
 	if (Beppi_Intro2->GetCurrentFrame() == 4 && FinishDown ==false)
 	{
 		GetTransform()->AddLocalPosition({ 0.0f,0.0f,75.0f });
+		ResetLiveTime(); 
 		FinishDown = true;
+		
 	}
 
 
@@ -501,7 +503,14 @@ void Ph1_Bepi::BossFinsihUpdate(float _Time)
 		GetTransform()->AddLocalPosition({ float4::Right * 400.0f * _Time });
 		GetTransform()->AddLocalPosition({ float4::Down * 700.0f * _Time});
 	}
-
+	if (GetLiveTime() > 3)
+	{
+		Crown_Bepi_Level* Level = (Crown_Bepi_Level*)GetLevel();
+		Level->PaseCheck = Pase::Pase2;
+		this->Death(); 
+		return;
+	}
+	
 }
 
 void Ph1_Bepi::UnloadUpdate(float _Time)

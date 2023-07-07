@@ -3,7 +3,11 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCamera.h>
-
+#include <GameEngineCore/GameEngineCollision.h>
+#include "EnumClass.h"
+#include "Player.h"
+#include "Rollercoaster.h"
+#include "Crown_Bepi_Level.h"
 Crown_Bepi_Map::Crown_Bepi_Map()
 {
 }
@@ -120,9 +124,23 @@ void Crown_Bepi_Map::Start()
 	clown_bg_back_mist->SetScaleToTexture("clown_bg_back_mist_0001.png");
 	clown_bg_back_mist->GetTransform()->AddLocalPosition({ 0.0f,-70.0f,80.0f });
 	
+	
+
+
 	clown_bg_track = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_track->SetScaleToTexture("clown_bg_track 1.png");
 	clown_bg_track->GetTransform()->AddLocalPosition({ 0.0f,-270.0f,50.0f });
+
+	clown_bg_light_off = CreateComponent<GameEngineSpriteRenderer>();
+	clown_bg_light_off->SetScaleToTexture("clown_bg_light_off.png");
+	clown_bg_light_off->GetTransform()->AddLocalPosition({ 320.0f,-120.0f,51.0f });
+
+	clown_bg_light_on = CreateComponent<GameEngineSpriteRenderer>();
+	clown_bg_light_on->CreateAnimation({ .AnimationName = "clown_bg_light_on", .SpriteName = "clown_bg_light_on", .FrameInter = 0.2f,.Loop = true, .ScaleToTexture = true, });
+	clown_bg_light_on->ChangeAnimation("clown_bg_light_on");
+	clown_bg_light_on->GetTransform()->AddLocalPosition({ 320.0f,-120.0f,51.0f });
+	clown_bg_light_on->Off();
+
 
 	clown_bg_track_top = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_track_top->SetScaleToTexture("clown_bg_track_top.png");
@@ -132,8 +150,12 @@ void Crown_Bepi_Map::Start()
 	
 	
 
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 1500.0f, 300.0f, 300.0f });
+	Collision->GetTransform()->AddLocalPosition({ 0.0f,-350.0f });
 
-	
+	Collision->SetOrder((int)CollisionType::BepiMap);
+	Collision->SetColType(ColType::AABBBOX2D);
 
 	
 	
@@ -141,8 +163,55 @@ void Crown_Bepi_Map::Start()
 
 void Crown_Bepi_Map::Update(float _Delta)
 {
-	clown_bg_ferris_Circle->GetTransform()->AddLocalRotation({ 0,0,1.0f*28.8f* _Delta });
-	
+
+	Rollercoaster_Time += _Delta; 
+	Rollercoaster_Time_BG += _Delta;
+
+
+	if (Collision->Collision((int)CollisionType::Player,ColType::AABBBOX2D , ColType::AABBBOX2D))
+	{
+		Player::MainPlayer->SetGravity(false);
+	}
+
+	if (Collision->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D) == nullptr)
+	{
+		Player::MainPlayer->SetGravity(true);
+	}
+
+
+	Crown_Bepi_Level* Level = (Crown_Bepi_Level*)GetLevel();
+
+	if (Level->PaseCheck == Pase::Pase1)
+	{
+		if (Rollercoaster_Time_BG > 15)
+		{
+			std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
+			Rollercoaster_Time_BG = 0;
+			Rollercoaster_Time = 14;
+			clown_bg_light_on->Off();
+		}
+
+		if (Rollercoaster_Time > 20)
+		{
+			clown_bg_light_on->On(); 
+
+			std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
+
+			TransformData Date = Object->GetTransform()->GetTransDataRef(); 
+
+			Object->MoveCheck = 1;
+			Rollercoaster_Time = 0;
+		}
+
+
+
+
+
+	}
+
+
+
+	clown_bg_ferris_Circle->GetTransform()->AddLocalRotation({ 0,0,1.0f * 28.8f * _Delta });
 
 	// 타원의 중심
 	float x = 300.0f;
@@ -320,6 +389,10 @@ void Crown_Bepi_Map::Update(float _Delta)
 
 		clown_bg_moon->GetTransform()->SetLocalPosition({ -Pos_x, Pos_y,100.0f });
 	}
+
+	
+
+
 
 }
 

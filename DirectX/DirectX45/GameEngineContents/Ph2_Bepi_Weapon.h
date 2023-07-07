@@ -1,9 +1,16 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+enum class Dir
+{
+	Left,
+	Right
+};
+
 class Ph2_Bepi_Weapon : public GameEngineActor
 {
 public:
+
 	// constrcuter destructer
 	Ph2_Bepi_Weapon();
 	~Ph2_Bepi_Weapon();
@@ -14,10 +21,10 @@ public:
 	Ph2_Bepi_Weapon& operator=(const Ph2_Bepi_Weapon& _Other) = delete;
 	Ph2_Bepi_Weapon& operator=(Ph2_Bepi_Weapon&& _Other) noexcept = delete;
 
-
-
 	
 
+	
+	Dir directon = Dir::Right;
 
 protected:
 	void Start();
@@ -26,20 +33,22 @@ protected:
 private:
 
 	std::shared_ptr<class GameEngineCollision> Collision;
+	std::shared_ptr<class GameEngineCollision> Collision2;
 	std::shared_ptr<class GameEngineCollision> PinkCollision;
 	std::shared_ptr<class GameEngineSpriteRenderer> ParryEffect;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet_Stop;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Bullet_Destroy;
 
 
 	int AttackCheck = 0;
-
+	bool CollisionCheck = false;
+	bool BulletCheck = false;
 	bool MoveDirCheck = false;
 
 	float4 MoveDir4 = { 0,0 };
-	float4 MoveDir = { 0,0 };
+	float4 MoveDir = { 1,0 };
 
 };
 

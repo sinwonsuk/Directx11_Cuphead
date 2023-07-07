@@ -47,6 +47,10 @@ private:
 
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_moon;
 
+
+	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_light_off;
+	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_light_on;
+
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_cart_blue;
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_cart_blue2;
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_cart_blue3;
@@ -61,8 +65,11 @@ private:
 
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_track_top;
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_main2;
-
+	std::shared_ptr<class GameEngineCollision> Collision;
+	
 	float yellow = 0.0f;
+	float Rollercoaster_Time_BG = 14; 
+	float Rollercoaster_Time = 14;
 
 	//float yellow2 = 0.0f;
 	float Red = 0.7f;

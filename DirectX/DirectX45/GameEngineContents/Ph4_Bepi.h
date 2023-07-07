@@ -5,14 +5,14 @@ enum class Ph4_Bepi_State
 {
 	BossIntro,
 	BossIdle,
-	BossRightAttack,
-	BossLeftAttack,
+	
+	BossAttackStart,
+	BossAttackMiddle,
+	BossAttackEnd,
 
 
-	BossRightFinishAttack,
-	BossLeftIdle,
-	BossFinish,
 
+	
 };
 
 class Ph4_Bepi : public GameEngineActor
@@ -39,7 +39,10 @@ public:
 
 	void ChangeState(Ph4_Bepi_State _State);
 
-	
+	void BossAttackStartUpdate(float _Time);
+	void BossAttackMiddleUpdate(float _Time);
+	void BossAttackEndUpdate(float _Time);
+
 	static int Hp;
 	static bool Finish;
 
@@ -67,24 +70,14 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Attack_Start;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Attack_Middle;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Attack_End;
-
+	std::shared_ptr<class GameEngineSpriteRenderer> umbrella_bk;
 
 
 
 	std::shared_ptr<class GameEngineCollision> Collision;
-	float Time = 0;
-	float Time2 = 0;
-	int BulletNumber = 0;
-	float BulletStopPos = 200;
-	float Left_BulletStopPos = -200;
-	int BulletCheck = 0;
 
-	int GreenBulletCheck = 0;
+	bool Swing_Platform_Intro = false;
 
-
-	int YellowORGreenCheck = 0;
-	int LeftORRightCheck = 0;
-	int YellowPattern = 0;
+	float Platform = 0;
 
 };
-

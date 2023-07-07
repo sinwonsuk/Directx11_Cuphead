@@ -30,4 +30,8 @@ enum class CollisionType
 	Ph3_Dog_Boss_Pink_Bullet,
 	TutorialTarget,
 	TutorialObject2,
+	BepiMap,
+	PinkDuck,
+	RollerCoaster,
+	ph2_Bepi_Attack
 };

@@ -58,6 +58,11 @@ void IdleWeapon::Update(float _Delta)
 			Bullet->GetTransform()->AddLocalPosition({ MoveDir * _Delta * 1500.0f });
 		}
 		
+
+
+
+
+
 		
 		if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
 		{

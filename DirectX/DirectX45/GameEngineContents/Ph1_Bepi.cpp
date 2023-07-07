@@ -9,7 +9,9 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineSprite.h>
 #include <GameEngineCore/GameEngineUIRenderer.h>
+#include "Crown_Bepi_Level.h"
 #include "Bepi_Duck.h"
+#include "EnumClass.h"
 Ph1_Bepi::Ph1_Bepi()
 {
 }
@@ -48,12 +50,62 @@ void Ph1_Bepi::Start()
 	Ready->SetScaleRatio(3.0f);
 	Ready->On();
 
+	
+
+	Collision2 = CreateComponent<GameEngineCollision>();
+	Collision2->GetTransform()->SetLocalScale({ 200.0f, 200.0f, 200.0f });
+	Collision2->GetTransform()->AddLocalPosition({ 0.0f,-100.0f });
+	Collision2->SetOrder((int)CollisionType::BossAttack);
+
+
+
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 200.0f, 200.0f, 200.0f });
+	Collision->GetTransform()->AddLocalPosition({ 0.0f,-100.0f });
+
+	Collision->SetOrder((int)CollisionType::BossBody);
+	Collision->SetColType(ColType::AABBBOX2D);
+
 
 	GetTransform()->AddLocalPosition({ 300.0f,20.0f });
 }
 
 void Ph1_Bepi::Update(float _Delta)
 {
+
+	
+
+
+
+	//Collision->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition() });
+
+	if (StateValue != Ph1_Beppi_State::BossIntro || StateValue != Ph1_Beppi_State::BossIntro2)
+	{
+		if (Collision->Collision((int)CollisionType::Bullet) && CollisonCheck == false)
+		{
+
+
+			if (CollisonCheck == false)
+			{
+				Beppi_Intro2->ColorOptionValue.PlusColor = { 1,1,1,0 };
+				Beppi_Intro2->ResetLiveTime();
+				CollisonCheck = true;
+
+			}
+
+			std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+			collision->Death();
+		}
+
+		if (CollisonCheck == true && Beppi_Intro2->GetLiveTime() > 0.05f)
+		{
+			Beppi_Intro2->ColorOptionValue.PlusColor = { 0,0,0,0 };
+			CollisonCheck = false;
+		}
+	}
+
+	
+
 	if (Ready->IsAnimationEnd())
 	{
 		Ready->Off();
@@ -65,11 +117,31 @@ void Ph1_Bepi::Update(float _Delta)
 	}
 
 
-	if (DuckTime > 1.5f)
+	if (StateValue != Ph1_Beppi_State::BossFinish)
 	{
-		std::shared_ptr<Bepi_Duck> Object = GetLevel()->CreateActor<Bepi_Duck>();
-		DuckTime = 0;
+		if (DuckTime > 1.5f)
+		{
+
+			Random_Duck = GameEngineRandom::MainRandom.RandomInt(0, 3);
+
+			if (Random_Duck == 1)
+			{
+				std::shared_ptr<Bepi_Duck> Object = GetLevel()->CreateActor<Bepi_Duck>();
+				Object->Check = DuckCheck::Pink;
+				DuckTime = 0;
+			}
+
+			else
+			{
+				std::shared_ptr<Bepi_Duck> Object = GetLevel()->CreateActor<Bepi_Duck>();
+				DuckTime = 0;
+			}
+
+
+		}
 	}
+
+
 
 
 	UpdateState(_Delta);

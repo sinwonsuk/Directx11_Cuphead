@@ -8,6 +8,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineSprite.h>
+#include "EnumClass.h"
 
 Ph2_Bepi::Ph2_Bepi()
 {
@@ -113,6 +114,14 @@ void Ph2_Bepi::Start()
 
 
 
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 200.0f, 200.0f, 200.0f });
+	Collision->GetTransform()->AddLocalPosition({ 0.0f,500.0f });
+
+	Collision->SetOrder((int)CollisionType::BossBody);
+	Collision->SetColType(ColType::AABBBOX2D);
+
+
 	
 
 
@@ -128,6 +137,32 @@ void Ph2_Bepi::Start()
 
 void Ph2_Bepi::Update(float _Delta)
 {
+
+	
+		if (Collision->Collision((int)CollisionType::Bullet) && CollisonCheck == false)
+		{
+			if (CollisonCheck == false)
+			{
+				Phase2_Idle_Head->ColorOptionValue.PlusColor = { 1,1,1,0 };
+				Phase2_Idle_Head->ResetLiveTime();
+				CollisonCheck = true;
+			}
+
+			std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+			collision->Death();
+		}
+
+		if (CollisonCheck == true && Phase2_Idle_Head->GetLiveTime() > 0.05f)
+		{
+			Phase2_Idle_Head->ColorOptionValue.PlusColor = { 0,0,0,0 };
+			CollisonCheck = false;
+		}
+	
+
+
+
+
+
 
 
 	UpdateState(_Delta);

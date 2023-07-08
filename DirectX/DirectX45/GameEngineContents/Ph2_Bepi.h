@@ -94,9 +94,10 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Helium_Tank_Back;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Helium_Tank_Front;
+
 	std::shared_ptr<class GameEngineCollision> Collision;
 
-
+	bool CollisonCheck = false;
 
 
 

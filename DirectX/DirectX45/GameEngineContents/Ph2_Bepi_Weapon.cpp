@@ -253,6 +253,8 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 			Bullet->Off();
 			Bullet_Destroy->Off();
 			Pink_Bullet_Stop->On(); 
+			Collision->Off();
+			Collision2->Off();
 			ColorCheck = true; 
 			Pink_Collision->On();
 			Pink_Collision2->On(); 
@@ -415,10 +417,15 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 		break;
 	}
 	
+	if (ParryEffect->GetCurrentFrame() > 0)
+	{
+		GetTransform()->AddLocalPosition(-MoveDir * 2 * _Delta * 200.0f);
+	}
+
 	if (ParryEffect->IsAnimationEnd())
 	{
 		ParryEffect->Off();
-		//PinkCollision->Off(); 
+	
 	}
 
 

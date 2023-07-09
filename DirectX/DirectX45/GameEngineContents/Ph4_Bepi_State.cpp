@@ -122,7 +122,7 @@ void Ph4_Bepi::BossAttackStartUpdate(float _Time)
 void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 {
 
-
+	std::shared_ptr<>Ph4_Pen
 	
 }
 

@@ -83,6 +83,7 @@
     <ClInclude Include="Ph4_Bepi.h" />
     <ClInclude Include="Ph4_Swing_Platform.h" />
     <ClInclude Include="Ph4_Bepi_Weapon.h" />
+    <ClInclude Include="..\App\Ph4_penguin.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -189,6 +190,7 @@
     <ClCompile Include="Ph4_Bepi_State.cpp" />
     <ClCompile Include="Ph4_Swing_Platform.cpp" />
     <ClCompile Include="Ph4_Bepi_Weapon.cpp" />
+    <ClCompile Include="..\App\Ph4_penguin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

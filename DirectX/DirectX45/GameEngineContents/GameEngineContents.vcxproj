@@ -166,6 +166,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\App\Ph4_penguin.h" />
     <ClInclude Include="Bepi_Duck.h" />
     <ClInclude Include="BoneWeapon.h" />
     <ClInclude Include="Boss_Finish.h" />
@@ -228,6 +229,7 @@
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\App\Ph4_penguin.cpp" />
     <ClCompile Include="Bepi_Duck.cpp" />
     <ClCompile Include="Beppi_State.cpp" />
     <ClCompile Include="BoneWeapon.cpp" />

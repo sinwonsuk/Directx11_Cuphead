@@ -35,5 +35,6 @@ enum class CollisionType
 	RollerCoaster,
 	ph2_Bepi_Attack,
 	ph2_Bepi_Attack_Pink,
-	ph3_Bepi_Attack_Pink
+	ph3_Bepi_Attack_Pink,
+	ph4_Bepi_penguin,
 };

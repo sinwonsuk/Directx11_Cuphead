@@ -35,7 +35,7 @@ protected:
 
 private:
 	
-	float Speed = 200;
+	float Speed = 300;
 	std::shared_ptr<class GameEngineSpriteRenderer> Swing_Platform;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Swing_Rope;

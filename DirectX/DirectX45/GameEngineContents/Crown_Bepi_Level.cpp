@@ -174,6 +174,12 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Yellow_Horse_End").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Green_Horse_End").GetFullPath());
 
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_clapspark").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_clap").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_idle").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_roll_Jump").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_roll_ground").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_roll").GetFullPath());
 
 
 	}
@@ -208,9 +214,9 @@ void Crown_Bepi_Level::Start()
 	}*/
 
 
-	//{
-	//	std::shared_ptr<Ph4_Bepi> Object = CreateActor<Ph4_Bepi>();
-	//}
+	{
+		std::shared_ptr<Ph4_Bepi> Object = CreateActor<Ph4_Bepi>();
+	}
 
 	//{
 	//	std::shared_ptr<Ph4_Swing_Platform> Object = CreateActor<Ph4_Swing_Platform>();
@@ -223,9 +229,9 @@ void Crown_Bepi_Level::Start()
 	//}
 	// 
 	
-	{
+	/*{
 		std::shared_ptr<Ph3_Bepi> Object = CreateActor<Ph3_Bepi>();
-	}
+	}*/
 
 	{
 		std::shared_ptr<TimeFlow> Object = CreateActor<TimeFlow>(10);

@@ -89,7 +89,7 @@ void Ph4_Bepi::Update(float _Delta)
 	{
 		std::shared_ptr<Ph4_Swing_Platform> Object = GetLevel()->CreateActor<Ph4_Swing_Platform>();
 		Object->choic = Choice::Idle;
-		Object->GetTransform()->AddLocalPosition({ -1100.0f,70.0f });
+		Object->GetTransform()->AddLocalPosition({ -900.0f,70.0f });
 
 		Platform = 0;
 	}

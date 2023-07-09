@@ -75,7 +75,7 @@ private:
 
 
 	std::shared_ptr<class GameEngineCollision> Collision;
-
+	bool test = false;
 	bool Swing_Platform_Intro = false;
 
 	float Platform = 0;

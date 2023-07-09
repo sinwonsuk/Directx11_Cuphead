@@ -1,24 +1,20 @@
 #include "PrecompileHeader.h"
-#include "Ph4_penguin.h"
+#include "Ph4_Penguin.h"
+
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineContents/EnumClass.h>
-
-Ph4_penguin::Ph4_penguin()
+Ph4_Penguin::Ph4_Penguin()
 {
-
-
 }
 
-Ph4_penguin::~Ph4_penguin()
+Ph4_Penguin::~Ph4_Penguin()
 {
-	
-
 }
 
-void Ph4_penguin::Start()
+void Ph4_Penguin::Start()
 {
 	clown_ph3_penguin_clapspark = CreateComponent<GameEngineSpriteRenderer>();
 	clown_ph3_penguin_clapspark->CreateAnimation({ .AnimationName = "HorseShoe_Gold", .SpriteName = "HorseShoe_Gold", .FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
@@ -61,17 +57,16 @@ void Ph4_penguin::Start()
 	Collision->SetOrder((int)CollisionType::ph4_Bepi_penguin);
 	Collision->SetColType(ColType::AABBBOX2D);
 
-
 }
 
-void Ph4_penguin::Update(float _Delta)
+void Ph4_Penguin::Update(float _Delta)
 {
-	if (clown_ph3_penguin_roll->GetCurrentFrame() > 10 && CoiisionCheck ==false)
+	if (clown_ph3_penguin_roll->GetCurrentFrame() > 10 && CoiisionCheck == false)
 	{
 		GetTransform()->AddLocalPosition({ float4::Down * _Delta * Speed });
 	}
-	
-	if (Collision->Collision((int)CollisionType::BepiMap) && CoiisionCheck==false);
+
+	if (Collision->Collision((int)CollisionType::BepiMap) && CoiisionCheck == false)
 	{
 		clown_ph3_penguin_roll->Off();
 		clown_ph3_penguin_roll_ground->On();
@@ -82,44 +77,44 @@ void Ph4_penguin::Update(float _Delta)
 	{
 		switch (dir)
 		{
-		case Ph4_penguin_Dir::Left:
+		case Ph4_Penguin_Dir::Left:
 		{
-			
+
 
 			if (MoveCheck == false)
 			{
 				GetTransform()->AddLocalPosition({ float4::Left * _Delta * Speed });
 
 			}
-			 if (GetTransform()->GetLocalPosition().x < StopPos && MoveCheck == false)
-			 {
-				
-				clown_ph3_penguin_roll_ground->Off(); 
+			if (GetTransform()->GetLocalPosition().x < StopPos && MoveCheck == false)
+			{
+
+				clown_ph3_penguin_roll_ground->Off();
 				clown_ph3_penguin_roll_Jump->On();
 				MoveCheck = true;
-			 }
+			}
 
-			 if (clown_ph3_penguin_roll_Jump->IsAnimationEnd() && MoveCheck ==true)
-			 {
-				 clown_ph3_penguin_idle->On();
-			 }
+			if (clown_ph3_penguin_roll_Jump->IsAnimationEnd() && MoveCheck == true)
+			{
+				clown_ph3_penguin_idle->On();
+			}
 
-			 if (GetLiveTime() > 3 && MoveCheck == true)
-			 {
-				 clown_ph3_penguin_idle->Off(); 
-				 clown_ph3_penguin_clap->On(); 
-			 }
-			 if (clown_ph3_penguin_clap->IsAnimationEnd())
-			 {
-				 clown_ph3_penguin_clap->Off();
-				 clown_ph3_penguin_idle->On(); 
-				 ResetLiveTime(); 
-			 }
+			if (GetLiveTime() > 3 && MoveCheck == true)
+			{
+				clown_ph3_penguin_idle->Off();
+				clown_ph3_penguin_clap->On();
+			}
+			if (clown_ph3_penguin_clap->IsAnimationEnd())
+			{
+				clown_ph3_penguin_clap->Off();
+				clown_ph3_penguin_idle->On();
+				ResetLiveTime();
+			}
 
 
 		}
 		break;
-		case Ph4_penguin_Dir::Right:
+		case Ph4_Penguin_Dir::Right:
 		{
 			if (MoveCheck == false)
 			{

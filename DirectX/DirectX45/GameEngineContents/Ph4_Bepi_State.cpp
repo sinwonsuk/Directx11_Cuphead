@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "Ph4_Swing_Platform.h"
-
+#include "Ph4_Penguin.h"
 void Ph4_Bepi::ChangeState(Ph4_Bepi_State _State)
 {
 	Ph4_Bepi_State NextState = _State;
@@ -121,9 +121,15 @@ void Ph4_Bepi::BossAttackStartUpdate(float _Time)
 
 void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 {
-
-	std::shared_ptr<>Ph4_Pen
+	if (test == false)
+	{
+		std::shared_ptr<Ph4_Penguin> object = GetLevel()->CreateActor<Ph4_Penguin>();
+		object->dir = Ph4_Penguin_Dir::Left;
+		object->SetStopPos(-400.0f);
+		test = true;
+	}
 	
+
 }
 
 void Ph4_Bepi::BossAttackEndUpdate(float _Time)

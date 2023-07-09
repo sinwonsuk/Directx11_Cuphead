@@ -52,7 +52,7 @@ void Crown_Bepi_Level::Update(float _DeltaTime)
 
 void Crown_Bepi_Level::Start()
 {
-	//GameEngineLevel::IsDebugSwitch();
+	GameEngineLevel::IsDebugSwitch();
 
 	if (nullptr == GameEngineSprite::Find("DD_Idle"))
 	{

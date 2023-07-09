@@ -99,7 +99,8 @@ void ph2_Boss_Weapon::Update(float _Delta)
 		MoveDirCheck = true;
 	}
 
-	Bullet_First->GetTransform()->AddLocalPosition({ MoveDir * 2 });
+	Bullet_First->GetTransform()->AddLocalPosition({ MoveDir * 2* _Delta*200.0f });
+	Bullet_First->GetTransform()->AddLocalPosition({0.0f,0.0f,-1.0f });
 	Collision->GetTransform()->SetLocalPosition({ Bullet_First->GetTransform()->GetLocalPosition() });
 	PinkCollision->GetTransform()->SetLocalPosition({ Bullet_First->GetTransform()->GetLocalPosition() });
 

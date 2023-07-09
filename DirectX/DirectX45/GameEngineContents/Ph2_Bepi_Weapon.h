@@ -73,11 +73,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Pink_Bullet;
 	std::shared_ptr<class GameEngineSpriteRenderer> Pink_Bullet_Destroy;
 
-
-
-
-
-
+	
 	int AttackCheck = 0;
 	bool CollisionCheck = false;
 	bool BulletCheck = false;

@@ -8,9 +8,12 @@ enum class Ph3_Bepi_State
 	BossRightAttack,
 	BossLeftAttack, 
 
+	Left_Green_Finish,
+	Left_Yellow_Finish,
+	Right_Green_Finish,
+	Right_Yellow_Finish,
 
-	BossRightFinishAttack,
-	BossLeftIdle,
+	BossFinish_Finish,
 	BossFinish,
 
 };
@@ -41,15 +44,11 @@ public:
 
 	void LeftAttackUpdate(float _Time);
 	void RightAttackUpdate(float _Time);
+	void BossFinishUpdate(float _Time);
 
-	void RightStartAttackUpdate(float _Time);
-	void RightRunAttackUpdate(float _Time);
-	void RightFinishAttackUpdate(float _Time);
-	void LeftIdleUpdate(float _Time);
+	void BossFinish_Finish_Update(float _Time);
 
-	void BossFinsihUpdate(float _Time);
-	void UnloadUpdate(float _Time);
-	static int Hp;
+	
 	static bool Finish;
 
 
@@ -64,7 +63,7 @@ protected:
 	float4 TestColor;
 
 private:
-	
+	int Hp = 10; 
 	int RandomPos = 0;
 
 	std::vector<std::shared_ptr<Ph3_Bepi_Weapon>> Bullets;
@@ -79,9 +78,11 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Green_Horse_Body;
 	std::shared_ptr<class GameEngineSpriteRenderer> Yellow_Horse_Body;
 
+	std::shared_ptr<class GameEngineSpriteRenderer> clown_ph3_horse_spit;
 
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Bepi_boss_explosion;
 	std::shared_ptr<class GameEngineCollision> Collision;
+
 	float Time = 0;
 	float Time2 = 0;
 	int BulletNumber = 0;
@@ -90,11 +91,14 @@ private:
 	int BulletCheck = 0;
 
 	int GreenBulletCheck = 0; 
-
+	bool FinishCheck = false;
+	bool CollisonCheck =false;
 
 	int YellowORGreenCheck = 0;
 	int LeftORRightCheck = 0;
 	int YellowPattern = 0; 
-
+	int Boss_Exploision_Number = 0; 
+	bool Boss_Exploision_Check = false;
+	float4 Boss_Exploision_Pos = {0,0};
 };
 

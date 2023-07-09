@@ -84,10 +84,16 @@ void Ph2_Bepi_Weapon::Start()
 	ParryEffect->Off();
 
 
+
+
 }
 
 void Ph2_Bepi_Weapon::Update(float _Delta)
 {
+
+
+
+
 	switch (color)
 	{
 	case Color::Idle:
@@ -398,7 +404,7 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 			BulletCheck = true;
 		}
 
-		if (Pink_Bullet_Stop->IsAnimationEnd())
+		if (Pink_Bullet_Stop->IsAnimationEnd() && ParryEffect->GetCurrentFrame() <= 0)
 		{
 			Pink_Bullet_Stop->Off();
 			//Bullet->On();
@@ -409,7 +415,7 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 
 		if (Pink_Bullet_Destroy->IsAnimationEnd())
 		{
-			this->Death();
+			this->Death(); 
 		}
 	}
 		break;
@@ -417,15 +423,14 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 		break;
 	}
 	
-	if (ParryEffect->GetCurrentFrame() > 0)
+	/*if (ParryEffect->GetCurrentFrame() > 0)
 	{
-		GetTransform()->AddLocalPosition(-MoveDir * 2 * _Delta * 200.0f);
-	}
+		ParryEffect->GetTransform()->AddLocalPosition({- MoveDir * 2 * _Delta * 200.0f });
+	}*/
 
 	if (ParryEffect->IsAnimationEnd())
 	{
-		ParryEffect->Off();
-	
+		ParryEffect->Off();	
 	}
 
 

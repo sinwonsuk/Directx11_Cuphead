@@ -21,6 +21,8 @@ Ph2_Bepi::~Ph2_Bepi()
 void Ph2_Bepi::Start()
 {
 	
+
+
 	LeftHeliumBottle_Texture = CreateComponent<GameEngineSpriteRenderer>();
 	LeftHeliumBottle_Texture->SetScaleToTexture("LeftHeliumBottle_00.png");
 	LeftHeliumBottle_Texture->GetTransform()->AddLocalPosition({ -180.0f,220.0f,55.0f });
@@ -28,6 +30,20 @@ void Ph2_Bepi::Start()
 	RightHeliumBottle_Texture = CreateComponent<GameEngineSpriteRenderer>();
 	RightHeliumBottle_Texture->SetScaleToTexture("RightHeliumBottle_00.png");
 	RightHeliumBottle_Texture->GetTransform()->AddLocalPosition({ 180.0f,220.0f,55.0f });
+
+
+
+
+	helium_pipe_puff = CreateComponent<GameEngineSpriteRenderer>();
+	helium_pipe_puff->CreateAnimation({ .AnimationName = "helium_pipe_puff", .SpriteName = "helium_pipe_puff", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
+	helium_pipe_puff->ChangeAnimation("helium_pipe_puff");
+	helium_pipe_puff->Off();
+
+	helium_pipe_puff2 = CreateComponent<GameEngineSpriteRenderer>();
+	helium_pipe_puff2->CreateAnimation({ .AnimationName = "helium_pipe_puff", .SpriteName = "helium_pipe_puff", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
+	helium_pipe_puff2->ChangeAnimation("helium_pipe_puff");
+	helium_pipe_puff2->Off();
+
 
 
 	LeftHeliumPipes_Intro = CreateComponent<GameEngineSpriteRenderer>();
@@ -90,8 +106,13 @@ void Ph2_Bepi::Start()
 
 	Phase2_Idle_Head = CreateComponent<GameEngineSpriteRenderer>();
 	Phase2_Idle_Head->CreateAnimation({ .AnimationName = "Phase2_Idle_Head", .SpriteName = "Phase2_Idle_Head", .FrameInter = 0.15f,.Loop = true, .ScaleToTexture = true, });
+	Phase2_Idle_Head->CreateAnimation({ .AnimationName = "Phase2_End", .SpriteName = "Phase2_End", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	Phase2_Idle_Head->ChangeAnimation("Phase2_Idle_Head");
 	Phase2_Idle_Head->GetTransform()->AddLocalPosition({ 0.0f,550.0f,55.0f });
+
+
+
+
 	Phase2_Idle_Head->Off();
 
 	Phase2_Body_Front = CreateComponent<GameEngineSpriteRenderer>();
@@ -109,6 +130,11 @@ void Ph2_Bepi::Start()
 	
 	
 
+	BossExploision = CreateComponent<GameEngineSpriteRenderer>();
+	BossExploision->CreateAnimation({ .AnimationName = "Bepi_boss_explosion", .SpriteName = "Bepi_boss_explosion", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
+	BossExploision->ChangeAnimation("Bepi_boss_explosion");
+	BossExploision->Off();
+	
 	
 
 
@@ -138,9 +164,11 @@ void Ph2_Bepi::Start()
 void Ph2_Bepi::Update(float _Delta)
 {
 
-	
+
+
 		if (Collision->Collision((int)CollisionType::Bullet) && CollisonCheck == false)
 		{
+			Hp -= 1;
 			if (CollisonCheck == false)
 			{
 				Phase2_Idle_Head->ColorOptionValue.PlusColor = { 1,1,1,0 };
@@ -158,11 +186,7 @@ void Ph2_Bepi::Update(float _Delta)
 			CollisonCheck = false;
 		}
 	
-
-
-
-
-
+		
 
 
 	UpdateState(_Delta);
@@ -176,6 +200,7 @@ void Ph2_Bepi::Render(float _Delta)
 
 void Ph2_Bepi::AnimationCheck(const std::string_view& _AnimationName)
 {
+	Phase2_Idle_Head->ChangeAnimation(_AnimationName); 
 }
 
 void Ph2_Bepi::LevelChangeStart()

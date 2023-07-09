@@ -23,6 +23,7 @@ public:
 	bool DownCheck = false;
 
 	int YellowPattern = 0;
+
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -32,11 +33,12 @@ private:
 	
 	float StopPos = 200;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
-	
-	
+	std::shared_ptr<class GameEngineSpriteRenderer> Bullet_Destory;
+	std::shared_ptr<class GameEngineSpriteRenderer> Bullet_Sfx;
+	std::shared_ptr<class GameEngineCollision> Collision;
 
 	float Speed = 1200;
-
+	bool CoiisionCheck = false;
 	bool Stop = false;
 };
 

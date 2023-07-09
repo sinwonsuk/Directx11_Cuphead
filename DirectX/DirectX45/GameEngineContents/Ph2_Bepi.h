@@ -4,19 +4,7 @@
 enum class Ph2_Bepi_State
 {
 	BossIntro,
-	BossIntro2,
-	BossIntro3,
 	BossIdle,
-
-	BossLeftStartAttack,
-	BossLeftRunAttack,
-	BossLeftFinishAttack,
-	BossRightIdle,
-
-	BossRightStartAttack,
-	BossRightRunAttack,
-	BossRightFinishAttack,
-	BossLeftIdle,
 	BossFinish,
 
 };
@@ -40,7 +28,7 @@ public:
 
 	void BossIdleUpdate(float _Time);
 	void BossIntroUpdate(float _Time);
-	
+	void BossFinishUpdate(float _Time);
 
 	void LevelChangeStart() override;
 
@@ -52,7 +40,7 @@ public:
 	
 
 	
-	static int Hp;
+	
 	static bool Finish;
 
 
@@ -66,7 +54,7 @@ protected:
 	float4 TestColor;
 
 private:
-	
+	int Hp = 10;
 	
 	int AttackCheck = 0;
 	int AttackColor = 0; 
@@ -97,6 +85,22 @@ private:
 
 	std::shared_ptr<class GameEngineCollision> Collision;
 
+	std::shared_ptr<class GameEngineSpriteRenderer> BossExploision;
+
+
+	std::shared_ptr<class GameEngineSpriteRenderer> helium_pipe_puff;
+	std::shared_ptr<class GameEngineSpriteRenderer> helium_pipe_puff2;
+
+	float helium_pipe_puff_Time = 0; 
+
+	bool helium_pipe_puff_Cehck = false;
+
+	float4 Boss_Exploision_Pos = { 0,0 }; 
+	bool Boss_Exploision_Check = false;
+	int Boss_Exploision_Number = 0;
+
+
+	int helium_pipe_puff_location = 0;
 	bool CollisonCheck = false;
 
 

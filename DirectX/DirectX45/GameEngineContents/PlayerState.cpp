@@ -16,6 +16,7 @@
 #include "ph3_Laser.h"
 #include "Bepi_Duck.h"
 #include "Ph2_Bepi_Weapon.h"
+#include "Ph3_Bepi_Weapon_Green.h"
 void Player::ChangeState(PlayerState _State)
 {
 	PlayerState NextState = _State;
@@ -1050,6 +1051,31 @@ void Player::ParryUpdate(float _Time)
 		PinkObject = true;
 	}
 
+
+	std::shared_ptr<GameEngineCollision> ph3_Bepi_Pink_Bullet = Collision->Collision((int)CollisionType::ph3_Bepi_Attack_Pink, ColType::AABBBOX2D, ColType::AABBBOX2D);
+
+	if (ph3_Bepi_Pink_Bullet && PinkObject == false)
+	{
+		JumpCheck = true;
+		ResetLiveTime();
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		TimeFlow::Time = 0.0f;
+		UserInterface::CardNumber += 1;
+
+		Ph3_Bepi_Weapon_Green* weapon = (Ph3_Bepi_Weapon_Green*)ph3_Bepi_Pink_Bullet->GetActor();
+
+		if (weapon != nullptr)
+		{
+
+			weapon->GetParryEffect()->On();
+			weapon->GetBullet()->Off();
+			//weapon->GetParryEffect()->GetTransform()->SetLocalPosition(weapon->GetBullet()->GetTransform()->GetLocalPosition());
+			weapon->GetPinkCollision()->Off();
+			weapon->GetPinkCollision2()->Off();
+		}
+		PinkObject = true;
+	}
 
 	if (TimeFlow::Time > 0.2 && PinkObject ==true)
 	{

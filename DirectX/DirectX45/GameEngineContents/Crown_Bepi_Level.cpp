@@ -159,6 +159,22 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("pink_balloon_dog_death").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("pink_balloon_dog_chomp").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("pink_balloon_dog_intro").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("helium_pipe_puff").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase2_End").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Bepi_boss_explosion").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_horse_spit").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_horse_horseshoe_puff").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_horse_horseshoe_explode_yellow").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_horse_horseshoe_pink").GetFullPath());
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase3_End_Finish").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase3_End").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Yellow_Horse_End").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Green_Horse_End").GetFullPath());
+
+
 
 	}
 
@@ -187,9 +203,9 @@ void Crown_Bepi_Level::Start()
 		ph1_Bepi = CreateActor<Ph1_Bepi>();
 	}*/
 	
-	{
+	/*{
 		ph2_Bepi = CreateActor<Ph2_Bepi>();
-	}
+	}*/
 
 
 	//{
@@ -207,9 +223,9 @@ void Crown_Bepi_Level::Start()
 	//}
 	// 
 	
-	//{
-	//	std::shared_ptr<Ph3_Bepi> Object = CreateActor<Ph3_Bepi>();
-	//}
+	{
+		std::shared_ptr<Ph3_Bepi> Object = CreateActor<Ph3_Bepi>();
+	}
 
 	{
 		std::shared_ptr<TimeFlow> Object = CreateActor<TimeFlow>(10);

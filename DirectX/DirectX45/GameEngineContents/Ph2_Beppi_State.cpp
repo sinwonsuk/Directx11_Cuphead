@@ -17,20 +17,13 @@ void Ph2_Bepi::ChangeState(Ph2_Bepi_State _State)
 	case Ph2_Bepi_State::BossIntro:
 
 		break;
-	case Ph2_Bepi_State::BossIntro2:
 	
-		break;
-	case Ph2_Bepi_State::BossIntro3:
-		
-		break;
 	case Ph2_Bepi_State::BossIdle:
 	
 		break;
-	case Ph2_Bepi_State::BossLeftStartAttack:
 	
-		break;
-	case Ph2_Bepi_State::BossLeftRunAttack:
-		
+	case Ph2_Bepi_State::BossFinish:
+		AnimationCheck("Phase2_End");
 		break;
 
 	default:
@@ -56,7 +49,9 @@ void Ph2_Bepi::UpdateState(float _Time)
 	case Ph2_Bepi_State::BossIdle:
 		BossIdleUpdate(_Time);
 		break;
-
+	case Ph2_Bepi_State::BossFinish:
+		BossFinishUpdate(_Time);
+		break;
 
 	default:
 		break;
@@ -70,6 +65,8 @@ void Ph2_Bepi::UpdateState(float _Time)
 
 void Ph2_Bepi::BossIntroUpdate(float _Time)
 {
+	Collision->Off(); 
+
 	if (GetTransform()->GetLocalPosition().y < -300.0f)
 	{
 		GetTransform()->AddLocalPosition({ 0,1.0f* _Time* 500 });
@@ -122,12 +119,70 @@ void Ph2_Bepi::BossIntroUpdate(float _Time)
 
 }
 
+void Ph2_Bepi::BossFinishUpdate(float _Time)
+{
+	Phase2_Idle_Head->GetTransform()->AddLocalPosition({ float4::Up * 500.0f * _Time });
+	GetTransform()->AddLocalPosition({ float4::Down * 500.0f * _Time });
+
+	//Phase2_Idle_Head
+	if (Boss_Exploision_Number < 5)
+	{
+		if (Phase2_Idle_Head->GetLiveTime() > 0.03f)
+		{
+			Boss_Exploision_Pos.x = GameEngineRandom::MainRandom.RandomFloat(-100.0f, 100.0f);
+			Boss_Exploision_Pos.y = GameEngineRandom::MainRandom.RandomFloat(100.0f, 200.0f);
+
+			if (Boss_Exploision_Check == false)
+			{
+				BossExploision->ChangeAnimation("Bepi_boss_explosion");
+				BossExploision->On();
+				BossExploision->GetTransform()->SetWorldPosition({ Boss_Exploision_Pos.x,Boss_Exploision_Pos.y });
+				Boss_Exploision_Check = true;
+			}
+
+
+			if (BossExploision->IsAnimationEnd())
+			{
+				++Boss_Exploision_Number;
+				Boss_Exploision_Check = false;
+				BossExploision->Off();
+				Phase2_Idle_Head->ResetLiveTime();
+			}
+
+		}
+	}
+	if (Boss_Exploision_Number == 5)
+	{
+		Phase2_Idle_Head->GetTransform()->AddLocalPosition({ float4::Up * 500.0f * _Time });
+	}
+	
+	if (Phase2_Idle_Head->GetTransform()->GetLocalRotation().y > 1000.0f)
+	{
+		this->Death(); 
+	}
+
+}
+
 void Ph2_Bepi::BossIdleUpdate(float _Time)
 {
+
+	helium_pipe_puff_Time += _Time; 
+
+
+	Collision->On(); 
+	
+
+
+
 	if (GetLiveTime() > 2)
 	{
+	
 		AttackCheck = GameEngineRandom::MainRandom.RandomInt(0, 5);
 		AttackColor = GameEngineRandom::MainRandom.RandomInt(0, 3);
+
+
+
+
 		switch (AttackCheck)
 		{
 		case 0:
@@ -247,8 +302,161 @@ void Ph2_Bepi::BossIdleUpdate(float _Time)
 		ResetLiveTime(); 
 	}
 
+	if (helium_pipe_puff_Time > 1)
+	{
+		helium_pipe_puff_location = GameEngineRandom::MainRandom.RandomInt(0, 5);
 
+		
+		
 
+		switch (helium_pipe_puff_location)
+		{
+			
 
+		case 0:
+		{
+			
+			if (helium_pipe_puff_Cehck == false)
+			{
+				helium_pipe_puff->ChangeAnimation("helium_pipe_puff");
+				helium_pipe_puff->On(); 
+				helium_pipe_puff->GetTransform()->SetWorldPosition({ -580.0f,-10.0f });
+				helium_pipe_puff_Cehck = true;
+			}
+		
 
+			if (helium_pipe_puff->IsAnimationEnd())
+			{
+				helium_pipe_puff_Cehck = false;
+				helium_pipe_puff->Off(); 
+				helium_pipe_puff_Time = 0; 
+			
+			}
+
+		}
+		break;
+		case 1:
+		{
+
+			if (helium_pipe_puff_Cehck == false)
+			{
+				helium_pipe_puff->ChangeAnimation("helium_pipe_puff");
+				helium_pipe_puff->On();
+				helium_pipe_puff->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
+				helium_pipe_puff->GetTransform()->SetWorldPosition({ -580.0f,-10.0f });
+				helium_pipe_puff_Cehck = true; 
+			}
+
+			if (helium_pipe_puff->IsAnimationEnd())
+			{
+				helium_pipe_puff_Cehck = false;
+				helium_pipe_puff->Off();
+				helium_pipe_puff_Time = 0;
+			}
+
+		}
+		break;
+		case 2:
+		{
+		
+
+			if (helium_pipe_puff_Cehck == false)
+			{
+				helium_pipe_puff->ChangeAnimation("helium_pipe_puff");
+				helium_pipe_puff->On();
+
+				helium_pipe_puff->GetTransform()->SetWorldPosition({ -520.0f,245.0f });
+				helium_pipe_puff_Cehck = true;
+			}
+
+			if (helium_pipe_puff->IsAnimationEnd())
+			{
+				helium_pipe_puff_Cehck = false;
+				helium_pipe_puff->Off();
+				helium_pipe_puff_Time = 0;
+			}
+
+		}
+		break;
+		case 3:
+		{
+		
+
+			if (helium_pipe_puff_Cehck == false)
+			{
+				helium_pipe_puff->ChangeAnimation("helium_pipe_puff");
+				helium_pipe_puff->On();
+
+				helium_pipe_puff->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
+				helium_pipe_puff->GetTransform()->AddLocalPosition({ 520.0f,245.0f });
+				helium_pipe_puff_Cehck = true;
+			}
+
+			if (helium_pipe_puff->IsAnimationEnd())
+			{
+				helium_pipe_puff_Cehck = false;
+				helium_pipe_puff->Off();
+				helium_pipe_puff_Time = 0;
+			}
+
+		}
+		break;
+		case 4:
+		{
+			
+
+			if (helium_pipe_puff_Cehck == false)
+			{
+				helium_pipe_puff->ChangeAnimation("helium_pipe_puff");
+				helium_pipe_puff->On();
+
+				helium_pipe_puff->GetTransform()->SetWorldPosition({ -300.0f,250.0f });
+				helium_pipe_puff_Cehck = true;
+			}
+
+			if (helium_pipe_puff->IsAnimationEnd())
+			{
+				helium_pipe_puff_Cehck = false;
+				helium_pipe_puff->Off();
+				helium_pipe_puff_Time = 0;
+			}
+
+		}
+		break;
+		case 5:
+		{
+			
+
+			if (helium_pipe_puff_Cehck == false)
+			{
+				helium_pipe_puff->ChangeAnimation("helium_pipe_puff");
+				helium_pipe_puff->On();
+				helium_pipe_puff->GetTransform()->AddLocalRotation({ 0.0f,180.0f });
+				helium_pipe_puff->GetTransform()->AddLocalPosition({ 300.0f,250.0f });
+				helium_pipe_puff_Cehck = true;
+			}
+
+			if (helium_pipe_puff->IsAnimationEnd())
+			{
+				helium_pipe_puff_Cehck = false;
+				helium_pipe_puff->Off();
+				helium_pipe_puff_Time = 0;
+			}
+		}
+		break;
+
+		default:
+			break;
+		}
+	}
+
+	if (Hp <= 0)
+	{
+		Collision->Off(); 
+		helium_pipe_puff->Off(); 
+		ChangeState(Ph2_Bepi_State::BossFinish);
+
+		//Phase2_Idle_Head->ResetLiveTime(); 
+		return; 
+	}
 }

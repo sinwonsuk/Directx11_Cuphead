@@ -246,31 +246,42 @@ void Rollercoaster::Start()
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 2600.0f, 50.0f, 200.0f });
 	Collision->GetTransform()->AddLocalPosition({ 1000.0f,-50.0f });
-
 	Collision->SetOrder((int)CollisionType::RollerCoaster);
 	Collision->SetColType(ColType::AABBBOX2D);
+
 
 	Collision2 = CreateComponent<GameEngineCollision>();
 	Collision2->GetTransform()->SetLocalScale({ 200.0f, 200.0f, 200.0f });
 	Collision2->GetTransform()->AddLocalPosition({ -500.0f,-30.0f });
-
 	Collision2->SetOrder((int)CollisionType::BossAttack);
 	Collision2->SetColType(ColType::AABBBOX2D);
+
+
+	Collision5 = CreateComponent<GameEngineCollision>();
+	Collision5->GetTransform()->SetLocalScale({ 200.0f, 200.0f, 200.0f });
+	Collision5->GetTransform()->AddLocalPosition({ -500.0f,-30.0f });
+	Collision5->SetOrder((int)CollisionType::RollerCoaster_Attack);
+	Collision5->SetColType(ColType::AABBBOX2D);
+
 
 
 	Collision3 = CreateComponent<GameEngineCollision>();
 	Collision3->GetTransform()->SetLocalScale({ 200.0f, 150.0f, 200.0f });
 	Collision3->GetTransform()->AddLocalPosition({ 620.0f,0.0f });
-
 	Collision3->SetOrder((int)CollisionType::BossAttack);
 	Collision3->SetColType(ColType::AABBBOX2D);
 
 	Collision4 = CreateComponent<GameEngineCollision>();
 	Collision4->GetTransform()->SetLocalScale({ 200.0f, 150.0f, 200.0f });
 	Collision4->GetTransform()->AddLocalPosition({ 1650.0f,0.0f });
-
 	Collision4->SetOrder((int)CollisionType::BossAttack);
 	Collision4->SetColType(ColType::AABBBOX2D);
+
+	Collision->Off();
+	Collision2->Off();
+	Collision3->Off();
+	Collision4->Off();
+	Collision5->Off();
 
 }
 
@@ -278,7 +289,6 @@ void Rollercoaster::Update(float _Delta)
 {
 
 	
-
 
 
 	switch (MoveCheck)
@@ -289,6 +299,7 @@ void Rollercoaster::Update(float _Delta)
 		Collision2->Off();
 		Collision3->Off();
 		Collision4->Off();
+		Collision5->Off(); 
 		if (test == false)
 		{
 			GetTransform()->SetLocalScale({ 0.3f,0.3f, 1.2f });
@@ -304,6 +315,17 @@ void Rollercoaster::Update(float _Delta)
 	break;
 	case 1:
 	{
+		if (GetLiveTime() > 0.5)
+		{
+			Collision->On();
+			Collision2->On();
+			Collision3->On();
+			Collision4->On();
+			Collision5->On();
+		}
+
+		GetTransform()->AddLocalPosition({ float4::Left * (Speed + 100.0f) * _Delta });
+
 		if (Collision->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D))
 		{
 			Player::MainPlayer->SetGravity(false);
@@ -319,13 +341,16 @@ void Rollercoaster::Update(float _Delta)
 			test = true;
 		}
 
-		GetTransform()->AddLocalPosition({ float4::Left * (Speed+100.0f) * _Delta });
+	
 	}
 	break;
 
 	default:
 		break;
 	}
+
+
+	CurPos = GetTransform()->GetLocalPosition(); 
 	if (GetLiveTime() > 10)
 	{
 		this->Death(); 

@@ -12,6 +12,7 @@ enum class Choice
 class Ph4_Swing_Platform : public GameEngineActor
 {
 public:
+	static bool Ph4_Platform_Check;
 	// constrcuter destructer
 	Ph4_Swing_Platform();
 	~Ph4_Swing_Platform();
@@ -34,15 +35,18 @@ protected:
 
 
 private:
-	
+	float Time = 0;
+
 	float Speed = 300;
+
+	bool CollisionCheck = false; 
 	std::shared_ptr<class GameEngineSpriteRenderer> Swing_Platform;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Swing_Rope;
 
-	//std::shared_ptr<class GameEngineCollision> MiddleCollision;
-
-
+	std::shared_ptr<class GameEngineCollision> Collision;
+//	bool Ph4_Platform_Check = false;
+	float4 CurPos = {};
 	int Check = 0;
 
 };

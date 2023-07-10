@@ -8,6 +8,9 @@
 #include "Player.h"
 #include "Rollercoaster.h"
 #include "Crown_Bepi_Level.h"
+#include "Ph4_Bepi.h"
+#include "Ph4_Swing_Platform.h"
+bool Crown_Bepi_Map::Ph4_Check = false;
 Crown_Bepi_Map::Crown_Bepi_Map()
 {
 }
@@ -166,22 +169,62 @@ void Crown_Bepi_Map::Update(float _Delta)
 
 	Rollercoaster_Time += _Delta; 
 	Rollercoaster_Time_BG += _Delta;
-
+	if (Ph4_Check == false)
+	{
+		Ph4_Rollercoaster_Time_BG += _Delta;
+		clown_bg_light_on->Off();
+	}
+	
 
 	if (Collision->Collision((int)CollisionType::Player,ColType::AABBBOX2D , ColType::AABBBOX2D))
 	{
 		Player::MainPlayer->SetGravity(false);
+		Ph4_Swing_Platform::Ph4_Platform_Check = false;
 	}
 
 	if (Collision->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D) == nullptr)
 	{
 		Player::MainPlayer->SetGravity(true);
+		//Ph4_Swing_Platform::Ph4_Platform_Check = false;
 	}
 
 
 	Crown_Bepi_Level* Level = (Crown_Bepi_Level*)GetLevel();
 
 	if (Level->PaseCheck == Pase::Pase1)
+	{
+		if (Ph4_Rollercoaster_Time_BG > 4)
+		{
+
+			if (Ph4_Bepi::ph4_Bepi->StateValue == Ph4_Bepi_State::BossIdle && Ph4_Check == false)
+			{
+				std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
+				Object->Speed = 700;
+
+				Ph4_Rollercoaster_Time_BG = 0;
+				Rollercoaster_Time = 17;
+				Ph4_Check = true;
+			
+
+			}
+		}
+	
+		
+		if (Rollercoaster_Time > 20 && Ph4_Check == true)
+		{
+			clown_bg_light_on->On();
+
+			std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
+			Object->Speed = 700;
+			TransformData Date = Object->GetTransform()->GetTransDataRef();
+
+			Object->MoveCheck = 1;
+			Rollercoaster_Time = 0;
+
+			
+		}
+	}
+	/*else if (Level->PaseCheck == Pase::Pase1)
 	{
 		if (Rollercoaster_Time_BG > 15)
 		{
@@ -202,12 +245,9 @@ void Crown_Bepi_Map::Update(float _Delta)
 			Object->MoveCheck = 1;
 			Rollercoaster_Time = 0;
 		}
+	}*/
 
 
-
-
-
-	}
 
 
 

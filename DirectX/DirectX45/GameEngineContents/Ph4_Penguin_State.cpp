@@ -93,6 +93,23 @@ void Ph4_Penguin::IntroUpdate(float _Time)
 		ChangeState(Ph4_Penguin_State::Ground);
 		return; 
 	}
+
+	if (Collision->Collision((int)CollisionType::RollerCoaster_Attack))
+	{
+		clown_ph3_penguin_clap->Off();
+		clown_ph3_penguin_idle->Off();
+		clown_ph3_penguin_roll_Jump->Off();
+		clown_ph3_penguin_roll_ground->Off();
+		clown_ph3_penguin_roll->Off();
+		Collision->Off();
+		clown_ph3_penguin_explode->On();
+	}
+	if (clown_ph3_penguin_explode->IsAnimationEnd())
+	{
+		this->Death();
+    }
+
+
 }
 
 void Ph4_Penguin::GroundUpdate(float _Time)
@@ -146,7 +163,20 @@ void Ph4_Penguin::GroundUpdate(float _Time)
 		default:
 			break;
 		}
-	
+		if (Collision->Collision((int)CollisionType::RollerCoaster_Attack))
+		{
+			clown_ph3_penguin_clap->Off();
+			clown_ph3_penguin_idle->Off();
+			clown_ph3_penguin_roll_Jump->Off();
+			clown_ph3_penguin_roll_ground->Off();
+			clown_ph3_penguin_roll->Off();
+			Collision->Off();
+			clown_ph3_penguin_explode->On();
+		}
+		if (clown_ph3_penguin_explode->IsAnimationEnd())
+		{
+			this->Death();
+		}
 }
 
 
@@ -163,6 +193,20 @@ void Ph4_Penguin::JumpUpdate(float _Time)
 		ChangeState(Ph4_Penguin_State::Idle);
 		return; 
 	}
+	if (Collision->Collision((int)CollisionType::RollerCoaster_Attack))
+	{
+		clown_ph3_penguin_clap->Off();
+		clown_ph3_penguin_idle->Off();
+		clown_ph3_penguin_roll_Jump->Off();
+		clown_ph3_penguin_roll_ground->Off();
+		clown_ph3_penguin_roll->Off();
+		Collision->Off();
+		clown_ph3_penguin_explode->On();
+	}
+	if (clown_ph3_penguin_explode->IsAnimationEnd())
+	{
+		this->Death();
+	}
 }
 void Ph4_Penguin::IdleUpdate(float _Time)
 {
@@ -178,7 +222,20 @@ void Ph4_Penguin::IdleUpdate(float _Time)
 		ChangeState(Ph4_Penguin_State::Attack);
 		return;
 	}
-
+	if (Collision->Collision((int)CollisionType::RollerCoaster_Attack))
+	{
+		clown_ph3_penguin_clap->Off();
+		clown_ph3_penguin_idle->Off();
+		clown_ph3_penguin_roll_Jump->Off();
+		clown_ph3_penguin_roll_ground->Off();
+		clown_ph3_penguin_roll->Off();
+		Collision->Off();
+		clown_ph3_penguin_explode->On();
+	}
+	if (clown_ph3_penguin_explode->IsAnimationEnd())
+	{
+		this->Death();
+	}
 }
 void Ph4_Penguin::AttackUpdate(float _Time)
 {
@@ -186,23 +243,37 @@ void Ph4_Penguin::AttackUpdate(float _Time)
 
 	if (clown_ph3_penguin_clap->GetCurrentFrame() > 9)
 	{
+		clown_ph3_penguin_clapspark->On();
 		GetTransform()->AddLocalPosition({ float4::Down * _Time * (Speed - 400.0f) });
 	}
 
 	if (clown_ph3_penguin_clap->IsAnimationEnd())
 	{
+
+
 		GetTransform()->SetLocalPosition(CurPos);
 		clown_ph3_penguin_idle->On();
 		clown_ph3_penguin_clap->Off();
 
 		IdleNumber = 0;
+		
 		clown_ph3_penguin_clap->ChangeAnimation("clown_ph3_penguin_clap");
 		ChangeState(Ph4_Penguin_State::Idle);
 		return; 
 	}
 
-
-
-
-
+	if (Collision->Collision((int)CollisionType::RollerCoaster_Attack))
+	{
+		clown_ph3_penguin_clap->Off();
+		clown_ph3_penguin_idle->Off();
+		clown_ph3_penguin_roll_Jump->Off();
+		clown_ph3_penguin_roll_ground->Off();
+		clown_ph3_penguin_roll->Off();
+		Collision->Off();
+		clown_ph3_penguin_explode->On();
+	}
+	if (clown_ph3_penguin_explode->IsAnimationEnd())
+	{
+		this->Death();
+	}
 }

@@ -18,6 +18,7 @@ enum class DogAirplaneType
 enum class CollisionType
 {
 	Player,
+	PlayerDown,
 	Bullet,
 	NpcAirPlane,
 	BossBody,
@@ -37,4 +38,6 @@ enum class CollisionType
 	ph2_Bepi_Attack_Pink,
 	ph3_Bepi_Attack_Pink,
 	ph4_Bepi_penguin,
+	RollerCoaster_Attack, 
+	Ph4_swing_Platform,
 };

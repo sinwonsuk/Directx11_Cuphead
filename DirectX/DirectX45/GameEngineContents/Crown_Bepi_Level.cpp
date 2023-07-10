@@ -180,7 +180,7 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_roll_Jump").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_roll_ground").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_roll").GetFullPath());
-
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_explode").GetFullPath());
 
 	}
 

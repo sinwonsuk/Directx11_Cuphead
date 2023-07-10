@@ -18,8 +18,9 @@ void Ph4_Penguin::Start()
 {
 
 	clown_ph3_penguin_clapspark = CreateComponent<GameEngineSpriteRenderer>();
-	clown_ph3_penguin_clapspark->CreateAnimation({ .AnimationName = "clown_ph3_penguin_clapspark", .SpriteName = "clown_ph3_penguin_clapspark", .FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
+	clown_ph3_penguin_clapspark->CreateAnimation({ .AnimationName = "clown_ph3_penguin_clapspark", .SpriteName = "clown_ph3_penguin_clapspark", .FrameInter = 0.1f, .Loop = false, .ScaleToTexture = true });
 	clown_ph3_penguin_clapspark->ChangeAnimation("clown_ph3_penguin_clapspark");
+	clown_ph3_penguin_clapspark->GetTransform()->AddLocalPosition({ 0.0f,90.0f });
 	clown_ph3_penguin_clapspark->Off();
 
 	clown_ph3_penguin_clap = CreateComponent<GameEngineSpriteRenderer>();
@@ -48,6 +49,12 @@ void Ph4_Penguin::Start()
 	clown_ph3_penguin_roll = CreateComponent<GameEngineSpriteRenderer>();
 	clown_ph3_penguin_roll->CreateAnimation({ .AnimationName = "clown_ph3_penguin_roll", .SpriteName = "clown_ph3_penguin_roll", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
 	clown_ph3_penguin_roll->ChangeAnimation("clown_ph3_penguin_roll");
+
+	clown_ph3_penguin_explode = CreateComponent<GameEngineSpriteRenderer>();
+	clown_ph3_penguin_explode->CreateAnimation({ .AnimationName = "clown_ph3_penguin_explode", .SpriteName = "clown_ph3_penguin_explode", .FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
+	clown_ph3_penguin_explode->ChangeAnimation("clown_ph3_penguin_explode");
+	clown_ph3_penguin_explode->Off();
+
 	//clown_ph3_penguin_roll->Off();
 
 	Collision = CreateComponent<GameEngineCollision>();
@@ -63,119 +70,16 @@ void Ph4_Penguin::Start()
 
 void Ph4_Penguin::Update(float _Delta)
 {
-	//if (clown_ph3_penguin_roll->GetCurrentFrame() > 10 && CoiisionCheck == false)
-	//{
-	//	GetTransform()->AddLocalPosition({ float4::Down * _Delta * Speed });
-	//}
-
-	//if (Collision->Collision((int)CollisionType::BepiMap) && CoiisionCheck == false)
-	//{
-	//	GetTransform()->AddLocalPosition({ float4::Up * _Delta * Speed });
-	//	clown_ph3_penguin_roll->Off();
-	//	clown_ph3_penguin_roll_ground->On();
-	//	CoiisionCheck = true;
-
-	//}
-	//if (CoiisionCheck == true)
-	//{
-	//	switch (dir)
-	//	{
-	//	case Ph4_Penguin_Dir::Left:
-	//	{
-
-
-	//		if (MoveCheck == false)
-	//		{
-	//			GetTransform()->AddLocalPosition({ float4::Left * _Delta * Speed });
-
-	//		}
-	//		if (GetTransform()->GetLocalPosition().x < StopPos && MoveCheck == false)
-	//		{
-
-	//			clown_ph3_penguin_roll_ground->Off();
-	//			clown_ph3_penguin_roll_Jump->On();
-	//			MoveCheck = true;
-	//			//JumpCheck = true;
-	//		}
-
-	//		if (MoveCheck == true && JumpCheck == false)
-	//		{
-	//			
-	//			GetTransform()->AddLocalPosition({ 0.0f,1.0f });
-	//		}
-
-
-	//		if (clown_ph3_penguin_roll_Jump->IsAnimationEnd() && MoveCheck == true)
-	//		{
-	//			JumpCheck = true;
-
-
-	//			
-	//			clown_ph3_penguin_roll_Jump->Off();
-	//			clown_ph3_penguin_idle->On();
-	//		}
-
-	//		if (MoveCheck == true && JumpCheck == true)
-	//		{
-	//			//GetTransform()->AddLocalPosition({ 0.0f,-2.0f });
-	//			CoiisionCheck = false;
+	
 
 
 
-	//		}
 
-
-	//		if (GetLiveTime() > 6 && MoveCheck == true)
-	//		{
-	//			clown_ph3_penguin_idle->Off();
-	//			clown_ph3_penguin_clap->On();
-	//		}
-
-	//		if (clown_ph3_penguin_clap->IsAnimationEnd())
-	//		{
-	//			clown_ph3_penguin_clap->Off();
-	//			clown_ph3_penguin_idle->On();
-	//			ResetLiveTime();
-	//		}
-
-
-	//	}
-	//	break;
-	//	case Ph4_Penguin_Dir::Right:
-	//	{
-	//		if (MoveCheck == false)
-	//		{
-	//			GetTransform()->AddLocalPosition({ float4::Right * _Delta * Speed });
-	//		}
-	//		if (GetTransform()->GetLocalPosition().x < StopPos && MoveCheck == false)
-	//		{
-	//			clown_ph3_penguin_roll_ground->Off();
-	//			clown_ph3_penguin_roll_Jump->On();
-	//			MoveCheck = true;
-	//		}
-
-	//		if (clown_ph3_penguin_roll_Jump->IsAnimationEnd() && MoveCheck == true)
-	//		{
-	//			clown_ph3_penguin_idle->On();
-	//		}
-
-	//		if (GetLiveTime() > 3 && MoveCheck == true)
-	//		{
-	//			clown_ph3_penguin_idle->Off();
-	//			clown_ph3_penguin_clap->On();
-	//		}
-	//		if (clown_ph3_penguin_clap->IsAnimationEnd())
-	//		{
-	//			clown_ph3_penguin_clap->Off();
-	//			clown_ph3_penguin_idle->On();
-	//			ResetLiveTime();
-	//		}
-	//	}
-	//	break;
-	//	default:
-	//		break;
-	//	}
-	//}
+         if (clown_ph3_penguin_clapspark->IsAnimationEnd())
+         {
+         	clown_ph3_penguin_clapspark->ChangeAnimation("clown_ph3_penguin_clapspark");
+         	clown_ph3_penguin_clapspark->Off();
+         }
 
          UpdateState(_Delta);
 }

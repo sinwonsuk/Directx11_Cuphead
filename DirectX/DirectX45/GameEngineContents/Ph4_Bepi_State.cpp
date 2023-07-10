@@ -6,6 +6,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "Ph4_Swing_Platform.h"
 #include "Ph4_Penguin.h"
+#include "Crown_Bepi_Map.h"
 void Ph4_Bepi::ChangeState(Ph4_Bepi_State _State)
 {
 	Ph4_Bepi_State NextState = _State;
@@ -21,7 +22,7 @@ void Ph4_Bepi::ChangeState(Ph4_Bepi_State _State)
 
 
 	case Ph4_Bepi_State::BossIdle:
-
+		AnimationCheck("Phase4_Idle");
 		break;
 	case Ph4_Bepi_State::BossAttackStart:
 		AnimationCheck("Phase4_Attack_Start");
@@ -73,9 +74,11 @@ void Ph4_Bepi::UpdateState(float _Time)
 }
 void Ph4_Bepi::BossIdleUpdate(float _Time)
 {
-	if (GetLiveTime() > 3)
+	if (GetLiveTime() > 10 && Crown_Bepi_Map::Ph4_Check == true)
 	{
-		ChangeState({ Ph4_Bepi_State::BossAttackStart });
+		Crown_Bepi_Map::Ph4_Check = false;
+
+		ChangeState(Ph4_Bepi_State::BossAttackStart);
 		return; 
 	}
 
@@ -112,7 +115,7 @@ void Ph4_Bepi::BossIntroUpdate(float _Time)
 
 void Ph4_Bepi::BossAttackStartUpdate(float _Time)
 {
-	if (Phase4_Idle->IsAnimationEnd())
+	if (Phase4_Idle->IsAnimationEnd() )
 	{
 		ChangeState(Ph4_Bepi_State::BossAttackMiddle);
 		return; 
@@ -121,14 +124,72 @@ void Ph4_Bepi::BossAttackStartUpdate(float _Time)
 
 void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 {
-	if (test == false)
-	{
-		std::shared_ptr<Ph4_Penguin> object = GetLevel()->CreateActor<Ph4_Penguin>();
-		object->dir = Ph4_Penguin_Dir::Left;
-		object->SetStopPos(-400.0f);
-		test = true;
-	}
 	
+	switch (AttackNumber)
+	{
+	case 0:
+	{
+		if (GetLiveTime() > 1)
+		{
+			std::shared_ptr<Ph4_Penguin> object = GetLevel()->CreateActor<Ph4_Penguin>();
+			object->dir = Ph4_Penguin_Dir::Left;
+			object->SetStopPos(-500.0f);
+			++AttackNumber;
+			ResetLiveTime(); 
+		}
+	}
+	break; 
+	case 1:
+	{
+		if (GetLiveTime() > 1)
+		{
+			std::shared_ptr<Ph4_Penguin> object = GetLevel()->CreateActor<Ph4_Penguin>();
+			object->dir = Ph4_Penguin_Dir::Left;
+			object->SetStopPos(-200.0f);
+			++AttackNumber;
+			ResetLiveTime();
+		}
+	}
+	break;
+	case 2:
+	{
+		if (GetLiveTime() > 1)
+		{
+			std::shared_ptr<Ph4_Penguin> object = GetLevel()->CreateActor<Ph4_Penguin>();
+			object->dir = Ph4_Penguin_Dir::Right;
+			object->SetStopPos(500.0f);
+			++AttackNumber;
+			ResetLiveTime();
+		}
+	}
+	break;
+	case 3:
+	{
+		if (GetLiveTime() > 1)
+		{
+			std::shared_ptr<Ph4_Penguin> object = GetLevel()->CreateActor<Ph4_Penguin>();
+			object->dir = Ph4_Penguin_Dir::Right;
+			object->SetStopPos(200.0f);
+			++AttackNumber;
+			ResetLiveTime();
+		}
+	}
+	break;
+
+
+
+	default:
+		break;
+	}
+
+	if (GetLiveTime() > 1 && AttackNumber==4)
+	{
+		AttackNumber = 0;
+		ChangeState(Ph4_Bepi_State::BossAttackEnd);
+		return; 
+	}
+
+
 
 }
 
@@ -136,7 +197,8 @@ void Ph4_Bepi::BossAttackEndUpdate(float _Time)
 {
 	if (Phase4_Idle->IsAnimationEnd())
 	{
-		ChangeState(Ph4_Bepi_State::BossAttackMiddle);
+		/*Crown_Bepi_Map::Ph4_Check = false;*/
+		ChangeState(Ph4_Bepi_State::BossIdle);
 		return;
 	}
 

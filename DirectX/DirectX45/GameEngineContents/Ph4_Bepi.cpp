@@ -9,6 +9,8 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineSprite.h>
 #include "Ph4_Swing_Platform.h"
+
+Ph4_Bepi* Ph4_Bepi::ph4_Bepi;
 Ph4_Bepi::Ph4_Bepi()
 {
 }
@@ -30,6 +32,8 @@ void Ph4_Bepi::LevelChangeStart()
 
 void Ph4_Bepi::Start()
 {
+	ph4_Bepi = this;
+
 	umbrella_bk = CreateComponent<GameEngineSpriteRenderer>();
 	umbrella_bk->CreateAnimation({ .AnimationName = "umbrella_bk", .SpriteName = "umbrella_bk", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true });
 	umbrella_bk->ChangeAnimation("umbrella_bk");

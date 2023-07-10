@@ -18,6 +18,7 @@ enum class Ph4_Bepi_State
 class Ph4_Bepi : public GameEngineActor
 {
 public:
+	static Ph4_Bepi* ph4_Bepi;
 	// constrcuter destructer
 	Ph4_Bepi();
 	~Ph4_Bepi();
@@ -42,7 +43,7 @@ public:
 	void BossAttackStartUpdate(float _Time);
 	void BossAttackMiddleUpdate(float _Time);
 	void BossAttackEndUpdate(float _Time);
-
+	Ph4_Bepi_State StateValue = Ph4_Bepi_State::BossIntro;
 	static int Hp;
 	static bool Finish;
 
@@ -58,10 +59,10 @@ protected:
 	float4 TestColor;
 
 private:
-
+	int AttackNumber = 0; 
 	int RandomPos = 0;
 
-	Ph4_Bepi_State StateValue = Ph4_Bepi_State::BossIntro;
+	
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro_Spin;

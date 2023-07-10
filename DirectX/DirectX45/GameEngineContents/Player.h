@@ -152,7 +152,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
 	std::shared_ptr<class GameEngineCollision> Collision;
-
+	std::shared_ptr<class GameEngineCollision> Collision2;
 	int DownBlockCheck = 0; 
 	int GravityCheck = 0; 
 	int RightCheck = 0;

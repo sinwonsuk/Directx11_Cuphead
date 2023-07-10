@@ -4,6 +4,7 @@
 class Crown_Bepi_Map : public GameEngineActor
 {
 public:
+	static bool Ph4_Check;
 	///static DogAirplaneBackground* Background;
 	// constrcuter destructer
 	Crown_Bepi_Map();
@@ -67,7 +68,11 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_main2;
 	std::shared_ptr<class GameEngineCollision> Collision;
 	
+	
+
+
 	float yellow = 0.0f;
+	float Ph4_Rollercoaster_Time_BG = 14;
 	float Rollercoaster_Time_BG = 14; 
 	float Rollercoaster_Time = 14;
 

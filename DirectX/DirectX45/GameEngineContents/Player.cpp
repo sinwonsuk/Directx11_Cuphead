@@ -345,7 +345,15 @@ void Player::Start()
 	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });
 	Collision->SetOrder((int)CollisionType::Player);
 
-	Collision->GetTransform()->SetParent(this->GetTransform(), false);
+
+
+	Collision2 = CreateComponent<GameEngineCollision>();
+	Collision2->GetTransform()->AddLocalPosition({ 0.0f, -30.0f, 0.0f });
+	Collision2->GetTransform()->SetLocalScale({ 10.0f, 10.0f, 300.0f });
+	Collision2->SetOrder((int)CollisionType::PlayerDown);
+	Collision2->GetTransform()->AddLocalPosition({ 0.0f,-50.0f });
+
+
 }
 
 void Player::AnimationCheck(const std::string_view& _AnimationName)

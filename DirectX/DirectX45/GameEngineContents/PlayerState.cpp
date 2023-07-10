@@ -846,7 +846,14 @@ void Player::JumpUpdate(float _Time)
 		return;
 	}
 
-	
+	if (Collision->Collision((int)CollisionType::BepiMap, ColType::AABBBOX2D, ColType::AABBBOX2D) &&JumpCheck == false)
+	{
+		Gravity = false;
+		return;
+	}
+
+
+
 
 	if (Collision->Collision((int)CollisionType::MapOut, ColType::AABBBOX2D, ColType::AABBBOX2D))
 	{

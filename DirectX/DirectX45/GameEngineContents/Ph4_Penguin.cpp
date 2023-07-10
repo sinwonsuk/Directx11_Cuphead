@@ -16,6 +16,7 @@ Ph4_Penguin::~Ph4_Penguin()
 
 void Ph4_Penguin::Start()
 {
+
 	clown_ph3_penguin_clapspark = CreateComponent<GameEngineSpriteRenderer>();
 	clown_ph3_penguin_clapspark->CreateAnimation({ .AnimationName = "clown_ph3_penguin_clapspark", .SpriteName = "clown_ph3_penguin_clapspark", .FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true });
 	clown_ph3_penguin_clapspark->ChangeAnimation("clown_ph3_penguin_clapspark");

@@ -59,17 +59,22 @@ void Ph4_Penguin::Start()
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 50.0f });
-	Collision->GetTransform()->AddLocalPosition({ 0.0f,0.0f });
-
-
 	Collision->SetOrder((int)CollisionType::ph4_Bepi_penguin);
 	Collision->GetTransform()->AddLocalPosition({ 0.0f,-50.0f });
 	Collision->SetColType(ColType::AABBBOX2D);
 
+	HitCollision = CreateComponent<GameEngineCollision>();
+	HitCollision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 200.0f });
+	HitCollision->SetOrder((int)CollisionType::BossBody);
+	HitCollision->GetTransform()->AddLocalPosition({ 0.0f,0.0f });
+	HitCollision->SetColType(ColType::AABBBOX2D);
 }
 
 void Ph4_Penguin::Update(float _Delta)
 {
+	
+
+
 
          if (clown_ph3_penguin_clapspark->IsAnimationEnd())
          {

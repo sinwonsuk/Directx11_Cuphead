@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.h"
-
+#include "Ph4_Penguin_Weapon.h"
 void Ph4_Penguin::ChangeState(Ph4_Penguin_State _State)
 {
 	Ph4_Penguin_State NextState = _State;
@@ -239,17 +239,28 @@ void Ph4_Penguin::IdleUpdate(float _Time)
 }
 void Ph4_Penguin::AttackUpdate(float _Time)
 {
+
+
+
 	GetTransform()->AddLocalPosition({ float4::Up * _Time * (Speed - 400.0f) });
 
 	if (clown_ph3_penguin_clap->GetCurrentFrame() > 9)
 	{
+		if (AttackCheck == false)
+		{
+			std::shared_ptr<Ph4_Penguin_Weapon> object = GetLevel()->CreateActor<Ph4_Penguin_Weapon>();
+			object->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition() }); 
+			AttackCheck = true;
+		}
+		
+
 		clown_ph3_penguin_clapspark->On();
 		GetTransform()->AddLocalPosition({ float4::Down * _Time * (Speed - 400.0f) });
 	}
 
 	if (clown_ph3_penguin_clap->IsAnimationEnd())
 	{
-
+		AttackCheck = false;
 
 		GetTransform()->SetLocalPosition(CurPos);
 		clown_ph3_penguin_idle->On();

@@ -32,7 +32,7 @@ private:
 
 	float StopPos = 200;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
-
+	std::shared_ptr<class GameEngineCollision> Collision;
 
 
 	float Speed = 1200;

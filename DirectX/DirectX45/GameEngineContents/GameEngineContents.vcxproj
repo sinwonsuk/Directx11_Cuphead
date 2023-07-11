@@ -206,6 +206,7 @@
     <ClInclude Include="Ph4_Bepi.h" />
     <ClInclude Include="Ph4_Bepi_Weapon.h" />
     <ClInclude Include="Ph4_Penguin.h" />
+    <ClInclude Include="Ph4_Penguin_Weapon.h" />
     <ClInclude Include="Ph4_Swing_Platform.h" />
     <ClInclude Include="Player.h">
       <SubType>
@@ -279,6 +280,7 @@
     <ClCompile Include="Ph4_Bepi_Weapon.cpp" />
     <ClCompile Include="Ph4_Penguin.cpp" />
     <ClCompile Include="Ph4_Penguin_State.cpp" />
+    <ClCompile Include="Ph4_Penguin_Weapon.cpp" />
     <ClCompile Include="Ph4_Swing_Platform.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>

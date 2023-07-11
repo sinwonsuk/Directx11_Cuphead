@@ -39,7 +39,7 @@ void ContentsCore::GameStart()
 	//GameEngineCore::CreateLevel<OverWorld>();
 	//GameEngineCore::CreateLevel<Crown_Bepi_Level>();
 	//GameEngineCore::CreateLevel<TitleLevel>();
-	//GameEngineCore::CreateLevel<PlayLevel>();
+	GameEngineCore::CreateLevel<PlayLevel>();
 	//GameEngineCore::CreateLevel<giantStageLevel>();
 	GameEngineCore::CreateLevel<DogAirplaneLevel>();
 	GameEngineCore::ChangeLevel("DogAirplaneLevel");

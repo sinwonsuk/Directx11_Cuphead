@@ -40,4 +40,5 @@ enum class CollisionType
 	ph4_Bepi_penguin,
 	RollerCoaster_Attack, 
 	Ph4_swing_Platform,
+	Ph4_Beppi_Body,
 };

@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "ph3_DogAirPlane.h"
 #include "TutorialObject.h"
+#include "Ph4_Bepi.h"
 IdleWeapon::IdleWeapon()
 {
 }
@@ -49,6 +50,7 @@ void IdleWeapon::Start()
 
 void IdleWeapon::Update(float _Delta)
 {
+
 
 	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 
@@ -126,7 +128,34 @@ void IdleWeapon::Update(float _Delta)
 		
 		}
 
+		if (Ph4_Bepi::ph4_Bepi != nullptr)
+		{
 
+			if (Collision->Collision((int)CollisionType::Ph4_Beppi_Body))
+			{
+				Ph4_Bepi::ph4_Bepi->Hp -= 1;
+
+				if (CollisionCheck == false)
+				{
+					Ph4_Bepi::ph4_Bepi->Phase4_Idle->ColorOptionValue.PlusColor = { 1,1,1,0 };
+					Ph4_Bepi::ph4_Bepi->Phase4_Idle->ResetLiveTime();
+					UserInterface::Cut += 0.5f;
+					Bullet->ChangeAnimation("Peashooter_Death");
+					CollisionCheck = true;
+				}
+				std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+				collision->Death();
+			}
+
+
+
+			if (CollisionCheck == true && Ph4_Bepi::ph4_Bepi->Phase4_Idle->GetLiveTime() > 0.05f)
+			{
+				Ph4_Bepi::ph4_Bepi->Phase4_Idle->ColorOptionValue.PlusColor = { 0,0,0,0 };
+
+			}
+
+		}
 
 
 	if (GetLiveTime() > 5)

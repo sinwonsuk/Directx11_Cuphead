@@ -203,10 +203,7 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetSortType(0, SortType::ZSort);
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
-	//GameEngineLevel::IsDebugSwitch();
 
-	//
-	////CreateNewCamera
 	player = CreateActor<Player>();
 	player->GetTransform()->AddLocalPosition({ 0,0,0 });
 	std::shared_ptr<TimeFlow> Object = CreateActor<TimeFlow>(10);

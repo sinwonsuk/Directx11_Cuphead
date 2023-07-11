@@ -33,6 +33,10 @@ void Ph4_Bepi::ChangeState(Ph4_Bepi_State _State)
 	case Ph4_Bepi_State::BossAttackEnd:
 		AnimationCheck("Phase4_Attack_End");
 		break;
+	case Ph4_Bepi_State::BossFinish:
+		AnimationCheck("Phase4_End");
+		break;
+
 	default:
 		break;
 	}
@@ -63,7 +67,9 @@ void Ph4_Bepi::UpdateState(float _Time)
 	case Ph4_Bepi_State::BossAttackEnd:
 		BossAttackEndUpdate(_Time);
 		break;
-
+	case Ph4_Bepi_State::BossFinish:
+		BossFinsihUpdate(_Time);
+		break;
 
 
 	default:
@@ -80,6 +86,12 @@ void Ph4_Bepi::BossIdleUpdate(float _Time)
 
 		ChangeState(Ph4_Bepi_State::BossAttackStart);
 		return; 
+	}
+
+	if (Hp < 0)
+	{
+		ChangeState(Ph4_Bepi_State::BossFinish);
+		return;
 	}
 
 }
@@ -110,7 +122,41 @@ void Ph4_Bepi::BossIntroUpdate(float _Time)
 		return; 
 	}
 
+	if (Hp < 0)
+	{
+		ChangeState(Ph4_Bepi_State::BossFinish);
+		return;
+	}
+
 	
+}
+
+void Ph4_Bepi::BossFinsihUpdate(float _Time)
+{
+	if (Phase4_Idle->GetLiveTime() > 0.03f)
+	{
+		Boss_Exploision_Pos.x = GameEngineRandom::MainRandom.RandomFloat(-100.0f, 100.0f);
+		Boss_Exploision_Pos.y = GameEngineRandom::MainRandom.RandomFloat(-100.0f, 100.0f);
+
+		if (Boss_Exploision_Check == false)
+		{
+			Bepi_boss_explosion->ChangeAnimation("Bepi_boss_explosion");
+			Bepi_boss_explosion->On();
+			Bepi_boss_explosion->GetTransform()->SetLocalPosition({ Phase4_Idle->GetTransform()->GetLocalPosition().x - 80.0f + Boss_Exploision_Pos.x , Phase4_Idle->GetTransform()->GetLocalPosition().y + Boss_Exploision_Pos.y + 80.0f });
+			Boss_Exploision_Check = true;
+		}
+
+
+		if (Bepi_boss_explosion->IsAnimationEnd())
+		{
+			++Boss_Exploision_Number;
+			Boss_Exploision_Check = false;
+			Bepi_boss_explosion->Off();
+			Phase4_Idle->ResetLiveTime();
+		}
+	}
+
+
 }
 
 void Ph4_Bepi::BossAttackStartUpdate(float _Time)
@@ -119,6 +165,11 @@ void Ph4_Bepi::BossAttackStartUpdate(float _Time)
 	{
 		ChangeState(Ph4_Bepi_State::BossAttackMiddle);
 		return; 
+	}
+	if (Hp < 0)
+	{
+		ChangeState(Ph4_Bepi_State::BossFinish);
+		return;
 	}
 }
 
@@ -188,7 +239,11 @@ void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 		ChangeState(Ph4_Bepi_State::BossAttackEnd);
 		return; 
 	}
-
+	if (Hp < 0)
+	{
+		ChangeState(Ph4_Bepi_State::BossFinish);
+		return;
+	}
 
 
 }
@@ -201,6 +256,13 @@ void Ph4_Bepi::BossAttackEndUpdate(float _Time)
 		ChangeState(Ph4_Bepi_State::BossIdle);
 		return;
 	}
+
+	if (Hp < 0)
+	{
+		ChangeState(Ph4_Bepi_State::BossFinish);
+		return;
+	}
+
 
 }
 

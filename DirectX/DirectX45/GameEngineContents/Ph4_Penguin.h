@@ -62,6 +62,7 @@ protected:
 
 
 private:
+	bool AttackCheck = false;
 	Ph4_Penguin_State StateValue = Ph4_Penguin_State::Intro;
 	float StopPos = 0;
 
@@ -72,12 +73,14 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_ph3_penguin_roll_ground;
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_ph3_penguin_roll;
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_ph3_penguin_explode;
-
+	std::shared_ptr<class GameEngineCollision> HitCollision;
 	std::shared_ptr<class GameEngineCollision> Collision;
 	float Speed = 500;
 	
 	int IdleNumber = 0; 
 	bool MoveCheck = false;
 	float4 CurPos = {0.0f,0.0f};
+	float Time = 0.0f;
+	bool CollisionCheck = false;
 };
 

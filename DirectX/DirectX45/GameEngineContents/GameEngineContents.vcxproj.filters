@@ -46,44 +46,105 @@
     <ClInclude Include="GiantBoss.h">
       <Filter>Object\Giant</Filter>
     </ClInclude>
-    <ClInclude Include="Dog_ball.h" />
-    <ClInclude Include="BoneWeapon.h" />
-    <ClInclude Include="dogfight_catshoot_yarnball.h" />
-    <ClInclude Include="DogAirPlaneManager.h" />
-    <ClInclude Include="Ph2_DogAirpalne.h" />
-    <ClInclude Include="ph3_DogAirPlane.h" />
-    <ClInclude Include="ph3_Laser.h" />
-    <ClInclude Include="ph3_Dog_Npc.h" />
-    <ClInclude Include="ph3_food_bowl.h" />
-    <ClInclude Include="ph2_Boss_Weapon.h" />
-    <ClInclude Include="UserInterface.h" />
     <ClInclude Include="Boss_Finish.h" />
-    <ClInclude Include="ExWeapon.h" />
     <ClInclude Include="EnumClass.h" />
-    <ClInclude Include="TutorialObject.h" />
     <ClInclude Include="TimeFlow.h" />
-    <ClInclude Include="IntroLevel.h" />
     <ClInclude Include="OverWorld.h">
       <Filter>Levels</Filter>
     </ClInclude>
-    <ClInclude Include="OverHead_Player.h" />
-    <ClInclude Include="OverWorld_Map.h" />
-    <ClInclude Include="Crown_Bepi_Map.h" />
-    <ClInclude Include="Ph1_Bepi.h" />
-    <ClInclude Include="Bepi_Duck.h" />
-    <ClInclude Include="Rollercoaster.h" />
     <ClInclude Include="Crown_Bepi_Level.h">
       <Filter>Levels</Filter>
     </ClInclude>
-    <ClInclude Include="Ph2_Bepi.h" />
-    <ClInclude Include="Ph2_Bepi_Weapon.h" />
-    <ClInclude Include="Ph3_Bepi.h" />
-    <ClInclude Include="Ph3_Bepi_Weapon.h" />
-    <ClInclude Include="Ph3_Bepi_Weapon_Green.h" />
-    <ClInclude Include="Ph4_Bepi.h" />
-    <ClInclude Include="Ph4_Swing_Platform.h" />
-    <ClInclude Include="Ph4_Bepi_Weapon.h" />
-    <ClInclude Include="Ph4_Penguin.h" />
+    <ClInclude Include="BoneWeapon.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="Dog_ball.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="DogAirPlaneManager.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="Bepi_Duck.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="OverHead_Player.h">
+      <Filter>Object\OverWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="OverWorld_Map.h">
+      <Filter>Object\OverWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="Crown_Bepi_Map.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="ExWeapon.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph1_Bepi.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph2_Bepi.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph2_Bepi_Weapon.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="ph2_Boss_Weapon.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph2_DogAirpalne.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph3_Bepi.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph3_Bepi_Weapon.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph3_Bepi_Weapon_Green.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph4_Bepi.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph4_Bepi_Weapon.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph4_Penguin.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph4_Penguin_Weapon.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="ph3_Dog_Npc.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="ph3_DogAirPlane.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="ph3_food_bowl.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="ph3_Laser.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="Rollercoaster.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="dogfight_catshoot_yarnball.h">
+      <Filter>Object\DogAirplane</Filter>
+    </ClInclude>
+    <ClInclude Include="Ph4_Swing_Platform.h">
+      <Filter>Object\Bepi</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialObject.h">
+      <Filter>Object\Turorial</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroLevel.h">
+      <Filter>Object\Intro</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -143,55 +204,128 @@
     <ClCompile Include="GiantBoss.cpp">
       <Filter>Object\Giant</Filter>
     </ClCompile>
-    <ClCompile Include="Dog_ball.cpp" />
-    <ClCompile Include="BoneWeapon.cpp" />
-    <ClCompile Include="dogfight_catshoot_yarnball.cpp" />
-    <ClCompile Include="DogAirPlaneManager.cpp" />
-    <ClCompile Include="Ph2_DogAirpalne.cpp" />
     <ClCompile Include="Ph2_DogAirPlaneState.cpp">
       <Filter>Object\DogAirplane</Filter>
     </ClCompile>
-    <ClCompile Include="ph3_DogAirPlane.cpp" />
     <ClCompile Include="ph3_DogAirPlaneState.cpp">
       <Filter>Object\DogAirplane</Filter>
     </ClCompile>
-    <ClCompile Include="ph3_Laser.cpp" />
-    <ClCompile Include="ph3_Dog_Npc.cpp" />
-    <ClCompile Include="ph3_food_bowl.cpp" />
-    <ClCompile Include="ph2_Boss_Weapon.cpp" />
-    <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="Boss_Finish.cpp" />
-    <ClCompile Include="ExWeapon.cpp" />
-    <ClCompile Include="TutorialObject.cpp" />
     <ClCompile Include="TimeFlow.cpp" />
-    <ClCompile Include="IntroLevel.cpp" />
     <ClCompile Include="OverWorld.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
-    <ClCompile Include="OverHead_Player.cpp" />
-    <ClCompile Include="OverHead_Player_State.cpp" />
-    <ClCompile Include="OverWorld_Map.cpp" />
-    <ClCompile Include="Crown_Bepi_Map.cpp" />
-    <ClCompile Include="Ph1_Bepi.cpp" />
-    <ClCompile Include="Beppi_State.cpp" />
-    <ClCompile Include="Bepi_Duck.cpp" />
-    <ClCompile Include="Rollercoaster.cpp" />
     <ClCompile Include="Crown_Bepi_Level.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
-    <ClCompile Include="Ph2_Bepi.cpp" />
-    <ClCompile Include="Ph2_Beppi_State.cpp" />
-    <ClCompile Include="Ph2_Bepi_Weapon.cpp" />
-    <ClCompile Include="Ph3_Bepi.cpp" />
-    <ClCompile Include="Ph3_Bepi_State.cpp" />
-    <ClCompile Include="Ph3_Bepi_Weapon.cpp" />
-    <ClCompile Include="Ph3_Bepi_Weapon_Green.cpp" />
-    <ClCompile Include="Ph4_Bepi.cpp" />
-    <ClCompile Include="Ph4_Bepi_State.cpp" />
-    <ClCompile Include="Ph4_Swing_Platform.cpp" />
-    <ClCompile Include="Ph4_Bepi_Weapon.cpp" />
-    <ClCompile Include="Ph4_Penguin.cpp" />
-    <ClCompile Include="Ph4_Penguin_State.cpp" />
+    <ClCompile Include="BoneWeapon.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="Dog_ball.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="DogAirPlaneManager.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="Bepi_Duck.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Beppi_State.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="OverHead_Player.cpp">
+      <Filter>Object\OverWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="OverHead_Player_State.cpp">
+      <Filter>Object\OverWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="OverWorld_Map.cpp">
+      <Filter>Object\OverWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="Crown_Bepi_Map.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="ExWeapon.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph1_Bepi.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph2_Bepi.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph2_Bepi_Weapon.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph2_Beppi_State.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="ph2_Boss_Weapon.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph2_DogAirpalne.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph3_Bepi.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph3_Bepi_State.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph3_Bepi_Weapon.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph3_Bepi_Weapon_Green.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph4_Bepi.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph4_Bepi_State.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph4_Bepi_Weapon.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph4_Penguin.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph4_Penguin_State.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph4_Penguin_Weapon.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="ph3_Dog_Npc.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="ph3_DogAirPlane.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="ph3_food_bowl.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="ph3_Laser.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="Rollercoaster.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="dogfight_catshoot_yarnball.cpp">
+      <Filter>Object\DogAirplane</Filter>
+    </ClCompile>
+    <ClCompile Include="Ph4_Swing_Platform.cpp">
+      <Filter>Object\Bepi</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialObject.cpp">
+      <Filter>Object\Turorial</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroLevel.cpp">
+      <Filter>Object\Intro</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">
@@ -214,6 +348,18 @@
     </Filter>
     <Filter Include="Object\Giant">
       <UniqueIdentifier>{cc7c939c-679c-4668-a056-b7ce01d4d5a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Bepi">
+      <UniqueIdentifier>{38cbfed1-af8a-4465-8fc1-16d92bf2a1eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\OverWorld">
+      <UniqueIdentifier>{245053ee-32fe-412e-9920-08e0df0bc12d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Turorial">
+      <UniqueIdentifier>{084b4fc1-e897-4339-b354-dd661774a869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Intro">
+      <UniqueIdentifier>{94d49bd6-8fc3-42e7-8f31-3abb25041fcf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

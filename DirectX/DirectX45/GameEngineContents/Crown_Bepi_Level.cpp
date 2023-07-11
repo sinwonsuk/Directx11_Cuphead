@@ -182,6 +182,8 @@ void Crown_Bepi_Level::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_roll").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("clown_ph3_penguin_explode").GetFullPath());
 
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("penguin_baseball").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Phase4_End").GetFullPath());
 	}
 
 	if (nullptr == GameEngineSprite::Find("FightText_GetReady"))

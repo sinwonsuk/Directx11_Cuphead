@@ -9,8 +9,11 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineSprite.h>
 #include "Ph4_Swing_Platform.h"
+#include "EnumClass.h"
+#include "IdleWeapon.h"
 
 Ph4_Bepi* Ph4_Bepi::ph4_Bepi;
+
 Ph4_Bepi::Ph4_Bepi()
 {
 }
@@ -45,6 +48,7 @@ void Ph4_Bepi::Start()
 	Phase4_Idle->CreateAnimation({ .AnimationName = "Phase4_Attack_Start", .SpriteName = "Phase4_Attack_Start", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 	Phase4_Idle->CreateAnimation({ .AnimationName = "Phase4_Attack_Middle", .SpriteName = "Phase4_Attack_Middle", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
 	Phase4_Idle->CreateAnimation({ .AnimationName = "Phase4_Attack_End", .SpriteName = "Phase4_Attack_End", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+	Phase4_Idle->CreateAnimation({ .AnimationName = "Phase4_End", .SpriteName = "Phase4_End", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 	Phase4_Idle->ChangeAnimation("Phase4_Idle");
 	Phase4_Idle->GetTransform()->AddLocalPosition({ 0.0f,-20.0f,57.0f });
 	
@@ -65,10 +69,21 @@ void Ph4_Bepi::Start()
 	Phase4_Intro_Spin->GetTransform()->AddLocalPosition({ 0.0f,385.0f,55.0f });
 	Phase4_Intro_Spin->Off(); 
 	
-	
+	Bepi_boss_explosion = CreateComponent<GameEngineSpriteRenderer>();
+	Bepi_boss_explosion->CreateAnimation({ .AnimationName = "Bepi_boss_explosion", .SpriteName = "Bepi_boss_explosion", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+	Bepi_boss_explosion->ChangeAnimation("Bepi_boss_explosion");
+	Bepi_boss_explosion->GetTransform()->AddLocalPosition({ 0.0f,385.0f,55.0f });
+	Bepi_boss_explosion->Off();
+
 
 	
 
+	Collision = CreateComponent<GameEngineCollision>();
+	Collision->GetTransform()->SetLocalScale({ 200.0f, 300.0f, 100.0f });
+	Collision->GetTransform()->AddLocalPosition({ 0.0f,100.0f });
+
+	Collision->SetOrder((int)CollisionType::Ph4_Beppi_Body);
+	Collision->SetColType(ColType::AABBBOX2D);
 
 
 
@@ -84,10 +99,12 @@ void Ph4_Bepi::Update(float _Delta)
 
 	Platform += _Delta;
 
-	
+
+
 	
 	UpdateState(_Delta);
 
+	
 
 	if (Swing_Platform_Intro == true && Platform > 1.3)
 	{

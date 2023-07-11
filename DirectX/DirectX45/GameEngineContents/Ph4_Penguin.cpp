@@ -70,10 +70,6 @@ void Ph4_Penguin::Start()
 
 void Ph4_Penguin::Update(float _Delta)
 {
-	
-
-
-
 
          if (clown_ph3_penguin_clapspark->IsAnimationEnd())
          {

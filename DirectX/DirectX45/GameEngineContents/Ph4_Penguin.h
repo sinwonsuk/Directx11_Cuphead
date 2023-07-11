@@ -72,6 +72,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_ph3_penguin_roll_ground;
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_ph3_penguin_roll;
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_ph3_penguin_explode;
+
 	std::shared_ptr<class GameEngineCollision> Collision;
 	float Speed = 500;
 	

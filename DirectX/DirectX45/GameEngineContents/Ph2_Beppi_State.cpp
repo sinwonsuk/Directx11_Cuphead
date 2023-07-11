@@ -5,6 +5,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "Ph2_Bepi_Weapon.h"
+#include "Crown_Bepi_Level.h"
 void Ph2_Bepi::ChangeState(Ph2_Bepi_State _State)
 {
 	Ph2_Bepi_State NextState = _State;
@@ -151,16 +152,23 @@ void Ph2_Bepi::BossFinishUpdate(float _Time)
 
 		}
 	}
-	if (Boss_Exploision_Number == 5)
+	if (Boss_Exploision_Number > 4)
 	{
 		Phase2_Idle_Head->GetTransform()->AddLocalPosition({ float4::Up * 500.0f * _Time });
 	}
 	
-	if (Phase2_Idle_Head->GetTransform()->GetLocalRotation().y > 1000.0f)
+	if (Phase2_Idle_Head->GetTransform()->GetLocalRotation().y > 500.0f)
 	{
-		this->Death(); 
+	
+		
 	}
 
+	if (GetLiveTime() > 5)
+	{
+		Crown_Bepi_Level* Level = (Crown_Bepi_Level*)GetLevel();
+		Level->PaseCheck = Pase::Pase3;
+		this->Death();
+	}
 }
 
 void Ph2_Bepi::BossIdleUpdate(float _Time)
@@ -454,6 +462,7 @@ void Ph2_Bepi::BossIdleUpdate(float _Time)
 	{
 		Collision->Off(); 
 		helium_pipe_puff->Off(); 
+		ResetLiveTime(); 
 		ChangeState(Ph2_Bepi_State::BossFinish);
 
 		//Phase2_Idle_Head->ResetLiveTime(); 

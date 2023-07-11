@@ -169,6 +169,7 @@ void Crown_Bepi_Map::Update(float _Delta)
 
 	Rollercoaster_Time += _Delta; 
 	Rollercoaster_Time_BG += _Delta;
+
 	if (Ph4_Check == false)
 	{
 		Ph4_Rollercoaster_Time_BG += _Delta;
@@ -191,25 +192,26 @@ void Crown_Bepi_Map::Update(float _Delta)
 
 	Crown_Bepi_Level* Level = (Crown_Bepi_Level*)GetLevel();
 
-	if (Level->PaseCheck == Pase::Pase1)
+	if (Level->PaseCheck == Pase::Pase4 && sdasd > 7)
 	{
-		if (Ph4_Rollercoaster_Time_BG > 4)
-		{
-
-			if (Ph4_Bepi::ph4_Bepi->StateValue == Ph4_Bepi_State::BossIdle && Ph4_Check == false)
-			{
-				std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
-				Object->Speed = 700;
-
-				Ph4_Rollercoaster_Time_BG = 0;
-				Rollercoaster_Time = 17;
-				Ph4_Check = true;
-			
-
-			}
-		}
-	
 		
+			if (Ph4_Rollercoaster_Time_BG > 4)
+			{
+
+				if (Ph4_Bepi::ph4_Bepi->StateValue == Ph4_Bepi_State::BossIdle && Ph4_Check == false)
+				{
+					std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
+					Object->Speed = 700;
+
+					Ph4_Rollercoaster_Time_BG = 0;
+					Rollercoaster_Time = 17;
+					Ph4_Check = true;
+
+
+				}
+			}
+
+
 		if (Rollercoaster_Time > 20 && Ph4_Check == true)
 		{
 			clown_bg_light_on->On();
@@ -219,19 +221,19 @@ void Crown_Bepi_Map::Update(float _Delta)
 			TransformData Date = Object->GetTransform()->GetTransDataRef();
 
 			Object->MoveCheck = 1;
-			Rollercoaster_Time = 0;
-
-			
+			Rollercoaster_Time = 0;			
 		}
 	}
-	/*else if (Level->PaseCheck == Pase::Pase1)
+	else if (Level->PaseCheck == Pase::Pase2 || Level->PaseCheck == Pase::Pase3)
 	{
 		if (Rollercoaster_Time_BG > 15)
 		{
+			Ph4_Time_bool = true;
 			std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
 			Rollercoaster_Time_BG = 0;
 			Rollercoaster_Time = 14;
 			clown_bg_light_on->Off();
+			sdasd = 0; 
 		}
 
 		if (Rollercoaster_Time > 20)
@@ -239,14 +241,18 @@ void Crown_Bepi_Map::Update(float _Delta)
 			clown_bg_light_on->On(); 
 
 			std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
-
+			Ph4_Time_bool = true;
 			TransformData Date = Object->GetTransform()->GetTransDataRef(); 
-
+			sdasd = 0; 
 			Object->MoveCheck = 1;
 			Rollercoaster_Time = 0;
 		}
-	}*/
+	}
 
+	if (Ph4_Time_bool == true)
+	{
+		sdasd += _Delta;
+	}
 
 
 

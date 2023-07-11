@@ -57,12 +57,16 @@ void Ph4_Bepi::Start()
 	Phase4_Lights->ChangeAnimation("Phase4_Lights");
 	Phase4_Lights->GetTransform()->AddLocalPosition({ 0.0f,375.0f,57.0f });
 
+	Phase4_Intro_Texture = CreateComponent<GameEngineSpriteRenderer>();
+	Phase4_Intro_Texture->SetScaleToTexture("Phase4_Intro_0.png");
+	Phase4_Intro_Texture->GetTransform()->AddLocalPosition({ 0.0f,415.0f,55.0f });
 
 	Phase4_Intro = CreateComponent<GameEngineSpriteRenderer>();
 	Phase4_Intro->CreateAnimation({ .AnimationName = "Phase4_Intro", .SpriteName = "Phase4_Intro", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true });
 	Phase4_Intro->ChangeAnimation("Phase4_Intro");
 	Phase4_Intro->GetTransform()->AddLocalPosition({ 0.0f,415.0f,55.0f });
-	
+	Phase4_Intro->Off(); 
+
 	Phase4_Intro_Spin = CreateComponent<GameEngineSpriteRenderer>();
 	Phase4_Intro_Spin->CreateAnimation({ .AnimationName = "Phase4_Spin", .SpriteName = "Phase4_Spin", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true });
 	Phase4_Intro_Spin->ChangeAnimation("Phase4_Spin");
@@ -89,32 +93,34 @@ void Ph4_Bepi::Start()
 
 	
 
-	GetTransform()->AddLocalPosition({ 0.0f,-100.0f });
+	GetTransform()->AddLocalPosition({ 0.0f,-700.0f });
 
 
 }
 
 void Ph4_Bepi::Update(float _Delta)
 {
-
-	Platform += _Delta;
-
+	if (GetTransform()->GetLocalPosition().y > -100.0f)
+	{
+		Platform += _Delta;
+	}
 
 
 	
 	UpdateState(_Delta);
 
 	
-
-	if (Swing_Platform_Intro == true && Platform > 1.3)
+	if (GetTransform()->GetLocalPosition().y > -100.0f)
 	{
-		std::shared_ptr<Ph4_Swing_Platform> Object = GetLevel()->CreateActor<Ph4_Swing_Platform>();
-		Object->choic = Choice::Idle;
-		Object->GetTransform()->AddLocalPosition({ -900.0f,70.0f });
+		if (Swing_Platform_Intro == true && Platform > 1.3)
+		{
+			std::shared_ptr<Ph4_Swing_Platform> Object = GetLevel()->CreateActor<Ph4_Swing_Platform>();
+			Object->choic = Choice::Idle;
+			Object->GetTransform()->AddLocalPosition({ -900.0f,70.0f });
 
-		Platform = 0;
+			Platform = 0;
+		}
 	}
-
 }
 
 void Ph4_Bepi::Render(float _Delta)

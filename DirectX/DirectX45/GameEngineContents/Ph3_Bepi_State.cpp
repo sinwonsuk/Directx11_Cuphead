@@ -6,6 +6,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "Ph3_Bepi_Weapon.h"
 #include "Ph3_Bepi_Weapon_Green.h"
+#include "Crown_Bepi_Level.h"
 
 void Ph3_Bepi::ChangeState(Ph3_Bepi_State _State)
 {
@@ -158,8 +159,14 @@ void Ph3_Bepi::BossIdleUpdate(float _Time)
 
 }
 void Ph3_Bepi::BossIntroUpdate(float _Time)
-
 {
+
+
+
+
+
+
+
 	if (GetTransform()->GetLocalPosition().y > 400.0f)
 	{
 		GetTransform()->AddLocalPosition({ 0,-1.0f* _Time * 400.0f });
@@ -1097,8 +1104,12 @@ void Ph3_Bepi::BossFinish_Finish_Update(float _Time)
 		Green_Horse_Head->GetTransform()->AddLocalPosition({ 0, 1.0f * _Time * 600.0f });
 		Green_Horse_Body->GetTransform()->AddLocalPosition({ 0, 1.0f * _Time * 600.0f });
 	}
-
-
+	if (GetLiveTime() > 5)
+	{
+		Crown_Bepi_Level* Level = (Crown_Bepi_Level*)GetLevel();
+		Level->PaseCheck = Pase::Pase4;
+	}
+	
 }
 
 

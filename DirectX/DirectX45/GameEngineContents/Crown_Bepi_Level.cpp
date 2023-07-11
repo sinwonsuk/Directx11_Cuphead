@@ -13,6 +13,7 @@
 #include "Ph4_Swing_Platform.h"
 #include "Player.h"
 #include "TimeFlow.h"
+#include "UserInterface.h"
 Crown_Bepi_Level::Crown_Bepi_Level()
 {
 }
@@ -23,29 +24,44 @@ Crown_Bepi_Level::~Crown_Bepi_Level()
 
 void Crown_Bepi_Level::Update(float _DeltaTime)
 {
-	/*switch (PaseCheck)
+	switch (PaseCheck)
 	{
 	case Pase::Pase1:
 	{
 		ph1_Bepi->On();
 		ph2_Bepi->Off(); 
-
+		ph3_Bepi->Off();
+		ph4_Bepi->Off();
 
 	}
 		break;
 	case Pase::Pase2:
-
+	{
 		ph1_Bepi->Off();
 		ph2_Bepi->On();
-
+		ph3_Bepi->Off();
+		ph4_Bepi->Off();
+	}
 		break;
 	case Pase::Pase3:
+	{
+		ph1_Bepi->Off();
+		ph2_Bepi->Off();
+		ph3_Bepi->On();
+		ph4_Bepi->Off();
+	}
 		break;
 	case Pase::Pase4:
+	{
+		ph1_Bepi->Off();
+		ph2_Bepi->Off();
+		ph3_Bepi->Off();
+		ph4_Bepi->On();
+	}
 		break;
 	default:
 		break;
-	}*/
+	}
 
 
 }
@@ -195,7 +211,17 @@ void Crown_Bepi_Level::Start()
 		NewDir.Move("DogAirplane");
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_GetReady").GetFullPath());
 	}
-	
+
+	if (nullptr == GameEngineSprite::Find("FightText_KO"))
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Texture");
+		NewDir.Move("DogAirplane");
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_KO").GetFullPath());
+	}
+
 
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 	GetMainCamera()->SetSortType(0, SortType::ZSort);
@@ -206,38 +232,29 @@ void Crown_Bepi_Level::Start()
 	{
 		std::shared_ptr<Crown_Bepi_Map> Object = CreateActor<Crown_Bepi_Map>();
 	}
-
-	/*{
-		ph1_Bepi = CreateActor<Ph1_Bepi>();
-	}*/
-	
-	/*{
-		ph2_Bepi = CreateActor<Ph2_Bepi>();
-	}*/
-
-
 	{
-		std::shared_ptr<Ph4_Bepi> Object = CreateActor<Ph4_Bepi>();
+		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
 	}
-
-	//{
-	//	std::shared_ptr<Ph4_Swing_Platform> Object = CreateActor<Ph4_Swing_Platform>();
-	//}
-	
-	
-	
-	//{
-	//	std::shared_ptr<Bepi_Duck> Object = CreateActor<Bepi_Duck>();
-	//}
-	// 
-	
-	/*{
-		std::shared_ptr<Ph3_Bepi> Object = CreateActor<Ph3_Bepi>();
-	}*/
-
 	{
 		std::shared_ptr<TimeFlow> Object = CreateActor<TimeFlow>(10);
 	}
+
+	{
+		ph1_Bepi = CreateActor<Ph1_Bepi>();
+	}
+	
+	{
+		ph2_Bepi = CreateActor<Ph2_Bepi>();
+	}
+
+	{
+		ph3_Bepi = CreateActor<Ph3_Bepi>();
+	}
+	{
+		ph4_Bepi = CreateActor<Ph4_Bepi>();
+	}
+
+
 	
 	
 }

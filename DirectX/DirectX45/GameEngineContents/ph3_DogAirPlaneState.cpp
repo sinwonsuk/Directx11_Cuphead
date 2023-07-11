@@ -913,9 +913,7 @@ void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
 	if (Hp < 0)
 	{
 		ph3_dogcopter_rotated_idle->ChangeAnimation("ph3_dogcopter_sideways_death");
-		//FightText_KO->On();
-	//	GameEngineTime::GlobalTime.SetGlobalTimeScale(0.0f);
-
+	
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
 		Object->On();

@@ -72,6 +72,8 @@ private:
 
 
 	float yellow = 0.0f;
+	float Ph4_TimeCheck = 0;
+	float Ph4_Rollercoaster_Time = 14; 
 	float Ph4_Rollercoaster_Time_BG = 14;
 	float Rollercoaster_Time_BG = 14; 
 	float Rollercoaster_Time = 14;
@@ -92,5 +94,9 @@ private:
 	float cloud2 = 0.0f;
 
 	float moon = 0.0f;
+
+	float sdasd = 0;
+
+	bool Ph4_Time_bool = false;
 };
 

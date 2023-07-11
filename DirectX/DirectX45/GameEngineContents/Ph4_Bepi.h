@@ -46,7 +46,7 @@ public:
 	void BossAttackMiddleUpdate(float _Time);
 	void BossAttackEndUpdate(float _Time);
 	Ph4_Bepi_State StateValue = Ph4_Bepi_State::BossIntro;
-	int Hp = 0;
+	int Hp = 20;
 
 
 
@@ -61,12 +61,12 @@ protected:
 	float4 TestColor;
 
 private:
-	
+	bool BossFinish = false;
 	int AttackNumber = 0; 
 	int RandomPos = 0;
 
 	
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro_Texture;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro_Spin;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Lights;

@@ -7,6 +7,7 @@
 #include "Ph4_Swing_Platform.h"
 #include "Ph4_Penguin.h"
 #include "Crown_Bepi_Map.h"
+#include "Boss_Finish.h"
 void Ph4_Bepi::ChangeState(Ph4_Bepi_State _State)
 {
 	Ph4_Bepi_State NextState = _State;
@@ -90,6 +91,15 @@ void Ph4_Bepi::BossIdleUpdate(float _Time)
 
 	if (Hp < 0)
 	{
+		if (BossFinish == false)
+		{
+			Phase4_Idle->ColorOptionValue.PlusColor = { 0,0,0,0 };
+			std::shared_ptr<Boss_Finish> Object = GetLevel()->CreateActor<Boss_Finish>(50);
+			BossFinish = true;
+		}
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+
 		ChangeState(Ph4_Bepi_State::BossFinish);
 		return;
 	}
@@ -98,41 +108,64 @@ void Ph4_Bepi::BossIdleUpdate(float _Time)
 
 void Ph4_Bepi::BossIntroUpdate(float _Time)
 {
-	if (Phase4_Intro->IsAnimationEnd() && Swing_Platform_Intro == false)
+	if (GetTransform()->GetLocalPosition().y < -100.0f)
 	{
-		Phase4_Intro->Off();
-		Phase4_Intro_Spin->On();
-		umbrella_bk->On();
-
-		std::shared_ptr<Ph4_Swing_Platform> Object = GetLevel()->CreateActor<Ph4_Swing_Platform>();
-		Object->GetTransform()->AddLocalPosition({ -800.0f,200.0f });
-
-		std::shared_ptr<Ph4_Swing_Platform> Object2 = GetLevel()->CreateActor<Ph4_Swing_Platform>();
-		Object2->GetTransform()->AddLocalPosition({ -500.0f,200.0f });
-
-		std::shared_ptr<Ph4_Swing_Platform> Object3 = GetLevel()->CreateActor<Ph4_Swing_Platform>();
-		Object3->GetTransform()->AddLocalPosition({ -200.0f,200.0f });
-
-		std::shared_ptr<Ph4_Swing_Platform> Object4 = GetLevel()->CreateActor<Ph4_Swing_Platform>();
-		Object4->GetTransform()->AddLocalPosition({ 100.0f,200.0f });
-
-		Swing_Platform_Intro = true;
-		ResetLiveTime(); 
-		ChangeState(Ph4_Bepi_State::BossIdle);
-		return; 
+		GetTransform()->AddLocalPosition({ float4::Up * _Time * 500.0f });
 	}
-
-	if (Hp < 0)
-	{
-		ChangeState(Ph4_Bepi_State::BossFinish);
-		return;
-	}
-
 	
+
+	if (GetTransform()->GetLocalPosition().y > -100.0f)
+	{
+		Phase4_Intro_Texture->Off();
+		Phase4_Intro->On(); 
+
+		if (Phase4_Intro->IsAnimationEnd() && Swing_Platform_Intro == false)
+		{
+			Phase4_Intro->Off();
+			Phase4_Intro_Spin->On();
+			umbrella_bk->On();
+
+			std::shared_ptr<Ph4_Swing_Platform> Object = GetLevel()->CreateActor<Ph4_Swing_Platform>();
+			Object->GetTransform()->AddLocalPosition({ -800.0f,200.0f });
+
+			std::shared_ptr<Ph4_Swing_Platform> Object2 = GetLevel()->CreateActor<Ph4_Swing_Platform>();
+			Object2->GetTransform()->AddLocalPosition({ -500.0f,200.0f });
+
+			std::shared_ptr<Ph4_Swing_Platform> Object3 = GetLevel()->CreateActor<Ph4_Swing_Platform>();
+			Object3->GetTransform()->AddLocalPosition({ -200.0f,200.0f });
+
+			std::shared_ptr<Ph4_Swing_Platform> Object4 = GetLevel()->CreateActor<Ph4_Swing_Platform>();
+			Object4->GetTransform()->AddLocalPosition({ 100.0f,200.0f });
+
+			Swing_Platform_Intro = true;
+			ResetLiveTime();
+			ChangeState(Ph4_Bepi_State::BossIdle);
+			return;
+		}
+
+		if (Hp < 0)
+		{
+			Phase4_Idle->ColorOptionValue.PlusColor = { 0,0,0,0 };
+			GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+			GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+			if (BossFinish == false)
+			{
+				std::shared_ptr<Boss_Finish> Object = GetLevel()->CreateActor<Boss_Finish>(50);
+				BossFinish = true;
+			}
+
+
+			ChangeState(Ph4_Bepi_State::BossFinish);
+			return;
+		}
+
+	}
 }
 
 void Ph4_Bepi::BossFinsihUpdate(float _Time)
 {
+	Collision->Off(); 
+
 	if (Phase4_Idle->GetLiveTime() > 0.03f)
 	{
 		Boss_Exploision_Pos.x = GameEngineRandom::MainRandom.RandomFloat(-100.0f, 100.0f);
@@ -168,6 +201,14 @@ void Ph4_Bepi::BossAttackStartUpdate(float _Time)
 	}
 	if (Hp < 0)
 	{
+		Phase4_Idle->ColorOptionValue.PlusColor = { 0,0,0,0 };
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+		if (BossFinish == false)
+		{
+			std::shared_ptr<Boss_Finish> Object = GetLevel()->CreateActor<Boss_Finish>(50);
+			BossFinish = true;
+		}
 		ChangeState(Ph4_Bepi_State::BossFinish);
 		return;
 	}
@@ -241,6 +282,16 @@ void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 	}
 	if (Hp < 0)
 	{
+		Phase4_Idle->ColorOptionValue.PlusColor = { 0,0,0,0 };
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+
+		if (BossFinish == false)
+		{
+			std::shared_ptr<Boss_Finish> Object = GetLevel()->CreateActor<Boss_Finish>(50);
+			BossFinish = true;
+
+		}
 		ChangeState(Ph4_Bepi_State::BossFinish);
 		return;
 	}
@@ -259,6 +310,16 @@ void Ph4_Bepi::BossAttackEndUpdate(float _Time)
 
 	if (Hp < 0)
 	{
+		Phase4_Idle->ColorOptionValue.PlusColor = { 0,0,0,0 };
+		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
+		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
+
+		if (BossFinish == false)
+		{
+			std::shared_ptr<Boss_Finish> Object = GetLevel()->CreateActor<Boss_Finish>(50);
+			BossFinish = true;
+		}
+
 		ChangeState(Ph4_Bepi_State::BossFinish);
 		return;
 	}

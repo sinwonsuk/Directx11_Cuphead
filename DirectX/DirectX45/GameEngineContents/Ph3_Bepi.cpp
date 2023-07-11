@@ -98,6 +98,9 @@ void Ph3_Bepi::Update(float _Delta)
 	if (Collision->Collision((int)CollisionType::Bullet) && CollisonCheck == false)
 	{
 		Hp -= 1;
+
+
+
 		if (CollisonCheck == false)
 		{
 			Yellow_Horse_Body->ColorOptionValue.PlusColor = { 1,1,1,0 };

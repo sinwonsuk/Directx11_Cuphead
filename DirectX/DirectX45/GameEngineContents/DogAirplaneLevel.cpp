@@ -205,12 +205,14 @@ void DogAirplaneLevel::Start()
 
 
 	player = CreateActor<Player>();
+
 	player->GetTransform()->AddLocalPosition({ 0,0,0 });
 	std::shared_ptr<TimeFlow> Object = CreateActor<TimeFlow>(10);
 	{
 		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
 	}
 	
+
 	BackGround = CreateActor<DogAirplaneBackground>();
 
 	Npc = CreateActor<NpcAirplane>();

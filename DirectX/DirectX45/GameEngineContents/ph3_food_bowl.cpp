@@ -9,10 +9,12 @@
 
 ph3_food_bowl::ph3_food_bowl()
 {
+
 }
 
 ph3_food_bowl::~ph3_food_bowl()
 {
+
 }
 
 void ph3_food_bowl::Start()
@@ -93,10 +95,12 @@ void ph3_food_bowl::Update(float _Delta)
 	{
 	case 0:
 
+
+
 		if (Gravity.y > -8)
 		{
 			Gravity += float4::Down * 20.0f * _Delta;
-			Bullet->GetTransform()->AddLocalPosition({ Gravity });
+			Bullet->GetTransform()->AddLocalPosition({ float4::Down * 20.0f * _Delta });
 			Bullet->GetTransform()->AddLocalPosition(LeftMoveDir * _Delta * 650);
 
 		}
@@ -145,7 +149,7 @@ void ph3_food_bowl::Update(float _Delta)
 		if (Gravity.y > -8)
 		{
 			Gravity += float4::Down * 20.0f * _Delta;
-			Bullet->GetTransform()->AddLocalPosition({ Gravity });
+			Bullet->GetTransform()->AddLocalPosition({ float4::Down * 20.0f * _Delta });
 			Bullet->GetTransform()->AddLocalPosition(RightMoveDir * _Delta * 650);
 
 		}

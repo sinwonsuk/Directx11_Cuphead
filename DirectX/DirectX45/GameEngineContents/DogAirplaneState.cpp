@@ -11,6 +11,7 @@
 
 void DogAirplane::ChangeState(DogAirplaneState _State)
 {
+
 	DogAirplaneState NextState = _State;
 	DogAirplaneState PrevState = StateValue;
 
@@ -38,20 +39,23 @@ void DogAirplane::ChangeState(DogAirplaneState _State)
 	case DogAirplaneState::BossAttackPase1:
 		AnimationCheck("bulldog_Attack_Pase1");
 		break;
+
 	case DogAirplaneState::bulldog_Jump_Reverse:
 		AnimationCheck("bulldog_Jump_Reverse");
 		break;
+
+
 	case DogAirplaneState::BossAttackPase2Intro:
 		AnimationCheck("bulldog_Attack2_Pase1_intro");
 		break;
+
 	case DogAirplaneState::BossAttackPase2:
 		AnimationCheck("bulldog_Attack2_Pase1_Attack");
 		break;
+
 	default:
 		break;
 	}
-
-
 }
 
 
@@ -69,7 +73,6 @@ void DogAirplane::UpdateState(float _Time)
 	case DogAirplaneState::bulldog_Idle:
 		BossIdleUpdate(_Time);
 		break;
-
 	case DogAirplaneState::BossIdleHand:
 
 	case DogAirplaneState::bulldog_Jump:
@@ -97,8 +100,6 @@ void DogAirplane::UpdateState(float _Time)
 		break;
 	}
 
-
-	
 }
 
 void DogAirplane::BossIdleUpdate(float _Time)
@@ -107,7 +108,6 @@ void DogAirplane::BossIdleUpdate(float _Time)
 	{
 		Airplane_Tail->Off();
 		Airplane_Wing->Off();
-
 		AirplaneFlap_A->Off();
 		AirplaneFlap_B->Off();
 		AirplaneFlap_C->Off();
@@ -136,24 +136,16 @@ void DogAirplane::BossIdleUpdate(float _Time)
 	{
 		++bulldogIdleCheck;
 	}
-	
-
 
 	if (bulldogIdleCheck == 2)
 	{
 		
 		CurPos = AirplaneSpin->GetTransform()->GetLocalPosition();
-
 		bulldogIdle->GetTransform()->AddLocalPosition({ 0,0, 3 });
 		bulldogIdleCheck = 0;
 		ChangeState(DogAirplaneState::bulldog_Jump);
 		return; 
 	}
-	
-
-	
-
-
 }
 
 void DogAirplane::BossIntroUpdate(float _Time)
@@ -180,9 +172,6 @@ void DogAirplane::BossIntroUpdate(float _Time)
 	{
 		bulldogIntro->Off();
 	}
-
-	
-
 
 
 }
@@ -226,6 +215,7 @@ void DogAirplane::BossIntro2Update(float _Time)
 
 void DogAirplane::BossJumpReverseUpdate(float _Time)
 {
+
 	AirplaneSpin->GetTransform()->AddWorldPosition({ float4::Down * Speed * _Time });
 	Airplane_Back->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
 	Airplane_Front->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
@@ -293,12 +283,6 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 		}
 	}
 
-
-
-
-
-
-
 	if (Pase1_Attack < 0)
 	{
 		
@@ -350,6 +334,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 			BoneCheck = 0;
 		}
 	}
+
 	else if (Pase1_Attack > 0)
 	{
 		Collision->GetTransform()->SetLocalPosition({ 600,CollisionMove });
@@ -407,10 +392,6 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 			BoneCheck = 0;
 		}
 	}
-
-	
-
-	
 
 	if (bulldogIdle->IsAnimationEnd())
 	{
@@ -609,26 +590,11 @@ void DogAirplane::UnloadUpdate(float _Time)
 		GameEngineSprite::UnLoad("acada");
 		GameEngineSprite::UnLoad("Ph1_Death_Front");
 		++unloadCheck;
-
 	}
 	break;
 	default:
 		break;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-
-
 }
 
 
@@ -643,6 +609,9 @@ void DogAirplane::BossAttackPase2IntroUpdate(float _Time)
 
 void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 {
+
+
+
 	if (Pase1_Attack < 0)
 	{
 		if (YarnballCheck == 0 && bulldogIdle->GetCurrentFrame() == 16)
@@ -672,6 +641,8 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 	}
 	else if (Pase1_Attack > 0)
 	{
+
+
 		if (YarnballCheck == 0 && bulldogIdle->GetCurrentFrame() == 16)
 		{
 			++YarnballCheck;

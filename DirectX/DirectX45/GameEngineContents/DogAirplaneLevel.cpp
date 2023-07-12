@@ -48,7 +48,20 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 		Ph2_DogAirpalne_Bottom->Off();
 		Ph3_DogAirpalne->On(); 
 	}
+	break;
+	case 3:
+	{
 
+		Ph1_DogAirplane->Death(); 
+		Ph2_DogAirpalne_Left->Death();
+		Ph2_DogAirpalne_Right->Death();
+		Ph2_DogAirpalne_Top->Death();
+		Ph2_DogAirpalne_Bottom->Death();
+		Ph3_DogAirpalne->Death();
+		BackGround->Death(); 
+		Npc->Death(); 
+		player->Death(); 
+	}
 	break;
 
 

@@ -27,7 +27,7 @@ protected:
 
 
 private:
-	void PlayerCreate();
+	
 
 
 };

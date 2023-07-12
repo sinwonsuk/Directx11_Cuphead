@@ -24,7 +24,7 @@ NpcAirplane::~NpcAirplane()
 
 void NpcAirplane::Start()
 {
-	if (nullptr == GameEngineSprite::Find("Npc_Airplane_Back"))
+	/*if (nullptr == GameEngineSprite::Find("Npc_Airplane_Back"))
 	{
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("ContentResources");
@@ -39,7 +39,7 @@ void NpcAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("NpcIntro").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Npc_Intro2").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Npc_Idle").GetFullPath());
-	}
+	}*/
 
 
 
@@ -169,7 +169,7 @@ void NpcAirplane::Update(float _Delta)
 	
 	TransformData date = Npc->GetTransform()->GetTransDataRef(); 
 
-	if (DogAirplane::Finish == true && Npc->GetTransform()->GetLocalPosition().y > -75.0f)
+	if (DogAirplane::Finish == true && Npc->GetTransform()->GetLocalPosition().y > -75.0f )
 	{
 		DogAirplane::Finish = false;
 		DogAirplaneLevel* A = (DogAirplaneLevel*)GetLevel();
@@ -184,20 +184,27 @@ void NpcAirplane::Update(float _Delta)
 			)
 		{
 			float4 a = { 0,-230.0f };
-			float4  ad = { Npc->GetTransform()->GetLocalPosition().x, Npc->GetTransform()->GetLocalPosition().y };
-			float4 b = a - ad;
-			test = b.NormalizeReturn();
 
-			Player::MainPlayer->GetTransform()->AddLocalPosition({ test * 1.3f });
-			Npc->GetTransform()->AddLocalPosition({ test * 1.3f });
-			Npc_Airplane_Back->GetTransform()->AddLocalPosition({ test * 1.3f });
-			Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ test * 1.3f });
-			Npc_Airplane_Front->GetTransform()->AddLocalPosition({ test * 1.3f });
-			Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ test * 1.3f });
+			float4 MoveDir1 = { a - Npc->GetTransform()->GetLocalPosition() };
+			MoveDir1.Normalize();
 
-			Player_Pos_Y_Check -= test.y * 1.4f;
+			MoveDir = MoveDir1.NormalizeReturn();
 
-			if (Npc->GetTransform()->GetLocalPosition().y < -225.0f)
+		
+
+			Player::MainPlayer->GetTransform()->AddLocalPosition({ MoveDir.x * 1.3f *_Delta * 200.0f,  MoveDir.y * 1.3f * _Delta * 200.0f });
+			Npc->GetTransform()->AddLocalPosition({ MoveDir * 1.3f * _Delta * 200.0f });
+			Npc_Airplane_Back->GetTransform()->AddLocalPosition({ MoveDir * 1.3f * _Delta * 200.0f });
+			Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ MoveDir * 1.3f * _Delta * 200.0f });
+			Npc_Airplane_Front->GetTransform()->AddLocalPosition({ MoveDir * 1.3f * _Delta * 200.0f });
+			Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ MoveDir * 1.3f * _Delta * 200.0f });
+
+
+
+
+			Player_Pos_Y_Check -= test.y * 1.4f * _Delta * 200.0f;
+
+			if (Npc->GetTransform()->GetLocalPosition().y < -215.0f)
 			{
 				Player_Pos_Y_Check = -150.0f;
 				AirPlaneLevel->ad = 2;

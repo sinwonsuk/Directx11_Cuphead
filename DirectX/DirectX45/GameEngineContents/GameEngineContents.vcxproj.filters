@@ -147,6 +147,8 @@
     </ClInclude>
     <ClInclude Include="DogAirPlane_Loading_Level.h" />
     <ClInclude Include="DogAirPlane_Loading.h" />
+    <ClInclude Include="DogAirPlaneUnLoad_Level.h" />
+    <ClInclude Include="DogAirPlane_UnLoad.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -330,6 +332,8 @@
     </ClCompile>
     <ClCompile Include="DogAirPlane_Loading_Level.cpp" />
     <ClCompile Include="DogAirPlane_Loading.cpp" />
+    <ClCompile Include="DogAirPlaneUnLoad_Level.cpp" />
+    <ClCompile Include="DogAirPlane_UnLoad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

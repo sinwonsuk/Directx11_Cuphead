@@ -40,7 +40,7 @@ void DogAirplane::AnimationCheck(const std::string_view& _AnimationName)
 void DogAirplane::Start()
 {
 
-	if (nullptr == GameEngineSprite::Find("Chinook_Pilot_Saluki"))
+	/*if (nullptr == GameEngineSprite::Find("Chinook_Pilot_Saluki"))
 	{
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("ContentResources");
@@ -76,7 +76,7 @@ void DogAirplane::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("acada").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Death_Front").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_GetReady").GetFullPath());
-	}
+	}*/
 
 	GirlDog = CreateComponent<GameEngineSpriteRenderer>(0);
 	GirlDog->CreateAnimation({ .AnimationName = "Chinook_Pilot_Saluki", .SpriteName = "Chinook_Pilot_Saluki", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });

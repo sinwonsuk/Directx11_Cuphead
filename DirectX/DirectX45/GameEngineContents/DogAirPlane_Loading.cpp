@@ -11,7 +11,7 @@ DogAirPlane_Loading::~DogAirPlane_Loading()
 {
 }
 
-void AFunction(GameEngineThread* Thread)
+void Function(GameEngineThread* Thread)
 {
 	
 
@@ -171,7 +171,7 @@ void AFunction(GameEngineThread* Thread)
 void DogAirPlane_Loading::Start()
 {
 
-	GameEngineCore::JobQueue.Work(AFunction);
+	GameEngineCore::JobQueue.Work(Function);
 	
 	if (nullptr == GameEngineSprite::Find("Loading_Hourglass.png"))
 	{

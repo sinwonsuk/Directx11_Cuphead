@@ -41,4 +41,6 @@ enum class CollisionType
 	RollerCoaster_Attack, 
 	Ph4_swing_Platform,
 	Ph4_Beppi_Body,
+	OverWorldPlayer, 
+	OverWorldAirPlane, 
 };

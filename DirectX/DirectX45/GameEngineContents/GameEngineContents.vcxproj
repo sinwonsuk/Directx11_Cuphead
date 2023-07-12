@@ -179,8 +179,10 @@
     <ClInclude Include="DogAirplaneBackground.h" />
     <ClInclude Include="DogAirplaneLevel.h" />
     <ClInclude Include="DogAirPlaneManager.h" />
+    <ClInclude Include="DogAirPlaneUnLoad_Level.h" />
     <ClInclude Include="DogAirPlane_Loading.h" />
     <ClInclude Include="DogAirPlane_Loading_Level.h" />
+    <ClInclude Include="DogAirPlane_UnLoad.h" />
     <ClInclude Include="dogfight_catshoot_yarnball.h" />
     <ClInclude Include="Dog_ball.h" />
     <ClInclude Include="EnumClass.h" />
@@ -247,8 +249,10 @@
     <ClCompile Include="DogAirplaneLevel.cpp" />
     <ClCompile Include="DogAirPlaneManager.cpp" />
     <ClCompile Include="DogAirplaneState.cpp" />
+    <ClCompile Include="DogAirPlaneUnLoad_Level.cpp" />
     <ClCompile Include="DogAirPlane_Loading.cpp" />
     <ClCompile Include="DogAirPlane_Loading_Level.cpp" />
+    <ClCompile Include="DogAirPlane_UnLoad.cpp" />
     <ClCompile Include="dogfight_catshoot_yarnball.cpp" />
     <ClCompile Include="Dog_ball.cpp" />
     <ClCompile Include="ExWeapon.cpp" />

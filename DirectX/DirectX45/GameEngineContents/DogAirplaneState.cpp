@@ -524,71 +524,50 @@ void DogAirplane::UnloadUpdate(float _Time)
 	{
 		Finish = true;
 
-		GameEngineSprite::UnLoad("ph1_dogcopter_intro");
-		GameEngineSprite::UnLoad("ph1_bulldog_intro");
-		GameEngineSprite::UnLoad("DogAirplane");
+		
 		++unloadCheck;
 	}
 	break;
 
 	case 1:
 	{
-		GameEngineSprite::UnLoad("bulldog_Left");
-		GameEngineSprite::UnLoad("bulldog_Right");
-		GameEngineSprite::UnLoad("bulldog_Jump");
+	
 		++unloadCheck;
 	}
 	break;
 
 	case 2:
 	{
-		GameEngineSprite::UnLoad("bulldog_Attack_Pase1");
-		GameEngineSprite::UnLoad("bulldog_Jump_Reverse");
-		GameEngineSprite::UnLoad("bulldog_plane_flap_left_a");
+		
 		++unloadCheck;
 	}
 	break;
 
 	case 3:
 	{
-		GameEngineSprite::UnLoad("bulldog_plane_flap_left_b");
-		GameEngineSprite::UnLoad("bulldog_plane_flap_left_c");
-		GameEngineSprite::UnLoad("bulldog_plane_flap_left_d");
-		++unloadCheck;
+	
 	}
 	break;
 
 	case 4:
 	{
-		GameEngineSprite::UnLoad("ph1_dog_a_ball_toss");
-		GameEngineSprite::UnLoad("ph1_dog_b_ball_toss");
-		GameEngineSprite::UnLoad("bulldog_plane_wing");
-		++unloadCheck;
+	
 	}
 	break;
 
 	case 5:
 	{
-		GameEngineSprite::UnLoad("AirPlane_Tail");
-		GameEngineSprite::UnLoad("bulldog_Attack2_Pase1_intro");
-		GameEngineSprite::UnLoad("bulldog_Attack2_Pase1_Attack");
-		++unloadCheck;
 	}
 	break;
 
 	case 6:
 	{
-		GameEngineSprite::UnLoad("ph1_dogcopter_hydrant");
-		GameEngineSprite::UnLoad("Ph1_Buldog_Death");
-		GameEngineSprite::UnLoad("Ph1_Buldog_Death_intro");
-		++unloadCheck;
 	}
 	break;
 
 	case 7:
 	{
-		GameEngineSprite::UnLoad("acada");
-		GameEngineSprite::UnLoad("Ph1_Death_Front");
+		
 		++unloadCheck;
 	}
 	break;

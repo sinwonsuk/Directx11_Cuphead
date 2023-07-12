@@ -39,12 +39,14 @@ protected:
 	void Render(float _Delta) override;
 
 	float4 TestColor;
-	float4 test = {0,0};
+	
 	bool axccs = false;
 private:
 	NpcAirplaneState StateValue = NpcAirplaneState::Intro;
+	float4 MoveDir = { 0,0 };
+	float4 test = { 0,0 };
 
-
+	bool LevelCehck = false;
 	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Back;
 	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Front;
 	std::shared_ptr<class GameEngineSpriteRenderer> Npc_Airplane_Reg;

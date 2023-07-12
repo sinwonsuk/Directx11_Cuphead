@@ -9,6 +9,7 @@
 #include "Crown_Bepi_Level.h"
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include "DogAirPlane_Loading_Level.h"
+#include "DogAirPlaneUnLoad_Level.h"
 ContentsCore::ContentsCore() 
 {
 }
@@ -36,11 +37,13 @@ void ContentsCore::GameStart()
 
 	ContentsResourcesCreate();
 
-	//GameEngineCore::CreateLevel<OverWorld>();
+	
 	//GameEngineCore::CreateLevel<Crown_Bepi_Level>();
 	//GameEngineCore::CreateLevel<TitleLevel>();
 	GameEngineCore::CreateLevel<DogAirPlane_Loading_Level>();
 	GameEngineCore::CreateLevel<PlayLevel>();
+	//GameEngineCore::CreateLevel<DogAirplaneLevel>();
+	GameEngineCore::CreateLevel<DogAirPlaneUnLoad_Level>();
 	//GameEngineCore::CreateLevel<giantStageLevel>();
 
 	GameEngineCore::ChangeLevel("DogAirPlane_Loading_Level");

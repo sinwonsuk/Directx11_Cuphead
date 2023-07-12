@@ -918,7 +918,7 @@ void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
 		Object->On();
 
-
+		ResetLiveTime(); 
 		ChangeState(Ph3_DogAirPlaneState::Death);
 		return;
 	}
@@ -969,13 +969,11 @@ void Ph3_DogAirplane::DeathUpdate(float _Time)
 	GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(50, 1.0f);
 
 
-
-	/*if (FightText_KO->IsAnimationEnd())
+	if (GetLiveTime() > 2)
 	{
-		GameEngineTime::GlobalTime.SetGlobalTimeScale(1.0f);
-
-
-	}*/
+		GameEngineCore::ChangeLevel("DogAirPlaneUnLoad_Level");
+	}
+	
 
 	
 }

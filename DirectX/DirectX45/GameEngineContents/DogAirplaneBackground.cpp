@@ -20,7 +20,7 @@ void DogAirplaneBackground::Start()
 	Background = this;
 
 
-	if (nullptr == GameEngineSprite::Find("Background"))
+	/*if (nullptr == GameEngineSprite::Find("Background"))
 	{
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("ContentResources");
@@ -34,7 +34,7 @@ void DogAirplaneBackground::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("B_clouds").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("C_clouds").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("D_clouds").GetFullPath());
-	}
+	}*/
 
 
 

@@ -37,9 +37,6 @@
     <ClInclude Include="NpcAirplane.h">
       <Filter>Object\DogAirplane</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerRunEffect.h">
-      <Filter>Object\test</Filter>
-    </ClInclude>
     <ClInclude Include="PrecompileHeader.h">
       <Filter>Object\test</Filter>
     </ClInclude>
@@ -145,10 +142,30 @@
     <ClInclude Include="IntroLevel.h">
       <Filter>Object\Intro</Filter>
     </ClInclude>
-    <ClInclude Include="DogAirPlane_Loading_Level.h" />
-    <ClInclude Include="DogAirPlane_Loading.h" />
-    <ClInclude Include="DogAirPlaneUnLoad_Level.h" />
-    <ClInclude Include="DogAirPlane_UnLoad.h" />
+    <ClInclude Include="PlayerRunEffect.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>Object\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="DogAirPlane_Loading.h">
+      <Filter>Object\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="DogAirPlane_Loading_Level.h">
+      <Filter>Object\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="DogAirPlane_UnLoad.h">
+      <Filter>Object\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="DogAirPlaneUnLoad_Level.h">
+      <Filter>Object\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="OverWorldLoading.h">
+      <Filter>Object\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="OverWorld_Loading_Level.h">
+      <Filter>Object\Loading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -330,10 +347,27 @@
     <ClCompile Include="IntroLevel.cpp">
       <Filter>Object\Intro</Filter>
     </ClCompile>
-    <ClCompile Include="DogAirPlane_Loading_Level.cpp" />
-    <ClCompile Include="DogAirPlane_Loading.cpp" />
-    <ClCompile Include="DogAirPlaneUnLoad_Level.cpp" />
-    <ClCompile Include="DogAirPlane_UnLoad.cpp" />
+    <ClCompile Include="Title.cpp">
+      <Filter>Object\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="DogAirPlane_Loading.cpp">
+      <Filter>Object\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="DogAirPlane_Loading_Level.cpp">
+      <Filter>Object\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="DogAirPlane_UnLoad.cpp">
+      <Filter>Object\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="DogAirPlaneUnLoad_Level.cpp">
+      <Filter>Object\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="OverWorldLoading.cpp">
+      <Filter>Object\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="OverWorld_Loading_Level.cpp">
+      <Filter>Object\Loading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">
@@ -368,6 +402,12 @@
     </Filter>
     <Filter Include="Object\Intro">
       <UniqueIdentifier>{94d49bd6-8fc3-42e7-8f31-3abb25041fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Title">
+      <UniqueIdentifier>{00ef2702-4d6f-424d-910a-9cbebe51f6df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Loading">
+      <UniqueIdentifier>{31924177-2264-45e3-9365-5344417a155b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

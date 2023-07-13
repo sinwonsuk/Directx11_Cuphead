@@ -194,6 +194,8 @@
     <ClInclude Include="NpcAirplane.h" />
     <ClInclude Include="OverHead_Player.h" />
     <ClInclude Include="OverWorld.h" />
+    <ClInclude Include="OverWorldLoading.h" />
+    <ClInclude Include="OverWorld_Loading_Level.h" />
     <ClInclude Include="OverWorld_Map.h" />
     <ClInclude Include="Ph1_Bepi.h" />
     <ClInclude Include="Ph2_Bepi.h" />
@@ -225,6 +227,7 @@
     <ClInclude Include="Rollercoaster.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="TimeFlow.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>
@@ -266,6 +269,8 @@
     <ClCompile Include="OverHead_Player.cpp" />
     <ClCompile Include="OverHead_Player_State.cpp" />
     <ClCompile Include="OverWorld.cpp" />
+    <ClCompile Include="OverWorldLoading.cpp" />
+    <ClCompile Include="OverWorld_Loading_Level.cpp" />
     <ClCompile Include="OverWorld_Map.cpp" />
     <ClCompile Include="Ph1_Bepi.cpp" />
     <ClCompile Include="Ph2_Bepi.cpp" />
@@ -309,6 +314,7 @@
     <ClCompile Include="Rollercoaster.cpp" />
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TimeFlow.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="TitleLevel.cpp">
       <SubType>
       </SubType>

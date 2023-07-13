@@ -3,6 +3,7 @@
 #include "DogAirPlaneManager.h"
 enum class DogAirplaneState
 {
+	Black,
 	BossIntro,
 	BossIntro2,
 	BossIntroRock,
@@ -32,6 +33,7 @@ public:
 	DogAirplane& operator=(const DogAirplane& _Other) = delete;
 	DogAirplane& operator=(DogAirplane&& _Other) noexcept = delete;
 
+	void BlackUpdate(float _Time); 
 	void UpdateState(float _Time);
 	void AnimationCheck(const std::string_view& _AnimationName);
 	void BossIdleUpdate(float _Time);
@@ -62,7 +64,7 @@ protected:
 private:
 	std::vector<int> a;
 	float CollisionMove = 640;
-
+	bool adsdf = false;
 
 	float DownSpeed = 600;
 	float Right_Left_Speed = 50;
@@ -104,7 +106,7 @@ private:
 
 	std::shared_ptr<class GameEngineCollision> Collision;
 	
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Loading;
 
 	float Pase1_Attack = 500;
 	float Ball_Monster_Time = 0;

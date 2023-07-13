@@ -25,15 +25,15 @@ void PlayLevel::Update(float _DeltaTime)
 
 void PlayLevel::PlayerCreate(/*Playlevel* this*/)
 {
-	//std::shared_ptr<Player> Object = CreateActor<Player>(3);
-
-
-
+	
 
 }
 
 void PlayLevel::Start()
 {
+
+	
+
 	GameEngineLevel::IsDebugSwitch();
 
 
@@ -42,15 +42,12 @@ void PlayLevel::Start()
 		NewDir.MoveParentToDirectory("ContentResources");
 		NewDir.Move("ContentResources");
 		NewDir.Move("Texture");
-		NewDir.Move("Test");
+		NewDir.Move("Tutorial");
 
-		std::vector<GameEngineFile> File = NewDir.GetAllFile({ ".Png", });
+	
 
-
-		for (size_t i = 0; i < File.size(); i++)
-		{
-			GameEngineTexture::Load(File[i].GetFullPath());
-		}
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("MapOrObject").GetFullPath());
+		
 	}
 
 	{
@@ -67,11 +64,11 @@ void PlayLevel::Start()
 
 
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
-	GetMainCamera()->GetTransform()->AddLocalPosition({ 0.0f,-80.0f,0.0f });
+	GetCamera(100)->SetProjectionType(CameraType::Orthogonal);
+	GetCamera(100)->SetSortType(0, SortType::ZSort);
+	GetMainCamera()->GetTransform()->AddLocalPosition({ -320.0f,-80.0f,0.0f });
 	GetCamera(100)->GetTransform()->AddLocalPosition({ 0.0f,-80.0f,0.0f });
-	//GetMainCamera()->GetTransform()->AddLocalPosition({ 2888.0f,0.0f,0.0f });
-	//GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -1000.0f});
-
+	
 
 	std::shared_ptr<GameEngineCoreWindow> Window = GameEngineGUI::FindGUIWindowConvert<GameEngineCoreWindow>("CoreWindow");
 
@@ -84,16 +81,9 @@ void PlayLevel::Start()
 		Window->Test = std::bind(&PlayLevel::PlayerCreate, this);
 	}
 
-	{
-		std::shared_ptr<Player> Object = CreateActor<Player>();
-		Object->GetTransform()->SetLocalPosition({ 0.0f,0.0f });
-	}
+	
 
-	{
-		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
-		Object->GetTransform()->AddLocalPosition({ 0,-80.0f });
-		
-	}
+	
 
 	{
 		std::shared_ptr<TutorialMap> Object = CreateActor<TutorialMap>();
@@ -101,10 +91,22 @@ void PlayLevel::Start()
 	}
 
 	{
+		std::shared_ptr<Player> Object = CreateActor<Player>();
+
+		Object->GetTransform()->SetLocalPosition({ -320.0f,-70.0f });
+		Object->SetCameraCheck(true);
+		Object->SetTutorialCheck(true);
+	}
+
+	{
 		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>(10);
 		Object->GetTransform()->SetLocalPosition({0.0f,0.0f });
 	}
 
+	{
+		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
+		Object->GetTransform()->AddLocalPosition({ 0,-80.0f });
+	}
 	/*{
 		std::shared_ptr<TutorialObject> Object = CreateActor<TutorialObject>(10);
 		Object->GetTransform()->SetLocalPosition({ 3345.0f,-10.0f });
@@ -125,6 +127,7 @@ void PlayLevel::Start()
 	//	std::shared_ptr<TestObject> Object = CreateActor<TestObject>(1);
 	//}
 
+	
 
 }
 void PlayLevel::LevelChangeStart()
@@ -135,6 +138,12 @@ void PlayLevel::LevelChangeStart()
 
 void PlayLevel::LevelChangeEnd() 
 {
+	UserInterface::CardNumber = 0;
+	UserInterface::Cut = 0;
+	Player::MainPlayer->Death(); 
+	Player::MainPlayer = nullptr;
+	GameEngineSprite::UnLoad("MapOrObject");
+
 	GameEngineLevel::LevelChangeEnd();
 	int a = 0;
 }

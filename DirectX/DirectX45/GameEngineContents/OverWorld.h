@@ -19,6 +19,9 @@ public:
 	
 
 protected:
+
+	bool OneCheck = false; 
+
 	void Update(float _DeltaTime) override;
 	void Start() override;
 

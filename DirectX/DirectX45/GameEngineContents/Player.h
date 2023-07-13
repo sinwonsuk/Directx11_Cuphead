@@ -43,6 +43,7 @@ enum class PlayerState
 	Ex_Straight, 
 	Ex_Up, 
 	PinkObject, 
+	TutorlalPotal,
 };
 // Ό³Έν :
 class Player : public GameEngineActor
@@ -96,9 +97,9 @@ public:
 	void DownAttackPreUpdate(float _Time);
 	void MapOutUpdate(float _Time); 
 	void FailUpdate(float _Time);
-	void HitUpdate(float _Time);
+	void HitUpdate(float _Time); 
 	void PinkObjectUpdate(float _Time);
-
+	void TutorlalPotalUpdate(float _Time);
 	void Ex_DiagonalDown_Update(float _Time);
 	void Ex_DiagonalUp_Update(float _Time);
 	void Ex_Down_Update(float _Time);
@@ -122,6 +123,21 @@ public:
 	{
 		return TuritualCheck;
 	}
+
+	bool SetTutorialCheck(bool _TuritualCheck)
+	{
+		TuritualCheck = _TuritualCheck;
+
+		return TuritualCheck;
+	}
+	bool SetCameraCheck(bool _CheckCamera)
+	{
+		CheckCamera = _CheckCamera;
+
+		return _CheckCamera;
+	}
+
+
 	std::shared_ptr<class GameEngineCollision> GetCollision()
 	{
 		return Collision;
@@ -130,6 +146,9 @@ public:
 	{
 		return StateValue; 
 	}
+
+
+
 
 	std::shared_ptr<class GameEngineSpriteRenderer> GetPlayer()
 	{
@@ -144,11 +163,13 @@ protected:
 	float4 TestColor;
 
 private:
+
 	PlayerState StateValue = PlayerState::Idle;
 	float Angle = 0.0f;
 
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Render0;
+	
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
 	std::shared_ptr<class GameEngineCollision> Collision;
@@ -163,6 +184,10 @@ private:
 	float Speed = 400;
 	float GravitySpeed = 1000;
 	float JumpSpeed = 1200;
+
+	
+
+
 	bool Block = false;
 	bool Gravity = true;
 	

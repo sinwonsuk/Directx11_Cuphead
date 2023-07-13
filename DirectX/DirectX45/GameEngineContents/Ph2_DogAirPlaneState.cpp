@@ -8,7 +8,7 @@
 #include "EnumClass.h"
 void Ph2_DogAirpalne::ChangeState(Ph2_DogAirPlaneState _State)
 {
-	Ph2_DogAirPlaneState NextState = _State;
+	Ph2_DogAirPlaneState NextState = _State; 
 	Ph2_DogAirPlaneState PrevState = StateValue;
 
 	StateValue = NextState;

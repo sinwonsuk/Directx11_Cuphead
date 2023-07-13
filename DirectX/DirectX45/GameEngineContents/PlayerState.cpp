@@ -144,6 +144,9 @@ void Player::ChangeState(PlayerState _State)
 	case PlayerState::PinkObject:
 		AnimationCheck("Jump");
 		break;
+	case PlayerState::TutorlalPotal:
+		AnimationCheck("Player_Portal");
+		break;
 	default:
 		break;
 	}
@@ -284,6 +287,9 @@ void Player::UpdateState(float _Time)
 		break;
 	case PlayerState::PinkObject:
 		PinkObjectUpdate(_Time);
+		break;
+	case PlayerState::TutorlalPotal:
+		TutorlalPotalUpdate(_Time);
 		break;
 	default:
 		break;
@@ -1084,7 +1090,7 @@ void Player::ParryUpdate(float _Time)
 		PinkObject = true;
 	}
 
-	if (TimeFlow::Time > 0.2 && PinkObject ==true)
+	if (TimeFlow::Time > 0.5 && PinkObject ==true)
 	{
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 1.0f);
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 1.0f);
@@ -4165,7 +4171,6 @@ void Player::PinkObjectUpdate(float _Time)
 {
 	
 	
-	
 
 	if (CheckCamera == true)
 	{
@@ -4211,6 +4216,16 @@ void Player::PinkObjectUpdate(float _Time)
 		ChangeState(PlayerState::Jump);
 		return;
 	}
+}
+
+void Player::TutorlalPotalUpdate(float _Time)
+{
+		
+
+	
+
+		
+	
 }
 
 void Player::Ex_DiagonalDown_Update(float _Time)
@@ -4499,6 +4514,7 @@ void Player::DiagonalUpAttackUpdate(float _Time)
 
 void Player::DiagonalUpAttackPreUpdate(float _Time)
 {
+	
 	if (true == GameEngineInput::IsUp("PlayerRock") && true == GameEngineInput::IsPress("PlayerMoveLeft") && true == GameEngineInput::IsPress("PlayerMoveUp"))
 	{
 		ChangeState(PlayerState::DiagonalUpRunAttack);

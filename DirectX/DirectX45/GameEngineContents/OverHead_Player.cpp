@@ -1,12 +1,14 @@
 #include "PrecompileHeader.h"
 #include "OverHead_Player.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
+#include <GameEngineCore/GameEngineUIRenderer.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
+
 #include "EnumClass.h"
 
 
@@ -36,6 +38,21 @@ void OverHead_Player::Start()
 	Player->CreateAnimation({ .AnimationName = "Up_Idle", .SpriteName = "Up_Idle", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 	Player->CreateAnimation({ .AnimationName = "Up_Move", .SpriteName = "Up_Move", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 
+
+
+	Loading = CreateComponent<GameEngineSpriteRenderer>();
+	Loading->CreateAnimation({ .AnimationName = "Start", .SpriteName = "Start", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+	Loading->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-200.0f });
+	Loading->ChangeAnimation("Start");
+
+
+	Exit = CreateComponent<GameEngineSpriteRenderer>();
+	Exit->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+	Exit->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-200.0f });
+	Exit->ChangeAnimation("Exit");
+	Exit->Off(); 
+
+
 	GetTransform()->AddLocalPosition({ -1300,200,-1.0f });
 
 	Player->ChangeAnimation("DD_Idle");
@@ -51,15 +68,30 @@ void OverHead_Player::Start()
 	Collision->SetOrder((int)CollisionType::OverWorldPlayer);
 	Collision->SetColType(ColType::OBBBOX2D);
 
+
+
 }
 
 void OverHead_Player::Update(float _Delta)
 {
-	if (Collision->Collision((int)CollisionType::OverWorldAirPlane, ColType::OBBBOX2D, ColType::OBBBOX2D) == nullptr)
+	if (Loading->IsAnimationEnd())
 	{
-		GameEngineCore::ChangeLevel("DogAirPlaneUnLoad_Level");
+		Loading->Off(); 
 	}
-	
+
+	if (Collision->Collision((int)CollisionType::OverWorldAirPlane, ColType::OBBBOX2D, ColType::OBBBOX2D))
+	{
+		if (GameEngineInput::IsDown("PlayerJump"))
+		{
+			Exit->On();		
+		}	
+	}
+	if (Exit->IsAnimationEnd())
+	{
+		Exit->ChangeAnimation("Exit"); 
+		Exit->Off(); 
+		GameEngineCore::ChangeLevel("DogAirPlane_Loading_Level");
+	}
 	
 		std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("Overworld_ColMap1.png");
 		//2009,368

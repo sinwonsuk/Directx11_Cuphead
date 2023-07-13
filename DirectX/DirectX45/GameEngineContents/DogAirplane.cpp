@@ -194,6 +194,11 @@ void DogAirplane::Start()
 	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,81 });
 	bulldogIdle->On();
 
+	Loading = CreateComponent<GameEngineSpriteRenderer>();
+	Loading->CreateAnimation({ .AnimationName = "Start", .SpriteName = "Start", .FrameInter = 0.03f,.Loop = false, .ScaleToTexture = true });
+	Loading->GetTransform()->AddLocalPosition({ 0.0f,0.0f,-200.0f });
+	Loading->ChangeAnimation("Start");
+
 	Ready = CreateComponent<GameEngineSpriteRenderer>(120);
 	Ready->CreateAnimation({ .AnimationName = "FightText_GetReady", .SpriteName = "FightText_GetReady", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	Ready->GetTransform()->AddLocalPosition({ 0,0,-150.0f });
@@ -212,117 +217,123 @@ void DogAirplane::Start()
 
 void DogAirplane::Update(float _Delta)
 {		
-
-	if (Ready->IsAnimationEnd())
+	if (Loading->IsAnimationEnd())
 	{
-		Ready->Off();
+		Loading->Off(); 
 	}
+
+		if (Ready->IsAnimationEnd())
+		{
+			Ready->Off();
+		}
+
+
+		if (StateValue != DogAirplaneState::BossAttackPase1)
+		{
+			Collision->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition() });
+		}
+
+
+
+		if (Collision->Collision((int)CollisionType::Bullet))
+		{
+
+
+			Hp -= 1;
+
+			if (CollisonCheck == false)
+			{
+				bulldogIdle->ColorOptionValue.PlusColor = { 1,1,1,0 };
+				bulldogIdle->ResetLiveTime();
+				CollisonCheck = true;
+
+			}
+			std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
+
+			collision->Death();
+		}
+
+		if (CollisonCheck == true && bulldogIdle->GetLiveTime() > 0.05f)
+		{
+			bulldogIdle->ColorOptionValue.PlusColor = { 0,0,0,0 };
+			CollisonCheck = false;
+		}
+
+		//bulldogIdle->ColorOptionValue.PlusColor = { 0,0,0,-1 };
+
+
+
+
+		/*if (Hp == 50)
+		{
+			dogcopter_hydrant->On();
+		}
+
+		if (dogcopter_hydrant->IsAnimationEnd())
+		{
+			dogcopter_hydrant->Death();
+		}*/
+
+		Ball_Monster_Time += _Delta;
+
+		if (Ball_Monster_Time > 3 && Hp > 0)
+		{
+			int test = GameEngineRandom::MainRandom.RandomInt(0, 3);
+
+			if (test == 0)
+			{
+				Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x - 418,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 80,85 });
+				Ball_Monster->GetTransform()->SetLocalRotation({ 0,180,0 });
+				Ball_Monster->ChangeAnimation("ph1_dog_b_ball_toss");
+				Ball_Monster->On();
+			}
+
+			if (test == 1)
+			{
+				Ball_Monster->ChangeAnimation("ph1_dog_a_ball_toss");
+				Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x - 160,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 40 ,85 });
+				Ball_Monster->GetTransform()->SetLocalRotation({ 0,180,0 });
+				Ball_Monster->On();
+			}
+
+			else if (test == 2)
+			{
+				Ball_Monster->ChangeAnimation("ph1_dog_a_ball_toss");
+				Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x + 170,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 40 ,85 });
+				Ball_Monster->GetTransform()->SetLocalRotation({ 0,0,0 });
+				Ball_Monster->On();
+			}
+
+			else if (test == 3)
+			{
+
+				Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x + 418,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 80,85 });
+				Ball_Monster->GetTransform()->SetLocalRotation({ 0,0,0 });
+				Ball_Monster->ChangeAnimation("ph1_dog_b_ball_toss");
+				Ball_Monster->On();
+
+			}
+			Ball_Monster_Time = 0;
+		}
+
+		if (Ball_Monster->GetCurrentFrame() == 6 && Ball_MonsterCheck == false)
+		{
+
+			std::shared_ptr<Dog_ball> Object = GetLevel()->CreateActor<Dog_ball>(4);
+			Object->GetTransform()->SetLocalPosition({ Ball_Monster->GetTransform()->GetLocalPosition().x, Ball_Monster->GetTransform()->GetLocalPosition().y + 50 });
+
+			Ball_MonsterCheck = true;
+		}
+
+
+		if (Ball_Monster->IsAnimationEnd())
+		{
+
+			Ball_MonsterCheck = false;
+			Ball_Monster->Off();
+		}
 	
 
-	if (StateValue != DogAirplaneState::BossAttackPase1)
-	{
-		Collision->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition()});
-	}
-
-
-
-	if (Collision->Collision((int)CollisionType::Bullet))
-	{
-
-
-		Hp -= 1;
-
-		if (CollisonCheck == false)
-		{
-			bulldogIdle->ColorOptionValue.PlusColor = { 1,1,1,0 };
-			bulldogIdle->ResetLiveTime(); 
-			CollisonCheck = true; 
-			
-		}
-		std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);
-
-		collision->Death();
-	}
-
-	if (CollisonCheck == true && bulldogIdle->GetLiveTime() > 0.05f)
-	{
-		bulldogIdle->ColorOptionValue.PlusColor = { 0,0,0,0 };
-		CollisonCheck = false;
-	}
-
-	//bulldogIdle->ColorOptionValue.PlusColor = { 0,0,0,-1 };
-
-
-	
-
-	/*if (Hp == 50)
-	{
-		dogcopter_hydrant->On();
-	}
-
-	if (dogcopter_hydrant->IsAnimationEnd())
-	{
-		dogcopter_hydrant->Death();
-	}*/
-	
-	Ball_Monster_Time += _Delta;
-
-	if (Ball_Monster_Time > 3 && Hp > 0)
-	{
-		int test = GameEngineRandom::MainRandom.RandomInt(0,3);
-
-		if (test == 0)
-		{
-			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x - 418,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 80,85});
-			Ball_Monster->GetTransform()->SetLocalRotation({ 0,180,0 });
-			Ball_Monster->ChangeAnimation("ph1_dog_b_ball_toss");
-			Ball_Monster->On();
-		}
-
-		 if (test == 1)
-		{
-			Ball_Monster->ChangeAnimation("ph1_dog_a_ball_toss");
-			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x - 160,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 40 ,85});		
-			Ball_Monster->GetTransform()->SetLocalRotation({ 0,180,0 });
-			Ball_Monster->On();
-		}
-
-		else if (test == 2)
-		{
-			Ball_Monster->ChangeAnimation("ph1_dog_a_ball_toss");
-			Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x + 170,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 40 ,85});	
-			Ball_Monster->GetTransform()->SetLocalRotation({ 0,0,0 });
-			Ball_Monster->On();
-		}
-
-		else if (test == 3)
-		{
-
-		 Ball_Monster->GetTransform()->SetWorldPosition({ AirplaneFlap_A->GetTransform()->GetWorldPosition().x + 418,AirplaneFlap_A->GetTransform()->GetWorldPosition().y + 80,85 });
-		 Ball_Monster->GetTransform()->SetLocalRotation({ 0,0,0 });
-		 Ball_Monster->ChangeAnimation("ph1_dog_b_ball_toss");
-		 Ball_Monster->On();
-
-		}
-		 Ball_Monster_Time = 0;
-	}
-
-	if (Ball_Monster->GetCurrentFrame() == 6 && Ball_MonsterCheck ==false)
-	{
-		
-		std::shared_ptr<Dog_ball> Object = GetLevel()->CreateActor<Dog_ball>(4);
-		Object->GetTransform()->SetLocalPosition({ Ball_Monster->GetTransform()->GetLocalPosition().x, Ball_Monster->GetTransform()->GetLocalPosition().y + 50 });
-	
-		Ball_MonsterCheck = true;
-	}
-
-
-	if (Ball_Monster->IsAnimationEnd())
-	{
-		
-		Ball_MonsterCheck = false;
-		Ball_Monster->Off();
-	}
 	UpdateState(_Delta);
 }
 void DogAirplane::Render(float _Delta)

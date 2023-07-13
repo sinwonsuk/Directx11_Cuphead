@@ -28,7 +28,7 @@ void OverWorld_Map::Start()
 	AirPlane = CreateComponent<GameEngineSpriteRenderer>();
 	AirPlane->CreateAnimation({ .AnimationName = "To_Tutorial_Fly", .SpriteName = "To_Tutorial_Fly.png", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	AirPlane->ChangeAnimation("To_Tutorial_Fly");
-	//AirPlane->GetTransform()->AddLocalPosition({ 250.0f,-50.0f,90.0f });
+	AirPlane->GetTransform()->AddLocalPosition({ 250.0f,-50.0f,90.0f });
 
 
 	Collision = CreateComponent<GameEngineCollision>();

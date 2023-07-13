@@ -7,11 +7,15 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineVideo.h>
+#include <GameEngineCore/GameEngineUIRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include <GameEngineCore/GameEngineCore.h>
+
 #include "TutorialMap.h"
 #include "IdleWeapon.h"
 #include "EnumClass.h"
 Player* Player::MainPlayer;
+
 Player::Player()
 {
 	
@@ -24,11 +28,24 @@ Player::~Player()
 
 void Player::Update(float _DeltaTime)
 {
-	if (true == GameEngineInput::IsPress("Start"))
+
+
+	
+
+	if (Collision->Collision((int)CollisionType::TutorialDoor))
 	{
-		GameEngineTime::GlobalTime.SetGlobalTimeScale(1.0f);
+		if (GameEngineInput::IsDown("PlayerJump"))
+		{
+			ChangeState(PlayerState::TutorlalPotal); 
+			return; 
+		}
 	}
-	MainPlayer = this;
+
+
+
+
+	
+	
 	//Collision->GetTransform()->SetLocalRotation({Render0->GetTransform()->GetLocalRotation() });
 	//Collision->GetTransform()->SetLocalPosition(Render0->GetTransform()->GetWorldPosition());
 	
@@ -142,8 +159,11 @@ void Player::Update(float _DeltaTime)
 
 
 	}
-	/*Collision->GetTransform()->SetLocalPosition({ 0.0f, -30.0f, 0.0f });
-	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });*/
+	Collision->GetTransform()->SetLocalPosition({ 0.0f, -30.0f, 0.0f });
+	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });
+
+
+
 
 	if (true == GameEngineInput::IsPress("PlayerMoveDown"))
 	{
@@ -206,7 +226,7 @@ void Player::Update(float _DeltaTime)
 void Player::Start()
 {
 	
-
+	MainPlayer = this;
 	
 
 	if (false == GameEngineInput::IsKey("PlayerMoveLeft"))
@@ -283,7 +303,7 @@ void Player::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ex_Up").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("tutorial_target").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("boss_explosion").GetFullPath());
-
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Player_Portal").GetFullPath());
 
 		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttackPre").GetFullPath());
@@ -335,8 +355,9 @@ void Player::Start()
 	Render0->CreateAnimation({ .AnimationName = "Ex_Down", .SpriteName = "Ex_Down",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "Ex_Straight", .SpriteName = "Ex_Straight",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "Ex_Up", .SpriteName = "Ex_Up",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Player_Portal", .SpriteName = "Player_Portal",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
 
-
+	
 
 	Render0->ChangeAnimation("Idle");
 

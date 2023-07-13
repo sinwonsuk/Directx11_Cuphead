@@ -14,7 +14,7 @@ public:
 	DogAirPlane_UnLoad& operator=(const DogAirPlane_UnLoad& _Other) = delete;
 	DogAirPlane_UnLoad& operator=(DogAirPlane_UnLoad&& _Other) noexcept = delete;
 
-
+	static bool check1;
 
 	
 

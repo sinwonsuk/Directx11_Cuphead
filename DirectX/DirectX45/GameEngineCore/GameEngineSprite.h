@@ -30,6 +30,7 @@ public:
 		return LoadFolder(NewPath.GetFileName(), _Path);
 	}
 
+
 	static std::shared_ptr<GameEngineSprite> LoadFolder(std::string _Spritename, const std::string_view& _Path)
 	{
 		std::shared_ptr<GameEngineSprite> NewTexture = GameEngineResource::Create(_Spritename);

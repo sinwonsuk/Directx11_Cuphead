@@ -52,15 +52,7 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 	case 3:
 	{
 
-		Ph1_DogAirplane->Death(); 
-		Ph2_DogAirpalne_Left->Death();
-		Ph2_DogAirpalne_Right->Death();
-		Ph2_DogAirpalne_Top->Death();
-		Ph2_DogAirpalne_Bottom->Death();
-		Ph3_DogAirpalne->Death();
-		BackGround->Death(); 
-		Npc->Death(); 
-		player->Death(); 
+		
 	}
 	break;
 
@@ -217,14 +209,28 @@ void DogAirplaneLevel::Start()
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
 
+	
+
+
+}
+
+void DogAirplaneLevel::LevelChangeStart()
+{
+	
+
+
 	player = CreateActor<Player>();
 
 	player->GetTransform()->AddLocalPosition({ 0,0,0 });
-	std::shared_ptr<TimeFlow> Object = CreateActor<TimeFlow>(10);
+
+	timeFlow = CreateActor<TimeFlow>(10);
+
+	if(UserInterfaceCheck ==false)
 	{
 		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
+		UserInterfaceCheck = true; 
 	}
-	
+
 
 	BackGround = CreateActor<DogAirplaneBackground>();
 
@@ -232,7 +238,7 @@ void DogAirplaneLevel::Start()
 
 
 
-	
+
 	Ph1_DogAirplane = CreateActor<DogAirplane>();
 
 	{
@@ -262,22 +268,48 @@ void DogAirplaneLevel::Start()
 		Ph2_DogAirpalne_Bottom->Get_Ph2_Boss()->GetTransform()->AddLocalPosition({ 0.0f,-400.0f,82.0f });
 		Ph2_DogAirpalne_Bottom->Get_jetpack()->GetTransform()->AddLocalPosition({ 0.0f, -450.0f,82.0f });
 	}
-	
-	
+
+
 	Ph3_DogAirpalne = CreateActor<Ph3_DogAirplane>();
 
 
-}
 
-void DogAirplaneLevel::LevelChangeStart()
-{
-	GameEngineLevel::LevelChangeStart();
 	int a = 0;
 }
 
 
 void DogAirplaneLevel::LevelChangeEnd()
 {
+	
+	GetMainCamera()->GetTransform()->SetLocalRotation({ 0.0f,0.0f,0.0f }); 
+	GetMainCamera()->GetTransform()->SetLocalPosition({ 0.0f,0.0f,0.0f });
+	ph3_Dog_Npc::ph3_Npc->Death(); 
+	ph3_Dog_Npc::ph3_Npc = nullptr;
+	UserInterface::CardNumber = 0;
+	UserInterface::Cut = 0; 
+
+	Ph3_DogAirplane::ph3_mainBoss = nullptr;
+	DogAirplane::Hp = 20;
+	TimeFlow::Time = 0; 
+	Ph3_DogAirpalne->Off(); 
+	Player::MainPlayer->Death(); 
+	Player::MainPlayer = nullptr;
+	Ph3_DogAirplane::Hp = 20;
+	DogAirplane::Finish = false;
+	ad = 0;
+
+	timeFlow->Death(); 
+	Ph1_DogAirplane->Death();
+	Ph2_DogAirpalne_Left->Death();
+	Ph2_DogAirpalne_Right->Death();
+	Ph2_DogAirpalne_Top->Death();
+	Ph2_DogAirpalne_Bottom->Death();
+	Ph3_DogAirpalne->Death();
+
+	BackGround->Death();
+	Npc->Death();
+	player->Death();
+
 	GameEngineLevel::LevelChangeEnd();
 	int a = 0;
 }

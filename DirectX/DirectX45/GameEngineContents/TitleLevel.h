@@ -17,6 +17,8 @@ public:
 
 protected:
 	void Start() override;
+	void LevelChangeStart() override;
+	void LevelChangeEnd() override;
 
 private:
 };

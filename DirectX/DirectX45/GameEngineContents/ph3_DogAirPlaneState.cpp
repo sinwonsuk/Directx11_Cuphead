@@ -9,6 +9,7 @@
 #include "ph3_Dog_Npc.h"
 #include "ph3_food_bowl.h"
 #include "Boss_Finish.h"
+#include "DogAirPlaneUnLoad_Level.h"
 void Ph3_DogAirplane::ChangeState(Ph3_DogAirPlaneState _State)
 {
 	Ph3_DogAirPlaneState NextState = _State;
@@ -971,9 +972,17 @@ void Ph3_DogAirplane::DeathUpdate(float _Time)
 
 	if (GetLiveTime() > 2)
 	{
+		Exit->On(); 
+		//Object->Death(); 
+		//ph3_Dog_Npc::ph3_Npc = nullptr;
+
+		//GameEngineCore::ChangeLevel("DogAirPlaneUnLoad_Level");
+	}
+	if (Exit->IsAnimationEnd())
+	{
+		Object->Death();
 		GameEngineCore::ChangeLevel("DogAirPlaneUnLoad_Level");
 	}
-	
 
 	
 }

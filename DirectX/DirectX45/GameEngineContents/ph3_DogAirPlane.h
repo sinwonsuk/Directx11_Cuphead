@@ -178,6 +178,9 @@ private:
 
 	std::shared_ptr<class GameEngineCollision> Collision;
 
+
+	std::shared_ptr<class GameEngineSpriteRenderer> Exit;
+
 	float4 trsd = { 0,0,-500 };
 	float4 tsdds = { 150,1500,0 };
 

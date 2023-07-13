@@ -427,6 +427,12 @@ void Ph3_DogAirplane::Start()
 
 	}
 
+	Exit = CreateComponent<GameEngineSpriteRenderer>();
+	Exit->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+	Exit->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-200.0f });
+	Exit->ChangeAnimation("Exit");
+	Exit->Off();
+
 	FightText_KO = CreateComponent<GameEngineSpriteRenderer>(100);
 	FightText_KO->CreateAnimation({ .AnimationName = "FightText_KO", .SpriteName = "FightText_KO", .FrameInter = 0.08f,.Loop = false, .ScaleToTexture = true /*,.FrameIndex = {0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1}*/ });
 	FightText_KO->ChangeAnimation("FightText_KO");

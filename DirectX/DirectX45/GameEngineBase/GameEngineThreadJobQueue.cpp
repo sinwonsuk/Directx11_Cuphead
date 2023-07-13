@@ -6,7 +6,6 @@ std::atomic_int GameEngineThreadJobQueue::RunningThreadCount = 0;
 
 GameEngineThreadJobQueue::GameEngineThreadJobQueue() 
 {
-
 }
 
 GameEngineThreadJobQueue::~GameEngineThreadJobQueue() 
@@ -44,6 +43,7 @@ void GameEngineThreadJobQueue::ThreadPoolFunction(GameEngineThreadJobQueue* _Thr
 		case UserWork:
 		{
 			Job* JobPtr = reinterpret_cast<Job*>(PtrKey);
+
 			if (nullptr != JobPtr->Function)
 			{
 				JobPtr->Function(_Thread);

@@ -64,7 +64,8 @@ private:
 	
 		std::shared_ptr<class GameEngineSpriteRenderer> ph3_leader_sideways_death_tears;
 	std::shared_ptr<class GameEngineSpriteRenderer> ph3_leader_sideways_death;
-
+	bool TimeCheck = false;
+	float Time = 0; 
 	bool CollisonCheck = false;
 	int RotationCheck = 0;
 	bool test = false;

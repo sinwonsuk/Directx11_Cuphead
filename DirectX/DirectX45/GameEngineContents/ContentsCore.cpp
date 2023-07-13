@@ -10,6 +10,7 @@
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include "DogAirPlane_Loading_Level.h"
 #include "DogAirPlaneUnLoad_Level.h"
+#include "OverWorld_Loading_Level.h"
 ContentsCore::ContentsCore() 
 {
 }
@@ -39,14 +40,15 @@ void ContentsCore::GameStart()
 
 	
 	//GameEngineCore::CreateLevel<Crown_Bepi_Level>();
-	//GameEngineCore::CreateLevel<TitleLevel>();
+	
 	GameEngineCore::CreateLevel<DogAirPlane_Loading_Level>();
-	GameEngineCore::CreateLevel<PlayLevel>();
-	//GameEngineCore::CreateLevel<DogAirplaneLevel>();
+	GameEngineCore::CreateLevel<DogAirplaneLevel>();
 	GameEngineCore::CreateLevel<DogAirPlaneUnLoad_Level>();
-	//GameEngineCore::CreateLevel<giantStageLevel>();
-
-	GameEngineCore::ChangeLevel("DogAirPlane_Loading_Level");
+	GameEngineCore::CreateLevel<OverWorld_Loading_Level>();
+	GameEngineCore::CreateLevel<TitleLevel>();
+	GameEngineCore::CreateLevel<PlayLevel>();
+	GameEngineCore::CreateLevel<OverWorld>();
+	GameEngineCore::ChangeLevel("TitleLevel");
 }
 
 void ContentsCore::GameEnd() 

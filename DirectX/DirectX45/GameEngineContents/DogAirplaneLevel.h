@@ -9,7 +9,7 @@
 #include "ph3_Laser.h"
 #include "ph3_food_bowl.h"
 #include "ph3_Dog_Npc.h"
-
+#include "TimeFlow.h"
 // Ό³Έν :
 class DogAirplaneLevel : public GameEngineLevel
 {
@@ -27,7 +27,7 @@ public:
 	std::shared_ptr<class GameEngineVideo> Video;
 	int ad = 0;
 	float sd = 0;
-
+	bool UserInterfaceCheck = false;
 	std::shared_ptr<Ph2_DogAirpalne> Get_Ph2_DogAirpalne_Left()
 	{
 		return Ph2_DogAirpalne_Left;
@@ -57,7 +57,7 @@ protected:
 
 private:
 	void PlayerCreate();
-
+	std::shared_ptr<TimeFlow> timeFlow;
 	std::shared_ptr<NpcAirplane> Npc;
 	std::shared_ptr<Player> player;
 	std::shared_ptr<DogAirplane> Ph1_DogAirplane;

@@ -43,4 +43,5 @@ enum class CollisionType
 	Ph4_Beppi_Body,
 	OverWorldPlayer, 
 	OverWorldAirPlane, 
+	TutorialDoor
 };

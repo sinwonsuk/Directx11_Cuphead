@@ -56,6 +56,8 @@ private:
 	std::shared_ptr<class GameEngineCollision> Collision2;
 	std::shared_ptr<class GameEngineCollision> Collision3;
 	std::shared_ptr<class GameEngineCollision> Collision4;
+	std::shared_ptr<class GameEngineCollision> Door;
+	std::shared_ptr<class GameEngineSpriteRenderer> Exit;
 	std::shared_ptr<class GameEngineCollision> tutorial_target_Collision;
 
 

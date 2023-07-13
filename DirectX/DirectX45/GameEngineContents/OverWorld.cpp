@@ -25,67 +25,56 @@ void OverWorld::Update(float _DeltaTime)
 
 void OverWorld::Start()
 {
-	if (nullptr == GameEngineSprite::Find("DD_Idle"))
-	{
-		GameEngineDirectory NewDir;
-		NewDir.MoveParentToDirectory("ContentResources");
-		NewDir.Move("ContentResources");
-		NewDir.Move("Texture");
-		NewDir.Move("OverWorld");
-		NewDir.Move("Character");
-
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DD_Idle").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DD_Move").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Down_Idle").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Down_Move").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DU_Idle").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("DU_Move").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("InterAction_Win").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Side_Idle").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Side_Move").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Up_Idle").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Up_Move").GetFullPath());
-	}
-
-	if (nullptr == GameEngineSprite::Find("Map"))
-	{
-		GameEngineDirectory NewDir;
-		NewDir.MoveParentToDirectory("ContentResources");
-		NewDir.Move("ContentResources");
-		NewDir.Move("Texture");
-		NewDir.Move("OverWorld");
-		NewDir.Move("Map");
-
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Map").GetFullPath());
-		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Object\\To_Tutorial_Fly.png").GetFullPath(), 3, 1);
-		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Object\\To_WaittingRoom.png").GetFullPath(), 3, 1);
-		
-
-	}
+	
 
 
 
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 	GetMainCamera()->SetSortType(0,SortType::ZSort);
-	
-	
-	{
-		std::shared_ptr<OverWorld_Map> Object = CreateActor<OverWorld_Map>();
-	}
-	{
-		std::shared_ptr<OverHead_Player> Object = CreateActor<OverHead_Player>();
-	}
-
 	GetMainCamera()->GetTransform()->AddLocalPosition({ -1300,300 });
+	
+	
+
+	
 
 }
 
 void OverWorld::LevelChangeStart()
 {
 	GameEngineLevel::LevelChangeStart();
+
+	if (OneCheck == false)
+	{
+		{
+			std::shared_ptr<OverWorld_Map> Object = CreateActor<OverWorld_Map>();
+		}
+		{
+			std::shared_ptr<OverHead_Player> Object = CreateActor<OverHead_Player>();
+			Object->GetTransform()->AddLocalPosition({ 120.0f,120.0f });
+		}
+		OneCheck = true;
+	}
+	  
 }
 
 void OverWorld::LevelChangeEnd()
 {
+	
+
+	GameEngineSprite::UnLoad("DD_Idle");
+	GameEngineSprite::UnLoad("DD_Move");
+	GameEngineSprite::UnLoad("Down_Idle");
+	GameEngineSprite::UnLoad("Down_Move");
+	GameEngineSprite::UnLoad("DU_Idle");
+	GameEngineSprite::UnLoad("DU_Move");
+	GameEngineSprite::UnLoad("InterAction_Win");
+	GameEngineSprite::UnLoad("Side_Idle");
+	GameEngineSprite::UnLoad("Side_Move");
+	GameEngineSprite::UnLoad("Up_Idle");
+	GameEngineSprite::UnLoad("Up_Move");
+	GameEngineSprite::UnLoad("Map");
+	GameEngineSprite::UnLoad("To_Tutorial_Fly.png");
+	GameEngineSprite::UnLoad("To_WaittingRoom.png");
+
 	GameEngineLevel::LevelChangeEnd();
 }

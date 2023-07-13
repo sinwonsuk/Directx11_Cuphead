@@ -24,6 +24,8 @@ protected:
 
 private:
 	float Angle = 0.0f;
+	
+	std::shared_ptr<class GameEngineSpriteRenderer> Loading;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
 	

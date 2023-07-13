@@ -183,6 +183,7 @@ void NpcAirplane::Update(float _Delta)
 			AirPlaneLevel->ad == 1
 			)
 		{
+			
 			float4 a = { 0,-230.0f };
 
 			float4 MoveDir1 = { a - Npc->GetTransform()->GetLocalPosition() };

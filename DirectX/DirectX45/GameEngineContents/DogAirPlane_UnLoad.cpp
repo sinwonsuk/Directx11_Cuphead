@@ -3,6 +3,8 @@
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include "OverWorld.h"
+#include "DogAirPlane_Loading.h"
+bool DogAirPlane_UnLoad::check1 = false;
 DogAirPlane_UnLoad::DogAirPlane_UnLoad()
 {
 }
@@ -12,6 +14,42 @@ DogAirPlane_UnLoad::~DogAirPlane_UnLoad()
 }
 void AFunction(GameEngineThread* Thread)
 {
+	
+	
+
+		GameEngineSprite::ReLoad("DD_Idle");
+		GameEngineSprite::ReLoad("DD_Move");
+		GameEngineSprite::ReLoad("Down_Idle");
+		GameEngineSprite::ReLoad("Down_Move");
+		GameEngineSprite::ReLoad("DU_Idle");
+		GameEngineSprite::ReLoad("DU_Move");
+		GameEngineSprite::ReLoad("InterAction_Win");
+		GameEngineSprite::ReLoad("Side_Idle");
+		GameEngineSprite::ReLoad("Side_Move");
+		GameEngineSprite::ReLoad("Up_Idle");
+		GameEngineSprite::ReLoad("Up_Move");
+
+		GameEngineSprite::ReLoad("Map");
+		GameEngineSprite::ReLoad("To_Tutorial_Fly.png");
+		GameEngineSprite::ReLoad("To_WaittingRoom.png");
+	
+
+	/*if (nullptr == GameEngineSprite::Find("Map"))
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Texture");
+		NewDir.Move("OverWorld");
+		NewDir.Move("Map");
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Map").GetFullPath());
+		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Object\\To_Tutorial_Fly.png").GetFullPath(), 3, 1);
+		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Object\\To_WaittingRoom.png").GetFullPath(), 3, 1);
+	}*/
+
+
+
 	
 		GameEngineSprite::UnLoad("Chinook_Pilot_Saluki");
 		GameEngineSprite::UnLoad("ph1_dogcopter_intro");
@@ -152,17 +190,23 @@ void AFunction(GameEngineThread* Thread)
 		GameEngineSprite::UnLoad("ph3_dogcopter_death_blades");
 		GameEngineSprite::UnLoad("FightText_KO");
 
-		GameEngineCore::CreateLevel<OverWorld>();
-
-		GameEngineCore::ChangeLevel("OverWorld");
+		
 	
+	
+	
+
+	DogAirPlane_Loading::Check = false;
+	DogAirPlane_UnLoad::check1 = true;
+	//GameEngineCore::CreateLevel<OverWorld>();
+	GameEngineCore::ChangeLevel("OverWorld");
+	//GameEngineCore::ChangeLevel("OverWorld");
 }
 void DogAirPlane_UnLoad::Start()
 {
-	
+	//GameEngineCore::JobQueue.Work(AFunction);
 
 	UnLoad = CreateComponent<GameEngineSpriteRenderer>();
-	UnLoad->CreateAnimation({ .AnimationName = "Loading", .SpriteName = "Loading", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
+	UnLoad->CreateAnimation({ .AnimationName = "Loading", .SpriteName = "Loading", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true});
 	UnLoad->ChangeAnimation("Loading");
 
 }
@@ -176,6 +220,8 @@ void DogAirPlane_UnLoad::Update(float _Delta)
 	}
 
 
+
+	
 
 	
 }

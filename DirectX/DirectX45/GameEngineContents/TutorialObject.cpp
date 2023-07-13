@@ -5,6 +5,7 @@
 #include <GameEngineCore/GameEngineUIRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEngineCore/GameEngineCore.h>
 #include "EnumClass.h"
 #include "Player.h"
 #include "UserInterface.h"
@@ -128,12 +129,40 @@ void TutorialObject::Start()
 	Collision3->GetTransform()->SetLocalPosition({ 3540.0f,-10.0f });
 	Collision3->SetOrder((int)CollisionType::TutorialObject);
 
+	Door = CreateComponent<GameEngineCollision>();
+	Door->GetTransform()->SetLocalScale({ 200.0f, 300.0f, 300.0f });
+	Door->GetTransform()->SetLocalPosition({ 5200.0f,-170.0f });
+	Door->SetOrder((int)CollisionType::TutorialDoor);
+
+
+	Exit = CreateComponent<GameEngineUIRenderer>();
+	Exit->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
+	Exit->ChangeAnimation("Exit");
+	Exit->GetTransform()->AddLocalPosition({ 0.0f,0.0f,-200.0f });
+	Exit->Off();
 
 }
 
 void TutorialObject::Update(float _Delta)
 {
-	
+	if (Door->Collision((int)CollisionType::Player))
+	{
+		if (GameEngineInput::IsDown("PlayerJump"))
+		{
+			Exit->On();
+			return;
+		}
+	}
+
+	if (Exit->IsAnimationEnd())
+	{
+		GameEngineCore::ChangeLevel("OverWorld_Loading_Level");
+
+	}
+
+
+
+
 	if (Collision4->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D) )
 	{
 		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition(float4::Left * 400 * _Delta);
@@ -249,6 +278,7 @@ void TutorialObject::Update(float _Delta)
 	}
 	if (TargetHp < 0)
 	{
+		tutorial_target_Collision->Off();
 		tutorial_target->Off();
 		Pyramid_Topper->Off();
 		Explosion->On();

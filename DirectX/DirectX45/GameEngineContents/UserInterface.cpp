@@ -37,42 +37,42 @@ void UserInterface::Start()
 
 
 	Hp3 = CreateComponent<GameEngineUIRenderer>();
-	Hp3->GetTransform()->AddLocalPosition({ -570,-320 });
+	Hp3->GetTransform()->AddLocalPosition({ -570,-320,-300.0f });
 	Hp3->SetScaleToTexture("hud_hp_3.png");
 	Hp3->On(); 
 
 	Hp2 = CreateComponent<GameEngineUIRenderer>();
 	Hp2->SetScaleToTexture("hud_hp_2.png");
-	Hp2->GetTransform()->AddLocalPosition({ -570,-320 });
+	Hp2->GetTransform()->AddLocalPosition({ -570,-320,-300.0f });
 	Hp2->Off();
 
 	Hp1 = CreateComponent<GameEngineUIRenderer>();
-	Hp1->GetTransform()->AddLocalPosition({ -570,-320 });
+	Hp1->GetTransform()->AddLocalPosition({ -570,-320 ,-300.0f });
 	Hp1->SetScaleToTexture("hud_hp_1.png");
 	Hp1->Off();
 
 	BackCard = CreateComponent<GameEngineUIRenderer>();
-	BackCard->GetTransform()->AddLocalPosition({ -510,-320 });
+	BackCard->GetTransform()->AddLocalPosition({ -510,-320 ,-300.0f });
 	BackCard->SetScaleToTexture("hud_ch_card_Back.png");
 	BackCard->On();
 
 	BackCard2 = CreateComponent<GameEngineUIRenderer>();
-	BackCard2->GetTransform()->AddLocalPosition({ -490,-320 });
+	BackCard2->GetTransform()->AddLocalPosition({ -490,-320 ,-300.0f });
 	BackCard2->SetScaleToTexture("hud_ch_card_Back.png");
 	BackCard2->On();
 
 	BackCard3 = CreateComponent<GameEngineUIRenderer>();
-	BackCard3->GetTransform()->AddLocalPosition({ -470,-320 });
+	BackCard3->GetTransform()->AddLocalPosition({ -470,-320,-300.0f });
 	BackCard3->SetScaleToTexture("hud_ch_card_Back.png");
 	BackCard3->On();
 
 	BackCard4 = CreateComponent<GameEngineUIRenderer>();
-	BackCard4->GetTransform()->AddLocalPosition({ -450,-320 });
+	BackCard4->GetTransform()->AddLocalPosition({ -450,-320 ,-300.0f });
 	BackCard4->SetScaleToTexture("hud_ch_card_Back.png");
 	BackCard4->On();
 
 	BackCard5 = CreateComponent<GameEngineUIRenderer>();
-	BackCard5->GetTransform()->AddLocalPosition({ -430,-320 });
+	BackCard5->GetTransform()->AddLocalPosition({ -430,-320 ,-300.0f });
 	BackCard5->SetScaleToTexture("hud_ch_card_Back.png");
 	BackCard5->On();
 
@@ -86,34 +86,34 @@ void UserInterface::Start()
 	FlipCard->CreateAnimation({ .AnimationName = "FlipCard", .SpriteName = "FlipCard", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true });
 	FlipCard->ChangeAnimation("FlipCard");
 	FlipCard->Off();
-	FlipCard->GetTransform()->AddLocalPosition({ -510,-320 });
+	FlipCard->GetTransform()->AddLocalPosition({ -510,-320,-300.0f });
 
 
 	FlipCard2 = CreateComponent<GameEngineUIRenderer>();
 	FlipCard2->CreateAnimation({ .AnimationName = "FlipCard", .SpriteName = "FlipCard", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true });
 	FlipCard2->ChangeAnimation("FlipCard");
 	FlipCard2->Off();
-	FlipCard2->GetTransform()->AddLocalPosition({ -490,-320 });
+	FlipCard2->GetTransform()->AddLocalPosition({ -490,-320,-300.0f });
 
 	FlipCard3 = CreateComponent<GameEngineUIRenderer>();
 	FlipCard3->CreateAnimation({ .AnimationName = "FlipCard", .SpriteName = "FlipCard", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true });
 	FlipCard3->ChangeAnimation("FlipCard");
 	FlipCard3->Off();
-	FlipCard3->GetTransform()->AddLocalPosition({ -470,-320 });
+	FlipCard3->GetTransform()->AddLocalPosition({ -470,-320 ,-300.0f });
 
 
 	FlipCard4 = CreateComponent<GameEngineUIRenderer>();
 	FlipCard4->CreateAnimation({ .AnimationName = "FlipCard", .SpriteName = "FlipCard", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true });
 	FlipCard4->ChangeAnimation("FlipCard");
 	FlipCard4->Off();
-	FlipCard4->GetTransform()->AddLocalPosition({ -450,-320 });
+	FlipCard4->GetTransform()->AddLocalPosition({ -450,-320 ,-300.0f });
 
 
 	FlipCard5 = CreateComponent<GameEngineUIRenderer>();
 	FlipCard5->CreateAnimation({ .AnimationName = "FlipCard", .SpriteName = "FlipCard", .FrameInter = 0.1f,.Loop = false, .ScaleToTexture = true });
 	FlipCard5->ChangeAnimation("FlipCard");
 	FlipCard5->Off();
-	FlipCard5->GetTransform()->AddLocalPosition({ -430,-320 });
+	FlipCard5->GetTransform()->AddLocalPosition({ -430,-320 ,-300.0f });
 
 
 	/*FlipCard = CreateComponent<GameEngineSpriteRenderer>();
@@ -555,7 +555,14 @@ void UserInterface::Update(float _Delta)
 		Test = true;
 	}
 	
-	
+	if (CardNumber == 0)
+	{
+		FlipCard2->Off(); 
+		FlipCard3->Off(); 
+		FlipCard4->Off(); 
+		FlipCard5->Off(); 
+
+	}
 
 
 	PlusCard = CardNumber;

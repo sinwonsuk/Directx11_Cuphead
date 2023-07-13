@@ -25,7 +25,7 @@ void ph3_Dog_Npc::Start()
 	ph3_Npc = this;
 
 
-	if (nullptr == GameEngineSprite::Find("ph3_tongue_rotate_camera"))
+	/*if (nullptr == GameEngineSprite::Find("ph3_tongue_rotate_camera"))
 	{
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("ContentResources");
@@ -41,7 +41,7 @@ void ph3_Dog_Npc::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_arms_backer").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_tongue_rotate_camera_tongue").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_leader_sideways_body_Finish").GetFullPath());
-	}
+	}*/
 
 	ph3_leader_sideways_body_Finish = CreateComponent<GameEngineSpriteRenderer>();
 	ph3_leader_sideways_body_Finish->CreateAnimation({ .AnimationName = "ph3_leader_sideways_body_Finish", .SpriteName = "ph3_leader_sideways_body_Finish", .FrameInter = 0.08f,.Loop = true, .ScaleToTexture = true });
@@ -117,11 +117,14 @@ void ph3_Dog_Npc::Start()
 
 void ph3_Dog_Npc::Update(float _Delta)
 {
-
+	if (TimeCheck == true)
+	{
+		Time += _Delta; 
+	}
 	
 
 
-
+	
 
 
 	if (Ph3_DogAirplane::ph3_mainBoss->Get_ph3_dogcopter_rotate_camera()->GetCurrentFrame() == 15)
@@ -223,7 +226,7 @@ void ph3_Dog_Npc::Update(float _Delta)
 			Collision->On();
 			if (Ph3_DogAirplane::Hp < 0)
 			{
-				
+				TimeCheck = true;
 				ph3_leader_sideways_body_Finish->Off();
 				ph3_leader_sideways_body_Finish_0->Off();
 				ph3_leader_sideways_arms->Off();
@@ -301,19 +304,6 @@ void ph3_Dog_Npc::Update(float _Delta)
 				ph3_leader_sideways_arms->On();
 			}
 
-		/*	if (Ph3_DogAirplane::ph3_mainBoss->GetBowlCheck() == 8)
-			{
-				ph3_leader_sideways_arms_backer->Off();
-				ph3_leader_sideways_body_Attack->Off();
-				ph3_leader_sideways_arms->Off();
-				ph3_leader_sideways_body_Finish_0->On();
-			}
-
-			if (ph3_leader_sideways_body_Finish_0->IsAnimationEnd())
-			{
-				ph3_leader_sideways_body_Finish_0->Off();
-				ph3_leader_sideways_body_Finish->On();
-			}*/
 			
 		}
 		break;
@@ -323,16 +313,7 @@ void ph3_Dog_Npc::Update(float _Delta)
 
 
 
-			//if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
-			//{
-			//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,-1 });
-			//	GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ -3,0,0 });
-			//	//GetTransform()->SetLocalPosition({ 0,0 });
-			//	RotationCheck = 0;
-			//}
-			//GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,1 });
-			//GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 3,0,0 });
-
+			
 		}
 		break;
 
@@ -340,16 +321,10 @@ void ph3_Dog_Npc::Update(float _Delta)
 			break;
 		}
 	}
-	/*if (GetLevel()->GetMainCamera()->GetTransform()->GetTransDataRef().Rotation.z > 360)
+	/*if (Time > 4)
 	{
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalRotation({ 0,0,0});
-		GetLevel()->GetMainCamera()->GetTransform()->AddLocalPosition({ 0,0,0 });
-		RotationCheck = 0;
-		TransformData data = GetTransform()->GetTransDataRef();
-		int a = 0;
+		this->Death(); 
 	}*/
-
-	
 
 
 }

@@ -19,6 +19,10 @@ void DogAirplane::ChangeState(DogAirplaneState _State)
 
 	switch (NextState)
 	{
+	case DogAirplaneState::Black:
+
+		break;
+
 	case DogAirplaneState::BossIntro:
 		
 		break;
@@ -59,11 +63,24 @@ void DogAirplane::ChangeState(DogAirplaneState _State)
 }
 
 
+void DogAirplane::BlackUpdate(float _Time)
+{
+	if (Loading->IsAnimationEnd())
+	{
+		ChangeState(DogAirplaneState::BossIntro);
+		return; 
+	}
+}
+
 void DogAirplane::UpdateState(float _Time)
 {
 
 	switch (StateValue)
 	{
+	case DogAirplaneState::Black:
+		BlackUpdate(_Time);
+		break;
+
 	case DogAirplaneState::BossIntro:
 		BossIntroUpdate(_Time);
 		break;
@@ -539,7 +556,8 @@ void DogAirplane::UnloadUpdate(float _Time)
 	case 2:
 	{
 		
-		++unloadCheck;
+		
+
 	}
 	break;
 

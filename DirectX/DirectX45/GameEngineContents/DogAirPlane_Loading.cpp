@@ -161,7 +161,7 @@ void Function(GameEngineThread* Thread)
 		GameEngineSprite::ReLoad("ph3_dogcopter_death_blades");
 
 		
-		
+		DogAirPlane_UnLoad::Check = false;
 
 		GameEngineCore::ChangeLevel("DogAirplaneLevel");
 	}

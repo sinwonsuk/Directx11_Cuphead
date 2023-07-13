@@ -4,7 +4,7 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include "OverWorld.h"
 #include "DogAirPlane_Loading.h"
-bool DogAirPlane_UnLoad::check = false;
+bool DogAirPlane_UnLoad::Check = false;
 DogAirPlane_UnLoad::DogAirPlane_UnLoad()
 {
 }

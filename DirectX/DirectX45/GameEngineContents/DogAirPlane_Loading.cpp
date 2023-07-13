@@ -4,6 +4,7 @@
 #include <GameEngineCore/GameEngineCore.h>
 #include "DogAirplaneLevel.h"
 #include <GameEnginePlatform/GameEngineInput.h>
+#include "DogAirPlane_UnLoad.h"
 bool DogAirPlane_Loading::Check = false;
 DogAirPlane_Loading::DogAirPlane_Loading()
 {
@@ -331,7 +332,7 @@ void Function(GameEngineThread* Thread)
 			}
 		}
 
-
+		DogAirPlane_UnLoad::Check = false;
 
 		GameEngineCore::ChangeLevel("DogAirplaneLevel");
 	}

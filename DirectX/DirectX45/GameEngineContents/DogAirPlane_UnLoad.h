@@ -14,7 +14,7 @@ public:
 	DogAirPlane_UnLoad& operator=(const DogAirPlane_UnLoad& _Other) = delete;
 	DogAirPlane_UnLoad& operator=(DogAirPlane_UnLoad&& _Other) noexcept = delete;
 
-	static bool check1;
+	static bool Check;
 
 	
 
@@ -29,7 +29,7 @@ protected:
 
 private:
 
-	bool Check = false;
+	
 
 	std::shared_ptr<class GameEngineSpriteRenderer> UnLoad;
 

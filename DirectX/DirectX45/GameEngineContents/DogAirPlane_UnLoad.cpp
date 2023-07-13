@@ -4,7 +4,7 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include "OverWorld.h"
 #include "DogAirPlane_Loading.h"
-bool DogAirPlane_UnLoad::check1 = false;
+bool DogAirPlane_UnLoad::check = false;
 DogAirPlane_UnLoad::DogAirPlane_UnLoad()
 {
 }
@@ -196,13 +196,14 @@ void AFunction(GameEngineThread* Thread)
 	
 
 	DogAirPlane_Loading::Check = false;
-	DogAirPlane_UnLoad::check1 = true;
+	
 	//GameEngineCore::CreateLevel<OverWorld>();
 	GameEngineCore::ChangeLevel("OverWorld");
 	//GameEngineCore::ChangeLevel("OverWorld");
 }
 void DogAirPlane_UnLoad::Start()
 {
+
 	//GameEngineCore::JobQueue.Work(AFunction);
 
 	UnLoad = CreateComponent<GameEngineSpriteRenderer>();
@@ -213,6 +214,7 @@ void DogAirPlane_UnLoad::Start()
 
 void DogAirPlane_UnLoad::Update(float _Delta)
 {
+
 	if (Check == false)
 	{
 		GameEngineCore::JobQueue.Work(AFunction);

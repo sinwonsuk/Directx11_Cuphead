@@ -52,6 +52,11 @@ void OverHead_Player::Start()
 	Exit->ChangeAnimation("Exit");
 	Exit->Off(); 
 
+	Exit2 = CreateComponent<GameEngineSpriteRenderer>();
+	Exit2->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+	Exit2->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-200.0f });
+	Exit2->ChangeAnimation("Exit");
+	Exit2->Off();
 
 	GetTransform()->AddLocalPosition({ -1300,200,-1.0f });
 
@@ -64,7 +69,7 @@ void OverHead_Player::Start()
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 100.0f });
-	//Collision->GetTransform()->AddLocalScale({ 0.0f, -50.0f, 0.0f });
+	
 	Collision->SetOrder((int)CollisionType::OverWorldPlayer);
 	Collision->SetColType(ColType::OBBBOX2D);
 
@@ -92,6 +97,21 @@ void OverHead_Player::Update(float _Delta)
 		Exit->Off(); 
 		GameEngineCore::ChangeLevel("DogAirPlane_Loading_Level");
 	}
+
+	if (Collision->Collision((int)CollisionType::OverWorldBepi, ColType::OBBBOX2D, ColType::OBBBOX2D))
+	{
+		if (GameEngineInput::IsDown("PlayerJump"))
+		{
+			Exit2->On();
+		}
+	}
+	if (Exit2->IsAnimationEnd())
+	{
+		Exit2->ChangeAnimation("Exit");
+		Exit2->Off();
+		GameEngineCore::ChangeLevel("Bepi_Loading_Level");
+	}
+
 	
 		std::shared_ptr<GameEngineTexture> testMap = GameEngineTexture::Find("Overworld_ColMap1.png");
 		//2009,368

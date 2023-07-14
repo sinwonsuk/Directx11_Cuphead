@@ -68,7 +68,7 @@ void IdleWeapon::Update(float _Delta)
 		
 		if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
 		{
-			UserInterface::Cut += 0.5f;
+			UserInterface::Cut += 0.1f;
 			Bullet->ChangeAnimation("Peashooter_Death");
 			CollisionCheck = true;
 		}
@@ -82,7 +82,7 @@ void IdleWeapon::Update(float _Delta)
 				TutorialObject::Object->GetPyramid_Topper()->ColorOptionValue.PlusColor = { 1.0f,1.0f,1.0f,0.0f };
 				TutorialObject::Object->Gettutorial_target()->ResetLiveTime();
 				TutorialObject::Object->TargetHp -= 1;
-				UserInterface::Cut += 0.5f;
+				UserInterface::Cut += 0.1f;
 
 				Bullet->ChangeAnimation("Peashooter_Death");
 				CollisionCheck = true;
@@ -110,7 +110,7 @@ void IdleWeapon::Update(float _Delta)
 					{
 						Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ColorOptionValue.PlusColor = { 1,1,1,0 };
 						Ph3_DogAirplane::ph3_mainBoss->Idle_Body->ResetLiveTime();
-						UserInterface::Cut += 0.5f;
+						UserInterface::Cut += 0.1f;
 						Bullet->ChangeAnimation("Peashooter_Death");
 						CollisionCheck = true;
 					}
@@ -139,7 +139,7 @@ void IdleWeapon::Update(float _Delta)
 				{
 					Ph4_Bepi::ph4_Bepi->Phase4_Idle->ColorOptionValue.PlusColor = { 1,1,1,0 };
 					Ph4_Bepi::ph4_Bepi->Phase4_Idle->ResetLiveTime();
-					UserInterface::Cut += 0.5f;
+					UserInterface::Cut += 0.1f;
 					Bullet->ChangeAnimation("Peashooter_Death");
 					CollisionCheck = true;
 				}

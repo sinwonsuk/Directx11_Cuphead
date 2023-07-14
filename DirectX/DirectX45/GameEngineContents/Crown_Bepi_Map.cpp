@@ -4,13 +4,18 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include <GameEngineCore/GameEngineLevel.h>
 #include "EnumClass.h"
 #include "Player.h"
 #include "Rollercoaster.h"
 #include "Crown_Bepi_Level.h"
 #include "Ph4_Bepi.h"
 #include "Ph4_Swing_Platform.h"
+std::vector<std::shared_ptr<class Rollercoaster>> Crown_Bepi_Map::Rollercoasters; 
+
 bool Crown_Bepi_Map::Ph4_Check = false;
+
+
 Crown_Bepi_Map::Crown_Bepi_Map()
 {
 }
@@ -21,7 +26,7 @@ Crown_Bepi_Map::~Crown_Bepi_Map()
 
 void Crown_Bepi_Map::Start()
 {
-
+	
 	clown_bg_sky = CreateComponent<GameEngineSpriteRenderer>();
 	clown_bg_sky->SetScaleToTexture("clown_bg_sky.png");
 	clown_bg_sky->GetTransform()->AddLocalPosition({ 0.0f,300.0f,300.0f });
@@ -149,9 +154,16 @@ void Crown_Bepi_Map::Start()
 	clown_bg_track_top->SetScaleToTexture("clown_bg_track_top.png");
 	clown_bg_track_top->GetTransform()->AddLocalPosition({ 0.0f,-250.0f,-1.0f });
 
+	Rollercoasters.reserve(1000);
+	
 
-	
-	
+		for (size_t i = 0; i < 50; i++)
+		{
+			std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
+		
+			Object->Off();
+			Rollercoasters.push_back(Object);
+		}
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 1500.0f, 300.0f, 300.0f });
@@ -192,22 +204,21 @@ void Crown_Bepi_Map::Update(float _Delta)
 
 	Crown_Bepi_Level* Level = (Crown_Bepi_Level*)GetLevel();
 
-	if (Level->PaseCheck == Pase::Pase4 && sdasd > 7)
+	if (Level->PaseCheck == Pase::Pase4 && sdasd > 9)
 	{
 		
 			if (Ph4_Rollercoaster_Time_BG > 4)
 			{
 
+
 				if (Ph4_Bepi::ph4_Bepi->StateValue == Ph4_Bepi_State::BossIdle && Ph4_Check == false)
 				{
-					std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
-					Object->Speed = 700;
-
+					Rollercoasters[RollercoastersNumber]->On();
+					Rollercoasters[RollercoastersNumber]->Speed = 700; 
 					Ph4_Rollercoaster_Time_BG = 0;
 					Rollercoaster_Time = 17;
 					Ph4_Check = true;
-
-
+					++RollercoastersNumber;
 				}
 			}
 
@@ -215,37 +226,34 @@ void Crown_Bepi_Map::Update(float _Delta)
 		if (Rollercoaster_Time > 20 && Ph4_Check == true)
 		{
 			clown_bg_light_on->On();
-
-			std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
-			Object->Speed = 700;
-			TransformData Date = Object->GetTransform()->GetTransDataRef();
-
-			Object->MoveCheck = 1;
-			Rollercoaster_Time = 0;			
+			Rollercoasters[RollercoastersNumber]->On();
+			Rollercoasters[RollercoastersNumber]->Speed = 700;
+			Rollercoasters[RollercoastersNumber]->MoveCheck = 1;		
+			Rollercoaster_Time = 0;		
+			++RollercoastersNumber;
 		}
 	}
+
 	else if (Level->PaseCheck == Pase::Pase2 || Level->PaseCheck == Pase::Pase3)
 	{
 		if (Rollercoaster_Time_BG > 15)
 		{
-			Ph4_Time_bool = true;
-			std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
+			Rollercoasters[RollercoastersNumber]->On(); 	
 			Rollercoaster_Time_BG = 0;
 			Rollercoaster_Time = 14;
 			clown_bg_light_on->Off();
-			sdasd = 0; 
+			++RollercoastersNumber;
 		}
 
 		if (Rollercoaster_Time > 20)
 		{
 			clown_bg_light_on->On(); 
-
-			std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
+			Rollercoasters[RollercoastersNumber]->On();
 			Ph4_Time_bool = true;
-			TransformData Date = Object->GetTransform()->GetTransDataRef(); 
+			Rollercoasters[RollercoastersNumber]->MoveCheck = 1;	
 			sdasd = 0; 
-			Object->MoveCheck = 1;
 			Rollercoaster_Time = 0;
+			++RollercoastersNumber;
 		}
 	}
 
@@ -254,7 +262,22 @@ void Crown_Bepi_Map::Update(float _Delta)
 		sdasd += _Delta;
 	}
 
+	if (RollercoastersNumber == 50)
+	{
+		for (size_t i = 0; i < Rollercoasters.size(); i++)
+		{
+			Rollercoasters.clear();
+		}
 
+		for (size_t i = 0; i < 50; i++)
+		{
+			std::shared_ptr<Rollercoaster> Object = GetLevel()->CreateActor<Rollercoaster>();
+			Object->Off();
+			Rollercoasters.push_back(Object);
+		}
+
+		RollercoastersNumber = 0;
+	}
 
 
 	clown_bg_ferris_Circle->GetTransform()->AddLocalRotation({ 0,0,1.0f * 28.8f * _Delta });

@@ -36,8 +36,8 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> House;
 	std::shared_ptr<class GameEngineSpriteRenderer> AirPlane;
 	std::shared_ptr<class GameEngineSpriteRenderer> Left_Map_Layer;
-	std::shared_ptr<class GameEngineCollision> Collision;
-
+	std::shared_ptr<class GameEngineCollision> AirPlane_Collision;
+	std::shared_ptr<class GameEngineCollision> Bepi_Collision;
 
 
 

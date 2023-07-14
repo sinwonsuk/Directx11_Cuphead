@@ -167,8 +167,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bepi_Duck.h" />
+    <ClInclude Include="Bepi_Loading_Level.h" />
+    <ClInclude Include="Bepi_UnLoad.h" />
+    <ClInclude Include="Bepi_UnLoad_Level.h" />
     <ClInclude Include="BoneWeapon.h" />
     <ClInclude Include="Boss_Finish.h" />
+    <ClInclude Include="Bpei_Loading.h" />
     <ClInclude Include="ContentsCore.h">
       <SubType>
       </SubType>
@@ -238,9 +242,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bepi_Duck.cpp" />
+    <ClCompile Include="Bepi_Loading_Level.cpp" />
+    <ClCompile Include="Bepi_UnLoad.cpp" />
+    <ClCompile Include="Bepi_UnLoad_Level.cpp" />
     <ClCompile Include="Beppi_State.cpp" />
     <ClCompile Include="BoneWeapon.cpp" />
     <ClCompile Include="Boss_Finish.cpp" />
+    <ClCompile Include="Bpei_Loading.cpp" />
     <ClCompile Include="ContentsCore.cpp">
       <SubType>
       </SubType>

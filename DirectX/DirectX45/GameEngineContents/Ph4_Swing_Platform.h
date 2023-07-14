@@ -12,6 +12,7 @@ enum class Choice
 class Ph4_Swing_Platform : public GameEngineActor
 {
 public:
+
 	static bool Ph4_Platform_Check;
 	// constrcuter destructer
 	Ph4_Swing_Platform();

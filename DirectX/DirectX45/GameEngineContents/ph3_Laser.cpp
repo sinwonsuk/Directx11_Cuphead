@@ -147,6 +147,7 @@ void ph3_Laser::Start()
 	PinkCollision->SetOrder((int)CollisionType::Ph3_Dog_Boss_Pink_Bullet);
 	PinkCollision->Off(); 
 
+
 	
 	ParryEffect = CreateComponent<GameEngineSpriteRenderer>();
 	ParryEffect->CreateAnimation({ .AnimationName = "ParryEffect", .SpriteName = "ParryEffect", .FrameInter = 0.08f, .Loop = false, .ScaleToTexture = true, });
@@ -283,7 +284,7 @@ void ph3_Laser::Update(float _Delta)
 				{
 					PinkCollision->On();
 					PinkCollision->GetTransform()->SetLocalScale({ 1200.0f, 50.0f, 300.0f });
-					PinkCollision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y-220.0f,ph3_beam_top->GetTransform()->GetLocalPosition().z });
+					PinkCollision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y-190.0f,ph3_beam_top->GetTransform()->GetLocalPosition().z });
 					ResetLiveTime();
 				}
 
@@ -654,7 +655,7 @@ void ph3_Laser::Update(float _Delta)
 				{
 					PinkCollision->On();
 					PinkCollision->GetTransform()->SetLocalScale({ 1000.0f, 50.0f, 300.0f });
-					PinkCollision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y - 220.0f,ph3_beam_top->GetTransform()->GetLocalPosition().z });
+					PinkCollision->GetTransform()->SetLocalPosition({ ph3_beam_top->GetTransform()->GetLocalPosition().x,ph3_beam_top->GetTransform()->GetLocalPosition().y - 190.0f,ph3_beam_top->GetTransform()->GetLocalPosition().z });
 					ResetLiveTime();
 
 				}

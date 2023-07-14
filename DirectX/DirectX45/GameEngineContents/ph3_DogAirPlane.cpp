@@ -427,9 +427,9 @@ void Ph3_DogAirplane::Start()
 
 	}
 
-	Exit = CreateComponent<GameEngineSpriteRenderer>();
+	Exit = CreateComponent<GameEngineSpriteRenderer>(150);
 	Exit->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
-	Exit->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-200.0f });
+	Exit->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-500.0f });
 	Exit->ChangeAnimation("Exit");
 	Exit->Off();
 

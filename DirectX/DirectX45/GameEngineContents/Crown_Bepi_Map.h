@@ -1,10 +1,11 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include "Rollercoaster.h"
 class Crown_Bepi_Map : public GameEngineActor
 {
 public:
 	static bool Ph4_Check;
+	
 	///static DogAirplaneBackground* Background;
 	// constrcuter destructer
 	Crown_Bepi_Map();
@@ -16,7 +17,8 @@ public:
 	Crown_Bepi_Map& operator=(const Crown_Bepi_Map& _Other) = delete;
 	Crown_Bepi_Map& operator=(Crown_Bepi_Map&& _Other) noexcept = delete;
 
-
+	static std::vector<std::shared_ptr<class Rollercoaster>> Rollercoasters;
+	
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -25,7 +27,11 @@ protected:
 	float4 TestColor;
 
 private:
-
+	float sdasd = 0;
+	bool Ph4_Time_bool = false;
+	//std::vector<std::shared_ptr<class Rollercoaster>> Rollercoasters;
+	int RollercoastersNumber = 0; 
+	std::shared_ptr<class GameEngineSpriteRenderer> Loading;
 	std::shared_ptr<class GameEngineSpriteRenderer> MainMap;
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_back_coaster;
 	std::shared_ptr<class GameEngineSpriteRenderer> clown_bg_sky;
@@ -95,8 +101,8 @@ private:
 
 	float moon = 0.0f;
 
-	float sdasd = 0;
 
-	bool Ph4_Time_bool = false;
+
+	
 };
 

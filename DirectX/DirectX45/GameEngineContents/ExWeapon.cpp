@@ -19,29 +19,7 @@ ExWeapon::~ExWeapon()
 
 void ExWeapon::Start()
 {
-	if (nullptr == GameEngineSprite::Find("Peashooter_EX_Death.png"))
-	{
-		GameEngineDirectory NewDir;
-		NewDir.MoveParentToDirectory("ContentResources");
-		NewDir.Move("ContentResources");
-
-
-		NewDir.Move("Texture");
-
-		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\Peashooter_EX_Death.png").GetFullPath(), 5, 2);
-		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\Peashooter_EX_Loop.png").GetFullPath(), 5, 2);
-	}
-	if (nullptr == GameEngineSprite::Find("EX_Dust"))
-	{
-		GameEngineDirectory NewDir;
-		NewDir.MoveParentToDirectory("ContentResources");
-		NewDir.Move("ContentResources");
-		NewDir.Move("Texture");
-		NewDir.Move("Character");
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("EX_Dust").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("EX_ChargeUp").GetFullPath());
-	}
-
+	
 
 
 	Bullet = CreateComponent<GameEngineSpriteRenderer>();
@@ -169,7 +147,7 @@ void ExWeapon::Update(float _Delta)
 			{
 				Ph4_Bepi::ph4_Bepi->Phase4_Idle->ColorOptionValue.PlusColor = { 1,1,1,0 };
 				Ph4_Bepi::ph4_Bepi->Phase4_Idle->ResetLiveTime();
-				UserInterface::Cut += 0.5f;
+				UserInterface::Cut += 0.1f;
 				Bullet->ChangeAnimation("Peashooter_Death");
 				CollisionCheck = true;
 			}

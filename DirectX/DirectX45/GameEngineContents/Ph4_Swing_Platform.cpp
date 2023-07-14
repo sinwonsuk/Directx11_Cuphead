@@ -6,6 +6,8 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.h"
 #include "Player.h"
+
+
 bool Ph4_Swing_Platform::Ph4_Platform_Check = false;
 Ph4_Swing_Platform::Ph4_Swing_Platform()
 {
@@ -17,7 +19,7 @@ Ph4_Swing_Platform::~Ph4_Swing_Platform()
 
 void Ph4_Swing_Platform::Start()
 {
-
+	
 	Swing_Rope = CreateComponent<GameEngineSpriteRenderer>();
 	Swing_Rope->CreateAnimation({ .AnimationName = "Swing_Rope", .SpriteName = "Swing_Rope", .FrameInter = 0.2f,.Loop = true, .ScaleToTexture = true, });
 	Swing_Rope->ChangeAnimation("Swing_Rope");
@@ -46,7 +48,10 @@ void Ph4_Swing_Platform::Update(float _Delta)
 		Time += _Delta; 
 	}
 
-
+	if (GetLiveTime() > 10)
+	{
+		this->Death(); 
+	}
 	
 
 

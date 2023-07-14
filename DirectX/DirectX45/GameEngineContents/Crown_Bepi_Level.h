@@ -4,7 +4,9 @@
 #include "Ph2_Bepi.h"
 #include "Ph3_Bepi.h"
 #include "Ph4_Bepi.h"
-
+#include "Player.h"
+#include "UserInterface.h"
+#include "Crown_Bepi_Map.h"
 enum class Pase
 {
 	Pase1,
@@ -41,12 +43,13 @@ protected:
 
 
 private:
-	
+	std::shared_ptr<Crown_Bepi_Map> Map;
 	std::shared_ptr<Ph1_Bepi> ph1_Bepi;
 	std::shared_ptr<Ph2_Bepi> ph2_Bepi;
 	std::shared_ptr<Ph3_Bepi> ph3_Bepi;
 	std::shared_ptr<Ph4_Bepi> ph4_Bepi;
-
+	std::shared_ptr<Player> player;
+	std::shared_ptr<UserInterface> userInterface;
 
 
 };

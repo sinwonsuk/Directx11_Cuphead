@@ -89,6 +89,7 @@ private:
 	Ph1_Beppi_State StateValue = Ph1_Beppi_State::BossIntro;
 
 	float Angle = 0.0f;
+	std::shared_ptr<class GameEngineSpriteRenderer> Loading;
 	std::shared_ptr<class GameEngineSpriteRenderer> Beppi_Intro;
 	std::shared_ptr<class GameEngineSpriteRenderer> Beppi_Intro2;
 

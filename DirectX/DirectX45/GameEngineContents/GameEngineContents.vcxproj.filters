@@ -166,6 +166,10 @@
     <ClInclude Include="OverWorld_Loading_Level.h">
       <Filter>Object\Loading</Filter>
     </ClInclude>
+    <ClInclude Include="Bepi_Loading_Level.h" />
+    <ClInclude Include="Bepi_UnLoad_Level.h" />
+    <ClInclude Include="Bpei_Loading.h" />
+    <ClInclude Include="Bepi_UnLoad.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -368,6 +372,10 @@
     <ClCompile Include="OverWorld_Loading_Level.cpp">
       <Filter>Object\Loading</Filter>
     </ClCompile>
+    <ClCompile Include="Bepi_Loading_Level.cpp" />
+    <ClCompile Include="Bepi_UnLoad_Level.cpp" />
+    <ClCompile Include="Bpei_Loading.cpp" />
+    <ClCompile Include="Bepi_UnLoad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

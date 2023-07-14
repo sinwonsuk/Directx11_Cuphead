@@ -215,7 +215,11 @@ void Player::Update(float _DeltaTime)
 			HitTime = 0;
 		}
 	}
-	
+	if (HitEffect->IsAnimationEnd())
+	{
+		HitEffect->Off(); 
+	}
+
 	UpdateState(_DeltaTime);
 
 //	Collision->GetTransform()->SetLocalPosition(Render0->GetTransform()->GetWorldPosition());
@@ -304,13 +308,39 @@ void Player::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("tutorial_target").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("boss_explosion").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Player_Portal").GetFullPath());
-
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("HitSFX").GetFullPath());
 		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttackPre").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAimAttack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAimAttackPre").GetFullPath());*/
 	}
 		
+	if (nullptr == GameEngineSprite::Find("Peashooter_EX_Death.png"))
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+
+
+		NewDir.Move("Texture");
+
+		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\Peashooter_EX_Death.png").GetFullPath(), 5, 2);
+		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\Peashooter_EX_Loop.png").GetFullPath(), 5, 2);
+	}
+
+	if (nullptr == GameEngineSprite::Find("EX_Dust"))
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Texture");
+		NewDir.Move("Character");
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("EX_Dust").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("EX_ChargeUp").GetFullPath());
+	}
+
+
+
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
 	Render0 = CreateComponent<GameEngineSpriteRenderer>(100);
 	
@@ -356,10 +386,12 @@ void Player::Start()
 	Render0->CreateAnimation({ .AnimationName = "Ex_Straight", .SpriteName = "Ex_Straight",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "Ex_Up", .SpriteName = "Ex_Up",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "Player_Portal", .SpriteName = "Player_Portal",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
-
-	
-
 	Render0->ChangeAnimation("Idle");
+
+	HitEffect = CreateComponent<GameEngineSpriteRenderer>(100);
+	HitEffect->CreateAnimation({ .AnimationName = "HitSFX", .SpriteName = "HitSFX",. FrameInter = 0.04f, .Loop = false, .ScaleToTexture = true });
+	HitEffect->ChangeAnimation("HitSFX");
+	HitEffect->Off(); 
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->AddLocalPosition({ 0.0f, -30.0f, 0.0f });

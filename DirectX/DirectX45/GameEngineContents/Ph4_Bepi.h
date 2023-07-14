@@ -1,6 +1,8 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include "Boss_Finish.h"
+#include "Ph4_Swing_Platform.h"
+#include "Ph4_Penguin.h"
 enum class Ph4_Bepi_State
 {
 	BossIntro,
@@ -64,8 +66,13 @@ private:
 	bool BossFinish = false;
 	int AttackNumber = 0; 
 	int RandomPos = 0;
-
+	float RollerCoaster_Time = 0;
+	int Platform_Number = 0; 
+	std::shared_ptr<class GameEngineSpriteRenderer> Exit;
 	
+	std::vector<std::shared_ptr<class Ph4_Penguin>> Ph4_Penguins;
+	std::vector<std::shared_ptr<class Ph4_Swing_Platform>> Ph4_Swing_Platforms;
+	std::shared_ptr<class Boss_Finish> Finish;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro_Texture;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro_Spin;
@@ -76,9 +83,11 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Attack_End;
 	std::shared_ptr<class GameEngineSpriteRenderer> umbrella_bk;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bepi_boss_explosion;
+
 	float4 Boss_Exploision_Pos = {};
 	bool Boss_Exploision_Check = false;
 	int Boss_Exploision_Number = 0; 
+	int Ph4_Penguin_Number = 0;
 	std::shared_ptr<class GameEngineCollision> Collision;
 	bool test = false;
 	bool Swing_Platform_Intro = false;

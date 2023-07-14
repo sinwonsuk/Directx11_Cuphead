@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "Player.h"
 #include "EnumClass.h"
-
+#include "Ph4_Bepi.h"
 Ph4_Penguin_Weapon::Ph4_Penguin_Weapon()
 {
 }
@@ -30,6 +30,11 @@ void Ph4_Penguin_Weapon::Start()
 
 void Ph4_Penguin_Weapon::Update(float _Delta)
 {
+	if (Ph4_Bepi::ph4_Bepi->Hp < 0)
+	{
+		this->Death(); 
+	}
+
 	if (MoveDirCheck == false)
 	{
 		float4 MoveDir1 = { Player::MainPlayer->GetTransform()->GetLocalPosition() - GetTransform()->GetLocalPosition() };

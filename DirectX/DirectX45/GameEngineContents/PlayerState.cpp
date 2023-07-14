@@ -118,13 +118,21 @@ void Player::ChangeState(PlayerState _State)
 		AnimationCheck("DownAttackPre");
 		break;
 	case PlayerState::MapOut:
+	{
+		HitEffect->ChangeAnimation("HitSFX");
+		HitEffect->Off();
 		AnimationCheck("Hit_Ground");
+	}
 		break;
 	case PlayerState::Fail:
 		AnimationCheck("Jump");
 		break;
 	case PlayerState::Hit:
+	{
+		HitEffect->ChangeAnimation("HitSFX");
+		HitEffect->Off();
 		AnimationCheck("Hit_Ground");
+	}
 		break;
 	case PlayerState::Ex_DiagonalDown:
 		AnimationCheck("Ex_DiagonalDown");
@@ -2606,6 +2614,17 @@ void Player::UpUpdate(float _Time)
 		return;
 	}
 
+
+
+	if(true == GameEngineInput::IsPress("PlayerJump"))
+	{
+
+		ResetLiveTime();
+		JumpCheck = true;
+		ChangeState(PlayerState::Jump);
+		return;
+	}
+
 	if (GameEngineInput::IsPress("PlayerRock"))
 	{
 		ChangeState(PlayerState::UpAim);
@@ -3944,6 +3963,8 @@ void Player::DownAttackPreUpdate(float _Time)
 
 void Player::MapOutUpdate(float _Time)
 {
+	HitEffect->On();
+
 	if (CheckCamera == true)
 	{
 		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && LeftMove == true)
@@ -4004,6 +4025,7 @@ void Player::MapOutUpdate(float _Time)
 
 void Player::FailUpdate(float _Time)
 {
+	
 
 	if (TuritualCheck == true)
 	{
@@ -4087,7 +4109,10 @@ void Player::FailUpdate(float _Time)
 
 void Player::HitUpdate(float _Time)
 {
-	
+	HitEffect->On(); 
+
+
+
 
 	if (CheckCamera == true)
 	{

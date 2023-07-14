@@ -68,9 +68,9 @@ void Crown_Bepi_Level::Update(float _DeltaTime)
 
 void Crown_Bepi_Level::Start()
 {
-	GameEngineLevel::IsDebugSwitch();
+	//GameEngineLevel::IsDebugSwitch();
 
-	if (nullptr == GameEngineSprite::Find("DD_Idle"))
+	/*if (nullptr == GameEngineSprite::Find("DD_Idle"))
 	{
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("ContentResources");
@@ -220,20 +220,29 @@ void Crown_Bepi_Level::Start()
 		NewDir.Move("Texture");
 		NewDir.Move("DogAirplane");
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_KO").GetFullPath());
-	}
+	}*/
 
 
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 	GetMainCamera()->SetSortType(0, SortType::ZSort);
 
+	
+
+
+	
+	
+}
+
+void Crown_Bepi_Level::LevelChangeStart()
+{
 	{
-		std::shared_ptr<Player> Object = CreateActor<Player>();
+		player = CreateActor<Player>();
 	}
 	{
-		std::shared_ptr<Crown_Bepi_Map> Object = CreateActor<Crown_Bepi_Map>();
+		Map = CreateActor<Crown_Bepi_Map>();
 	}
 	{
-		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
+		userInterface = CreateActor<UserInterface>();
 	}
 	{
 		std::shared_ptr<TimeFlow> Object = CreateActor<TimeFlow>(10);
@@ -242,7 +251,7 @@ void Crown_Bepi_Level::Start()
 	{
 		ph1_Bepi = CreateActor<Ph1_Bepi>();
 	}
-	
+
 	{
 		ph2_Bepi = CreateActor<Ph2_Bepi>();
 	}
@@ -254,17 +263,36 @@ void Crown_Bepi_Level::Start()
 		ph4_Bepi = CreateActor<Ph4_Bepi>();
 	}
 
-
-	
-	
-}
-
-void Crown_Bepi_Level::LevelChangeStart()
-{
 	GameEngineLevel::LevelChangeStart();
 }
 
 void Crown_Bepi_Level::LevelChangeEnd()
 {
+	PaseCheck = Pase::Pase1;
+
+	Crown_Bepi_Map::Ph4_Check = false;
+	
+
+		for (size_t i = 0; i < Crown_Bepi_Map::Rollercoasters.size(); i++)
+		{
+			Crown_Bepi_Map::Rollercoasters.clear(); 
+		}
+	TimeFlow::Time = 0; 
+	Map->Death(); 
+	Player::MainPlayer->Death();
+	Player::MainPlayer = nullptr;
+	player->Death();
+	Ph4_Bepi::ph4_Bepi->Death(); 
+	Ph4_Bepi::ph4_Bepi = nullptr;
+	UserInterface::Cut = 0;
+	UserInterface::CardNumber = 0;
+	userInterface->Death();
+
+	Ph4_Swing_Platform::Ph4_Platform_Check = false;
+	ph1_Bepi->Death();
+	ph2_Bepi->Death();
+	ph3_Bepi->Death();
+	ph4_Bepi->Death();
+
 	GameEngineLevel::LevelChangeEnd();
 }

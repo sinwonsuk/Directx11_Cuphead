@@ -194,15 +194,17 @@ void DogAirplane::Start()
 	bulldogIdle->GetTransform()->AddLocalPosition({ 0,650,81 });
 	bulldogIdle->On();
 
-	Loading = CreateComponent<GameEngineSpriteRenderer>();
-	Loading->CreateAnimation({ .AnimationName = "Start", .SpriteName = "Start", .FrameInter = 0.03f,.Loop = false, .ScaleToTexture = true });
-	Loading->GetTransform()->AddLocalPosition({ 0.0f,0.0f,-200.0f });
-	Loading->ChangeAnimation("Start");
+	
 
-	Ready = CreateComponent<GameEngineSpriteRenderer>(120);
+	Ready = CreateComponent<GameEngineSpriteRenderer>();
 	Ready->CreateAnimation({ .AnimationName = "FightText_GetReady", .SpriteName = "FightText_GetReady", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	Ready->GetTransform()->AddLocalPosition({ 0,0,-150.0f });
 	Ready->ChangeAnimation("FightText_GetReady");
+
+	Loading = CreateComponent<GameEngineSpriteRenderer>(150);
+	Loading->CreateAnimation({ .AnimationName = "Start", .SpriteName = "Start", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+	Loading->GetTransform()->AddLocalPosition({ 0.0f,0.0f,-200.0f });
+	Loading->ChangeAnimation("Start");
 
 	Ready->SetScaleRatio(3.0f);
 	Ready->On();

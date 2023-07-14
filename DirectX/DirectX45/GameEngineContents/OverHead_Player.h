@@ -85,8 +85,10 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
 	std::shared_ptr<class GameEngineSpriteRenderer> Loading;
 	std::shared_ptr<class GameEngineSpriteRenderer> Exit;
+	std::shared_ptr<class GameEngineSpriteRenderer> Exit2;
 	std::shared_ptr<class GameEngineCollision> Collision;
 
+	
 	int UpCheck = 0;
 	int GravityCheck = 0;
 	int RightCheck = 0;

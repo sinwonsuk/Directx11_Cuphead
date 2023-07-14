@@ -380,6 +380,11 @@ void ph2_Boss_Weapon::Update(float _Delta)
 		break;
 	}
 
+	if (GetLiveTime() > 8)
+	{
+		this->Death(); 
+	}
+
 	if (ParryEffect->IsAnimationEnd())
 	{
 		ParryEffect->Off();

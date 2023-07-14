@@ -22,6 +22,10 @@ Ph1_Bepi::~Ph1_Bepi()
 
 void Ph1_Bepi::Start()
 {
+	Loading = CreateComponent<GameEngineSpriteRenderer>(150);
+	Loading->CreateAnimation({ .AnimationName = "Start", .SpriteName = "Start", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+	Loading->GetTransform()->AddLocalPosition({ -150.0f,0.0f,0.0f });
+	Loading->ChangeAnimation("Start");
 
 
 
@@ -73,7 +77,10 @@ void Ph1_Bepi::Start()
 void Ph1_Bepi::Update(float _Delta)
 {
 
-	
+	if (Loading->IsAnimationEnd())
+	{
+		Loading->Off();
+	}
 
 
 

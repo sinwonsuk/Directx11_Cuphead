@@ -31,12 +31,18 @@ void OverWorld_Map::Start()
 	AirPlane->GetTransform()->AddLocalPosition({ 250.0f,-50.0f,90.0f });
 
 
-	Collision = CreateComponent<GameEngineCollision>();
-	Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 100.0f });
-	Collision->GetTransform()->AddLocalPosition({ 250.0f,-50.0f,90.0f });
-	Collision->SetOrder((int)CollisionType::OverWorldAirPlane);
-	Collision->SetColType(ColType::OBBBOX2D);
+	AirPlane_Collision = CreateComponent<GameEngineCollision>();
+	AirPlane_Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 100.0f });
+	AirPlane_Collision->GetTransform()->AddLocalPosition({ 250.0f,-50.0f,90.0f });
+	AirPlane_Collision->SetOrder((int)CollisionType::OverWorldAirPlane);
+	AirPlane_Collision->SetColType(ColType::OBBBOX2D);
 
+	Bepi_Collision = CreateComponent<GameEngineCollision>();
+	Bepi_Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 100.0f });
+	Bepi_Collision->GetTransform()->AddLocalPosition({ 250.0f,-650.0f,90.0f });
+	Bepi_Collision->SetOrder((int)CollisionType::OverWorldBepi);
+	Bepi_Collision->SetColType(ColType::OBBBOX2D);
+	
 
 
 

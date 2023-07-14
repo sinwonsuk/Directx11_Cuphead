@@ -11,7 +11,7 @@
 #include "Ph4_Swing_Platform.h"
 #include "EnumClass.h"
 #include "IdleWeapon.h"
-
+#include <algorithm>
 Ph4_Bepi* Ph4_Bepi::ph4_Bepi;
 
 Ph4_Bepi::Ph4_Bepi()
@@ -79,6 +79,11 @@ void Ph4_Bepi::Start()
 	Bepi_boss_explosion->GetTransform()->AddLocalPosition({ 0.0f,385.0f,55.0f });
 	Bepi_boss_explosion->Off();
 
+	Exit = CreateComponent<GameEngineSpriteRenderer>(150);
+	Exit->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+	Exit->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-500.0f });
+	Exit->ChangeAnimation("Exit");
+	Exit->Off();
 
 	
 
@@ -89,11 +94,26 @@ void Ph4_Bepi::Start()
 	Collision->SetOrder((int)CollisionType::Ph4_Beppi_Body);
 	Collision->SetColType(ColType::AABBBOX2D);
 
+	Ph4_Swing_Platforms.reserve(1000); 
+
+	for (size_t i = 0; i < 200; i++)
+	{
+		std::shared_ptr<class Ph4_Swing_Platform> Object = GetLevel()->CreateActor<Ph4_Swing_Platform>();
+		Object->choic = Choice::Idle;
+		Object->GetTransform()->AddLocalPosition({ -900.0f,70.0f });
+		Object->Off(); 
+		Ph4_Swing_Platforms.push_back(Object);
+	}
+
+	for (size_t i = 0; i < 50; i++)
+	{
+		std::shared_ptr<class Ph4_Penguin> Object = GetLevel()->CreateActor<Ph4_Penguin>();
+		Object->Off();
+		Ph4_Penguins.push_back(Object);
+	}
 
 
-	
-
-	GetTransform()->AddLocalPosition({ 0.0f,-700.0f });
+	GetTransform()->AddLocalPosition({ 0.0f,-900.0f });
 
 
 }
@@ -114,13 +134,47 @@ void Ph4_Bepi::Update(float _Delta)
 	{
 		if (Swing_Platform_Intro == true && Platform > 1.3)
 		{
-			std::shared_ptr<Ph4_Swing_Platform> Object = GetLevel()->CreateActor<Ph4_Swing_Platform>();
-			Object->choic = Choice::Idle;
-			Object->GetTransform()->AddLocalPosition({ -900.0f,70.0f });
-
+			Ph4_Swing_Platforms[Platform_Number]->On(); 
+			++Platform_Number;
 			Platform = 0;
 		}
 	}
+
+	if (Platform_Number == 200)
+	{
+		for (size_t i = 0; i < Ph4_Swing_Platforms.size(); i++)
+		{
+			Ph4_Swing_Platforms.clear(); 
+		}
+
+		for (size_t i = 0; i < 200; i++)
+		{
+			std::shared_ptr<class Ph4_Swing_Platform> Object = GetLevel()->CreateActor<Ph4_Swing_Platform>();
+			Object->choic = Choice::Idle;
+			Object->GetTransform()->AddLocalPosition({ -900.0f,70.0f });
+			Object->Off();
+			Ph4_Swing_Platforms.push_back(Object);
+
+		}
+		Platform_Number = 0; 
+	}
+	if (Ph4_Penguin_Number == 50)
+	{
+
+		for (size_t i = 0; i < Ph4_Swing_Platforms.size(); i++)
+		{
+			Ph4_Penguins.clear();
+		}
+		for (size_t i = 0; i < Ph4_Swing_Platforms.size(); i++)
+		{
+			std::shared_ptr<class Ph4_Penguin> Object = GetLevel()->CreateActor<Ph4_Penguin>();
+			Object->Off();
+			Ph4_Penguins.push_back(Object);
+		}
+		
+		Ph4_Penguin_Number = 0;
+	}
+	
 }
 
 void Ph4_Bepi::Render(float _Delta)

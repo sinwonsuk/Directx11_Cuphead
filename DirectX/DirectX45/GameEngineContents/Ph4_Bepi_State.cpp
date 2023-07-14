@@ -2,6 +2,7 @@
 #include "Ph4_Bepi.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "Ph4_Swing_Platform.h"
@@ -81,25 +82,35 @@ void Ph4_Bepi::UpdateState(float _Time)
 }
 void Ph4_Bepi::BossIdleUpdate(float _Time)
 {
-	if (GetLiveTime() > 10 && Crown_Bepi_Map::Ph4_Check == true)
+	if (Crown_Bepi_Map::Ph4_Check == true)
+	{
+		RollerCoaster_Time += _Time;
+
+		
+		
+	}
+
+	if (RollerCoaster_Time > 7)
 	{
 		Crown_Bepi_Map::Ph4_Check = false;
 
+		RollerCoaster_Time = 0; 
 		ChangeState(Ph4_Bepi_State::BossAttackStart);
-		return; 
+		return;
 	}
+
 
 	if (Hp < 0)
 	{
 		if (BossFinish == false)
 		{
 			Phase4_Idle->ColorOptionValue.PlusColor = { 0,0,0,0 };
-			std::shared_ptr<Boss_Finish> Object = GetLevel()->CreateActor<Boss_Finish>(50);
+			Finish = GetLevel()->CreateActor<Boss_Finish>(50);
 			BossFinish = true;
 		}
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
-
+		ResetLiveTime(); 
 		ChangeState(Ph4_Bepi_State::BossFinish);
 		return;
 	}
@@ -150,11 +161,11 @@ void Ph4_Bepi::BossIntroUpdate(float _Time)
 			GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
 			if (BossFinish == false)
 			{
-				std::shared_ptr<Boss_Finish> Object = GetLevel()->CreateActor<Boss_Finish>(50);
+				Finish = GetLevel()->CreateActor<Boss_Finish>(50);
 				BossFinish = true;
 			}
 
-
+			ResetLiveTime();
 			ChangeState(Ph4_Bepi_State::BossFinish);
 			return;
 		}
@@ -168,6 +179,7 @@ void Ph4_Bepi::BossFinsihUpdate(float _Time)
 
 	if (Phase4_Idle->GetLiveTime() > 0.03f)
 	{
+		
 		Boss_Exploision_Pos.x = GameEngineRandom::MainRandom.RandomFloat(-100.0f, 100.0f);
 		Boss_Exploision_Pos.y = GameEngineRandom::MainRandom.RandomFloat(-100.0f, 100.0f);
 
@@ -189,7 +201,56 @@ void Ph4_Bepi::BossFinsihUpdate(float _Time)
 		}
 	}
 
+	if (GetLiveTime() > 3)
+	{
+		Exit->On();
+		/*Exit->On(); 
+		Finish->Death();
 
+		for (size_t i = 0; i < Crown_Bepi_Map::Rollercoasters.size(); i++)
+		{
+			Crown_Bepi_Map::Rollercoasters[i].get()->Death();
+		}
+
+		for (size_t i = 0; i < Ph4_Swing_Platforms.size(); i++)
+		{
+			Ph4_Swing_Platforms[i].get()->Death(); 
+		}
+
+		GameEngineCore::ChangeLevel("Bepi_UnLoad_Level"); */
+	}
+
+	
+
+
+
+	if(Exit->IsAnimationEnd())
+	{
+
+
+		for (size_t i = 0; i < Crown_Bepi_Map::Rollercoasters.size(); i++)
+		{
+			Crown_Bepi_Map::Rollercoasters[i].get()->Death();
+		}
+
+		for (size_t i = 0; i < Ph4_Swing_Platforms.size(); i++)
+		{
+			Ph4_Swing_Platforms[i].get()->Death();
+		}
+		for (size_t i = 0; i < Ph4_Penguins.size(); i++)
+		{
+			Ph4_Penguins[i].get()->Death();
+		}
+
+
+		Ph4_Swing_Platforms.clear(); 
+		Ph4_Penguins.clear();
+
+
+
+		Finish->Death();
+		GameEngineCore::ChangeLevel("Bepi_UnLoad_Level");
+	}
 }
 
 void Ph4_Bepi::BossAttackStartUpdate(float _Time)
@@ -206,9 +267,10 @@ void Ph4_Bepi::BossAttackStartUpdate(float _Time)
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
 		if (BossFinish == false)
 		{
-			std::shared_ptr<Boss_Finish> Object = GetLevel()->CreateActor<Boss_Finish>(50);
+			Finish = GetLevel()->CreateActor<Boss_Finish>(50);
 			BossFinish = true;
 		}
+		ResetLiveTime();
 		ChangeState(Ph4_Bepi_State::BossFinish);
 		return;
 	}
@@ -223,9 +285,10 @@ void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 	{
 		if (GetLiveTime() > 1)
 		{
-			std::shared_ptr<Ph4_Penguin> object = GetLevel()->CreateActor<Ph4_Penguin>();
-			object->dir = Ph4_Penguin_Dir::Left;
-			object->SetStopPos(-500.0f);
+			Ph4_Penguins[Ph4_Penguin_Number]->On(); 
+			Ph4_Penguins[Ph4_Penguin_Number]->dir = Ph4_Penguin_Dir::Left;
+			Ph4_Penguins[Ph4_Penguin_Number]->SetStopPos(-500.0f);
+			++Ph4_Penguin_Number;
 			++AttackNumber;
 			ResetLiveTime(); 
 		}
@@ -235,9 +298,10 @@ void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 	{
 		if (GetLiveTime() > 1)
 		{
-			std::shared_ptr<Ph4_Penguin> object = GetLevel()->CreateActor<Ph4_Penguin>();
-			object->dir = Ph4_Penguin_Dir::Left;
-			object->SetStopPos(-200.0f);
+			Ph4_Penguins[Ph4_Penguin_Number]->On();
+			Ph4_Penguins[Ph4_Penguin_Number]->dir = Ph4_Penguin_Dir::Left;
+			Ph4_Penguins[Ph4_Penguin_Number]->SetStopPos(-200.0f);
+			++Ph4_Penguin_Number;
 			++AttackNumber;
 			ResetLiveTime();
 		}
@@ -247,9 +311,10 @@ void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 	{
 		if (GetLiveTime() > 1)
 		{
-			std::shared_ptr<Ph4_Penguin> object = GetLevel()->CreateActor<Ph4_Penguin>();
-			object->dir = Ph4_Penguin_Dir::Right;
-			object->SetStopPos(500.0f);
+			Ph4_Penguins[Ph4_Penguin_Number]->On();
+			Ph4_Penguins[Ph4_Penguin_Number]->dir = Ph4_Penguin_Dir::Right;
+			Ph4_Penguins[Ph4_Penguin_Number]->SetStopPos(500.0f);
+			++Ph4_Penguin_Number;
 			++AttackNumber;
 			ResetLiveTime();
 		}
@@ -259,9 +324,10 @@ void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 	{
 		if (GetLiveTime() > 1)
 		{
-			std::shared_ptr<Ph4_Penguin> object = GetLevel()->CreateActor<Ph4_Penguin>();
-			object->dir = Ph4_Penguin_Dir::Right;
-			object->SetStopPos(200.0f);
+			Ph4_Penguins[Ph4_Penguin_Number]->On();
+			Ph4_Penguins[Ph4_Penguin_Number]->dir = Ph4_Penguin_Dir::Right;
+			Ph4_Penguins[Ph4_Penguin_Number]->SetStopPos(200.0f);
+			++Ph4_Penguin_Number;
 			++AttackNumber;
 			ResetLiveTime();
 		}
@@ -288,10 +354,11 @@ void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 
 		if (BossFinish == false)
 		{
-			std::shared_ptr<Boss_Finish> Object = GetLevel()->CreateActor<Boss_Finish>(50);
+			Finish = GetLevel()->CreateActor<Boss_Finish>(50);
 			BossFinish = true;
 
 		}
+		ResetLiveTime();
 		ChangeState(Ph4_Bepi_State::BossFinish);
 		return;
 	}
@@ -316,10 +383,10 @@ void Ph4_Bepi::BossAttackEndUpdate(float _Time)
 
 		if (BossFinish == false)
 		{
-			std::shared_ptr<Boss_Finish> Object = GetLevel()->CreateActor<Boss_Finish>(50);
+			Finish = GetLevel()->CreateActor<Boss_Finish>(50);
 			BossFinish = true;
 		}
-
+		ResetLiveTime();
 		ChangeState(Ph4_Bepi_State::BossFinish);
 		return;
 	}

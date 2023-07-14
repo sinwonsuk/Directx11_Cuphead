@@ -51,7 +51,7 @@ void NpcAirplane::Start()
 	Npc_Airplane_Reg = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Reg->CreateAnimation({ .AnimationName = "Npc_Airplane_Reg", .SpriteName = "Npc_Airplane_Reg", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Reg->ChangeAnimation("Npc_Airplane_Reg");
-	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ 0,-230,-7.0f }); //-7
+	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ 0,-230,10.0f }); //-7
 
 	Npc_Airplane_Front = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Front->CreateAnimation({ .AnimationName = "Npc_Airplane_Front", .SpriteName = "Npc_Airplane_Front", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });

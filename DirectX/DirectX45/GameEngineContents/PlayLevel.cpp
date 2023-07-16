@@ -10,6 +10,9 @@
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include  "TutorialObject.h"
 #include "UserInterface.h"
+#include <GameEngineCore/BlurEffect.h>
+#include "OldFilm.h"
+#include "OldTVEffect.h"
 PlayLevel::PlayLevel() 
 {
 }
@@ -127,7 +130,8 @@ void PlayLevel::Start()
 	//	std::shared_ptr<TestObject> Object = CreateActor<TestObject>(1);
 	//}
 
-	
+	GetLastTarget()->CreateEffect<OldFilm>();
+	GetLastTarget()->CreateEffect<BlurEffect>();
 
 }
 void PlayLevel::LevelChangeStart()

@@ -204,7 +204,7 @@ void Function(GameEngineThread* Thread)
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Buldog_Death_intro").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("acada").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ph1_Death_Front").GetFullPath());
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_GetReady").GetFullPath());
+		
 
 		// ¹è°æ 
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Background").GetFullPath());
@@ -317,9 +317,33 @@ void Function(GameEngineThread* Thread)
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_dogcopter_sideways_death").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("ph3_dogcopter_death_blades").GetFullPath());
 
-		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_KO").GetFullPath());
+		if (nullptr == GameEngineSprite::Find("FightText_GetReady"))
+		{
+			GameEngineDirectory NewDir;
+			NewDir.MoveParentToDirectory("ContentResources");
+			NewDir.Move("ContentResources");
+			NewDir.Move("Texture");
+			NewDir.Move("DogAirplane");
+			GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_GetReady").GetFullPath());
+		}
+
+		if (nullptr == GameEngineSprite::Find("FightText_KO"))
+		{
+			GameEngineDirectory NewDir;
+			NewDir.MoveParentToDirectory("ContentResources");
+			NewDir.Move("ContentResources");
+			NewDir.Move("Texture");
+			NewDir.Move("DogAirplane");
+			GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("FightText_KO").GetFullPath());
+		}
 
 		// ph3_Npc
+
+
+
+
+
+
 
 		{
 			GameEngineDirectory NewDir;
@@ -344,7 +368,7 @@ void DogAirPlane_Loading::Start()
 	
 	
 	
-	if (nullptr == GameEngineSprite::Find("Loading_Hourglass.png"))
+	if (nullptr == GameEngineSprite::Find("Loading"))
 	{
 
 		GameEngineDirectory NewDir;

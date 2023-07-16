@@ -3,6 +3,9 @@
 
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include "Title.h"
+#include <GameEngineCore/BlurEffect.h>
+#include "OldFilm.h"
+#include "OldTVEffect.h"
 TitleLevel::TitleLevel() 
 {
 }
@@ -44,7 +47,8 @@ void TitleLevel::Start()
 		std::shared_ptr<Title> Object = CreateActor<Title>();
 	}
 
-
+	GetLastTarget()->CreateEffect<OldFilm>();
+	GetLastTarget()->CreateEffect<BlurEffect>();
 	
 }
 

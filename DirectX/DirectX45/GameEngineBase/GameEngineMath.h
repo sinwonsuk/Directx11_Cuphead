@@ -8,12 +8,12 @@
 
 // dx함수들
 // 다이렉트용 벡터
+
+
 #include <d3d11_4.h>
 #include <d3dcompiler.h>
 #include <DirectXPackedVector.h>
 #include <DirectXCollision.h>
-
-
 
 // final 더이상 상속내릴지 못한다.
 // 상속도 못하고 만들지도 못하게 만든 상태로
@@ -107,6 +107,7 @@ public:
 	}
 
 	// 외적의 결과는 두개의 백터가 겹칠때 주의해서 처리해줘야 한다.
+
 	static float GetAngleVectorToVectorRad(const float4& _Left, const float4& _Right)
 	{
 		float4 Left = _Left;

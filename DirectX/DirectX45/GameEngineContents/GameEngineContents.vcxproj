@@ -196,6 +196,8 @@
     <ClInclude Include="IdleWeapon.h" />
     <ClInclude Include="IntroLevel.h" />
     <ClInclude Include="NpcAirplane.h" />
+    <ClInclude Include="OldFilm.h" />
+    <ClInclude Include="OldTVEffect.h" />
     <ClInclude Include="OverHead_Player.h" />
     <ClInclude Include="OverWorld.h" />
     <ClInclude Include="OverWorldLoading.h" />
@@ -274,6 +276,8 @@
     <ClCompile Include="IntroLevel.cpp" />
     <ClCompile Include="NpcAirplane.cpp" />
     <ClCompile Include="NpcAirPlaneState.cpp" />
+    <ClCompile Include="OldFilm.cpp" />
+    <ClCompile Include="OldTVEffect.cpp" />
     <ClCompile Include="OverHead_Player.cpp" />
     <ClCompile Include="OverHead_Player_State.cpp" />
     <ClCompile Include="OverWorld.cpp" />

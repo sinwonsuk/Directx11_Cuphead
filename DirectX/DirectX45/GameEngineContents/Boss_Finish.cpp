@@ -26,7 +26,7 @@ void Boss_Finish::Update(float _Delta)
 	{
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 1.0f);
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 1.0f);
-		//Finish->Death(); 
+		Finish->Off(); 
 	}
 
 }

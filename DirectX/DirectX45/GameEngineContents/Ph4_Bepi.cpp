@@ -120,6 +120,7 @@ void Ph4_Bepi::Start()
 
 void Ph4_Bepi::Update(float _Delta)
 {
+
 	if (GetTransform()->GetLocalPosition().y > -100.0f)
 	{
 		Platform += _Delta;

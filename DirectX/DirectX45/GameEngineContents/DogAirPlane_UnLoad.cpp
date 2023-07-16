@@ -1,12 +1,14 @@
 #include "PrecompileHeader.h"
-#include "DogAirPlane_UnLoad.h"
+
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
-#include "OverWorld.h"
+#include "DogAirPlane_UnLoad.h"
 #include "DogAirPlane_Loading.h"
+#include "OverWorld.h"
 bool DogAirPlane_UnLoad::Check = false;
 DogAirPlane_UnLoad::DogAirPlane_UnLoad()
 {
+
 }
 
 DogAirPlane_UnLoad::~DogAirPlane_UnLoad()
@@ -78,7 +80,7 @@ void AFunction(GameEngineThread* Thread)
 		GameEngineSprite::UnLoad("Ph1_Buldog_Death_intro");
 		GameEngineSprite::UnLoad("acada");
 		GameEngineSprite::UnLoad("Ph1_Death_Front");
-		GameEngineSprite::UnLoad("FightText_GetReady");
+		//GameEngineSprite::UnLoad("FightText_GetReady");
 
 		// ¹è°æ 			
 		GameEngineSprite::UnLoad("Background");
@@ -188,7 +190,7 @@ void AFunction(GameEngineThread* Thread)
 		GameEngineSprite::UnLoad("ph3_leader_sideways_death");
 		GameEngineSprite::UnLoad("ph3_dogcopter_sideways_death");
 		GameEngineSprite::UnLoad("ph3_dogcopter_death_blades");
-		GameEngineSprite::UnLoad("FightText_KO");
+		//GameEngineSprite::UnLoad("FightText_KO");
 
 		
 	
@@ -203,8 +205,18 @@ void AFunction(GameEngineThread* Thread)
 }
 void DogAirPlane_UnLoad::Start()
 {
+	if (nullptr == GameEngineSprite::Find("Loading"))
+	{
 
-	//GameEngineCore::JobQueue.Work(AFunction);
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Texture");
+		//NewDir.Move("Loading");
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Loading").GetFullPath());
+	}
+	
 
 	UnLoad = CreateComponent<GameEngineSpriteRenderer>();
 	UnLoad->CreateAnimation({ .AnimationName = "Loading", .SpriteName = "Loading", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true});

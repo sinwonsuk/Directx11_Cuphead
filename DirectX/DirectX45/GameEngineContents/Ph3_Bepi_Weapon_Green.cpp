@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include "EnumClass.h"
-
+#include "Player.h"
 Ph3_Bepi_Weapon_Green::Ph3_Bepi_Weapon_Green()
 {
 }
@@ -54,6 +54,11 @@ void Ph3_Bepi_Weapon_Green::Start()
 
 void Ph3_Bepi_Weapon_Green::Update(float _Delta)
 {
+	if (Player::MainPlayer->Hp <= 0)
+	{
+		this->Death();
+	}
+
 	switch (color)
 	{
 	case Ph3_Bepi_Weapon_Color::Green:

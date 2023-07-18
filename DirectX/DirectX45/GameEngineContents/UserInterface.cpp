@@ -7,7 +7,7 @@
 
 float UserInterface::Cut = 0.0f;
 int UserInterface::CardNumber = 0;
-
+int UserInterface::HpBar = 3;
 UserInterface::UserInterface()
 {
 
@@ -50,6 +50,12 @@ void UserInterface::Start()
 	Hp1->GetTransform()->AddLocalPosition({ -570,-320 ,-300.0f });
 	Hp1->SetScaleToTexture("hud_hp_1.png");
 	Hp1->Off();
+
+	Hp0 = CreateComponent<GameEngineUIRenderer>();
+	Hp0->GetTransform()->AddLocalPosition({ -570,-320 ,-300.0f });
+	Hp0->SetScaleToTexture("hud_hp_dead.png");
+	Hp0->Off();
+
 
 	BackCard = CreateComponent<GameEngineUIRenderer>();
 	BackCard->GetTransform()->AddLocalPosition({ -510,-320 ,-300.0f });
@@ -557,12 +563,57 @@ void UserInterface::Update(float _Delta)
 	
 	if (CardNumber == 0)
 	{
+		//FlipCard->Off();
 		FlipCard2->Off(); 
 		FlipCard3->Off(); 
 		FlipCard4->Off(); 
 		FlipCard5->Off(); 
 
 	}
+
+	switch (HpBar)
+	{
+	case 3:
+	{
+		Hp3->On();
+		Hp2->Off();
+		Hp1->Off();
+		Hp0->Off(); 
+
+	}
+	break;
+	case 2:
+	{
+		Hp3->Off();
+		Hp2->On();
+		Hp1->Off();
+		Hp0->Off();
+	}
+	break;
+	case 1:
+	{
+		Hp3->Off();
+		Hp2->Off();
+		Hp1->On();
+		Hp0->Off();
+	}
+	break;
+	case 0:
+	{
+		Hp3->Off();
+		Hp2->Off();
+		Hp1->Off();
+		Hp0->On();
+	}
+	break;
+
+	default:
+		break;
+	}
+
+
+
+
 
 
 	PlusCard = CardNumber;

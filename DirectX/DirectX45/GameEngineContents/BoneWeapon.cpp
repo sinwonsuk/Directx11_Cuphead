@@ -141,7 +141,11 @@ void BoneWeapon::Update(float _Delta)
 	{
 		ParryEffect->Off(); 
 	}
-	
+
+	if (Player::MainPlayer->Hp <= 0)
+	{
+		this->Death();
+	}
 
 	if (GetLiveTime() > 7)
 	{

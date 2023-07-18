@@ -216,11 +216,14 @@ void DogAirPlane_UnLoad::Start()
 
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Loading").GetFullPath());
 	}
-	
+	BG = CreateComponent<GameEngineSpriteRenderer>();
+	BG->SetScaleToTexture("BlackBG.png");
+
 
 	UnLoad = CreateComponent<GameEngineSpriteRenderer>();
 	UnLoad->CreateAnimation({ .AnimationName = "Loading", .SpriteName = "Loading", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true});
 	UnLoad->ChangeAnimation("Loading");
+	UnLoad->GetTransform()->AddLocalPosition({ 520.0f,-200.0f });
 
 }
 

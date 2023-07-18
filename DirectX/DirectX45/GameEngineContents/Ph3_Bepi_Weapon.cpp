@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include "EnumClass.h"
-
+#include "Player.h"
 Ph3_Bepi_Weapon::Ph3_Bepi_Weapon()
 {
 }
@@ -45,7 +45,10 @@ void Ph3_Bepi_Weapon::Start()
 
 void Ph3_Bepi_Weapon::Update(float _Delta)
 {
-
+	if (Player::MainPlayer->Hp <= 0)
+	{
+		this->Death(); 
+	}
 	if (Collision->Collision((int)CollisionType::RollerCoaster) && CoiisionCheck == false)
 	{
 		Bullet->Off(); 

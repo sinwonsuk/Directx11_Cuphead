@@ -340,13 +340,43 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 		default:
 			break;
 		}
-		if (GetLiveTime() > 3.2)
+
+
+
+		if (Hp < 0)
+		{
+			if (YellowORGreenCheck == 0)
+			{
+				Yellow_Horse_Attack->Off();
+				Yellow_Horse_Head->Off();
+				Yellow_Horse_Body->ChangeAnimation("Yellow_Horse_End");
+				Yellow_Horse_Body->GetTransform()->AddLocalPosition({ -60.0f,100.0f });
+				Phase3_Idle->GetTransform()->AddLocalPosition({ 150.0f,-150.0f });
+				Phase3_Idle->ChangeAnimation("Phase3_End");
+			}
+
+			if (YellowORGreenCheck == 1)
+			{
+				Green_Horse_Attack->Off(); 
+				Green_Horse_Head->Off();
+				Green_Horse_Body->ChangeAnimation("Green_Horse_End");
+				Green_Horse_Body->GetTransform()->AddLocalPosition({ -60.0f,-40.0f });
+				Phase3_Idle->GetTransform()->AddLocalPosition({ 130.0f,-130.0f });
+				Phase3_Idle->ChangeAnimation("Phase3_End");
+			}
+
+			for (size_t i = 0; i < Bullets.size(); i++)
+			{
+				Bullets[i].get()->Death();
+			}
+			Bullets.clear();
+			ChangeState(Ph3_Bepi_State::BossFinish);
+		}
+
+		/*if (GetLiveTime() > 3.2)
 		{
 			if (Hp <= 0)
 			{
-
-
-
 				if (YellowORGreenCheck == 0)
 				{
 					Yellow_Horse_Head->Off(); 
@@ -367,7 +397,7 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 				ChangeState(Ph3_Bepi_State::BossFinish);
 				return;
 			}
-		}
+		}*/
 		if (GetLiveTime() > 4.0)
 		{
 
@@ -499,7 +529,39 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 			Green_Horse_Attack->Off();
 			Green_Horse_Head->On();
 		}
-		if (GetLiveTime() > 3.2)
+
+
+
+		if (Hp < 0)
+		{
+			if (YellowORGreenCheck == 0)
+			{
+				Yellow_Horse_Attack->Off();
+				Yellow_Horse_Head->Off();
+				Yellow_Horse_Body->ChangeAnimation("Yellow_Horse_End");
+				Yellow_Horse_Body->GetTransform()->AddLocalPosition({ -60.0f,100.0f });
+				Phase3_Idle->GetTransform()->AddLocalPosition({ 150.0f,-150.0f });
+				Phase3_Idle->ChangeAnimation("Phase3_End");
+			}
+
+			if (YellowORGreenCheck == 1)
+			{
+				Green_Horse_Attack->Off();
+				Green_Horse_Head->Off();
+				Green_Horse_Body->ChangeAnimation("Green_Horse_End");
+				Green_Horse_Body->GetTransform()->AddLocalPosition({ -60.0f,-40.0f });
+				Phase3_Idle->GetTransform()->AddLocalPosition({ 130.0f,-130.0f });
+				Phase3_Idle->ChangeAnimation("Phase3_End");
+			}
+
+			for (size_t i = 0; i < Bullets.size(); i++)
+			{
+				Bullets[i].get()->Death();
+			}
+			Bullets.clear();
+			ChangeState(Ph3_Bepi_State::BossFinish);
+		}
+		/*if (GetLiveTime() > 3.2)
 		{
 			if (Hp <= 0)
 			{
@@ -524,7 +586,7 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 				ChangeState(Ph3_Bepi_State::BossFinish);
 				return;
 			}
-		}
+		}*/
 
 		if (GetLiveTime() > 4.0)
 		{
@@ -755,7 +817,41 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 			break;
 		}
 
-		if (GetLiveTime() > 3.2)
+
+
+		if (Hp < 0)
+		{
+			if (YellowORGreenCheck == 0)
+			{
+				Yellow_Horse_Attack->Off();
+				Yellow_Horse_Head->Off();
+				Yellow_Horse_Body->ChangeAnimation("Yellow_Horse_End");
+				Yellow_Horse_Body->GetTransform()->AddLocalPosition({ -60.0f,100.0f });
+				Phase3_Idle->GetTransform()->AddLocalPosition({ 150.0f,-150.0f });
+				Phase3_Idle->ChangeAnimation("Phase3_End");
+
+			}
+
+			if (YellowORGreenCheck == 1)
+			{
+				Green_Horse_Attack->Off();
+				Green_Horse_Head->Off();
+				Green_Horse_Body->ChangeAnimation("Green_Horse_End");
+				Green_Horse_Body->GetTransform()->AddLocalPosition({ -60.0f,-100.0f });
+				Phase3_Idle->GetTransform()->AddLocalPosition({ 130.0f,-130.0f });
+				Phase3_Idle->ChangeAnimation("Phase3_End");
+			}
+
+			for (size_t i = 0; i < Bullets.size(); i++)
+			{
+				Bullets[i].get()->Death();
+			}
+			Bullets.clear();
+			ChangeState(Ph3_Bepi_State::BossFinish);
+		}
+
+
+		/*if (GetLiveTime() > 3.2)
 		{
 			if (Hp <= 0)
 			{
@@ -780,7 +876,7 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 				ChangeState(Ph3_Bepi_State::BossFinish);
 				return; 
 			}
-		}
+		}*/
 
 
 		if (GetLiveTime() > 4.0)
@@ -903,7 +999,37 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 				Green_Horse_Head->On(); 
 			}
 
-			if (GetLiveTime() > 3.2)
+			if (Hp < 0)
+			{
+				if (YellowORGreenCheck == 0)
+				{
+					Yellow_Horse_Attack->Off(); 
+					Yellow_Horse_Head->Off();
+					Yellow_Horse_Body->ChangeAnimation("Yellow_Horse_End");
+					Yellow_Horse_Body->GetTransform()->AddLocalPosition({ -60.0f,100.0f });
+					Phase3_Idle->GetTransform()->AddLocalPosition({ 150.0f,-150.0f });
+					Phase3_Idle->ChangeAnimation("Phase3_End");
+				}
+
+				else if (YellowORGreenCheck == 1)
+				{
+					Green_Horse_Attack->Off();
+					Green_Horse_Head->Off();
+					Green_Horse_Body->ChangeAnimation("Green_Horse_End");
+					Green_Horse_Body->GetTransform()->AddLocalPosition({ -60.0f,-40.0f });
+					Phase3_Idle->GetTransform()->AddLocalPosition({ 130.0f,-130.0f });
+					Phase3_Idle->ChangeAnimation("Phase3_End");
+
+				}
+
+				for (size_t i = 0; i < Bullets.size(); i++)
+				{
+					Bullets[i].get()->Death();
+				}
+				Bullets.clear();
+				ChangeState(Ph3_Bepi_State::BossFinish);
+			}
+		/*	if (GetLiveTime() > 3.2)
 			{
 				if (Hp <= 0)
 				{
@@ -928,7 +1054,7 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 					ChangeState(Ph3_Bepi_State::BossFinish);
 					return; 
 				}
-			}
+			}*/
 
 			if (GetLiveTime() > 4.0)
 			{
@@ -1007,6 +1133,10 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 
 void Ph3_Bepi::BossFinishUpdate(float _Time)
 {
+	Green_Horse_Head->Off();
+	Yellow_Horse_Attack->Off(); 
+	Green_Horse_Attack->Off(); 
+
 	
 		if (Phase3_Idle->GetLiveTime() > 0.03f)
 		{

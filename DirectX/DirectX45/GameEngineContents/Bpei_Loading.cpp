@@ -4,6 +4,7 @@
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include "Bepi_UnLoad.h"
+#include "OverHead_Player.h"
 bool Bpei_Loading::Check = false;
 Bpei_Loading::Bpei_Loading()
 {
@@ -287,8 +288,16 @@ void Bpei_Loading::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Loading").GetFullPath());
 	}
 
+	BG = CreateComponent<GameEngineSpriteRenderer>();
+	BG->SetScaleToTexture("BlackBG.png");
+
+
 	Loading = CreateComponent<GameEngineSpriteRenderer>();
 	Loading->CreateAnimation({ .AnimationName = "Loading", .SpriteName = "Loading", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
+
+	Loading->GetTransform()->AddLocalPosition({ 520.0f,-200.0f });
+
+
 	Loading->ChangeAnimation("Loading");
 }
 
@@ -297,6 +306,8 @@ void Bpei_Loading::Update(float _Delta)
 	if (Check == false)
 	{
 		GameEngineCore::JobQueue.Work(Bepi_Function);
+		OverHead_Player::Exit2->ChangeAnimation("Exit");
+		OverHead_Player::Exit2->Off();
 		Check = true;
 	}
 

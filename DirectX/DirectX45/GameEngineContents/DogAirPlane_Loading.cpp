@@ -5,7 +5,7 @@
 #include "DogAirplaneLevel.h"
 #include <GameEnginePlatform/GameEngineInput.h>
 #include "DogAirPlane_UnLoad.h"
-
+#include "OverHead_Player.h"
 bool DogAirPlane_Loading::Check = false;
 DogAirPlane_Loading::DogAirPlane_Loading()
 {
@@ -380,11 +380,14 @@ void DogAirPlane_Loading::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Loading").GetFullPath());
 	}
 
-
+	BG = CreateComponent<GameEngineSpriteRenderer>();
+	BG->SetScaleToTexture("BlackBG.png");
 
 	Loading = CreateComponent<GameEngineSpriteRenderer>();
 	Loading->CreateAnimation({ .AnimationName = "Loading", .SpriteName = "Loading", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	Loading->ChangeAnimation("Loading");
+	Loading->GetTransform()->AddLocalPosition({ 520.0f,-200.0f });
+
 	
 }
 
@@ -396,6 +399,8 @@ void DogAirPlane_Loading::Update(float _Delta)
 	if (Check == false)
 	{
 		GameEngineCore::JobQueue.Work(Function);
+		OverHead_Player::Exit->ChangeAnimation("Exit");
+		OverHead_Player::Exit->Off();
 		Check = true;
 	}
 

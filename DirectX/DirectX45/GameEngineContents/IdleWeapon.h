@@ -51,6 +51,7 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
 	int ColorCheck = 0;
 	bool ColorCollisionCheck = false;
+	bool ColorCollisionCheck2 = false;
 	bool CollisionColor = false;
 	bool collisionCheck = false;
 	bool CollisionCheck = false;

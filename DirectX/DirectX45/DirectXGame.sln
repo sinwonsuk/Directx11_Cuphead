@@ -51,6 +51,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shader", "Shader", "{698153
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shader", "EngineResources\Shader\Shader.vcxproj", "{E08354D1-C960-4DAB-BAF6-BB531A92010E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContentsShader", "ContentsShader", "{CF9BCA27-CF1C-4B5A-BD55-9004B36432AC}"
+	ProjectSection(SolutionItems) = preProject
+		ContentResources\ContentsShader\ContentsShader.vcxproj = ContentResources\ContentsShader\ContentsShader.vcxproj
+		ContentResources\ContentsShader\ContentsShader.vcxproj.filters = ContentResources\ContentsShader\ContentsShader.vcxproj.filters
+		ContentResources\ContentsShader\FadeShader.hlsl = ContentResources\ContentsShader\FadeShader.hlsl
+		ContentResources\ContentsShader\MyShader.fx = ContentResources\ContentsShader\MyShader.fx
+		ContentResources\ContentsShader\OldFilmShader.hlsl = ContentResources\ContentsShader\OldFilmShader.hlsl
+		ContentResources\ContentsShader\OldTVShader.hlsl = ContentResources\ContentsShader\OldTVShader.hlsl
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

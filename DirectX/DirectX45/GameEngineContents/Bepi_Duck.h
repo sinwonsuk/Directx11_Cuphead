@@ -13,6 +13,7 @@ enum class DuckCheck
 class Bepi_Duck : public GameEngineActor
 {
 public:
+	
 	// constrcuter destructer
 	Bepi_Duck();
 	~Bepi_Duck();
@@ -35,6 +36,18 @@ public:
 	{
 		return PinkCollision;
 	}
+	std::shared_ptr<class GameEngineSpriteRenderer> DuckHead;
+	std::shared_ptr<class GameEngineSpriteRenderer> DuckBody;
+	std::shared_ptr<class GameEngineSpriteRenderer> DuckSpin;
+
+	std::shared_ptr<class GameEngineSpriteRenderer> P_DuckHead;
+	std::shared_ptr<class GameEngineSpriteRenderer> P_DuckBody;
+	std::shared_ptr<class GameEngineSpriteRenderer> P_DuckSpin;
+	std::shared_ptr<class GameEngineCollision> PinkCollision;
+
+	std::shared_ptr<class GameEngineCollision> Body_Pink_Collision;
+	std::shared_ptr<class GameEngineCollision> Body_Collision;
+
 
 	DuckCheck Check = DuckCheck::Idle;
 protected:
@@ -48,15 +61,9 @@ private:
 	float4 MoveDir = { -1,-1 };
 	float4 MoveDir2 = { -1,1 };
 	
-	std::shared_ptr<class GameEngineCollision> PinkCollision;
+	
+	bool CollisonCheck = false;
 
-	std::shared_ptr<class GameEngineSpriteRenderer> DuckHead;
-	std::shared_ptr<class GameEngineSpriteRenderer> DuckBody;
-	std::shared_ptr<class GameEngineSpriteRenderer> DuckSpin;
-
-	std::shared_ptr<class GameEngineSpriteRenderer> P_DuckHead;
-	std::shared_ptr<class GameEngineSpriteRenderer> P_DuckBody;
-	std::shared_ptr<class GameEngineSpriteRenderer> P_DuckSpin;
 	std::shared_ptr<class GameEngineSpriteRenderer> ParryEffect;
 	int ColorCheck = 0;
 	bool CollisionCheck = false;

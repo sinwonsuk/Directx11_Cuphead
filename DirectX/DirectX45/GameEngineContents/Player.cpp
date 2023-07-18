@@ -10,10 +10,10 @@
 #include <GameEngineCore/GameEngineUIRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineCore.h>
-
 #include "TutorialMap.h"
 #include "IdleWeapon.h"
 #include "EnumClass.h"
+
 Player* Player::MainPlayer;
 
 Player::Player()
@@ -29,7 +29,11 @@ Player::~Player()
 void Player::Update(float _DeltaTime)
 {
 
-
+	/*std::shared_ptr<GameEngineFontRenderer> FontRender = CreateComponent<GameEngineFontRenderer>(300);
+	FontRender->SetFont("ÈÞ¸ÕµÕ±ÙÇìµå¶óÀÎ");
+	FontRender->SetText("ÁË¼ÛÇÕ´Ï´Ù~~~~~");
+	FontRender->
+	FontRender->SetScale(100.0f);*/
 	
 
 	if (Collision->Collision((int)CollisionType::TutorialDoor))
@@ -175,7 +179,7 @@ void Player::Update(float _DeltaTime)
 		&& StateValue != PlayerState::Ex_DiagonalUp && StateValue != PlayerState::Ex_Up
 		)
 	{
-		if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
+		if (true == GameEngineInput::IsPress("PlayerMoveLeft") && Hp > 0)
 		{
 			GetTransform()->SetLocalNegativeScaleX();
 		}
@@ -193,7 +197,7 @@ void Player::Update(float _DeltaTime)
 			GetTransform()->SetLocalPositiveScaleX();		
 		}
 	}
-	if (HitCheck == true)
+	if (HitCheck == true && Hp > 0)
 	{
 		if (HitTime < 0.1f)
 		{
@@ -222,6 +226,15 @@ void Player::Update(float _DeltaTime)
 
 	UpdateState(_DeltaTime);
 
+	if (Hp <= 0 && DeathCheck ==false)
+	{
+		DeathCheck = true;
+		ChangeState(PlayerState::Death);
+	}
+	
+
+	
+	 
 //	Collision->GetTransform()->SetLocalPosition(Render0->GetTransform()->GetWorldPosition());
 	
 
@@ -230,11 +243,13 @@ void Player::Update(float _DeltaTime)
 void Player::Start()
 {
 	
+
 	MainPlayer = this;
 	
 
 	if (false == GameEngineInput::IsKey("PlayerMoveLeft"))
 	{
+		GameEngineInput::CreateKey("Check", 'Q');
 		GameEngineInput::CreateKey("PlayerMoveLeft", VK_LEFT);
 		GameEngineInput::CreateKey("PlayerMoveRight", VK_RIGHT);
 		GameEngineInput::CreateKey("PlayerMoveUp", VK_UP);
@@ -309,6 +324,10 @@ void Player::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("boss_explosion").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Player_Portal").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("HitSFX").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Death").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Ghost").GetFullPath());
+		
+
 		/*GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttack").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("IdleAimAttackPre").GetFullPath());
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("UpAimAttack").GetFullPath());
@@ -328,6 +347,18 @@ void Player::Start()
 		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Weapon\\Peashooter_EX_Loop.png").GetFullPath(), 5, 2);
 	}
 
+	if (nullptr == GameEngineSprite::Find("YOU_DIED.png"))
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Texture");
+		NewDir.Move("UI");
+
+
+		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("DIED\\YOU_DIED.png").GetFullPath(), 3, 7);
+	
+	}
 	if (nullptr == GameEngineSprite::Find("EX_Dust"))
 	{
 		GameEngineDirectory NewDir;
@@ -386,12 +417,35 @@ void Player::Start()
 	Render0->CreateAnimation({ .AnimationName = "Ex_Straight", .SpriteName = "Ex_Straight",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "Ex_Up", .SpriteName = "Ex_Up",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
 	Render0->CreateAnimation({ .AnimationName = "Player_Portal", .SpriteName = "Player_Portal",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Ghost", .SpriteName = "Ghost",. FrameInter = 0.05f, .Loop = true, .ScaleToTexture = true });
+	Render0->CreateAnimation({ .AnimationName = "Death", .SpriteName = "Death",. FrameInter = 0.05f, .Loop = false, .ScaleToTexture = true });
+
 	Render0->ChangeAnimation("Idle");
 
 	HitEffect = CreateComponent<GameEngineSpriteRenderer>(100);
 	HitEffect->CreateAnimation({ .AnimationName = "HitSFX", .SpriteName = "HitSFX",. FrameInter = 0.04f, .Loop = false, .ScaleToTexture = true });
 	HitEffect->ChangeAnimation("HitSFX");
 	HitEffect->Off(); 
+
+
+	Black_BG = CreateComponent<GameEngineUIRenderer>();
+	Black_BG->SetTexture("BlackBG.png");
+	Black_BG->GetTransform()->SetLocalScale({ 5200.0f,5200.0f });
+	Black_BG->ColorOptionValue.MulColor = { 1.0f,1.0f,1.0f,0.6f };
+	Black_BG->Off();
+
+	Dided = CreateComponent<GameEngineUIRenderer>();
+	Dided->CreateAnimation({ .AnimationName = "YOU_DIED", .SpriteName = "YOU_DIED.png",. FrameInter = 0.2f, .Loop = false, .ScaleToTexture = true ,.FrameIndex = {0,1,2,3,4,5,6,7,8,9} });
+	Dided->ChangeAnimation("YOU_DIED");
+	Dided->GetTransform()->SetWorldPosition({ 0.0f,0.0f });
+	Dided->Off();
+
+	Exit = CreateComponent<GameEngineSpriteRenderer>(150);
+	Exit->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
+	Exit->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-500.0f });
+	Exit->SetScaleRatio(2.0f);
+	Exit->ChangeAnimation("Exit");
+	Exit->Off();
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->AddLocalPosition({ 0.0f, -30.0f, 0.0f });

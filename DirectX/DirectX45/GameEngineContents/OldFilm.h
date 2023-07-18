@@ -24,7 +24,7 @@ protected:
 private:
 	std::shared_ptr<GameEngineRenderUnit> OldUnit;
 	std::shared_ptr<GameEngineSprite> OldSprite;
-
+	float Time = 0;
 	float4 OldData;
 
 	int Index = 0;

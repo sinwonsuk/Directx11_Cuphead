@@ -36,10 +36,17 @@ void OldFilm::Start(GameEngineRenderTarget* _Target)
 
 void OldFilm::Effect(GameEngineRenderTarget* _Target, float _DeltaTime)
 {
+	Time += _DeltaTime;
 	std::shared_ptr<GameEngineSprite> Sprite = GameEngineSprite::Find("OldFilm");
 	SpriteInfo Info = Sprite->GetSpriteInfo(Index);
 
-	if (Sprite->GetSpriteCount() <= ++Index)
+
+	if (Time >= 0.05)
+	{
+		++Index;
+		Time = 0; 
+	}
+	if (Sprite->GetSpriteCount() <= Index)
 	{
 		Index = 0;
 	}

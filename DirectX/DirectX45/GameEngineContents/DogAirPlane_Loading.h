@@ -35,7 +35,7 @@ private:
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Loading;
 	
-
+	std::shared_ptr<class GameEngineSpriteRenderer> BG;
 
 
 

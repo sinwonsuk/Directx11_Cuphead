@@ -49,6 +49,6 @@ float4 OldFilm_PS(OutPut _Value) : SV_Target0
     //    Color.xyzw = 1.0f;
     //}
     Color.yzw = Color.x;
-    
+    Color.w = 0.1f;
     return Color;
 }

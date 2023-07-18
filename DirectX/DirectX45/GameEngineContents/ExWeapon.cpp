@@ -148,7 +148,7 @@ void ExWeapon::Update(float _Delta)
 				Ph4_Bepi::ph4_Bepi->Phase4_Idle->ColorOptionValue.PlusColor = { 1,1,1,0 };
 				Ph4_Bepi::ph4_Bepi->Phase4_Idle->ResetLiveTime();
 				UserInterface::Cut += 0.1f;
-				Bullet->ChangeAnimation("Peashooter_Death");
+				Bullet->ChangeAnimation("Peashooter_EX_Death");
 				CollisionCheck = true;
 			}
 			std::shared_ptr<GameEngineCollision> collision = Collision->Collision((int)CollisionType::Bullet);

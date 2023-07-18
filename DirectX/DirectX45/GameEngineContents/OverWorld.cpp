@@ -8,6 +8,10 @@
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include "OverHead_Player.h"
 #include "OverWorld_Map.h"
+#include <GameEngineCore/BlurEffect.h>
+#include "OldFilm.h"
+#include "OldTVEffect.h"
+
 OverWorld::OverWorld()
 {
 
@@ -34,7 +38,8 @@ void OverWorld::Start()
 	GetMainCamera()->GetTransform()->AddLocalPosition({ -1300,300 });
 	
 	
-
+	GetLastTarget()->CreateEffect<OldFilm>();
+	GetLastTarget()->CreateEffect<BlurEffect>();
 	
 
 }

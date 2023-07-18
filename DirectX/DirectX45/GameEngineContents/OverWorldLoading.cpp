@@ -25,11 +25,14 @@ void OverWorldLoading::Start()
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Loading").GetFullPath());
 	}
 
-
+	BG = CreateComponent<GameEngineSpriteRenderer>();
+	BG->SetScaleToTexture("BlackBG.png");
 
 	Loading = CreateComponent<GameEngineSpriteRenderer>();
 	Loading->CreateAnimation({ .AnimationName = "Loading", .SpriteName = "Loading", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
 	Loading->ChangeAnimation("Loading");
+
+	Loading->GetTransform()->AddLocalPosition({ 520.0f,-200.0f });
 }
 
 void OverWorld_Function(GameEngineThread* Thread)

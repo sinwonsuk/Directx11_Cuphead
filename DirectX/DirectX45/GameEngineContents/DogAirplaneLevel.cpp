@@ -7,6 +7,9 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include "UserInterface.h"
 #include "TimeFlow.h"
+#include <GameEngineCore/BlurEffect.h>
+#include "OldFilm.h"
+#include "OldTVEffect.h"
 DogAirplaneLevel::DogAirplaneLevel()
 {
 }
@@ -210,7 +213,8 @@ void DogAirplaneLevel::Start()
 
 
 	
-
+	GetLastTarget()->CreateEffect<OldFilm>();
+	GetLastTarget()->CreateEffect<BlurEffect>();
 
 }
 
@@ -225,11 +229,9 @@ void DogAirplaneLevel::LevelChangeStart()
 
 	timeFlow = CreateActor<TimeFlow>(10);
 
-	if(UserInterfaceCheck ==false)
-	{
-		std::shared_ptr<UserInterface> Object = CreateActor<UserInterface>();
-		UserInterfaceCheck = true; 
-	}
+
+	userInterface = CreateActor<UserInterface>();
+	
 
 
 	BackGround = CreateActor<DogAirplaneBackground>();
@@ -283,11 +285,21 @@ void DogAirplaneLevel::LevelChangeEnd()
 	
 	GetMainCamera()->GetTransform()->SetLocalRotation({ 0.0f,0.0f,0.0f }); 
 	GetMainCamera()->GetTransform()->SetLocalPosition({ 0.0f,0.0f,0.0f });
-	ph3_Dog_Npc::ph3_Npc->Death(); 
+	if (ph3_Dog_Npc::ph3_Npc != nullptr)
+	{
+		ph3_Dog_Npc::ph3_Npc->Death();
+	}
+	
 	ph3_Dog_Npc::ph3_Npc = nullptr;
+
 	UserInterface::CardNumber = 0;
 	UserInterface::Cut = 0; 
-
+	UserInterface::HpBar = 3;
+	userInterface->Death(); 
+	if (Ph3_DogAirplane::ph3_mainBoss != nullptr)
+	{
+		Ph3_DogAirplane::ph3_mainBoss->Death();
+	}
 	Ph3_DogAirplane::ph3_mainBoss = nullptr;
 	DogAirplane::Hp = 20;
 	TimeFlow::Time = 0; 

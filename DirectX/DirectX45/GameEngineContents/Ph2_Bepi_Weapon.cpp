@@ -8,6 +8,7 @@
 #include "EnumClass.h"
 #include <math.h>
 #include "IdleWeapon.h"
+#include "Player.h"
 Ph2_Bepi_Weapon::Ph2_Bepi_Weapon()
 {
 }
@@ -90,10 +91,10 @@ void Ph2_Bepi_Weapon::Start()
 
 void Ph2_Bepi_Weapon::Update(float _Delta)
 {
-
-
-
-
+	if (Player::MainPlayer->Hp <= 0)
+	{
+		this->Death();
+	}
 	switch (color)
 	{
 	case Color::Idle:
@@ -153,7 +154,7 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 				/*Collision->Off();
 				PinkCollision->Off();*/
 
-				std::vector<float> a = { -600, 0 };
+				std::vector<float> a = { -1, 0 };
 				std::vector<float> b = { MoveDir.x, MoveDir.y };
 
 				// 두 벡터의 내적을 구합니다.
@@ -178,7 +179,7 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 				// 두 벡터 사이의 각을 구합니다.
 				float angle = acos(dot_product / (float)(a_norm * b_norm));
 
-				GetTransform()->AddLocalRotation({ 0,0,-(float)angle * 40.0f * _Delta * 200.0f });
+				GetTransform()->AddLocalRotation({ 0,0,-(float)angle * 20.0f * _Delta * 200.0f });
 
 				MoveDirCheck = true;
 			}
@@ -189,13 +190,13 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 			if (MoveDirCheck == false)
 			{
 				float4 MoveDir1 = { Player::MainPlayer->GetTransform()->GetLocalPosition() - GetTransform()->GetLocalPosition() };
-				MoveDir1.Normalize();
+				//MoveDir1.Normalize();
 
 				MoveDir = MoveDir1.NormalizeReturn();
 				/*Collision->Off();
 				PinkCollision->Off();*/
 
-				std::vector<float> a = { 600, 0 };
+				std::vector<float> a = { 1, 0 };
 				std::vector<float> b = { MoveDir.x, MoveDir.y };
 
 				// 두 벡터의 내적을 구합니다.
@@ -220,7 +221,7 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 				// 두 벡터 사이의 각을 구합니다.
 				float angle = acos(dot_product / (float)(a_norm * b_norm));
 
-				GetTransform()->AddLocalRotation({ 0,0,-(float)angle * 40.0f * _Delta * 200.0f });
+				GetTransform()->AddLocalRotation({ 0,0,-(float)angle * 20.0f * _Delta * 200.0f });
 
 				MoveDirCheck = true;
 			}
@@ -250,7 +251,11 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 			this->Death();
 		}
 	}
-		break;
+	break;
+
+
+
+
 	case Color::Pink:
 	{
 		if (ColorCheck == false)
@@ -321,7 +326,7 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 				/*Collision->Off();
 				PinkCollision->Off();*/
 
-				std::vector<float> a = { -600, 0 };
+				std::vector<float> a = { -1, 0 };
 				std::vector<float> b = { MoveDir.x, MoveDir.y };
 
 				// 두 벡터의 내적을 구합니다.
@@ -346,7 +351,7 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 				// 두 벡터 사이의 각을 구합니다.
 				float angle = acos(dot_product / (float)(a_norm * b_norm));
 
-				GetTransform()->AddLocalRotation({ 0,0,-(float)angle * 40.0f * _Delta * 200.0f });
+				GetTransform()->AddLocalRotation({ 0,0,-(float)angle * 20.0f * _Delta * 200.0f });
 
 				MoveDirCheck = true;
 			}
@@ -363,7 +368,7 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 				/*Collision->Off();
 				PinkCollision->Off();*/
 
-				std::vector<float> a = { 600, 0 };
+				std::vector<float> a = { 1, 0 };
 				std::vector<float> b = { MoveDir.x, MoveDir.y };
 
 				// 두 벡터의 내적을 구합니다.
@@ -388,7 +393,7 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 				// 두 벡터 사이의 각을 구합니다.
 				float angle = acos(dot_product / (float)(a_norm * b_norm));
 
-				GetTransform()->AddLocalRotation({ 0,0,-(float)angle * 40.0f * _Delta * 200.0f });
+				GetTransform()->AddLocalRotation({ 0,0,-(float)angle * 20.0f * _Delta * 200.0f });
 
 				MoveDirCheck = true;
 			}
@@ -423,10 +428,7 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 		break;
 	}
 	
-	/*if (ParryEffect->GetCurrentFrame() > 0)
-	{
-		ParryEffect->GetTransform()->AddLocalPosition({- MoveDir * 2 * _Delta * 200.0f });
-	}*/
+
 
 	if (ParryEffect->IsAnimationEnd())
 	{

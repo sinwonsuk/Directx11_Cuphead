@@ -45,4 +45,6 @@ enum class CollisionType
 	OverWorldAirPlane, 
 	OverWorldBepi, 
 	TutorialDoor,
+	Duck,
+	Pink_Duck_Body,
 };

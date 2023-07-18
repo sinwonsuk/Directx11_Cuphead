@@ -97,11 +97,11 @@ void NpcAirplane::collision(float _Delta)
 	Collision->GetTransform()->SetLocalRotation({ Npc->GetTransform()->GetLocalRotation().x, Npc->GetTransform()->GetLocalRotation().y,Npc->GetTransform()->GetLocalRotation().z });
 
 
-	if (Collision->Collision((int)CollisionType::Player, ColType::OBBBOX2D, ColType::OBBBOX2D) == nullptr)
+	if (Collision->Collision((int)CollisionType::Player, ColType::OBBBOX2D, ColType::OBBBOX2D) == nullptr && Player::MainPlayer->Hp > 0)
 	{
 		Player::MainPlayer->SetGravity(true);
 	}
-	else if (Collision->Collision((int)CollisionType::Player, ColType::OBBBOX2D, ColType::OBBBOX2D) && Player::MainPlayer->GetJumpCheck() ==false)
+	else if (Collision->Collision((int)CollisionType::Player, ColType::OBBBOX2D, ColType::OBBBOX2D) && Player::MainPlayer->GetJumpCheck() ==false )
 	{
 		if (Player::MainPlayer->GetTransform()->GetLocalPosition().y > Player_Pos_Y_Check)
 		{

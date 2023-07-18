@@ -131,7 +131,7 @@ void Ph3_Bepi::Update(float _Delta)
 		CollisonCheck = false;
 	}
 
-
+	
 
 
 	UpdateState(_Delta);

@@ -7,6 +7,7 @@
 #include "PlayerRunEffect.h"
 #include "IdleWeapon.h"
 #include <GameEngineCore/GameEngineCollision.h>
+#include <GameEngineCore/GameEngineCore.h>
 #include "UserInterface.h"
 #include "EnumClass.h"
 #include "ExWeapon.h"
@@ -17,6 +18,9 @@
 #include "Bepi_Duck.h"
 #include "Ph2_Bepi_Weapon.h"
 #include "Ph3_Bepi_Weapon_Green.h"
+#include "ph3_DogAirPlane.h"
+#include "Ph4_Bepi.h"
+
 void Player::ChangeState(PlayerState _State)
 {
 	PlayerState NextState = _State;
@@ -154,6 +158,12 @@ void Player::ChangeState(PlayerState _State)
 		break;
 	case PlayerState::TutorlalPotal:
 		AnimationCheck("Player_Portal");
+		break;
+	case PlayerState::Death:
+		AnimationCheck("Death");
+		break;
+	case PlayerState::Goast:
+		AnimationCheck("Ghost");
 		break;
 	default:
 		break;
@@ -299,6 +309,13 @@ void Player::UpdateState(float _Time)
 	case PlayerState::TutorlalPotal:
 		TutorlalPotalUpdate(_Time);
 		break;
+	case PlayerState::Death:
+		DeathUpdate(_Time);	
+		break;
+	case PlayerState::Goast:
+		GoastUpdate(_Time);
+
+		break;
 	default:
 		break;
 	}
@@ -399,6 +416,8 @@ void Player::IdleUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -409,6 +428,8 @@ void Player::IdleUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -591,6 +612,8 @@ void Player::RunUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -601,6 +624,8 @@ void Player::RunUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -659,6 +684,8 @@ void Player::JumpUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -669,6 +696,8 @@ void Player::JumpUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -914,6 +943,8 @@ void Player::DuckUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -924,6 +955,8 @@ void Player::DuckUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1041,8 +1074,11 @@ void Player::ParryUpdate(float _Time)
 		if (weapon != nullptr)
 		{
 			weapon->GetParryEffect()->On();
+			weapon->P_DuckHead->Off(); 
+			weapon->P_DuckBody->Off(); 
 			weapon->GetBullet()->Off();
-			//weapon->GetParryEffect()->GetTransform()->SetLocalPosition(weapon->GetBullet()->GetTransform()->GetLocalPosition());
+			weapon->PinkCollision->Off();
+			weapon->P_DuckSpin->On(); 
 			weapon->GetPinkCollision()->Off();
 		}
 		PinkObject = true;
@@ -1098,7 +1134,7 @@ void Player::ParryUpdate(float _Time)
 		PinkObject = true;
 	}
 
-	if (TimeFlow::Time > 0.5 && PinkObject ==true)
+	if (TimeFlow::Time > 0.2 && PinkObject ==true)
 	{
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 1.0f);
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 1.0f);
@@ -1347,6 +1383,8 @@ void Player::ParryUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1427,6 +1465,8 @@ void Player::UpAimUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1437,6 +1477,8 @@ void Player::UpAimUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1497,6 +1539,8 @@ void Player::DownAimUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1507,6 +1551,8 @@ void Player::DownAimUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1593,6 +1639,8 @@ void Player::IdleAimUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1603,6 +1651,8 @@ void Player::IdleAimUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1675,6 +1725,8 @@ void Player::DiagonalUpAimUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1685,6 +1737,8 @@ void Player::DiagonalUpAimUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1737,6 +1791,8 @@ void Player::DiagonalDownAimUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1747,6 +1803,8 @@ void Player::DiagonalDownAimUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1844,6 +1902,8 @@ void Player::DashUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1854,6 +1914,8 @@ void Player::DashUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2008,6 +2070,8 @@ void Player::IdleAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2018,6 +2082,8 @@ void Player::IdleAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2117,6 +2183,8 @@ void Player::IdleAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2127,6 +2195,8 @@ void Player::IdleAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2359,6 +2429,8 @@ void Player::RunAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2369,6 +2441,8 @@ void Player::RunAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2561,6 +2635,8 @@ void Player::DiagonalUpRunAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2571,6 +2647,8 @@ void Player::DiagonalUpRunAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2665,6 +2743,8 @@ void Player::UpUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2675,6 +2755,8 @@ void Player::UpUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2784,6 +2866,8 @@ void Player::UpAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2794,6 +2878,8 @@ void Player::UpAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2895,6 +2981,8 @@ void Player::UpAttackPre(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2905,6 +2993,8 @@ void Player::UpAttackPre(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2964,6 +3054,8 @@ void Player::DuckAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -2974,6 +3066,8 @@ void Player::DuckAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3038,6 +3132,8 @@ void Player::DuckAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3048,6 +3144,8 @@ void Player::DuckAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3185,6 +3283,8 @@ void Player::DiagonalDownAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3195,6 +3295,8 @@ void Player::DiagonalDownAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3338,6 +3440,8 @@ void Player::DiagonalDownAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3348,6 +3452,8 @@ void Player::DiagonalDownAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3459,6 +3565,8 @@ void Player::IdleAimAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3469,6 +3577,8 @@ void Player::IdleAimAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3562,6 +3672,8 @@ void Player::IdleAimAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3572,6 +3684,8 @@ void Player::IdleAimAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3653,6 +3767,8 @@ void Player::UpAimAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3663,6 +3779,8 @@ void Player::UpAimAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3750,6 +3868,8 @@ void Player::UpAimAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3760,6 +3880,8 @@ void Player::UpAimAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3838,6 +3960,8 @@ void Player::DownAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3848,6 +3972,8 @@ void Player::DownAttackUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3934,6 +4060,8 @@ void Player::DownAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -3944,6 +4072,8 @@ void Player::DownAttackPreUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -4080,6 +4210,8 @@ void Player::FailUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -4090,6 +4222,8 @@ void Player::FailUpdate(float _Time)
 			ResetLiveTime();
 			HitCheck = true;
 			JumpCheck = true;
+			UserInterface::HpBar -= 1;
+			Hp -= 1;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -4404,6 +4538,67 @@ void Player::Ex_Up_Update(float _Time)
 		ChangeState(PlayerState::Idle);
 		return;
 	}
+
+}
+
+void Player::DeathUpdate(float _Time)
+{
+	Gravity = false;
+
+	if (Render0->IsAnimationEnd())
+	{
+		ResetLiveTime();
+		Dided->On();
+		Black_BG->On();
+		ChangeState(PlayerState::Goast);
+		return;
+	}
+}
+
+void Player::GoastUpdate(float _Time)
+{
+
+
+	GetTransform()->SetLocalPositiveScaleX();
+	GetTransform()->AddLocalPosition({ float4::Up * 100.0f * _Time });
+
+	if (Dided->IsAnimationEnd())
+	{
+
+		Dided->ColorOptionValue.MulColor = {1.0f,1.0f,1.0f,DiedAlpha};
+		DiedAiphaColor = true;
+	}
+		
+	if (DiedAiphaColor == true)
+	{
+		DiedAlpha -= _Time * 5;
+	}
+	if (DiedAlpha < 0.1)
+	{
+		Dided->Off(); 
+		Exit->On();
+	}
+
+
+	if (Exit->IsAnimationEnd())
+	{
+		if (Ph3_DogAirplane::ph3_mainBoss != nullptr)
+		{
+			GameEngineCore::ChangeLevel("DogAirPlaneUnLoad_Level");
+		}
+		else if (Ph4_Bepi::ph4_Bepi != nullptr)
+		{
+			GameEngineCore::ChangeLevel("Bepi_UnLoad_Level");
+		}
+	}
+
+	
+	
+	
+	
+
+
+
 
 }
 

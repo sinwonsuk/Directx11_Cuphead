@@ -31,6 +31,7 @@ protected:
 private:
 	bool Check = false;
 
+	std::shared_ptr<class GameEngineSpriteRenderer> BG;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Loading;
 

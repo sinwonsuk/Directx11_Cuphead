@@ -29,7 +29,8 @@ enum class OverHead_PlayerState
 class OverHead_Player : public GameEngineActor
 {
 public:
-
+	static std::shared_ptr<class GameEngineSpriteRenderer> Exit;
+	static std::shared_ptr<class GameEngineSpriteRenderer> Exit2;
 	//static Player* MainPlayer;
 	OverHead_Player();
 	~OverHead_Player();
@@ -77,6 +78,8 @@ protected:
 
 private:
 	OverHead_PlayerState StateValue = OverHead_PlayerState::DownIdle;
+	bool Check = false;
+	float Time = 0;
 	float Speed = 300.0f;
 	float4 MoveDir = { 0,0 };
 
@@ -84,8 +87,8 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
 	std::shared_ptr<class GameEngineSpriteRenderer> Loading;
-	std::shared_ptr<class GameEngineSpriteRenderer> Exit;
-	std::shared_ptr<class GameEngineSpriteRenderer> Exit2;
+	//std::shared_ptr<class GameEngineSpriteRenderer> Exit;
+	//std::shared_ptr<class GameEngineSpriteRenderer> Exit2;
 	std::shared_ptr<class GameEngineCollision> Collision;
 
 	

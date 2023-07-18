@@ -10,6 +10,7 @@
 #include "ph3_food_bowl.h"
 #include "ph3_Dog_Npc.h"
 #include "TimeFlow.h"
+#include "UserInterface.h"
 // Ό³Έν :
 class DogAirplaneLevel : public GameEngineLevel
 {
@@ -67,5 +68,6 @@ private:
 	std::shared_ptr<Ph2_DogAirpalne> Ph2_DogAirpalne_Bottom;
 	std::shared_ptr<Ph3_DogAirplane> Ph3_DogAirpalne;
 	std::shared_ptr<DogAirplaneBackground> BackGround;
-
+	std::shared_ptr<UserInterface> userInterface;
+	
 };

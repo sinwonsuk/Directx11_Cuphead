@@ -10,8 +10,8 @@
 #include <GameEngineCore/GameEngineCollision.h>
 
 #include "EnumClass.h"
-
-
+std::shared_ptr<class GameEngineSpriteRenderer> OverHead_Player::Exit;
+std::shared_ptr<class GameEngineSpriteRenderer> OverHead_Player::Exit2;
 OverHead_Player::OverHead_Player()
 {
 }
@@ -91,24 +91,23 @@ void OverHead_Player::Update(float _Delta)
 			Exit->On();		
 		}	
 	}
-	if (Exit->IsAnimationEnd())
-	{
-		Exit->ChangeAnimation("Exit"); 
-		Exit->Off(); 
-		GameEngineCore::ChangeLevel("DogAirPlane_Loading_Level");
-	}
-
-	if (Collision->Collision((int)CollisionType::OverWorldBepi, ColType::OBBBOX2D, ColType::OBBBOX2D))
+	else if (Collision->Collision((int)CollisionType::OverWorldBepi, ColType::OBBBOX2D, ColType::OBBBOX2D))
 	{
 		if (GameEngineInput::IsDown("PlayerJump"))
 		{
 			Exit2->On();
 		}
 	}
+
+
+
+	if (Exit->IsAnimationEnd())
+	{
+		GameEngineCore::ChangeLevel("DogAirPlane_Loading_Level");
+	}
+		
 	if (Exit2->IsAnimationEnd())
 	{
-		Exit2->ChangeAnimation("Exit");
-		Exit2->Off();
 		GameEngineCore::ChangeLevel("Bepi_Loading_Level");
 	}
 

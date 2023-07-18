@@ -44,6 +44,8 @@ enum class PlayerState
 	Ex_Up, 
 	PinkObject, 
 	TutorlalPotal,
+	Death,
+	Goast, 
 };
 // Ό³Έν :
 class Player : public GameEngineActor
@@ -105,7 +107,8 @@ public:
 	void Ex_Down_Update(float _Time);
 	void Ex_Straight_Update(float _Time);
 	void Ex_Up_Update(float _Time);
-
+	void DeathUpdate(float _Time);
+	void GoastUpdate(float _Time);
 	bool GetGravity()
 	{
 		return Gravity;
@@ -155,6 +158,7 @@ public:
 		return Render0;
 	}
 	bool RightMove = true;
+	int Hp = 3;
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -169,17 +173,22 @@ private:
 
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Render0;
+	std::shared_ptr<class GameEngineSpriteRenderer> Black_BG;
+	std::shared_ptr<class GameEngineSpriteRenderer> Dided;
+	std::shared_ptr<class GameEngineSpriteRenderer> Exit;
 	std::shared_ptr<class GameEngineSpriteRenderer> HitEffect;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
 	std::shared_ptr<class GameEngineCollision> Collision;
 	std::shared_ptr<class GameEngineCollision> Collision2;
+	bool DiedAiphaColor = false;
+	float DiedAlpha = 1.0f;
 	int DownBlockCheck = 0; 
 	int GravityCheck = 0; 
 	int RightCheck = 0;
 	int LeftCheck = 0;
 	int HitNumber = 0;
-
+	
 	float HitTime = 0;
 	float Speed = 400;
 	float GravitySpeed = 1000;
@@ -187,7 +196,7 @@ private:
 
 	
 
-
+	bool DeathCheck = false;
 	bool Block = false;
 	bool Gravity = true;
 	

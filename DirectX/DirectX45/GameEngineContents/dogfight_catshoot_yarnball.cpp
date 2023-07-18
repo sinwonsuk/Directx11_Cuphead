@@ -3,6 +3,7 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.h"
+#include "Player.h"
 dogfight_catshoot_yarnball::dogfight_catshoot_yarnball()
 {
 
@@ -69,4 +70,8 @@ void dogfight_catshoot_yarnball::Update(float _Delta)
 		break;
 	}
 
+	if (Player::MainPlayer->Hp <= 0)
+	{
+		this->Death();
+	}
 }

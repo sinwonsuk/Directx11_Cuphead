@@ -5,7 +5,7 @@
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "EnumClass.h"
-
+#include "Player.h"
 Dog_ball::Dog_ball()
 {
 }
@@ -88,6 +88,12 @@ void Dog_ball::Update(float _Delta)
 	Left_Ball->GetTransform()->AddLocalPosition(LeftMoveDir *_Delta *650.0f);
 	Middle_Ball->GetTransform()->AddLocalPosition(MiddleMoveDir *_Delta * 650.0f);
 	Right_Ball->GetTransform()->AddLocalPosition( RightMoveDir *_Delta * 650.0f);
+
+	if (Player::MainPlayer->Hp <= 0)
+	{
+		this->Death(); 
+	}
+
 }
 
 void Dog_ball::Render(float _Delta)

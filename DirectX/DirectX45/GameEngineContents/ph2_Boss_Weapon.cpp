@@ -100,7 +100,7 @@ void ph2_Boss_Weapon::Update(float _Delta)
 	}
 
 	Bullet_First->GetTransform()->AddLocalPosition({ MoveDir * 2* _Delta*200.0f });
-	Bullet_First->GetTransform()->AddLocalPosition({0.0f,0.0f,-1.0f });
+	Bullet_First->GetTransform()->AddLocalPosition({0.0f,0.0f,-100.0f });
 	Collision->GetTransform()->SetLocalPosition({ Bullet_First->GetTransform()->GetLocalPosition() });
 	PinkCollision->GetTransform()->SetLocalPosition({ Bullet_First->GetTransform()->GetLocalPosition() });
 
@@ -390,5 +390,8 @@ void ph2_Boss_Weapon::Update(float _Delta)
 		ParryEffect->Off();
 	}
 
-
+	if (Player::MainPlayer->Hp <= 0)
+	{
+		this->Death();
+	}
 }

@@ -9,6 +9,7 @@
 #include "ph3_DogAirPlane.h"
 #include "TutorialObject.h"
 #include "Ph4_Bepi.h"
+#include "Bepi_Duck.h"
 IdleWeapon::IdleWeapon()
 {
 }
@@ -68,11 +69,46 @@ void IdleWeapon::Update(float _Delta)
 		
 		if (Collision->Collision((int)CollisionType::BossBody) && CollisionCheck == false)
 		{
-			UserInterface::Cut += 0.1f;
+			UserInterface::Cut += 0.05f;
 			Bullet->ChangeAnimation("Peashooter_Death");
 			CollisionCheck = true;
+			//Collision->Off(); 
 		}
 	
+		if (Collision->Collision((int)CollisionType::Duck) && CollisionCheck == false)
+		{
+			UserInterface::Cut += 0.05f;
+			Bullet->ChangeAnimation("Peashooter_Death");
+			CollisionCheck = true;
+			//Collision->Off(); 
+		}
+		/*if (Bepi_Duck::duck != nullptr)
+		{
+			if (Collision->Collision((int)CollisionType::Duck) && CollisionCheck == false)
+			{
+				
+				UserInterface::Cut += 0.05f;
+				Bullet->ChangeAnimation("Peashooter_Death");
+				CollisionCheck = true;
+				Collision->Off();
+			}
+			 if ((Collision->Collision((int)CollisionType::Pink_Duck_Body) && ColorCollisionCheck2 == false))
+			{
+				Bepi_Duck::duck->P_DuckBody->Off();
+				Bepi_Duck::duck->P_DuckHead->Off();
+				Bepi_Duck::duck->Body_Pink_Collision->Off();
+				Bepi_Duck::duck->PinkCollision->Off();
+				Bepi_Duck::duck->DuckSpin->Off();
+				Bepi_Duck::duck->P_DuckSpin->On();
+				UserInterface::Cut += 0.05f;
+				Bullet->ChangeAnimation("Peashooter_Death");
+				ColorCollisionCheck2 = true;
+				Collision->Off();
+			}
+
+
+		}*/
+
 		if (TutorialObject::Object != nullptr)
 		{
 
@@ -156,6 +192,15 @@ void IdleWeapon::Update(float _Delta)
 			}
 
 		}
+
+
+
+
+
+
+
+
+
 
 
 	if (GetLiveTime() > 5)

@@ -195,7 +195,7 @@ void Crown_Bepi_Map::Update(float _Delta)
 		Ph4_Swing_Platform::Ph4_Platform_Check = false;
 	}
 
-	if (Collision->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D) == nullptr)
+	if (Collision->Collision((int)CollisionType::Player, ColType::AABBBOX2D, ColType::AABBBOX2D) == nullptr && Player::MainPlayer->Hp >0)
 	{
 		Player::MainPlayer->SetGravity(true);
 		//Ph4_Swing_Platform::Ph4_Platform_Check = false;

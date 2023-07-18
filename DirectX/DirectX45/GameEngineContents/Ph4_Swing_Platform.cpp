@@ -59,37 +59,6 @@ void Ph4_Swing_Platform::Update(float _Delta)
 
 	
 
-	/*if (Collision->Collision((int)CollisionType::Player) == nullptr && CollisionCheck == true && CurPos.y > Player::MainPlayer->GetTransform()->GetLocalPosition().y )
-	{
-		Player::MainPlayer->SetGravity(true);
-	}
-
-	if (Time > 0.3)
-	{
-		CollisionCheck = false;
-	}
-*/
-
-
-
-	/*if (Collision->Collision((int)CollisionType::Player) == nullptr && Ph4_Platform_Check == true)
-	{
-		Player::MainPlayer->SetGravity(false);
-		Ph4_Platform_Check = false;
-	}*/
-
-
-
-
-
-	
-
-
-	//else if (0.5 > GetLiveTime() && Ph4_Platform_Check == true)
-	//{
-	//	Player::MainPlayer->SetGravity(true);
-	//}
-
 	
 
 
@@ -97,17 +66,18 @@ void Ph4_Swing_Platform::Update(float _Delta)
 
 	switch (choic)
 	{
-	case Choice::Intro :
+	case Choice::Intro:
 	{
 		if (Collision->Collision((int)CollisionType::PlayerDown) && Player::MainPlayer->GetJumpCheck() == false)
 		{
 			Player::MainPlayer->GetTransform()->AddLocalPosition({ float4::Right * (Speed)*_Delta });
 		}
+		
+
 		GetTransform()->AddLocalPosition({ float4::Right * (Speed)*_Delta });
 
 		if (GetTransform()->GetLocalPosition().y > 0)
 		{
-
 			if (Collision->Collision((int)CollisionType::PlayerDown) && Player::MainPlayer->GetJumpCheck() == false)
 			{
 				Player::MainPlayer->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Delta });
@@ -196,7 +166,7 @@ void Ph4_Swing_Platform::Update(float _Delta)
 
 	}
 
-	if (Time > 0.5)
+	if (Time > 0.3)
 	{
 		Collision->On();
 	}

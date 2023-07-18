@@ -48,13 +48,13 @@ void OverHead_Player::Start()
 
 	Exit = CreateComponent<GameEngineSpriteRenderer>();
 	Exit->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
-	Exit->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-200.0f });
+	Exit->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-2000.0f });
 	Exit->ChangeAnimation("Exit");
 	Exit->Off(); 
 
 	Exit2 = CreateComponent<GameEngineSpriteRenderer>();
 	Exit2->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
-	Exit2->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-200.0f });
+	Exit2->GetTransform()->AddLocalPosition({ 0.0f,20.0f,-2000.0f });
 	Exit2->ChangeAnimation("Exit");
 	Exit2->Off();
 

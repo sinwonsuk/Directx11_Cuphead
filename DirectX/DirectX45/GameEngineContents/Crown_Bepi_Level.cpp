@@ -18,6 +18,8 @@
 #include "OldFilm.h"
 #include "OldTVEffect.h"
 
+bool Crown_Bepi_Level::Finish_Check = false;
+
 Crown_Bepi_Level::Crown_Bepi_Level()
 {
 }

@@ -189,6 +189,8 @@
     <ClInclude Include="DogAirPlane_UnLoad.h" />
     <ClInclude Include="dogfight_catshoot_yarnball.h" />
     <ClInclude Include="Dog_ball.h" />
+    <ClInclude Include="Ending.h" />
+    <ClInclude Include="EndingLevel.h" />
     <ClInclude Include="EnumClass.h" />
     <ClInclude Include="ExWeapon.h" />
     <ClInclude Include="GiantBoss.h" />
@@ -268,6 +270,8 @@
     <ClCompile Include="DogAirPlane_UnLoad.cpp" />
     <ClCompile Include="dogfight_catshoot_yarnball.cpp" />
     <ClCompile Include="Dog_ball.cpp" />
+    <ClCompile Include="Ending.cpp" />
+    <ClCompile Include="EndingLevel.cpp" />
     <ClCompile Include="ExWeapon.cpp" />
     <ClCompile Include="GiantBoss.cpp" />
     <ClCompile Include="GiantBossState.cpp" />

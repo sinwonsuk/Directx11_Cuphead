@@ -173,14 +173,14 @@ void NpcAirplane::Update(float _Delta)
 	{
 		DogAirplane::Finish = false;
 		DogAirplaneLevel* A = (DogAirplaneLevel*)GetLevel();
-		A->ad = 1;
+		A->Pase = 1;
 	}
 	
 		if (AirPlaneLevel->Get_Ph2_DogAirpalne_Bottom()->GetHp() < 0 &&
 			AirPlaneLevel->Get_Ph2_DogAirpalne_Top()->GetHp() < 0 &&
 			AirPlaneLevel->Get_Ph2_DogAirpalne_Right()->GetHp() < 0 &&
 			AirPlaneLevel->Get_Ph2_DogAirpalne_Left()->GetHp() < 0 &&
-			AirPlaneLevel->ad == 1
+			AirPlaneLevel->Pase == 1
 			)
 		{
 			
@@ -208,7 +208,7 @@ void NpcAirplane::Update(float _Delta)
 			if (Npc->GetTransform()->GetLocalPosition().y < -215.0f)
 			{
 				Player_Pos_Y_Check = -150.0f;
-				AirPlaneLevel->ad = 2;
+				AirPlaneLevel->Pase = 2;
 			}
 		}
 	

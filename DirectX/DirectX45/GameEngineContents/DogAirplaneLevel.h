@@ -26,9 +26,14 @@ public:
 	DogAirplaneLevel& operator=(DogAirplaneLevel&& _Other) noexcept = delete;
 
 	std::shared_ptr<class GameEngineVideo> Video;
-	int ad = 0;
+
+	int Pase = 0;
 	float sd = 0;
 	bool UserInterfaceCheck = false;
+
+	static bool Finsh_Check;
+
+
 	std::shared_ptr<Ph2_DogAirpalne> Get_Ph2_DogAirpalne_Left()
 	{
 		return Ph2_DogAirpalne_Left;

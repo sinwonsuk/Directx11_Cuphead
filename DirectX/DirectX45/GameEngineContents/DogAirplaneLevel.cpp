@@ -10,6 +10,7 @@
 #include <GameEngineCore/BlurEffect.h>
 #include "OldFilm.h"
 #include "OldTVEffect.h"
+bool DogAirplaneLevel::Finsh_Check = false;
 DogAirplaneLevel::DogAirplaneLevel()
 {
 }
@@ -21,7 +22,7 @@ DogAirplaneLevel::~DogAirplaneLevel()
 void DogAirplaneLevel::Update(float _DeltaTime)
 {
 	sd += _DeltaTime;
-	switch (ad)
+	switch (Pase)
 	{
 	case 0:
 	{
@@ -308,7 +309,7 @@ void DogAirplaneLevel::LevelChangeEnd()
 	Player::MainPlayer = nullptr;
 	Ph3_DogAirplane::Hp = 20;
 	DogAirplane::Finish = false;
-	ad = 0;
+	Pase = 0;
 
 	timeFlow->Death(); 
 	Ph1_DogAirplane->Death();

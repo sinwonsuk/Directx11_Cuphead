@@ -172,6 +172,8 @@
     <ClInclude Include="Bepi_UnLoad.h" />
     <ClInclude Include="OldTVEffect.h" />
     <ClInclude Include="OldFilm.h" />
+    <ClInclude Include="EndingLevel.h" />
+    <ClInclude Include="Ending.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -380,6 +382,8 @@
     <ClCompile Include="Bepi_UnLoad.cpp" />
     <ClCompile Include="OldTVEffect.cpp" />
     <ClCompile Include="OldFilm.cpp" />
+    <ClCompile Include="EndingLevel.cpp" />
+    <ClCompile Include="Ending.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

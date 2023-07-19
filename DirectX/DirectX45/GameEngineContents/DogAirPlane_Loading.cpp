@@ -6,6 +6,9 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include "DogAirPlane_UnLoad.h"
 #include "OverHead_Player.h"
+#include <GameEngineCore/BlurEffect.h>
+#include "OldFilm.h"
+#include "OldTVEffect.h"
 bool DogAirPlane_Loading::Check = false;
 DogAirPlane_Loading::DogAirPlane_Loading()
 {

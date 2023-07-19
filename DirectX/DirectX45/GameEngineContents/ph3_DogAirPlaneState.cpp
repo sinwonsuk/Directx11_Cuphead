@@ -10,6 +10,8 @@
 #include "ph3_food_bowl.h"
 #include "Boss_Finish.h"
 #include "DogAirPlaneUnLoad_Level.h"
+#include "DogAirplaneLevel.h"
+#include "Crown_Bepi_Level.h"
 void Ph3_DogAirplane::ChangeState(Ph3_DogAirPlaneState _State)
 {
 	Ph3_DogAirPlaneState NextState = _State;
@@ -918,7 +920,8 @@ void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
 		Object->On();
-
+		DogAirplaneLevel::Finsh_Check = true;
+		//Finsh_Check = true;
 		ResetLiveTime(); 
 		ChangeState(Ph3_DogAirPlaneState::Death);
 		return;
@@ -978,11 +981,20 @@ void Ph3_DogAirplane::DeathUpdate(float _Time)
 
 		//GameEngineCore::ChangeLevel("DogAirPlaneUnLoad_Level");
 	}
-	if (Exit->IsAnimationEnd())
+
+	if (Exit->IsAnimationEnd() && DogAirplaneLevel::Finsh_Check==true && Crown_Bepi_Level::Finish_Check ==true)
+	{
+		Object->Death();
+		GameEngineCore::ChangeLevel("EndingLevel");
+	}
+
+	else if (Exit->IsAnimationEnd())
 	{
 		Object->Death();
 		GameEngineCore::ChangeLevel("DogAirPlaneUnLoad_Level");
 	}
+
+	
 
 	
 }

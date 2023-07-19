@@ -33,7 +33,7 @@ public:
 
 
 	Pase PaseCheck = Pase::Pase1;
-
+	static bool Finish_Check;
 protected:
 	void Update(float _DeltaTime) override;
 	void Start() override;

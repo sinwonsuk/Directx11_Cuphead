@@ -1,6 +1,9 @@
 #include "PrecompileHeader.h"
 #include "DogAirPlane_Loading_Level.h"
 #include "DogAirPlane_Loading.h"
+#include <GameEngineCore/BlurEffect.h>
+#include "OldFilm.h"
+#include "OldTVEffect.h"
 void DogAirPlane_Loading_Level::LevelChangeStart()
 {
 
@@ -26,7 +29,11 @@ void DogAirPlane_Loading_Level::Update(float _DeltaTime)
 
 void DogAirPlane_Loading_Level::Start()
 {
+
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 
 	std::shared_ptr<DogAirPlane_Loading> Object = CreateActor<DogAirPlane_Loading>();
+
+	GetLastTarget()->CreateEffect<OldFilm>();
+	GetLastTarget()->CreateEffect<BlurEffect>();
 }

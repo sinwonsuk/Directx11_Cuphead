@@ -9,6 +9,8 @@
 #include "Ph4_Penguin.h"
 #include "Crown_Bepi_Map.h"
 #include "Boss_Finish.h"
+#include "DogAirplaneLevel.h"
+#include "Crown_Bepi_Level.h"
 void Ph4_Bepi::ChangeState(Ph4_Bepi_State _State)
 {
 	Ph4_Bepi_State NextState = _State;
@@ -108,6 +110,7 @@ void Ph4_Bepi::BossIdleUpdate(float _Time)
 			Finish = GetLevel()->CreateActor<Boss_Finish>(50);
 			BossFinish = true;
 		}
+		Crown_Bepi_Level::Finish_Check = true; 
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
 		ResetLiveTime(); 
@@ -164,7 +167,7 @@ void Ph4_Bepi::BossIntroUpdate(float _Time)
 				Finish = GetLevel()->CreateActor<Boss_Finish>(50);
 				BossFinish = true;
 			}
-
+			Crown_Bepi_Level::Finish_Check = true;
 			ResetLiveTime();
 			ChangeState(Ph4_Bepi_State::BossFinish);
 			return;
@@ -204,9 +207,12 @@ void Ph4_Bepi::BossFinsihUpdate(float _Time)
 	if (GetLiveTime() > 3)
 	{
 		Exit->On();
-		/*Exit->On(); 
-		Finish->Death();
+		
+	}
 
+	
+	if (Exit->IsAnimationEnd() && DogAirplaneLevel::Finsh_Check == true && Crown_Bepi_Level::Finish_Check == true)
+	{
 		for (size_t i = 0; i < Crown_Bepi_Map::Rollercoasters.size(); i++)
 		{
 			Crown_Bepi_Map::Rollercoasters[i].get()->Death();
@@ -214,20 +220,23 @@ void Ph4_Bepi::BossFinsihUpdate(float _Time)
 
 		for (size_t i = 0; i < Ph4_Swing_Platforms.size(); i++)
 		{
-			Ph4_Swing_Platforms[i].get()->Death(); 
+			Ph4_Swing_Platforms[i].get()->Death();
+		}
+		for (size_t i = 0; i < Ph4_Penguins.size(); i++)
+		{
+			Ph4_Penguins[i].get()->Death();
 		}
 
-		GameEngineCore::ChangeLevel("Bepi_UnLoad_Level"); */
+
+		Ph4_Swing_Platforms.clear();
+		Ph4_Penguins.clear();
+		Finish->Death();
+		GameEngineCore::ChangeLevel("EndingLevel");
 	}
 
-	
 
-
-
-	if(Exit->IsAnimationEnd())
+	else if(Exit->IsAnimationEnd())
 	{
-
-
 		for (size_t i = 0; i < Crown_Bepi_Map::Rollercoasters.size(); i++)
 		{
 			Crown_Bepi_Map::Rollercoasters[i].get()->Death();
@@ -245,9 +254,6 @@ void Ph4_Bepi::BossFinsihUpdate(float _Time)
 
 		Ph4_Swing_Platforms.clear(); 
 		Ph4_Penguins.clear();
-
-
-
 		Finish->Death();
 		GameEngineCore::ChangeLevel("Bepi_UnLoad_Level");
 	}
@@ -262,6 +268,7 @@ void Ph4_Bepi::BossAttackStartUpdate(float _Time)
 	}
 	if (Hp < 0)
 	{
+		Crown_Bepi_Level::Finish_Check = true;
 		Phase4_Idle->ColorOptionValue.PlusColor = { 0,0,0,0 };
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
@@ -348,6 +355,7 @@ void Ph4_Bepi::BossAttackMiddleUpdate(float _Time)
 	}
 	if (Hp < 0)
 	{
+		Crown_Bepi_Level::Finish_Check = true;
 		Phase4_Idle->ColorOptionValue.PlusColor = { 0,0,0,0 };
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
@@ -377,6 +385,8 @@ void Ph4_Bepi::BossAttackEndUpdate(float _Time)
 
 	if (Hp < 0)
 	{
+		Crown_Bepi_Level::Finish_Check = true;
+
 		Phase4_Idle->ColorOptionValue.PlusColor = { 0,0,0,0 };
 		GameEngineTime::GlobalTime.SetRenderOrderTimeScale(0, 0.0f);
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);

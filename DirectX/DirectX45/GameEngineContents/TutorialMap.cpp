@@ -2,7 +2,10 @@
 #include "TutorialMap.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineUIRenderer.h>
+
 #include "Player.h"
+
+GameEngineSoundPlayer TutorialMap::BG;
 TutorialMap::TutorialMap()
 {
 }
@@ -48,7 +51,14 @@ void TutorialMap::Update(float _Delta)
 {
 	if (Loading->IsAnimationEnd())
 	{
-		Loading->Off(); 
+		Loading->Off();
+
+		if (Sound_Check == false)
+		{
+			BG = GameEngineSound::Play("MUS_Tutorial.wav");
+			Sound_Check = true; 
+		}
+
 	}
 
 	

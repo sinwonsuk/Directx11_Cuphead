@@ -8,10 +8,10 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCollision.h>
-
 #include "EnumClass.h"
 std::shared_ptr<class GameEngineSpriteRenderer> OverHead_Player::Exit;
 std::shared_ptr<class GameEngineSpriteRenderer> OverHead_Player::Exit2;
+bool OverHead_Player::Sound_Check = false;
 OverHead_Player::OverHead_Player()
 {
 }
@@ -82,6 +82,16 @@ void OverHead_Player::Update(float _Delta)
 	if (Loading->IsAnimationEnd())
 	{
 		Loading->Off(); 
+
+		if (Sound_Check == false)
+		{
+			BG = GameEngineSound::Play("bgm_map_world_1.wav");
+			BG.SetLoop(); 
+			Sound_Check = true;
+		}
+	
+
+
 	}
 
 	if (Collision->Collision((int)CollisionType::OverWorldAirPlane, ColType::OBBBOX2D, ColType::OBBBOX2D))
@@ -103,11 +113,13 @@ void OverHead_Player::Update(float _Delta)
 
 	if (Exit->IsAnimationEnd())
 	{
+		BG.Stop(); 
 		GameEngineCore::ChangeLevel("DogAirPlane_Loading_Level");
 	}
 		
 	if (Exit2->IsAnimationEnd())
 	{
+		BG.Stop();
 		GameEngineCore::ChangeLevel("Bepi_Loading_Level");
 	}
 

@@ -1,7 +1,7 @@
 
 #pragma once
 #include <GameEngineCore\GameEngineLevel.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 // Ό³Έν :
 class OverWorld : public GameEngineLevel
 {
@@ -16,7 +16,7 @@ public:
 	OverWorld& operator=(const OverWorld& _Other) = delete;
 	OverWorld& operator=(OverWorld&& _Other) noexcept = delete;
 
-	
+	GameEngineSoundPlayer BgmPlayer;
 
 protected:
 

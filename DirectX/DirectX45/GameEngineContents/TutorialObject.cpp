@@ -283,6 +283,12 @@ void TutorialObject::Update(float _Delta)
 		Pyramid_Topper->Off();
 		Explosion->On();
 		Collision4->Off();
+		if (Destory_Check == false)
+		{
+			Destory = GameEngineSound::Play("sfx_player_weapon_crackshot_turret_parryexplode.wav");
+			Destory_Check = true;
+		}
+		
 	}
 
 	if (CollisionEffect->IsAnimationEnd())

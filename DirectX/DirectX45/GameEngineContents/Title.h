@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 // Ό³Έν :
 class Title : public GameEngineActor
 {
@@ -27,7 +27,12 @@ protected:
 	float4 TestColor;
 
 private:
-
+	bool SoundCheck = false;
+	bool Sound_Log_Check = false;
+	GameEngineSoundPlayer Loge_BG;
+	GameEngineSoundPlayer BG;
+	/*BG = GameEngineSound::Play("mus_dlc_title.wav");
+	BG.SetLoop();*/
 	bool Check = false;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> TitleRoge;

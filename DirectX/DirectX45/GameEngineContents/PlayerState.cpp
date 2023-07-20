@@ -645,7 +645,11 @@ void Player::RunUpdate(float _Time)
 
 void Player::JumpUpdate(float _Time)
 {
-	
+	if (Sound_Jump_Check == false)
+	{
+		Jump = GameEngineSound::Play("sfx_player_jump_01.wav");
+		Sound_Jump_Check = true;
+	}
 
 	if (CheckCamera == true)
 	{
@@ -885,6 +889,7 @@ void Player::JumpUpdate(float _Time)
 		RunTime = 0;
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
+		Sound_Jump_Check = false;
 		ChangeState(PlayerState::Idle);
 		return;
 	}
@@ -905,6 +910,7 @@ void Player::JumpUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		Sound_Jump_Check = false;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -981,8 +987,18 @@ void Player::ParryUpdate(float _Time)
 
 	if (Collision->Collision((int)CollisionType::TutorialObject, ColType::AABBBOX2D, ColType::AABBBOX2D))
 	{
+
+
+
 		if (true == GameEngineInput::IsPress("PlayerJump"))
 		{
+			if (Sound_Parry_Check == false)
+			{
+				Parry = GameEngineSound::Play("sfx_player_parry_slap_01.wav");
+				Sound_Parry_Check = true; 
+			}
+
+
 			JumpCheck = true;
 			ResetLiveTime();
 			return;
@@ -993,6 +1009,13 @@ void Player::ParryUpdate(float _Time)
 
 	if (Test_Collision&& PinkObject ==false)
 	{
+		if (Sound_Parry_Check == false)
+		{
+			Parry = GameEngineSound::Play("sfx_player_parry_slap_01.wav");
+			Sound_Parry_Check = true;
+		}
+
+
 		JumpCheck = true;
 		ResetLiveTime();
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
@@ -1021,6 +1044,12 @@ void Player::ParryUpdate(float _Time)
 
 	if (TestCollision && PinkObject == false)
 	{
+		if (Sound_Parry_Check == false)
+		{
+			Parry = GameEngineSound::Play("sfx_player_parry_slap_01.wav");
+			Sound_Parry_Check = true;
+		}
+
 		JumpCheck = true;
 		ResetLiveTime();
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
@@ -1043,6 +1072,12 @@ void Player::ParryUpdate(float _Time)
 
 	if (ph3_Boss_Collision && PinkObject == false)
 	{
+		if (Sound_Parry_Check == false)
+		{
+			Parry = GameEngineSound::Play("sfx_player_parry_slap_01.wav");
+			Sound_Parry_Check = true;
+		}
+
 		JumpCheck = true;
 		ResetLiveTime();
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
@@ -1062,6 +1097,12 @@ void Player::ParryUpdate(float _Time)
 
 	if (ph1_Pink_Duck && PinkObject == false)
 	{
+		if (Sound_Parry_Check == false)
+		{
+			Parry = GameEngineSound::Play("sfx_player_parry_slap_01.wav");
+			Sound_Parry_Check = true;
+		}
+
 		JumpCheck = true;
 		ResetLiveTime();
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
@@ -1088,6 +1129,12 @@ void Player::ParryUpdate(float _Time)
 
 	if (ph2_Bepi_Pink_Bullet && PinkObject == false)
 	{
+		if (Sound_Parry_Check == false)
+		{
+			Parry = GameEngineSound::Play("sfx_player_parry_slap_01.wav");
+			Sound_Parry_Check = true;
+		}
+
 		JumpCheck = true;
 		ResetLiveTime();
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
@@ -1113,6 +1160,12 @@ void Player::ParryUpdate(float _Time)
 
 	if (ph3_Bepi_Pink_Bullet && PinkObject == false)
 	{
+		if (Sound_Parry_Check == false)
+		{
+			Parry = GameEngineSound::Play("sfx_player_parry_slap_01.wav");
+			Sound_Parry_Check = true;
+		}
+
 		JumpCheck = true;
 		ResetLiveTime();
 		GameEngineTime::GlobalTime.SetUpdateOrderTimeScale(0, 0.0f);
@@ -1824,6 +1877,14 @@ void Player::DiagonalDownAimUpdate(float _Time)
 
 void Player::DashUpdate(float _Time)
 {
+	if (Sound_Dash_Check == false)
+	{
+		Dash = GameEngineSound::Play("sfx_player_dash_01.wav");
+		Sound_Dash_Check = true;
+	}
+
+
+
 	if (CheckCamera == true)
 	{
 		if (GetTransform()->GetLocalScale().x < 0)
@@ -1882,7 +1943,7 @@ void Player::DashUpdate(float _Time)
 	
 		JumpCheck = false;
 		DashEffectCheck = false;
-		//ResetLiveTime();
+		Sound_Dash_Check = false;
 		ChangeState(PlayerState::Jump);
 		return;
 	}
@@ -1890,7 +1951,7 @@ void Player::DashUpdate(float _Time)
 	if (Render0->IsAnimationEnd() && Gravity ==false)
 	{
 		DashEffectCheck = false;
-
+		Sound_Dash_Check = false;
 		ChangeState(PlayerState::Idle);
 		return;
 	}
@@ -1904,6 +1965,7 @@ void Player::DashUpdate(float _Time)
 			JumpCheck = true;
 			UserInterface::HpBar -= 1;
 			Hp -= 1;
+			Sound_Dash_Check = false;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1916,6 +1978,7 @@ void Player::DashUpdate(float _Time)
 			JumpCheck = true;
 			UserInterface::HpBar -= 1;
 			Hp -= 1;
+			Sound_Dash_Check = false;
 			ChangeState(PlayerState::Hit);
 			return;
 		}
@@ -1928,6 +1991,7 @@ void Player::DashUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		Sound_Dash_Check = false;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -4328,7 +4392,7 @@ void Player::HitUpdate(float _Time)
 
 void Player::PinkObjectUpdate(float _Time)
 {
-	
+	Sound_Parry_Check = false;
 	
 
 	if (CheckCamera == true)

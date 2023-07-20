@@ -13,7 +13,7 @@ void Title::Start()
 {
 
 	TitleRoge = CreateComponent<GameEngineSpriteRenderer>();
-	TitleRoge->CreateAnimation({ .AnimationName = "Title_Logo", .SpriteName = "Title_Logo", .FrameInter = 0.005f,.Loop = false, .ScaleToTexture = true, });
+	TitleRoge->CreateAnimation({ .AnimationName = "Title_Logo", .SpriteName = "Title_Logo", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	TitleRoge->ChangeAnimation("Title_Logo");
 	TitleRoge->SetScaleRatio(1.5f);
 
@@ -35,8 +35,7 @@ void Title::Start()
 	Exit->Off();
 	//Exit->GetTransform()->AddLocalPosition({ 0.0f,-50.0f });
 	
-
-
+	
 }
 
 void Title::Update(float _Delta)
@@ -47,11 +46,25 @@ void Title::Update(float _Delta)
 		cuphead_title_screen->On(); 
 		title_screen_background->On(); 
 
+		
 		Check = true;
-
+		
+	}
+	
+	if (Sound_Log_Check ==false && TitleRoge->GetCurrentFrame() > 1)
+	{
+		Loge_BG = GameEngineSound::Play("cuphead-opening-theme.mp3");
+		Sound_Log_Check = true;
 	}
 
 
+
+	if (SoundCheck == false && Check==true)
+	{
+		BG = GameEngineSound::Play("mus_dlc_title.wav");
+		BG.SetLoop();
+		SoundCheck = true;
+	}
 
 
 	if (Check ==true && GameEngineInput::IsAnyKey())
@@ -61,6 +74,7 @@ void Title::Update(float _Delta)
 
 	if (Exit->IsAnimationEnd())
 	{
+		BG.Stop(); 
 		GameEngineCore::ChangeLevel("PlayLevel");
 	}
 }

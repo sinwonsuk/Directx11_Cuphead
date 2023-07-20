@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class OverHead_PlayerState
 {
 	DownIdle,
@@ -29,6 +29,7 @@ enum class OverHead_PlayerState
 class OverHead_Player : public GameEngineActor
 {
 public:
+	static bool Sound_Check;
 	static std::shared_ptr<class GameEngineSpriteRenderer> Exit;
 	static std::shared_ptr<class GameEngineSpriteRenderer> Exit2;
 	//static Player* MainPlayer;
@@ -77,12 +78,15 @@ protected:
 	float4 TestColor;
 
 private:
+
+	GameEngineSoundPlayer BG;
+
 	OverHead_PlayerState StateValue = OverHead_PlayerState::DownIdle;
 	bool Check = false;
 	float Time = 0;
 	float Speed = 300.0f;
 	float4 MoveDir = { 0,0 };
-
+	
 	std::shared_ptr<class GameEngineSpriteRenderer> Player;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
@@ -102,13 +106,14 @@ private:
 	int	Left_diagonal_Check = 0;
 	int	Left_diagonal_Down_Check = 0;
 
+	
+
+
 
 	bool Right_diagonal_Move= false;
 	bool Right_diagonal_Down_Move = false;
 	bool Left_diagonal_Move = false;
 	bool Left_diagonal_Down_Move = false;
-
-
 
 
 	bool UpMove = false;

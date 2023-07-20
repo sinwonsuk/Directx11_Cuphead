@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 #include "DogAirPlaneManager.h"
 enum class DogAirplaneState
 {
@@ -62,6 +63,10 @@ protected:
 	float4 TestColor;
 
 private:
+	GameEngineSoundPlayer BG;
+	GameEngineSoundPlayer Intro_Start;
+	GameEngineSoundPlayer Intro_SFX;
+
 	std::vector<int> a;
 	float CollisionMove = 640;
 	bool adsdf = false;
@@ -112,13 +117,17 @@ private:
 	float Ball_Monster_Time = 0;
 	float4 CurPos = { 0,0 };
 
+	bool Sound_Intro_Check = false;
+	bool Sound_BG_Check = false;
+
+
 	bool CollisonCheck = false;
 	bool Ball_MonsterCheck = false;
 	bool Intro_Jump_Check = false;
 	bool JumpCheck = false;
 	bool AttackCheck = false;
 
-	//float LiveTime = 0;
+	
 
 	int unloadCheck = 0;
 	int PinkBone = 0;

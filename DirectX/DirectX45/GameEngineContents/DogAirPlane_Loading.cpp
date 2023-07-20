@@ -401,6 +401,7 @@ void DogAirPlane_Loading::Update(float _Delta)
 {
 	if (Check == false)
 	{
+		OverHead_Player::Sound_Check = false;
 		GameEngineCore::JobQueue.Work(Function);
 		OverHead_Player::Exit->ChangeAnimation("Exit");
 		OverHead_Player::Exit->Off();

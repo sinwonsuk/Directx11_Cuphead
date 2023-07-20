@@ -222,7 +222,24 @@ void DogAirplane::Update(float _Delta)
 	if (Loading->IsAnimationEnd())
 	{
 		Loading->Off(); 
+
+		if (Sound_Intro_Check == false)
+		{
+			BG = GameEngineSound::Play("mus_dlc_dogfight_a.wav");
+			Intro_Start = GameEngineSound::Play("a-good-day-for-a-swell-battle.mp3");
+			Sound_Intro_Check = true;
+		}
+
 	}
+
+
+	/*if (Sound_Intro_Check == true && Sound_BG_Check == false)
+	{
+
+	}*/
+
+
+
 
 		if (Ready->IsAnimationEnd())
 		{

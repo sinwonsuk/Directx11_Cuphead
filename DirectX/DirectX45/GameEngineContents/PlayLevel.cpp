@@ -34,9 +34,7 @@ void PlayLevel::PlayerCreate(/*Playlevel* this*/)
 
 void PlayLevel::Start()
 {
-
 	
-
 	GameEngineLevel::IsDebugSwitch();
 
 
@@ -142,6 +140,7 @@ void PlayLevel::LevelChangeStart()
 
 void PlayLevel::LevelChangeEnd() 
 {
+	TutorialMap::BG.Stop(); 
 	UserInterface::CardNumber = 0;
 	UserInterface::Cut = 0;
 	Player::MainPlayer->Death(); 

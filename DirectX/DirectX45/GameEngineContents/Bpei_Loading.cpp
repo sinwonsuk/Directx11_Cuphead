@@ -305,6 +305,7 @@ void Bpei_Loading::Update(float _Delta)
 {
 	if (Check == false)
 	{
+		OverHead_Player::Sound_Check = false;
 		GameEngineCore::JobQueue.Work(Bepi_Function);
 		OverHead_Player::Exit2->ChangeAnimation("Exit");
 		OverHead_Player::Exit2->Off();

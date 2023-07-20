@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore\GameEngineLevel.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 // Ό³Έν :
 class PlayLevel : public GameEngineLevel
 {
@@ -27,7 +27,7 @@ protected:
 
 private:
 	void PlayerCreate();
-
+	
 
 };
 

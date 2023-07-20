@@ -167,6 +167,27 @@ void Player::Update(float _DeltaTime)
 	Collision->GetTransform()->SetLocalScale({ 50.0f, 100.0f, 300.0f });
 
 
+	if (true == GameEngineInput::IsDown("PlayerAttack"))
+	{
+		Attack = GameEngineSound::Play("sfx_player_weapon_peashot_death_001.wav");
+	}
+
+	if (true == GameEngineInput::IsPress("PlayerAttack"))
+	{
+		if (Sound_Attack_Loop_Check == false)
+		{
+			Attack = GameEngineSound::Play("sfx_player_weapon_upshot_loop_01.wav");
+			Attack.SetLoop(); 
+			Sound_Attack_Loop_Check = true;
+		}
+	}
+
+	if (true == GameEngineInput::IsUp("PlayerAttack"))
+	{
+		Sound_Attack_Loop_Check = false;
+		Attack.Stop(); 
+	}
+	
 
 
 	if (true == GameEngineInput::IsPress("PlayerMoveDown"))

@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class PlayerState
 {
 	Idle,
@@ -168,6 +168,11 @@ protected:
 
 private:
 
+	GameEngineSoundPlayer Jump;
+	GameEngineSoundPlayer Dash;
+	GameEngineSoundPlayer Attack;
+	GameEngineSoundPlayer Attack_Loop;
+	GameEngineSoundPlayer Parry;
 	PlayerState StateValue = PlayerState::Idle;
 	float Angle = 0.0f;
 
@@ -193,8 +198,11 @@ private:
 	float Speed = 400;
 	float GravitySpeed = 1000;
 	float JumpSpeed = 1200;
-
-	
+	 
+	bool Sound_Jump_Check = false;
+	bool Sound_Attack_Loop_Check = false;
+	bool Sound_Dash_Check = false;
+	bool Sound_Parry_Check = false;
 
 	bool DeathCheck = false;
 	bool Block = false;

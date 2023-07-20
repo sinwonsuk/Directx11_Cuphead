@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 // Ό³Έν :
 class TutorialObject : public GameEngineActor
 {
@@ -34,7 +34,7 @@ protected:
 	float4 TestColor;
 
 private:
-	
+	GameEngineSoundPlayer Destory;
 	
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
@@ -63,7 +63,7 @@ private:
 
 
 
-	bool test = false;
+	bool Destory_Check = false;
 
 	bool LeftCollisionCheck = false;
 	bool MiddleCollisionCheck = false;

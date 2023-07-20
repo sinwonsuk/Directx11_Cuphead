@@ -21,5 +21,6 @@ protected:
 	void LevelChangeEnd() override;
 
 private:
+	
 };
 

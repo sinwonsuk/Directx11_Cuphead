@@ -13,8 +13,8 @@
 #include "Dog_ball.h"
 int DogAirplane::Hp = 20;
 bool DogAirplane::Finish = false;
-
-
+bool DogAirplane::Sound_BG_Check = false;
+GameEngineSoundPlayer DogAirplane::BG;
 DogAirplane::DogAirplane()
 {
 }
@@ -219,15 +219,37 @@ void DogAirplane::Start()
 
 void DogAirplane::Update(float _Delta)
 {		
+
+	if (Loading->GetCurrentFrame() > 3)
+	{
+		if (Sound_Intro_Check == false)
+		{
+			Intro_Start = GameEngineSound::Play("a-good-day-for-a-swell-battle.mp3");
+			Intro_SFX = GameEngineSound::Play("sfx_DLC_Dogfight_BulldogPlane_IntroFlyby.wav");
+
+			Sound_Intro_Check = true;
+		}
+
+	}
+	/*if (Sound_Airplane_Loop == false)
+	{
+		AirplaneLoop = GameEngineSound::Play("a-good-day-for-a-swell-battle.mp3");
+		Sound_Airplane_Loop = false;
+	}*/
+
+
 	if (Loading->IsAnimationEnd())
 	{
 		Loading->Off(); 
 
-		if (Sound_Intro_Check == false)
+		if (Sound_BG_Check == false)
 		{
 			BG = GameEngineSound::Play("mus_dlc_dogfight_a.wav");
-			Intro_Start = GameEngineSound::Play("a-good-day-for-a-swell-battle.mp3");
-			Sound_Intro_Check = true;
+			AirplaneLoop = GameEngineSound::Play("sfx_DLC_Dogfight_PlayerPlane_Loop.wav");
+			AirplaneLoop.SetVolume(0.5f);
+			AirplaneLoop.SetLoop(); 
+			//Intro_Start = GameEngineSound::Play("a-good-day-for-a-swell-battle.mp3");
+			Sound_BG_Check = true;
 		}
 
 	}
@@ -337,7 +359,12 @@ void DogAirplane::Update(float _Delta)
 
 		if (Ball_Monster->GetCurrentFrame() == 6 && Ball_MonsterCheck == false)
 		{
-
+			if (Sound_Dog_howl == false)
+			{
+				Dog_Howl = GameEngineSound::Play("sfx_DLC_Dogfight_P1_TerrierPlane_Bark_01.wav");
+				Dog_Howl.SetVolume(1.2f);
+				Sound_Dog_howl = true;
+			}
 			std::shared_ptr<Dog_ball> Object = GetLevel()->CreateActor<Dog_ball>(4);
 			Object->GetTransform()->SetLocalPosition({ Ball_Monster->GetTransform()->GetLocalPosition().x, Ball_Monster->GetTransform()->GetLocalPosition().y + 50 });
 
@@ -347,7 +374,7 @@ void DogAirplane::Update(float _Delta)
 
 		if (Ball_Monster->IsAnimationEnd())
 		{
-
+			Sound_Dog_howl = false;
 			Ball_MonsterCheck = false;
 			Ball_Monster->Off();
 		}

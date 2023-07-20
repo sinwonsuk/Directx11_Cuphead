@@ -69,6 +69,8 @@ void Dog_ball::Start()
 
 void Dog_ball::Update(float _Delta)
 {
+	
+
 	LeftCollision->GetTransform()->SetLocalPosition({ Left_Ball->GetTransform()->GetLocalPosition() });
 
 	MiddleCollision->GetTransform()->SetLocalPosition({ Middle_Ball->GetTransform()->GetLocalPosition() });
@@ -77,10 +79,24 @@ void Dog_ball::Update(float _Delta)
 
 	Gravity += float4::Down * 30.0f * _Delta;
 
-	if (Gravity.y > 500.0f)
+	if (Gravity.y > 100.0f)
 	{
-		Gravity.y = 500.0f;
+		Gravity.y = 100.0f;
+
+		
 	}
+
+	if (Gravity.y < -100)
+	{
+		if (Sound_BaseBall == false)
+		{
+			Sound = GameEngineSound::Play("sfx_DLC_Dogfight_P1_TerrierPlane_Baseball_Whistle_01.wav");
+			Sound.SetVolume(0.5f);
+			Sound_BaseBall = true;
+		}
+	}
+
+
 
 
 	GetTransform()->AddLocalPosition({ Gravity });

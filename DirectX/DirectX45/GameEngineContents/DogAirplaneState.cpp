@@ -249,6 +249,12 @@ void DogAirplane::BossJumpReverseUpdate(float _Time)
 
 	if (bulldogIdle->GetCurrentFrame() > 4 && JumpCheck == false)
 	{
+		if (Sound_Jump_Down_Check == false)
+		{
+			Jump_Down = GameEngineSound::Play("sfx_DLC_Dogfight_P1_Bulldog_EjectDown.wav");
+			Sound_Jump_Down_Check = true;
+		}
+
 		Speed = -200;
 		JumpCheck = true;
 	}
@@ -263,6 +269,7 @@ void DogAirplane::BossJumpReverseUpdate(float _Time)
 		JumpCheck = false;
 		Speed = 75;
 		bulldogIdle->GetTransform()->SetLocalPosition({ AirplaneSpin->GetTransform()->GetLocalPosition().x,AirplaneSpin->GetTransform()->GetLocalPosition().y + 50,81 });
+		Sound_Jump_Down_Check = false;
 		ChangeState(DogAirplaneState::bulldog_Idle);
 		return;
 	}
@@ -308,7 +315,16 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 	
 		if (bulldogIdle->GetCurrentFrame() == 41 && BoneCheck == 0)
 		{
+			if (Sound_Bone_Start == false)
+			{
+				Bone_Sound = GameEngineSound::Play("sfx_DLC_Dogfight_P1_Bulldog_Boneshot_01.wav");
+				Bone_Sound.SetVolume(0.5f);
+				Sound_Bone_Start = true; 
+			}
 			
+
+
+
 			++BoneCheck;
 			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
 			if (PinkBone == 0)
@@ -324,6 +340,14 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 		}
 		if (bulldogIdle->GetCurrentFrame() == 51 && BoneCheck == 1)
 		{
+
+			/*if (Sound_Bone_Start2 == false)
+			{
+				Bone_Sound = GameEngineSound::Play("sfx_DLC_Dogfight_P1_Bulldog_Boneshot_01.wav");
+				Bone_Sound.SetVolume(0.5f);
+				Sound_Bone_Start2 = true;
+			}*/
+
 			++BoneCheck;
 			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
 			if (PinkBone == 1)
@@ -337,6 +361,12 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 		}
 		if (bulldogIdle->GetCurrentFrame() == 67 && BoneCheck == 2)
 		{
+			/*if (Sound_Bone_Start3 == false)
+			{
+				Bone_Sound = GameEngineSound::Play("sfx_DLC_Dogfight_P1_Bulldog_Boneshot_01.wav");
+				Bone_Sound.SetVolume(0.5f);
+				Sound_Bone_Start3 = true;
+			}*/
 			++BoneCheck;
 			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
 			if (PinkBone == 2)
@@ -364,6 +394,12 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 		{
 			++BoneCheck;
 
+			if (Sound_Bone_Start == false)
+			{
+				Bone_Sound = GameEngineSound::Play("sfx_DLC_Dogfight_P1_Bulldog_Boneshot_01.wav");
+				Bone_Sound.SetVolume(0.5f);
+				Sound_Bone_Start = true;
+			}
 
 			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
 			if (PinkBone == 0)
@@ -378,6 +414,13 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 		}
 		if (bulldogIdle->GetCurrentFrame() == 51 && BoneCheck == 1)
 		{
+			/*if (Sound_Bone_Start2 == false)
+			{
+				Bone_Sound = GameEngineSound::Play("sfx_DLC_Dogfight_P1_Bulldog_Boneshot_01.wav");
+				Bone_Sound.SetVolume(0.5f);
+				Sound_Bone_Start2 = true;
+			}*/
+
 			++BoneCheck;
 			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
 			if (PinkBone == 1)
@@ -392,7 +435,12 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 		}
 		if (bulldogIdle->GetCurrentFrame() == 68 && BoneCheck == 2)
 		{
-			
+			/*if (Sound_Bone_Start3 == false)
+			{
+				Bone_Sound = GameEngineSound::Play("sfx_DLC_Dogfight_P1_Bulldog_Boneshot_01.wav");
+				Bone_Sound.SetVolume(0.5f);
+				Sound_Bone_Start3 = true;
+			}*/
 
 			++BoneCheck;
 			std::shared_ptr<BoneWeapon> Object = GetLevel()->CreateActor<BoneWeapon>();
@@ -416,6 +464,9 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 		bulldogIdle->GetTransform()->SetLocalPosition({ AirplaneSpin->GetTransform()->GetLocalPosition().x,AirplaneSpin->GetTransform()->GetLocalPosition().y+50,84 });
 		Speed = 100;
 		CollisionMove = 640;
+		Sound_Bone_Start = false;
+		Sound_Bone_Start2 = false;
+		Sound_Bone_Start3 = false;
 		ChangeState(DogAirplaneState::bulldog_Jump_Reverse);	
 		return; 
 	}
@@ -424,7 +475,12 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 
 void DogAirplane::BossJumpUpdate(float _Time)
 {
-	
+	if (Sound_Jump_Check == false)
+	{
+		Jump = GameEngineSound::Play("sfx_DLC_Dogfight_P1_Bulldog_EjectUp.wav");
+		Sound_Jump_Check = true;
+	}
+
 	AirplaneSpin->GetTransform()->AddWorldPosition({ float4::Down * Speed * _Time });
 	Airplane_Back->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
 	Airplane_Front->GetTransform()->AddLocalPosition({ float4::Down * Speed * _Time });
@@ -473,6 +529,7 @@ void DogAirplane::BossJumpUpdate(float _Time)
 		}
 		bulldogIdle->GetTransform()->SetLocalPosition({ Pase1_Attack,0,-100 });
 
+		Sound_Jump_Check = false;
 		PinkBone = GameEngineRandom::MainRandom.RandomInt(0, 2);
 		ChangeState(DogAirplaneState::BossAttackPase1);
 		return; 
@@ -495,6 +552,7 @@ void DogAirplane::BossJumpUpdate(float _Time)
 		}
 		bulldogIdle->GetTransform()->SetLocalPosition({ Pase1_Attack,-100,0 });
 
+		Sound_Jump_Check = false;
 		ChangeState(DogAirplaneState::BossAttackPase2Intro);
 		return;
 	}
@@ -504,6 +562,13 @@ void DogAirplane::Ph1FinishUpdate(float _Time)
 {
 	if (Hp < 0)
 	{
+		if (Sound_Explodes == false)
+		{
+			Explodes = GameEngineSound::Play("sfx_DLC_Dogfight_P1_Bulldog_PlaneExplodes.wav");
+			Sound_Explodes = true;
+		}
+
+
 		Collision->Death(); 
 	
 		if (testImage1->IsAnimationEnd())
@@ -613,6 +678,13 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 	{
 		if (YarnballCheck == 0 && bulldogIdle->GetCurrentFrame() == 16)
 		{
+			if (Sound_Cat_Gun == false)
+			{
+				Cat_Gun = GameEngineSound::Play("sfx_DLC_Dogfight_P1_CatGun_Shoot_01.wav");
+				Sound_Cat_Gun = true; 
+			}
+			
+
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 50,bulldogIdle->GetTransform()->GetLocalPosition().y });
@@ -621,6 +693,11 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 		}
 		if ( YarnballCheck == 1 && bulldogIdle->GetCurrentFrame() == 22)
 		{
+			if (Sound_Cat_Gun2 == false)
+			{
+				Cat_Gun = GameEngineSound::Play("sfx_DLC_Dogfight_P1_CatGun_Shoot_01.wav");
+				Sound_Cat_Gun2 = true;
+			}
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 50,bulldogIdle->GetTransform()->GetLocalPosition().y });
@@ -629,6 +706,12 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 		}
 		if (YarnballCheck == 2 && bulldogIdle->GetCurrentFrame() == 28)
 		{
+			if (Sound_Cat_Gun3 == false)
+			{
+				Cat_Gun = GameEngineSound::Play("sfx_DLC_Dogfight_P1_CatGun_Shoot_01.wav");
+				Sound_Cat_Gun3 = true;
+			}
+
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 50,bulldogIdle->GetTransform()->GetLocalPosition().y });
@@ -642,6 +725,12 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 
 		if (YarnballCheck == 0 && bulldogIdle->GetCurrentFrame() == 16)
 		{
+			if (Sound_Cat_Gun == false)
+			{
+				Cat_Gun = GameEngineSound::Play("sfx_DLC_Dogfight_P1_CatGun_Shoot_01.wav");
+				Sound_Cat_Gun = true;
+			}
+
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 50,bulldogIdle->GetTransform()->GetLocalPosition().y });
@@ -650,6 +739,12 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 		}
 		if (YarnballCheck == 1 && bulldogIdle->GetCurrentFrame() == 22)
 		{
+			if (Sound_Cat_Gun2 == false)
+			{
+				Cat_Gun = GameEngineSound::Play("sfx_DLC_Dogfight_P1_CatGun_Shoot_01.wav");
+				Sound_Cat_Gun2 = true;
+			}
+
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 50,bulldogIdle->GetTransform()->GetLocalPosition().y });
@@ -658,6 +753,12 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 		}
 		if ( YarnballCheck == 2 && bulldogIdle->GetCurrentFrame() == 28)
 		{
+			if (Sound_Cat_Gun3 == false)
+			{
+				Cat_Gun = GameEngineSound::Play("sfx_DLC_Dogfight_P1_CatGun_Shoot_01.wav");
+				Sound_Cat_Gun3 = true;
+			}
+
 			++YarnballCheck;
 			std::shared_ptr<dogfight_catshoot_yarnball> Object = GetLevel()->CreateActor<dogfight_catshoot_yarnball>();
 			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 50,bulldogIdle->GetTransform()->GetLocalPosition().y });
@@ -668,6 +769,9 @@ void DogAirplane::BossAttackPase2AttackUpdate(float _Time)
 
 	if (bulldogIdle->IsAnimationEnd())
 	{
+		Sound_Cat_Gun = false;
+		Sound_Cat_Gun2 = false;
+		Sound_Cat_Gun3 = false;
 		YarnballCheck = 0;
 		bulldogIdle->GetTransform()->SetLocalPosition({ AirplaneSpin->GetTransform()->GetLocalPosition().x,AirplaneSpin->GetTransform()->GetLocalPosition().y + 50,84 });
 		Speed = 100;

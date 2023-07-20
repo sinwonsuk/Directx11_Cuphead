@@ -191,7 +191,7 @@ void ContentsCore::GameStart()
 	GameEngineCore::CreateLevel<PlayLevel>();
 	GameEngineCore::CreateLevel<OverWorld>();
 	GameEngineCore::CreateLevel<EndingLevel>();
-	GameEngineCore::ChangeLevel("DogAirPlane_Loading_Level");
+	GameEngineCore::ChangeLevel("OverWorld_Loading_Level");
 	
 }
 

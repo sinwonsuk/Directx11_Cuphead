@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 class Dog_ball : public GameEngineActor
 {
 public:
@@ -40,8 +40,8 @@ private:
 	float4 LeftMoveDir = {-0.5,1};
 	float4 MiddleMoveDir = { 0,1 };
 	float4 RightMoveDir = { 0.5,1 };
-
-
+	GameEngineSoundPlayer Sound;
+	bool Sound_BaseBall = false;
 };
 
 

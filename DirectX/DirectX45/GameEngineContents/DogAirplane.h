@@ -52,6 +52,9 @@ public:
 	void Ph1FinishUpdate(float _Time); 
 
 	void UnloadUpdate(float _Time);
+	static GameEngineSoundPlayer BG;
+	GameEngineSoundPlayer AirplaneLoop;
+	static bool Sound_BG_Check;
 	static int Hp;
 	static bool Finish;
 
@@ -59,13 +62,25 @@ protected:
 	void Start();
 	void Update(float _Delta) override;
 	void Render(float _Delta) override;
-
+	
 	float4 TestColor;
 
 private:
-	GameEngineSoundPlayer BG;
+	
 	GameEngineSoundPlayer Intro_Start;
 	GameEngineSoundPlayer Intro_SFX;
+	//GameEngineSoundPlayer AirplaneLoop; 
+	GameEngineSoundPlayer Jump;
+	GameEngineSoundPlayer Jump_Down;
+	GameEngineSoundPlayer Bone_Sound;
+	GameEngineSoundPlayer Bone_Sound2;
+	GameEngineSoundPlayer Bone_Sound3;
+	GameEngineSoundPlayer Bone_Shot;
+
+	GameEngineSoundPlayer Dog_Howl;
+	GameEngineSoundPlayer Cat_Gun;
+	GameEngineSoundPlayer Explodes;
+
 
 	std::vector<int> a;
 	float CollisionMove = 640;
@@ -118,8 +133,20 @@ private:
 	float4 CurPos = { 0,0 };
 
 	bool Sound_Intro_Check = false;
-	bool Sound_BG_Check = false;
+	bool Sound_Airplane_Loop = false;
+	bool Sound_Jump_Check = false;
+	bool Sound_Jump_Down_Check = false;
 
+	bool Sound_Bone_Start = false;
+	bool Sound_Bone_Start2 = false;
+	bool Sound_Bone_Start3 = false;
+
+	bool Sound_Dog_howl = false;
+	bool Sound_Explodes = false;
+
+	bool Sound_Cat_Gun = false;
+	bool Sound_Cat_Gun2 = false;
+	bool Sound_Cat_Gun3 = false;
 
 	bool CollisonCheck = false;
 	bool Ball_MonsterCheck = false;

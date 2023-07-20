@@ -245,8 +245,27 @@ void DogAirplaneLevel::LevelChangeStart()
 		GameEngineSound::Load(NewDir.GetPlusFileName("cuphead-a-knockout.mp3").GetFullPath());
 		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_BulldogPlane_Loop.wav").GetFullPath());
 		GameEngineSound::Load(NewDir.GetPlusFileName("mus_dlc_dogfight_a.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_BulldogPlane_IntroFlyby.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_PlayerPlane_Loop.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_Bulldog_EjectUp.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_Bulldog_EjectDown.wav").GetFullPath());
+
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_TerrierPlane_Bark_01.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_DogFlexHugoVocal_02.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_DogFlexHugoVocal_04.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_Bulldog_Boneshot_01.wav").GetFullPath());
+
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_TerrierPlane_Baseball_Whistle_01.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_CatGun_Shoot_01.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_Bulldog_PlaneExplodes.wav").GetFullPath());
 	}
 
+	
+	//sfx_DLC_Dogfight_P1_CatGun_Shoot_01
+	//sfx_DLC_Dogfight_P1_TerrierPlane_Bark_01
+	//	sfx_DLC_Dogfight_P1_DogFlexHugoVocal_02
+	//	sfx_DLC_Dogfight_P1_DogFlexHugoVocal_04
+	//	sfx_DLC_Dogfight_P1_Bulldog_Boneshot_01
 	player = CreateActor<Player>();
 
 	player->GetTransform()->AddLocalPosition({ 0,0,0 });
@@ -306,7 +325,7 @@ void DogAirplaneLevel::LevelChangeStart()
 
 void DogAirplaneLevel::LevelChangeEnd()
 {
-	
+	Ph1_DogAirplane->AirplaneLoop.Stop(); 
 	GetMainCamera()->GetTransform()->SetLocalRotation({ 0.0f,0.0f,0.0f }); 
 	GetMainCamera()->GetTransform()->SetLocalPosition({ 0.0f,0.0f,0.0f });
 	if (ph3_Dog_Npc::ph3_Npc != nullptr)
@@ -332,6 +351,8 @@ void DogAirplaneLevel::LevelChangeEnd()
 	Player::MainPlayer = nullptr;
 	Ph3_DogAirplane::Hp = 20;
 	DogAirplane::Finish = false;
+	DogAirplane::Sound_BG_Check = false;
+	DogAirplane::BG.Stop();
 	Pase = 0;
 
 	timeFlow->Death(); 

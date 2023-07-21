@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 #include "Rollercoaster.h"
 class Crown_Bepi_Map : public GameEngineActor
 {
@@ -18,7 +19,8 @@ public:
 	Crown_Bepi_Map& operator=(Crown_Bepi_Map&& _Other) noexcept = delete;
 
 	static std::vector<std::shared_ptr<class Rollercoaster>> Rollercoasters;
-	
+	GameEngineSoundPlayer Coaster;
+	GameEngineSoundPlayer Coaster_Light;
 protected:
 	void Start();
 	void Update(float _Delta) override;
@@ -75,7 +77,8 @@ private:
 	std::shared_ptr<class GameEngineCollision> Collision;
 	
 	
-
+	bool Sound_Coaster_Check = false;
+	bool Sound_light_Check = false;
 
 	float yellow = 0.0f;
 	float Ph4_TimeCheck = 0;

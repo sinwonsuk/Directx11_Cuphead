@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class Ph2_DogAirPlaneState
 {
 	LeftIntro,
@@ -53,7 +54,7 @@ public:
 	{
 		return Ph2_Boss; 
 	}
-
+	
 	std::shared_ptr<class GameEngineSpriteRenderer> Get_jetpack()
 	{
 		return jetpack;
@@ -68,7 +69,7 @@ public:
 	{
 		return Hp;
 	}
-
+	GameEngineSoundPlayer Sound_Loop;
 
 protected:
 	void Start();
@@ -78,7 +79,10 @@ protected:
 	float4 TestColor;
 
 private:
-	
+
+	GameEngineSoundPlayer Dog_Howl;
+	GameEngineSoundPlayer Exploision;
+
 	Ph2_DogAirPlaneState StateValue = Ph2_DogAirPlaneState::LeftIntro;
 	DirectionCheck directionCheck = DirectionCheck::Left;
 	
@@ -115,6 +119,9 @@ private:
 	int IntroCheck = 0;
 	int SmokeCheck = 0;
 
+	bool Sound_Exploision = false;
+	bool Sound_Check = false;
+	bool Sound_Loop_Check = false;
 	bool CollisonCheck = false;
 	bool AttackCheck = true;
 

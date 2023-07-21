@@ -166,16 +166,28 @@ void Ph3_DogAirplane::UpdateState(float _Time)
 
 void Ph3_DogAirplane::IntroUpdate(float _Time)
 {
+	if (Sound_Intro_Check == false)
+	{
+		Intro = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Intro.wav");
+		Intro.SetVolume(1.3f);
+		Sound_Intro_Check = true;
+	}
+
 	Collision->Off();
 	if (Ph3_Boss_Intro->IsAnimationEnd())
 	{
+		if (Sound_Grab_Check == false)
+		{
+			GrabScreen = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Settle_GrabScreen.wav");
+			Sound_Grab_Check = true;
+		}
 		Ph3_Boss_Intro->Off(); 
 
 		Idle_Arom->On();
 		Idle_Body->On();
 		Idle_Arom_Hand->On();
 		ph3_paw_merge->On();
-
+		Sound_Grab_Check = false;
 		ChangeState(Ph3_DogAirPlaneState::Idle);
 		return;
 	}
@@ -204,16 +216,37 @@ void Ph3_DogAirplane::Pase1_AttackUpdate(float _Time)
 {
 	if (ph3_laser_Left_top_paw_pad_opens->IsAnimationEnd())
 	{
-		ph3_Left_laser_top->On(); 
+		if (Sound_Laser_Build_Check == false)
+		{
+			Laser_Build = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+			Laser_Build.SetVolume(1.3f);
+			Sound_Laser_Build_Check = true;
+		}
 		
+		ph3_Left_laser_top->On();
 	}
 	if (ph3_laser_Left_mid_paw_pad_opens->IsAnimationEnd())
 	{
+		if (Sound_Laser_Build_Check2 == false)
+		{
+			Laser_Build2 = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+			Laser_Build2.SetVolume(1.3f);
+			Sound_Laser_Build_Check2 = true;
+		}
+
 		ph3_Left_laser_mid->On();		
 	}
 
 	if (ph3_Left_laser_top->IsAnimationEnd())
 	{
+		if (Sound_Laser_Attack_Check == false)
+		{
+			Laser_Attack = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_01.wav");
+			Laser_Attack.SetVolume(1.3f);
+			Sound_Laser_Attack_Check = true;
+		}
+
+
 		if (TopLaserCheck == false)
 		{
 			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>();
@@ -229,6 +262,13 @@ void Ph3_DogAirplane::Pase1_AttackUpdate(float _Time)
 
 	if (ph3_Left_laser_mid->IsAnimationEnd())
 	{
+		if (Sound_Laser_Attack_Check2 == false)
+		{
+			Laser_Attack2 = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_01.wav");
+			Laser_Attack2.SetVolume(1.3f);
+			Sound_Laser_Attack_Check2 = true;
+		}
+
 		if (MidLaserCheck == false)
 		{
 			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>();
@@ -243,6 +283,13 @@ void Ph3_DogAirplane::Pase1_AttackUpdate(float _Time)
 
 void Ph3_DogAirplane::Pase1_Attack_Reverse_Update(float _Time)
 {
+
+	Sound_Laser_Build_Check = false;
+	Sound_Laser_Build_Check2 = false;
+	Sound_Laser_Attack_Check = false;
+	Sound_Laser_Attack_Check2 = false;
+
+
 	if (GetLiveTime() > 2.0)
 	{
 		ph3_Left_laser_top->Off();
@@ -297,13 +344,29 @@ void Ph3_DogAirplane::Pase2_AttackUpdate(float _Time)
 {
 	if (ph3_laser_Right_mid_paw_pad_opens->IsAnimationEnd())
 	{
+		if (Sound_Laser_Build_Check == false)
+		{
+			Laser_Build = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+			Laser_Build.SetVolume(1.3f);
+			Sound_Laser_Build_Check = true;
+		}
+
+
+
 		ph3_Right_laser_mid->On();
 
 	}
 	
 	if (ph3_Right_laser_mid->IsAnimationEnd())
 	{
-		int a = 0;
+		if (Sound_Laser_Attack_Check == false)
+		{
+			Laser_Attack = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_01.wav");
+			Laser_Attack.SetVolume(1.3f);
+			Sound_Laser_Attack_Check = true;
+		}
+
+
 		if (MidLaserCheck == false)
 		{
 			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>();
@@ -320,6 +383,13 @@ void Ph3_DogAirplane::Pase2_AttackUpdate(float _Time)
 
 void Ph3_DogAirplane::Pase2_Attack_Reverse_Update(float _Time)
 {
+
+	Sound_Laser_Build_Check = false;
+	Sound_Laser_Build_Check2 = false;
+	Sound_Laser_Attack_Check = false;
+	Sound_Laser_Attack_Check2 = false;
+
+
 	if (GetLiveTime() > 2.0)
 	{
 		ph3_Right_laser_mid->Off();
@@ -365,32 +435,65 @@ void Ph3_DogAirplane::Pase3_AttackUpdate(float _Time)
 {
 	if (ph3_laser_Left_top_paw_pad_opens->IsAnimationEnd())
 	{
+		if (Sound_Laser_Build_Check == false)
+		{
+			Laser_Build = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+			Laser_Build.SetVolume(1.3f);
+			Sound_Laser_Build_Check = true;
+		}
+
 		ph3_Right_laser_top->On();
 
 	}
 	if (ph3_laser_Left_low_paw_pad_opens->IsAnimationEnd())
 	{
+		if (Sound_Laser_Build_Check2 == false)
+		{
+			Laser_Build2 = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+			Laser_Build2.SetVolume(1.3f);
+			Sound_Laser_Build_Check2 = true;
+		}
 		ph3_Left_laser_low->On();
 	}
 	if (ph3_laser_Right_low_paw_pad_opens->IsAnimationEnd())
 	{
+		if (Sound_Laser_Build_Check3 == false)
+		{
+			Laser_Build3 = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+			Laser_Build3.SetVolume(1.3f);
+			Sound_Laser_Build_Check3 = true;
+		}
+
 		ph3_Right_laser_low->On();
 	}
 
 	if (ph3_Right_laser_top->IsAnimationEnd())
 	{
+		if (Sound_Laser_Attack_Check == false)
+		{
+			Laser_Attack = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_01.wav");
+			Laser_Attack.SetVolume(1.3f);
+			Sound_Laser_Attack_Check = true;
+		}
+
 		if (TopLaserCheck == false)
 		{
 			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
 			Object->laserDir = LaserDir::Right_Top;
 			TopLaserCheck = true;
 			
-
 		}
 	}
 
 	if (ph3_Left_laser_low->IsAnimationEnd())
 	{
+		if (Sound_Laser_Attack_Check2 == false)
+		{
+			Laser_Attack2 = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_03.wav");
+			Laser_Attack2.SetVolume(1.3f);
+			Sound_Laser_Attack_Check2 = true;
+		}
+
 		if (LowLaserCheck == false)
 		{
 			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
@@ -409,6 +512,13 @@ void Ph3_DogAirplane::Pase3_AttackUpdate(float _Time)
 
 void Ph3_DogAirplane::Pase3_Attack_Reverse_Update(float _Time)
 {
+	bool Sound_Laser_Build_Check = false;
+	bool Sound_Laser_Build_Check2 = false;
+	bool Sound_Laser_Build_Check3 = false;
+	bool Sound_Laser_Attack_Check = false;
+	bool Sound_Laser_Attack_Check2 = false;
+	bool Sound_Laser_Attack_Check3 = false;
+
 	if (GetLiveTime() > 2.0)
 	{
 		ph3_Right_laser_top->Off();
@@ -475,6 +585,14 @@ void Ph3_DogAirplane::Pase3_Attack_Reverse_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Update(float _Time)
 {
+	if (Sound_Rotation_Check == false)
+	{
+		Rotation = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_ScreenRotate.wav"); 
+		Rotation.SetVolume(1.3f);
+		Sound_Rotation_Check = true;
+	}
+
+
 	Collision->Off(); 
 
 	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 10)
@@ -501,11 +619,19 @@ void Ph3_DogAirplane::Rotation_Update(float _Time)
 
 	if (ph3_dogcopter_rotate_camera->IsAnimationEnd())
 	{
+		if (Sound_Grab_Check == false)
+		{
+			GrabScreen = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Settle_GrabScreen.wav");
+			GrabScreen.SetVolume(1.3f);
+			Sound_Grab_Check = true;
+		}
+
 
 		ph3_dogcopter_rotate_camera->Off(); 
 		ph3_dogcopter_rotated_idle->On(); 
 		ph3_dogcopter_rotate_camera_out_blades->On(); 
 		ResetLiveTime(); 
+		Sound_Grab_Check = false;
 		ChangeState(Ph3_DogAirPlaneState::Rotation_Attack);
 		return; 
 	}
@@ -519,6 +645,13 @@ void Ph3_DogAirplane::Rotation_Attack_Update(float _Time)
 		
 		if (BowlDirCheck == 0)
 		{
+			if (Sound_Bowl_Check == false)
+			{
+				Bowl = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_DogBowl_Fire_01.wav");
+				Bowl.SetVolume(1.3f);
+				Sound_Bowl_Check = true;
+			}
+
 			std::shared_ptr<ph3_food_bowl> Object = GetLevel()->CreateActor<ph3_food_bowl>();
 			Object->GetBullet()->GetTransform()->AddLocalPosition({ -120,740 });
 			Object->GetSfx()->GetTransform()->AddLocalPosition({ -160,760 });
@@ -526,6 +659,13 @@ void Ph3_DogAirplane::Rotation_Attack_Update(float _Time)
 		}
 		else if (BowlDirCheck == 1)
 		{
+			if (Sound_Bowl_Check == false)
+			{
+				Bowl = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_DogBowl_Fire_01.wav");
+				Bowl.SetVolume(1.3f);
+				Sound_Bowl_Check = true;
+			}
+
 			std::shared_ptr<ph3_food_bowl> Object = GetLevel()->CreateActor<ph3_food_bowl>();
 			Object->GetBullet()->GetTransform()->AddLocalPosition({ 120,740 });
 			Object->GetSfx()->GetTransform()->AddLocalPosition({ 170,750 });
@@ -534,11 +674,15 @@ void Ph3_DogAirplane::Rotation_Attack_Update(float _Time)
 		}
 		++BowlCheck;
 		ResetLiveTime();
+
+		Sound_Bowl_Check = false;
 	}
 
 	if (BowlCheck == 8)
 	{
 		ResetLiveTime();
+		Sound_Rotation_Check = false;
+		Sound_Grab_Check = false;
 		ChangeState(Ph3_DogAirPlaneState::Rotation_Laser_Idle);
 		return; 
 	}	
@@ -546,6 +690,14 @@ void Ph3_DogAirplane::Rotation_Attack_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 {
+
+	if (Sound_Rotation_Check == false)
+	{
+		Rotation = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_ScreenRotate.wav");
+		Rotation.SetVolume(1.3f);
+		Sound_Rotation_Check = true;
+	}
+
 	if (GetLiveTime() > 3)
 	{
 		ph3_dogcopter_rotated_idle->Off();
@@ -560,6 +712,13 @@ void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 
 	if (ph3_dogcopter_rotate_camera_out->IsAnimationEnd())
 	{
+		if (Sound_Grab_Check == false)
+		{
+			GrabScreen = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Settle_GrabScreen.wav");
+			GrabScreen.SetVolume(1.3f);
+			Sound_Grab_Check = true;
+		}
+
 		ph3_dogcopter_rotate_camera_out->Off(); 
 		ph3_dogcopter_rotate_camera_out_blades->Off(); 
 		GetTransform()->SetLocalRotation({ 0,0,0 });
@@ -584,7 +743,10 @@ void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 		ph3_paw_merge->GetTransform()->SetLocalRotation({ 0,0,0 });*/
 
 		ResetLiveTime(); 
-		
+		Sound_Rotation_Check = false;
+		Sound_Grab_Check = false;
+		Sound_Laser_Build_Check = false;
+		Sound_Laser_Attack_Check = false;
 		ChangeState(Ph3_DogAirPlaneState::Rotation_Pase1_Laser_Attack);
 		return;
 	}
@@ -595,10 +757,10 @@ void Ph3_DogAirplane::Rotation_Laser_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Laser_Attack_Update(float _Time)
 {
-	//TransformData data 
+	
 	
 Collision->On(); 
-	//GetTransform()->SetLocalRotation({ 0,0,0 });
+	
 
 	TransformData date = GetTransform()->GetTransDataRef();
 
@@ -606,11 +768,25 @@ Collision->On();
 	{
 		if (ph3_laser_Right_mid_paw_pad_opens->IsAnimationEnd())
 		{		
+			if (Sound_Laser_Build_Check == false)
+			{
+				Laser_Build = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+				Laser_Build.SetVolume(1.3f);
+				Sound_Laser_Build_Check = true;
+			}
+
 			ph3_Right_laser_mid->On();
 		}
 		
 		if (ph3_Right_laser_mid->IsAnimationEnd())
 		{
+			if (Sound_Laser_Attack_Check == false)
+			{
+				Laser_Attack = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_01.wav");	
+				Laser_Attack.SetVolume(1.3f);
+				Sound_Laser_Attack_Check = true;
+			}
+
 			if (TopLaserCheck == false)
 			{
 				std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(120);
@@ -627,12 +803,15 @@ Collision->On();
 			}
 		}
 
-
+		//ph3_Left_laser_top->On();
 		
 	}
 	
 }void Ph3_DogAirplane::Rotation_Laser_Attack_Reverse_Update(float _Time)
 {
+	Sound_Laser_Attack_Check = false;
+	Sound_Laser_Build_Check = false;
+
 	if (GetLiveTime() > 2.0f)
 	{	
 		ph3_Right_laser_mid->Off();	
@@ -684,11 +863,25 @@ void Ph3_DogAirplane::Rotation_Pase2_Laser_Attack_Update(float _Time)
 	
 	if (ph3_laser_Left_top_paw_pad_opens->IsAnimationEnd())
 	{
+		if (Sound_Laser_Build_Check == false)
+		{
+			Laser_Build = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+			Laser_Build.SetVolume(1.3f);
+			Sound_Laser_Build_Check = true;
+		}
+
 		ph3_Left_laser_top->On();
 
 	}
 	if (ph3_laser_Right_top_paw_pad_opens->IsAnimationEnd())
 	{
+		if (Sound_Laser_Build_Check2 == false)
+		{
+			Laser_Build2 = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+			Laser_Build2.SetVolume(1.3f);
+			Sound_Laser_Build_Check2 = true;
+		}
+
 		ph3_Right_laser_top->On();
 	}
 
@@ -697,6 +890,18 @@ void Ph3_DogAirplane::Rotation_Pase2_Laser_Attack_Update(float _Time)
 	{
 		if (TopLaserCheck == false)
 		{
+			if (Sound_Laser_Attack_Check == false)
+		    {
+			Laser_Attack = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_01.wav");
+			Laser_Attack.SetVolume(1.3f); 
+			Laser_Attack2 = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_01.wav");
+			Laser_Attack2.SetVolume(1.3f);
+			Sound_Laser_Attack_Check = true;
+
+		    }
+
+
+
 			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
 			Object->laserDir = LaserDir::Left_Top_Reverse;
 	
@@ -725,8 +930,8 @@ void Ph3_DogAirplane::Rotation_Pase2_Laser_Attack_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Pase2_Laser_Attack_Reverse_Update(float _Time)
 {
-	
-
+	Sound_Laser_Attack_Check = false;
+	Sound_Laser_Build_Check = false;
 	if (GetLiveTime() > 1.7)
 	{
 		ph3_Right_laser_top->Off();
@@ -793,18 +998,40 @@ void Ph3_DogAirplane::Rotation_Pase2_Laser_Attack_Reverse_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Pase3_Laser_Attack_Update(float _Time)
 {
+	
+
 
 	if (ph3_laser_Left_low_paw_pad_opens->IsAnimationEnd())
 	{
+		if (Sound_Laser_Build_Check == false)
+		{
+			Laser_Build = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+			Laser_Build.SetVolume(1.3f);
+			Sound_Laser_Build_Check = true;
+		}
 		ph3_Left_laser_low->On();
 	}
 	if (ph3_laser_Right_low_paw_pad_opens->IsAnimationEnd())
 	{
+		if (Sound_Laser_Build_Check2 == false)
+		{
+			Laser_Build2 = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav");
+			Laser_Build2.SetVolume(1.3f);
+			Sound_Laser_Build_Check2 = true;
+		}
 		ph3_Right_laser_low->On();
 	}
 
 	if (ph3_Left_laser_low->IsAnimationEnd())
 	{
+		if (Sound_Laser_Attack_Check == false)
+		{
+			Laser_Attack = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_03.wav");
+			Laser_Attack.SetVolume(1.3f);
+			Sound_Laser_Attack_Check = true;
+		}
+
+
 		if (LowLaserCheck == false)
 		{
 			std::shared_ptr<ph3_Laser> Object = GetLevel()->CreateActor<ph3_Laser>(3);
@@ -827,6 +1054,8 @@ void Ph3_DogAirplane::Rotation_Pase3_Laser_Attack_Update(float _Time)
 
 void Ph3_DogAirplane::Rotation_Pase3_Laser_Attack_Reverse_Update(float _Time)
 {
+
+
 	if (GetLiveTime() > 1.7)
 	{
 		
@@ -878,7 +1107,8 @@ void Ph3_DogAirplane::Rotation_Pase3_Laser_Attack_Reverse_Update(float _Time)
 		Idle_Arom_Hand->Off();
 		Ph3_Boss_Intro->Off();
 		ph3_Npc_Check = true; 
-		
+		Sound_Rotation_Check = false;
+		Sound_Grab_Check = false;
 		ChangeState(Ph3_DogAirPlaneState::Left_Rotation);
 		return;
 	}
@@ -886,6 +1116,14 @@ void Ph3_DogAirplane::Rotation_Pase3_Laser_Attack_Reverse_Update(float _Time)
 
 void Ph3_DogAirplane::Left_Rotation_Update(float _Time)
 {
+
+	if (Sound_Rotation_Check == false)
+	{
+		Rotation = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_ScreenRotate.wav");
+		Rotation.SetVolume(1.3f);
+		Sound_Rotation_Check = true;
+	}
+
 	Collision->Off();
 
 	if (ph3_dogcopter_rotate_camera->GetCurrentFrame() == 10)
@@ -900,10 +1138,18 @@ void Ph3_DogAirplane::Left_Rotation_Update(float _Time)
 
 	if (ph3_dogcopter_rotate_camera->IsAnimationEnd())
 	{
-	
+		if (Sound_Grab_Check == false)
+		{
+			Rotation = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_Settle_GrabScreen.wav");
+			Rotation.SetVolume(1.3f);
+			Sound_Grab_Check = true;
+		}
+
 		ph3_dogcopter_rotate_camera->Off();
 		ph3_dogcopter_rotated_idle->On();
 		ph3_dogcopter_rotate_camera_out_blades->On();
+		Sound_Rotation_Check = false;
+		Sound_Grab_Check = false;
 		ResetLiveTime();
 		ChangeState(Ph3_DogAirPlaneState::Left_Rotation_Attack);
 		return;
@@ -934,6 +1180,14 @@ void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
 
 			if (BowlDirCheck == 0)
 			{
+				if (Sound_Bowl_Check == false)
+				{
+					Bowl = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_DogBowl_Fire_01.wav");
+					Bowl.SetVolume(1.3f);
+					Sound_Bowl_Check = true;
+				}
+
+
 				std::shared_ptr<ph3_food_bowl> Object = GetLevel()->CreateActor<ph3_food_bowl>();
 				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 				Object->GetBullet()->GetTransform()->AddLocalPosition({ -230,740 });
@@ -943,15 +1197,23 @@ void Ph3_DogAirplane::Left_Rotation_Attack_Update(float _Time)
 			}
 			else if (BowlDirCheck == 1)
 			{
+				if (Sound_Bowl_Check == false)
+				{
+					Bowl = GameEngineSound::Play("sfx_DLC_Dogfight_P3_DogCopter_DogBowl_Fire_01.wav");
+					Bowl.SetVolume(1.3f);
+					Sound_Bowl_Check = true;
+				}
+
 				std::shared_ptr<ph3_food_bowl> Object = GetLevel()->CreateActor<ph3_food_bowl>();
 				Object->GetBullet()->GetTransform()->SetLocalRotation({ 0,0,180 });
 				Object->GetBullet()->GetTransform()->AddLocalPosition({ 30,740 });
 				Object->GetSfx()->GetTransform()->AddLocalPosition({ 100,750 });
 				BowlDirCheck = 0;
 				Object->SetDirCheck(3);
+			
 				++BowlCheck;
 			}
-			
+			Sound_Bowl_Check = false;
 			ResetLiveTime();
 	}
 	

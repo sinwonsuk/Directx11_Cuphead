@@ -52,6 +52,7 @@ public:
 	void Ph1FinishUpdate(float _Time); 
 
 	void UnloadUpdate(float _Time);
+	GameEngineSoundPlayer Bone_Sound;
 	static GameEngineSoundPlayer BG;
 	GameEngineSoundPlayer AirplaneLoop;
 	static bool Sound_BG_Check;
@@ -72,7 +73,7 @@ private:
 	//GameEngineSoundPlayer AirplaneLoop; 
 	GameEngineSoundPlayer Jump;
 	GameEngineSoundPlayer Jump_Down;
-	GameEngineSoundPlayer Bone_Sound;
+	
 	GameEngineSoundPlayer Bone_Sound2;
 	GameEngineSoundPlayer Bone_Sound3;
 	GameEngineSoundPlayer Bone_Shot;
@@ -80,6 +81,7 @@ private:
 	GameEngineSoundPlayer Dog_Howl;
 	GameEngineSoundPlayer Cat_Gun;
 	GameEngineSoundPlayer Explodes;
+
 
 
 	std::vector<int> a;

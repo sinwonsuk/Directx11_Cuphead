@@ -565,6 +565,8 @@ void DogAirplane::Ph1FinishUpdate(float _Time)
 		if (Sound_Explodes == false)
 		{
 			Explodes = GameEngineSound::Play("sfx_DLC_Dogfight_P1_Bulldog_PlaneExplodes.wav");
+			AirplaneLoop.Stop();
+
 			Sound_Explodes = true;
 		}
 
@@ -591,7 +593,6 @@ void DogAirplane::Ph1FinishUpdate(float _Time)
 		if (Ph1_Buldog_Death->IsAnimationEnd())
 		{
 			Ph1_Buldog_Death->Off(); 
-			//ChangeState(DogAirplaneState::Unload);
 			return; 
 		}
 

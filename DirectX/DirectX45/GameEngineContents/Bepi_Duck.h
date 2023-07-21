@@ -1,7 +1,7 @@
 #pragma once
 
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class DuckCheck
 {
 	Idle,
@@ -63,7 +63,8 @@ private:
 	
 	
 	bool CollisonCheck = false;
-
+	bool Sound_Duck = false;
+	GameEngineSoundPlayer Duck_Sound;
 	std::shared_ptr<class GameEngineSpriteRenderer> ParryEffect;
 	int ColorCheck = 0;
 	bool CollisionCheck = false;

@@ -36,7 +36,9 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 	break;
 
 	case 1:
+
 	{
+		
 		Ph2_DogAirpalne_Left->On();
 		Ph2_DogAirpalne_Right->On();
 		Ph2_DogAirpalne_Top->On();
@@ -45,7 +47,7 @@ void DogAirplaneLevel::Update(float _DeltaTime)
 	break;
 	case 2:
 	{
-
+		Ph2_DogAirpalne_Left.get()->Sound_Loop.Stop(); 
 		Ph2_DogAirpalne_Left->Off();
 		Ph2_DogAirpalne_Right->Off();
 		Ph2_DogAirpalne_Top->Off();
@@ -258,8 +260,23 @@ void DogAirplaneLevel::LevelChangeStart()
 		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_TerrierPlane_Baseball_Whistle_01.wav").GetFullPath());
 		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_CatGun_Shoot_01.wav").GetFullPath());
 		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_Bulldog_PlaneExplodes.wav").GetFullPath());
-	}
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P2_TerrierJetpack_BarkShoot_06.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P2_TerrierJetpack_Loop.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav").GetFullPath());
 
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Intro.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_01.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_03.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Settle_GrabScreen.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_03.wav").GetFullPath());	
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_ScreenRotate.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_DogBowl_Fire_01.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("cuphead-a-knockout.mp3").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_hit_01.wav").GetFullPath());
+		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_death_01.wav").GetFullPath());
+	}
+	
 	
 	//sfx_DLC_Dogfight_P1_CatGun_Shoot_01
 	//sfx_DLC_Dogfight_P1_TerrierPlane_Bark_01
@@ -326,6 +343,7 @@ void DogAirplaneLevel::LevelChangeStart()
 void DogAirplaneLevel::LevelChangeEnd()
 {
 	Ph1_DogAirplane->AirplaneLoop.Stop(); 
+	Ph1_DogAirplane->Bone_Sound.Stop();
 	GetMainCamera()->GetTransform()->SetLocalRotation({ 0.0f,0.0f,0.0f }); 
 	GetMainCamera()->GetTransform()->SetLocalPosition({ 0.0f,0.0f,0.0f });
 	if (ph3_Dog_Npc::ph3_Npc != nullptr)

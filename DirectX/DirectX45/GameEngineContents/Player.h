@@ -173,6 +173,8 @@ private:
 	GameEngineSoundPlayer Attack;
 	GameEngineSoundPlayer Attack_Loop;
 	GameEngineSoundPlayer Parry;
+	GameEngineSoundPlayer Hit;
+	GameEngineSoundPlayer Death_Sound;
 	PlayerState StateValue = PlayerState::Idle;
 	float Angle = 0.0f;
 
@@ -199,6 +201,8 @@ private:
 	float GravitySpeed = 1000;
 	float JumpSpeed = 1200;
 	 
+	bool Sound_Death_Check = false;
+	bool Sound_Hit_Check = false;
 	bool Sound_Jump_Check = false;
 	bool Sound_Attack_Loop_Check = false;
 	bool Sound_Dash_Check = false;

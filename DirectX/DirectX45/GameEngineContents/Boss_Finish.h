@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 class Boss_Finish : public GameEngineActor
 {
 public:
@@ -13,6 +13,7 @@ public:
 	Boss_Finish(Boss_Finish&& _Other) noexcept = delete;
 	Boss_Finish& operator=(const Boss_Finish& _Other) = delete;
 	Boss_Finish& operator=(Boss_Finish&& _Other) noexcept = delete;
+	GameEngineSoundPlayer Sound_Finish;
 	float4 SetMoveDir(const float4& _MoveDir)
 	{
 		MoveDir = _MoveDir;
@@ -58,6 +59,7 @@ private:
 	int ColorCheck = 0;
 
 	bool HeightCheck = false;
+	bool SoundCheck = false;
 
 	bool CollisionCheck = false;
 	int DirCheck = false;

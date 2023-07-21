@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class Ph1_Beppi_State
 {
 	BossIntro,
@@ -27,7 +27,7 @@ public:
 	// constrcuter destructer
 	Ph1_Bepi();
 	~Ph1_Bepi();
-
+	GameEngineSoundPlayer BG;
 	// delete Function
 	Ph1_Bepi(const Ph1_Bepi& _Other) = delete;
 	Ph1_Bepi(Ph1_Bepi&& _Other) noexcept = delete;
@@ -75,6 +75,13 @@ protected:
 	float4 TestColor;
 
 private:
+
+	GameEngineSoundPlayer Dash;
+	GameEngineSoundPlayer Death_Sound;
+	GameEngineSoundPlayer Intro_Start;
+	GameEngineSoundPlayer End;
+	GameEngineSoundPlayer Move;
+	
 	bool FinishDown = false;
 	bool DuckStart = false;
 	float introFinish = 0;
@@ -100,6 +107,11 @@ private:
 	int FinishCheck = 0;
 	bool CollisonCheck = false;
 	int Random_Duck = 0; 
-	
+	bool Sound_Intro_Check = false;
+	bool Sound_Death_Check = false;
+	bool Sound_End_Check = false;
+	bool Sound_Dash_Check = false;
+	bool Sound_Dash_Check2 = false;
+	bool Sound_Dash_Check3 = false;
 
 };

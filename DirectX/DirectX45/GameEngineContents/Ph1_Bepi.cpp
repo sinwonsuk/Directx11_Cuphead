@@ -76,9 +76,19 @@ void Ph1_Bepi::Start()
 
 void Ph1_Bepi::Update(float _Delta)
 {
+	if (Loading->GetCurrentFrame() > 3)
+	{
+		if (Sound_Intro_Check == false)
+		{
+			Intro_Start = GameEngineSound::Play("a-good-day-for-a-swell-battle.mp3");
+			BG = GameEngineSound::Play("Clown_Music.mp3");
+			Sound_Intro_Check = true;
+		}
 
+	}
 	if (Loading->IsAnimationEnd())
 	{
+
 		Loading->Off();
 	}
 

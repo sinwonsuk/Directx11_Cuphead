@@ -83,9 +83,26 @@ void Ph2_DogAirpalne::UpdateState(float _Time)
 
 void Ph2_DogAirpalne::LeftIntroUpdate(float _Time)
 {
+	if (Sound_Loop_Check == false)
+	{
+		Sound_Loop = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_Loop.wav");
+		Sound_Loop.SetLoop(); 
+		Sound_Loop_Check = true;
+	}
+
+
+
+
 	if (Hp < 0)
 	{
+		if (Sound_Exploision == false)
+		{
+			Exploision = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav"); 
+			Sound_Exploision = true; 
+		}
+
 		jetpack->Off();
+
 		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
 		{
 			ph2_jetpack_smoke_a[i]->Off();
@@ -122,6 +139,11 @@ void Ph2_DogAirpalne::UpIntroUpdate(float _Time)
 
 	if (Hp < 0)
 	{
+		if (Sound_Exploision == false)
+		{
+			Exploision = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav");
+			Sound_Exploision = true;
+		}
 		jetpack->Off();
 		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
 		{
@@ -159,6 +181,12 @@ void Ph2_DogAirpalne::RightIntroUpdate(float _Time)
 {
 	if (Hp < 0)
 	{
+		if (Sound_Exploision == false)
+		{
+			Exploision = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav");
+			Sound_Exploision = true;
+		}
+
 		jetpack->Off();
 		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
 		{
@@ -195,6 +223,12 @@ void Ph2_DogAirpalne::DownIntroUpdate(float _Time)
 {
 	if (Hp < 0)
 	{
+		if (Sound_Exploision == false)
+		{
+			Exploision = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav");
+			Sound_Exploision = true;
+		}
+
 		jetpack->Off();
 		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
 		{
@@ -232,8 +266,22 @@ void Ph2_DogAirpalne::DownIntroUpdate(float _Time)
 
 void Ph2_DogAirpalne::AttackUpdate(float _Time)
 {
+
+
+	if (Sound_Check == false)
+	{
+		Dog_Howl = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_BarkShoot_06.wav");
+		Sound_Check = true;
+	}
+
 	if (Hp < 0)
 	{
+		if (Sound_Exploision == false)
+		{
+			Exploision = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav");
+			Sound_Exploision = true;
+		}
+
 		jetpack->Off();
 		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
 		{
@@ -673,6 +721,7 @@ void Ph2_DogAirpalne::AttackUpdate(float _Time)
 			ResetLiveTime();
 			WeaponCheck = false;
 			AttackCheck = true;
+			Sound_Check = false;
 			ChangeState(Ph2_DogAirPlaneState::Rotation);
 			return;
 		}
@@ -711,6 +760,12 @@ void Ph2_DogAirpalne::UpIdleUpdate(float _Time)
 {
 	if (Hp < 0)
 	{
+		if (Sound_Exploision == false)
+		{
+			Exploision = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav");
+			Sound_Exploision = true;
+		}
+
 		jetpack->Off();
 		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
 		{
@@ -761,6 +816,12 @@ void Ph2_DogAirpalne::RightIdleUpdate(float _Time)
 {
 	if (Hp < 0)
 	{
+		if (Sound_Exploision == false)
+		{
+			Exploision = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav");
+			Sound_Exploision = true;
+		}
+
 		jetpack->Off();
 		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
 		{
@@ -810,6 +871,12 @@ void Ph2_DogAirpalne::DownIdleUpdate(float _Time)
 {
 	if (Hp < 0)
 	{
+		if (Sound_Exploision == false)
+		{
+			Exploision = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav");
+			Sound_Exploision = true;
+		}
+
 		jetpack->Off();
 		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
 		{
@@ -860,6 +927,13 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 {
 	if (Hp < 0)
 	{
+		
+		if (Sound_Exploision == false)
+		{
+			Exploision = GameEngineSound::Play("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav");
+			Sound_Exploision = true;
+		}
+
 		jetpack->Off();
 		for (size_t i = 0; i < ph2_jetpack_smoke_a.size(); i++)
 		{
@@ -1259,6 +1333,8 @@ void Ph2_DogAirpalne::RotationUpdate(float _Time)
 		
 			Attack_Effect->ChangeAnimation("SD_bow_big_spark");
 			
+			
+
 
 			ChangeState(Ph2_DogAirPlaneState::Attack);
 			return;

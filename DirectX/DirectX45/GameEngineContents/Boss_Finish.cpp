@@ -20,7 +20,16 @@ void Boss_Finish::Start()
 
 void Boss_Finish::Update(float _Delta)
 {
-
+	if (Finish->GetCurrentFrame() > 4)
+	{
+		if (SoundCheck == false)
+		{
+			Sound_Finish = GameEngineSound::Play("cuphead-a-knockout.mp3");
+			Sound_Finish.SetVolume(1.8f);
+			SoundCheck = true;
+		}
+		
+	}
 
 	if (Finish->IsAnimationEnd())
 	{

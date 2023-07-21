@@ -446,6 +446,8 @@ void Player::IdleUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 600.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -638,6 +640,8 @@ void Player::RunUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -911,6 +915,8 @@ void Player::JumpUpdate(float _Time)
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
 		Sound_Jump_Check = false;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -975,6 +981,8 @@ void Player::DuckUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -1451,6 +1459,8 @@ void Player::ParryUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -1544,6 +1554,8 @@ void Player::UpAimUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -1618,6 +1630,8 @@ void Player::DownAimUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -1718,6 +1732,8 @@ void Player::IdleAimUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -1804,6 +1820,8 @@ void Player::DiagonalUpAimUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -1870,6 +1888,8 @@ void Player::DiagonalDownAimUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -1992,6 +2012,8 @@ void Player::DashUpdate(float _Time)
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
 		Sound_Dash_Check = false;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -2160,6 +2182,8 @@ void Player::IdleAttackUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -2273,6 +2297,8 @@ void Player::IdleAttackPreUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -2519,6 +2545,8 @@ void Player::RunAttackUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -2725,6 +2753,8 @@ void Player::DiagonalUpRunAttackUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -2833,6 +2863,8 @@ void Player::UpUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -2956,6 +2988,8 @@ void Player::UpAttackUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -3071,6 +3105,8 @@ void Player::UpAttackPre(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -3144,6 +3180,8 @@ void Player::DuckAttackUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -3222,6 +3260,8 @@ void Player::DuckAttackPreUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -3373,6 +3413,8 @@ void Player::DiagonalDownAttackUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -3530,6 +3572,8 @@ void Player::DiagonalDownAttackPreUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -3655,6 +3699,8 @@ void Player::IdleAimAttackUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -3762,6 +3808,8 @@ void Player::IdleAimAttackPreUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -3857,6 +3905,8 @@ void Player::UpAimAttackUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -3958,6 +4008,8 @@ void Player::UpAimAttackPreUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -4050,6 +4102,8 @@ void Player::DownAttackUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -4150,6 +4204,8 @@ void Player::DownAttackPreUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -4157,6 +4213,13 @@ void Player::DownAttackPreUpdate(float _Time)
 
 void Player::MapOutUpdate(float _Time)
 {
+	if (Sound_Hit_Check ==false)
+	{
+		Hit = GameEngineSound::Play("sfx_player_hit_01.wav");
+		Sound_Hit_Check = true;
+	}
+
+
 	HitEffect->On();
 
 	if (CheckCamera == true)
@@ -4192,6 +4255,7 @@ void Player::MapOutUpdate(float _Time)
 		{
 			GravitySpeed = 800;
 			//HitCheck = false;
+			Sound_Hit_Check = false;
 			ChangeState(PlayerState::Jump);
 			return;
 		}
@@ -4207,6 +4271,7 @@ void Player::MapOutUpdate(float _Time)
 		test = false;
 		DashCheck = true;
 		RunTime = 0;
+		Sound_Hit_Check = false;
 		ChangeState(PlayerState::Idle);
 		return;
 	}
@@ -4300,6 +4365,8 @@ void Player::FailUpdate(float _Time)
 		ResetLiveTime();
 		GravitySpeed = 650.0f;
 		JumpCheck = true;
+		UserInterface::HpBar -= 1;
+		Hp -= 1;
 		ChangeState(PlayerState::MapOut);
 		return;
 	}
@@ -4307,6 +4374,14 @@ void Player::FailUpdate(float _Time)
 
 void Player::HitUpdate(float _Time)
 {
+	if (Sound_Hit_Check == false)
+	{
+		Hit = GameEngineSound::Play("sfx_player_hit_01.wav");
+		Sound_Hit_Check = true;
+	}
+
+
+
 	HitEffect->On(); 
 
 
@@ -4365,6 +4440,7 @@ void Player::HitUpdate(float _Time)
 
 	if (Render0->IsAnimationEnd())
 	{
+		Sound_Hit_Check = false;
 		//Render0->ColorOptionValue.MulColor = { 1.0f,1.0f,1.0f,1.0f };
 		ChangeState(PlayerState::Idle);
 		return;
@@ -4609,11 +4685,19 @@ void Player::DeathUpdate(float _Time)
 {
 	Gravity = false;
 
+	if (Sound_Death_Check==false)
+	{
+		Death_Sound = GameEngineSound::Play("sfx_player_death_01.wav");
+		Sound_Death_Check = true;
+	}
+
+
 	if (Render0->IsAnimationEnd())
 	{
 		ResetLiveTime();
 		Dided->On();
 		Black_BG->On();
+		Sound_Death_Check = false;
 		ChangeState(PlayerState::Goast);
 		return;
 	}

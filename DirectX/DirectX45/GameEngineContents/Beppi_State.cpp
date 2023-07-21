@@ -168,21 +168,43 @@ void Ph1_Bepi::BossIdleUpdate(float _Time)
 	{
 		if (Beppi_Intro2->GetCurrentFrame() < 5)
 		{
+			if (Sound_Dash_Check ==false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+				Sound_Dash_Check = true;
+			}
+
+
 			GetTransform()->AddLocalPosition({float4::Right * Speed * _Time});
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 13 )
 		{
+			/*if (Sound_Dash_Check2 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check2 = true;
+			}*/
 			GetTransform()->AddLocalPosition({ float4::Right * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 19)
 		{
+			if (Sound_Dash_Check3 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check3 = true;
+			}
 			GetTransform()->AddLocalPosition({ float4::Left * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->IsAnimationEnd())
 		{
+			Sound_Dash_Check3 = false;
+			Sound_Dash_Check2 = false;
+			Sound_Dash_Check = false;
 			IdleCheck = 1;
 		}
 
@@ -194,20 +216,43 @@ void Ph1_Bepi::BossIdleUpdate(float _Time)
 	{
 		if (Beppi_Intro2->GetCurrentFrame() < 5 )
 		{
+			if (Sound_Dash_Check == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check = true;
+			}
+
+
 			GetTransform()->AddLocalPosition({ float4::Left * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 13 )
 		{
+			/*if (Sound_Dash_Check2 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check2 = true;
+			}*/
 			GetTransform()->AddLocalPosition({ float4::Right * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 19 )
 		{
+			if (Sound_Dash_Check3 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check3 = true;
+			}
 			GetTransform()->AddLocalPosition({ float4::Left * Speed * _Time });
 		}
 		if (Beppi_Intro2->IsAnimationEnd())
 		{
+			Sound_Dash_Check3 = false;
+			Sound_Dash_Check2 = false;
+			Sound_Dash_Check = false;
 			IdleCheck = 2;
 		}
 	}
@@ -241,8 +286,16 @@ void Ph1_Bepi::BossIdleUpdate(float _Time)
 
 void Ph1_Bepi::LeftStartAttackUpdate(float _Time)
 {
+	if (Sound_Dash_Check == false)
+	{
+		Dash = GameEngineSound::Play("clown_dash_start_01.wav");
+
+		Sound_Dash_Check = true;
+	}
+
 	if (GetLiveTime() > 0.7f)
 	{
+		Sound_Dash_Check = false;
 		ChangeState(Ph1_Beppi_State::BossLeftRunAttack);
 		return;
 	}
@@ -271,6 +324,11 @@ void Ph1_Bepi::LeftRunAttackUpdate(float _Time)
 
 void Ph1_Bepi::LeftFinishAttackUpdate(float _Time)
 {
+	if (Sound_End_Check == false)
+	{
+		End = GameEngineSound::Play("sfx_clown_clown_dash_end_03.wav");
+		Sound_End_Check = true;
+	}
 
 
 	if (Beppi_Intro2->GetCurrentFrame() > 20)
@@ -283,6 +341,7 @@ void Ph1_Bepi::LeftFinishAttackUpdate(float _Time)
 
 	if (Beppi_Intro2->IsAnimationEnd())
 	{
+		Sound_End_Check = false;
 		GetTransform()->AddLocalRotation({ 0.0f,180.0f,0.0f });
 		GetTransform()->AddLocalPosition({ 0.0f,-40.0f });
 		IdleCheck = 0;
@@ -300,21 +359,43 @@ void Ph1_Bepi::RightIdleUpdate(float _Time)
 	{
 		if (Beppi_Intro2->GetCurrentFrame() < 5)
 		{
+			if (Sound_Dash_Check == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check = true;
+			}
+
 			//GetTransform()->AddLocalPosition({ float4::Right * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 13)
 		{
+			/*if (Sound_Dash_Check2 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check2 = true;
+			}*/
 			GetTransform()->AddLocalPosition({ float4::Left * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 19)
 		{
+			if (Sound_Dash_Check3 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check3 = true;
+			}
 			GetTransform()->AddLocalPosition({ float4::Right * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->IsAnimationEnd())
 		{
+			Sound_Dash_Check = false;
+			Sound_Dash_Check2 = false;
+			Sound_Dash_Check3 = false;
 			IdleCheck = 1;
 		}
 
@@ -326,20 +407,42 @@ void Ph1_Bepi::RightIdleUpdate(float _Time)
 	{
 		if (Beppi_Intro2->GetCurrentFrame() < 5)
 		{
-			//GetTransform()->AddLocalPosition({ float4::Left * Speed * _Time });
+			if (Sound_Dash_Check == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check = true;
+			}
+			GetTransform()->AddLocalPosition({ float4::Left * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 13)
 		{
+			/*if (Sound_Dash_Check2 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check2 = true;
+			}*/
 			GetTransform()->AddLocalPosition({ float4::Right * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 19)
 		{
+			if (Sound_Dash_Check3 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check3 = true;
+			}
 			GetTransform()->AddLocalPosition({ float4::Left * Speed * _Time });
 		}
 		if (Beppi_Intro2->IsAnimationEnd())
 		{
+			Sound_Dash_Check = false;
+			Sound_Dash_Check2 = false;
+			Sound_Dash_Check3 = false;
+
 			IdleCheck = 2;
 		}
 	}
@@ -348,11 +451,19 @@ void Ph1_Bepi::RightIdleUpdate(float _Time)
 	{
 		if (Beppi_Intro2->GetCurrentFrame() < 5)
 		{
+			/*if (Sound_Dash_Check == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check = true;
+			}*/
+
 			GetTransform()->AddLocalPosition({ float4::Left * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 5)
 		{
+			Sound_Dash_Check = false;
 			IdleCheck = 3;
 			GetTransform()->AddLocalPosition({ 0.0f,30.0f });
 			ResetLiveTime();
@@ -369,8 +480,16 @@ void Ph1_Bepi::RightIdleUpdate(float _Time)
 
 void Ph1_Bepi::RightStartAttackUpdate(float _Time)
 {
+	if (Sound_Dash_Check == false)
+	{
+		Dash = GameEngineSound::Play("clown_dash_start_01.wav");
+
+		Sound_Dash_Check = true;
+	}
+
 	if (GetLiveTime() > 0.7f)
 	{
+		Sound_Dash_Check = false;
 		ChangeState(Ph1_Beppi_State::BossRightRunAttack);
 		return;
 	}
@@ -389,6 +508,12 @@ void Ph1_Bepi::RightRunAttackUpdate(float _Time)
 
 void Ph1_Bepi::RightFinishAttackUpdate(float _Time)
 {
+	if (Sound_End_Check == false)
+	{
+		End = GameEngineSound::Play("sfx_clown_clown_dash_end_03.wav");
+		Sound_End_Check = true;
+	}
+
 
 	if (Beppi_Intro2->GetCurrentFrame() > 20)
 	{
@@ -400,6 +525,7 @@ void Ph1_Bepi::RightFinishAttackUpdate(float _Time)
 
 	if (Beppi_Intro2->IsAnimationEnd())
 	{
+		Sound_End_Check = false;
 		GetTransform()->AddLocalRotation({ 0.0f,180.0f,0.0f });
 		GetTransform()->AddLocalPosition({ 0.0f,-40.0f });
 		IdleCheck = 0;
@@ -416,21 +542,44 @@ void Ph1_Bepi::LeftIdleUpdate(float _Time)
 	{
 		if (Beppi_Intro2->GetCurrentFrame() < 5)
 		{
+			if (Sound_Dash_Check == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check = true;
+			}
+
 			GetTransform()->AddLocalPosition({ float4::Right * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 13)
 		{
+			/*if (Sound_Dash_Check2 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check2 = true;
+			}*/
 			GetTransform()->AddLocalPosition({ float4::Left * Speed1 * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 19)
 		{
+			if (Sound_Dash_Check3 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check3 = true;
+			}
+
 			GetTransform()->AddLocalPosition({ float4::Right * Speed1 * _Time });
 		}
 
 		if (Beppi_Intro2->IsAnimationEnd())
 		{
+			Sound_Dash_Check = false;
+			Sound_Dash_Check2 = false;
+			Sound_Dash_Check3 = false;
 			IdleCheck = 1;
 		}
 
@@ -442,20 +591,44 @@ void Ph1_Bepi::LeftIdleUpdate(float _Time)
 	{
 		if (Beppi_Intro2->GetCurrentFrame() < 5)
 		{
+			if (Sound_Dash_Check == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check = true;
+			}
+
 			GetTransform()->AddLocalPosition({ float4::Right * Speed * 0.5f * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 13)
 		{
+			/*if (Sound_Dash_Check2 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check2 = true;
+			}*/
+
 			GetTransform()->AddLocalPosition({ float4::Left * Speed1 * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 19)
 		{
+			if (Sound_Dash_Check3 == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check3 = true;
+			}
+
 			GetTransform()->AddLocalPosition({ float4::Right * Speed1 * _Time });
 		}
 		if (Beppi_Intro2->IsAnimationEnd())
 		{
+			Sound_Dash_Check = false;
+			Sound_Dash_Check2 = false;
+			Sound_Dash_Check3 = false;
 			IdleCheck = 2;
 		}
 	}
@@ -464,22 +637,30 @@ void Ph1_Bepi::LeftIdleUpdate(float _Time)
 	{
 		if (Beppi_Intro2->GetCurrentFrame() < 5)
 		{
+			/*if (Sound_Dash_Check == false)
+			{
+				Move = GameEngineSound::Play("clown_bumper_move_01.wav");
+
+				Sound_Dash_Check = true;
+			}*/
+
 			GetTransform()->AddLocalPosition({ float4::Right * Speed * _Time });
 		}
 
 		if (Beppi_Intro2->GetCurrentFrame() > 5)
 		{
+
 			IdleCheck = 3;
 			GetTransform()->AddLocalPosition({ 0.0f,50.0f });
 			ResetLiveTime();
 
+			Sound_Dash_Check = false;
+			Sound_Dash_Check2 = false;
+			Sound_Dash_Check3 = false;
 			ChangeState(Ph1_Beppi_State::BossLeftStartAttack);
 			return;
 		}
-		if (Beppi_Intro2->IsAnimationEnd())
-		{
-			IdleCheck = 3;
-		}
+		
 	}
 	break;
 	default:
@@ -489,6 +670,12 @@ void Ph1_Bepi::LeftIdleUpdate(float _Time)
 
 void Ph1_Bepi::BossFinsihUpdate(float _Time)
 {
+	if (Sound_Death_Check == false)
+	{
+		Death_Sound = GameEngineSound::Play("clown_bumper_death_01.wav");
+		Sound_Death_Check = true;
+	}
+
 	if (Beppi_Intro2->GetCurrentFrame() == 4 && FinishDown ==false)
 	{
 		GetTransform()->AddLocalPosition({ 0.0f,0.0f,75.0f });
@@ -496,7 +683,6 @@ void Ph1_Bepi::BossFinsihUpdate(float _Time)
 		FinishDown = true;
 		
 	}
-
 
 	if (Beppi_Intro2->GetCurrentFrame() > 3)
 	{

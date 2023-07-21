@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 #include "Boss_Finish.h"
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class Ph3_DogAirPlaneState
 {
 	Intro,
@@ -107,7 +108,20 @@ protected:
 
 private:
 	Ph3_DogAirPlaneState StateValue = Ph3_DogAirPlaneState::Intro;
-//	Ph3_DogAirPlaneState StateValue = Ph3_DogAirPlaneState::Intro;
+
+	GameEngineSoundPlayer Intro;
+	GameEngineSoundPlayer GrabScreen;
+	GameEngineSoundPlayer Laser_Build;
+	GameEngineSoundPlayer Laser_Build2;
+	GameEngineSoundPlayer Laser_Build3;
+	GameEngineSoundPlayer Laser_Attack;
+	GameEngineSoundPlayer Laser_Attack2;
+	GameEngineSoundPlayer Rotation;
+	GameEngineSoundPlayer Bowl;
+
+	//GameEngineSoundPlayer Laser_Attack3;
+
+
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Ph3_Boss_Intro;
 
@@ -184,7 +198,17 @@ private:
 	float4 trsd = { 0,0,-500 };
 	float4 tsdds = { 150,1500,0 };
 
-	
+	bool Sound_Intro_Check = false;
+	bool Sound_Grab_Check = false;
+	bool Sound_Laser_Build_Check = false;
+	bool Sound_Laser_Build_Check2 = false;
+	bool Sound_Laser_Build_Check3 = false;
+	bool Sound_Laser_Attack_Check = false;
+	bool Sound_Laser_Attack_Check2 = false;
+	bool Sound_Laser_Attack_Check3 = false;
+	bool Sound_Rotation_Check = false;
+	bool Sound_Bowl_Check = false;
+
 	bool CollisonCheck = false;
 	bool TopLaserCheck = false;
 	bool MidLaserCheck = false;

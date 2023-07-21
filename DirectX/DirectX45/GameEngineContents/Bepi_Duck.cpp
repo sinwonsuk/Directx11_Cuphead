@@ -114,6 +114,7 @@ void Bepi_Duck::Update(float _Delta)
 
 		if( Body_Collision1 && CollisionCheck == false)
 		{
+			Duck_Sound = GameEngineSound::Play("clown_regular_duck_spin_01.wav");
 			DuckBody->Off();
 			DuckHead->Off();
 			Body_Collision->Off();

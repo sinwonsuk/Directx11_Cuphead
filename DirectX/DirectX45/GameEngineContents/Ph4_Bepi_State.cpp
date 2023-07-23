@@ -227,7 +227,7 @@ void Ph4_Bepi::BossFinsihUpdate(float _Time)
 	
 	if (Exit->IsAnimationEnd() && DogAirplaneLevel::Finsh_Check == true && Crown_Bepi_Level::Finish_Check == true)
 	{
-		for (size_t i = 0; i < Crown_Bepi_Map::Rollercoasters.size(); i++)
+		/*for (size_t i = 0; i < Crown_Bepi_Map::Rollercoasters.size(); i++)
 		{
 			Crown_Bepi_Map::Rollercoasters[i].get()->Death();
 		}
@@ -244,14 +244,12 @@ void Ph4_Bepi::BossFinsihUpdate(float _Time)
 
 		Ph4_Swing_Platforms.clear();
 		Ph4_Penguins.clear();
-		Finish->Death();
+		Finish->Death();*/
 		GameEngineCore::ChangeLevel("EndingLevel");
 	}
-
-
 	else if(Exit->IsAnimationEnd())
 	{
-		for (size_t i = 0; i < Crown_Bepi_Map::Rollercoasters.size(); i++)
+		/*for (size_t i = 0; i < Crown_Bepi_Map::Rollercoasters.size(); i++)
 		{
 			Crown_Bepi_Map::Rollercoasters[i].get()->Death();
 		}
@@ -268,7 +266,8 @@ void Ph4_Bepi::BossFinsihUpdate(float _Time)
 
 		Ph4_Swing_Platforms.clear(); 
 		Ph4_Penguins.clear();
-		Finish->Death();
+		Finish->Death();*/
+
 		GameEngineCore::ChangeLevel("Bepi_UnLoad_Level");
 	}
 }

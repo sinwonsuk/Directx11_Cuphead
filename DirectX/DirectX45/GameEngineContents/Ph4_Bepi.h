@@ -52,8 +52,9 @@ public:
 	int Hp = 20;
 
 
-
-
+	std::shared_ptr<class Boss_Finish> Finish;
+	std::vector<std::shared_ptr<class Ph4_Penguin>> Ph4_Penguins;
+	std::vector<std::shared_ptr<class Ph4_Swing_Platform>> Ph4_Swing_Platforms;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Idle;
 
 protected:
@@ -81,9 +82,8 @@ private:
 	int Platform_Number = 0; 
 	std::shared_ptr<class GameEngineSpriteRenderer> Exit;
 	
-	std::vector<std::shared_ptr<class Ph4_Penguin>> Ph4_Penguins;
-	std::vector<std::shared_ptr<class Ph4_Swing_Platform>> Ph4_Swing_Platforms;
-	std::shared_ptr<class Boss_Finish> Finish;
+	
+	
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro_Texture;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro;
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase4_Intro_Spin;

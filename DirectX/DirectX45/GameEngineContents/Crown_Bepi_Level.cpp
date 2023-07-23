@@ -140,10 +140,34 @@ void Crown_Bepi_Level::LevelChangeEnd()
 	}
 	Crown_Bepi_Map::Rollercoasters.clear(); 
 
+
+	
+
+
 	Map->Death(); 
 	Player::MainPlayer->Death();
 	Player::MainPlayer = nullptr;
 	player->Death();
+
+	for (size_t i = 0; i < ph4_Bepi->Ph4_Swing_Platforms.size(); i++)
+	{
+		ph4_Bepi->Ph4_Swing_Platforms[i].get()->Death();
+	}
+	for (size_t i = 0; i < ph4_Bepi->Ph4_Penguins.size(); i++)
+	{
+		ph4_Bepi->Ph4_Penguins[i].get()->Death();
+	}
+
+	ph4_Bepi->Ph4_Swing_Platforms.clear();
+	ph4_Bepi->Ph4_Penguins.clear();
+	if (ph4_Bepi->Finish != nullptr)
+	{
+		ph4_Bepi->Finish->Death();
+	}
+	
+
+
+
 	if (Ph4_Bepi::ph4_Bepi != nullptr)
 	{
 		Ph4_Bepi::ph4_Bepi->Death();

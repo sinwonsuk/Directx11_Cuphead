@@ -33,8 +33,15 @@ void Ending::Start()
 
 void Ending::Update(float _Delta)
 {
+	
 	if (start->IsAnimationEnd())
 	{
+		if (Sound_End_Check == false)
+		{
+			End = GameEngineSound::Play("MUS_GoodEnding.wav");
+			End.SetLoop();
+			Sound_End_Check = true;
+		}
 		start->Off(); 
 	}
 

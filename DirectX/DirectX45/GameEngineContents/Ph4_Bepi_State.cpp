@@ -124,12 +124,26 @@ void Ph4_Bepi::BossIntroUpdate(float _Time)
 {
 	if (GetTransform()->GetLocalPosition().y < -100.0f)
 	{
+		if (Sound_intro_Check == false)
+		{
+			intro = GameEngineSound::Play("clown_swing_face_intro_01.wav");
+			Sound_intro_Check = true;
+		}
+
+
 		GetTransform()->AddLocalPosition({ float4::Up * _Time * 500.0f });
 	}
 	
 
 	if (GetTransform()->GetLocalPosition().y > -100.0f)
 	{
+
+		if (Sound_swing_intro_Check == false)
+		{
+			swing_intro = GameEngineSound::Play("clown_swing_open_01.wav");
+			Sound_swing_intro_Check = true;
+		}
+
 		Phase4_Intro_Texture->Off();
 		Phase4_Intro->On(); 
 
@@ -261,8 +275,16 @@ void Ph4_Bepi::BossFinsihUpdate(float _Time)
 
 void Ph4_Bepi::BossAttackStartUpdate(float _Time)
 {
+	if (Sound_attack_Check == false)
+	{
+		attack = GameEngineSound::Play("clown_swing_face_attack_intro_02.wav");
+		Sound_attack_Check = true;
+	}
+
+
 	if (Phase4_Idle->IsAnimationEnd() )
 	{
+		Sound_attack_Check = false;
 		ChangeState(Ph4_Bepi_State::BossAttackMiddle);
 		return; 
 	}

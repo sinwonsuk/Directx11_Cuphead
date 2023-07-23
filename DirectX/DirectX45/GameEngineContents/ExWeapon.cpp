@@ -47,6 +47,11 @@ void ExWeapon::Start()
 
 void ExWeapon::Update(float _Delta)
 {
+	if (Sound_Attack_Sound == false)
+	{
+		Attack = GameEngineSound::Play("sfx_player_weapon_peashoot_ex_impact_02.wav");
+		Sound_Attack_Sound = true;
+	}
 	Collision->GetTransform()->SetLocalPosition({ Bullet->GetTransform()->GetLocalPosition() });
 
 

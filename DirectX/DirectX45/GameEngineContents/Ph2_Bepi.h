@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class Ph2_Bepi_State
 {
 	BossIntro,
@@ -61,7 +61,8 @@ private:
 	
 	Ph2_Bepi_State StateValue = Ph2_Bepi_State::BossIntro;
 
-	
+	GameEngineSoundPlayer Intro;
+	GameEngineSoundPlayer Attack;
 
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Phase2_Intro;
@@ -103,8 +104,8 @@ private:
 	int helium_pipe_puff_location = 0;
 	bool CollisonCheck = false;
 
-
-
+	bool Sound_Intro_Check = false;
+	bool Sound_Attack_Check = false;
 
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 class ExWeapon : public GameEngineActor
 {
 public:
@@ -42,6 +42,9 @@ protected:
 	void Update(float _Delta) override;
 
 private:
+	GameEngineSoundPlayer Attack;
+
+	bool Sound_Attack_Sound = false;
 	float4 MoveDir = { 0,0 };
 	std::shared_ptr<class GameEngineCollision> Collision;
 	std::shared_ptr<class GameEngineSpriteRenderer> Sfx;

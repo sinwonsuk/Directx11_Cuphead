@@ -71,6 +71,8 @@ void OverWorld_Function(GameEngineThread* Thread)
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Map").GetFullPath());
 		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Object\\To_Tutorial_Fly.png").GetFullPath(), 3, 1);
 		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Object\\To_WaittingRoom.png").GetFullPath(), 3, 1);
+		//GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Object\\Flag.png").GetFullPath(), 5, 6);
+
 	}
 
 	GameEngineCore::ChangeLevel("OverWorld");

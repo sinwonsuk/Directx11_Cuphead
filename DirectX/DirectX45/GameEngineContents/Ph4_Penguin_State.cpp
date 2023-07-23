@@ -96,6 +96,15 @@ void Ph4_Penguin::IntroUpdate(float _Time)
 
 	if (Collision->Collision((int)CollisionType::RollerCoaster_Attack))
 	{
+		if (Sound_Death_Check ==false)
+		{
+			Death_sound = GameEngineSound::Play("clown_penguin_death_01.wav");
+			Death_sound.SetVolume(1.5f);
+			Sound_Death_Check = true;
+		}
+
+
+
 		clown_ph3_penguin_clap->Off();
 		clown_ph3_penguin_idle->Off();
 		clown_ph3_penguin_roll_Jump->Off();
@@ -165,6 +174,13 @@ void Ph4_Penguin::GroundUpdate(float _Time)
 		}
 		if (Collision->Collision((int)CollisionType::RollerCoaster_Attack))
 		{
+			if (Sound_Death_Check == false)
+			{
+				Death_sound = GameEngineSound::Play("clown_penguin_death_01.wav");
+				Death_sound.SetVolume(1.5f);
+				Sound_Death_Check = true;
+			}
+
 			clown_ph3_penguin_clap->Off();
 			clown_ph3_penguin_idle->Off();
 			clown_ph3_penguin_roll_Jump->Off();
@@ -183,6 +199,15 @@ void Ph4_Penguin::GroundUpdate(float _Time)
 
 void Ph4_Penguin::JumpUpdate(float _Time)
 {
+	if (Sound_Jump_Check == false)
+	{
+		jump = GameEngineSound::Play("clown_penguin_roll_end_01.wav");
+		Sound_Jump_Check = true;
+	}
+
+
+
+
 	GetTransform()->AddLocalPosition({ float4::Up * _Time * (Speed-400.0f) });
 
 	if (clown_ph3_penguin_roll_Jump->IsAnimationEnd())
@@ -195,6 +220,13 @@ void Ph4_Penguin::JumpUpdate(float _Time)
 	}
 	if (Collision->Collision((int)CollisionType::RollerCoaster_Attack))
 	{
+		if (Sound_Death_Check == false)
+		{
+			Death_sound = GameEngineSound::Play("clown_penguin_death_01.wav");
+			Death_sound.SetVolume(1.5f);
+			Sound_Death_Check = true;
+		}
+
 		clown_ph3_penguin_clap->Off();
 		clown_ph3_penguin_idle->Off();
 		clown_ph3_penguin_roll_Jump->Off();
@@ -224,6 +256,13 @@ void Ph4_Penguin::IdleUpdate(float _Time)
 	}
 	if (Collision->Collision((int)CollisionType::RollerCoaster_Attack))
 	{
+		if (Sound_Death_Check == false)
+		{
+			Death_sound = GameEngineSound::Play("clown_penguin_death_01.wav");
+			Death_sound.SetVolume(1.5f);
+			Sound_Death_Check = true;
+		}
+
 		clown_ph3_penguin_clap->Off();
 		clown_ph3_penguin_idle->Off();
 		clown_ph3_penguin_roll_Jump->Off();
@@ -246,6 +285,14 @@ void Ph4_Penguin::AttackUpdate(float _Time)
 
 	if (clown_ph3_penguin_clap->GetCurrentFrame() > 9)
 	{
+		if (Sound_Attack_Check == false)
+		{
+			Attack = GameEngineSound::Play("clown_penguin_clap_01.wav");
+			Attack.SetVolume(1.5f);
+			Sound_Attack_Check = true;
+		}
+
+
 		if (AttackCheck == false)
 		{
 			std::shared_ptr<Ph4_Penguin_Weapon> object = GetLevel()->CreateActor<Ph4_Penguin_Weapon>();
@@ -267,7 +314,7 @@ void Ph4_Penguin::AttackUpdate(float _Time)
 		clown_ph3_penguin_clap->Off();
 
 		IdleNumber = 0;
-		
+		Sound_Attack_Check = false;
 		clown_ph3_penguin_clap->ChangeAnimation("clown_ph3_penguin_clap");
 		ChangeState(Ph4_Penguin_State::Idle);
 		return; 
@@ -275,6 +322,13 @@ void Ph4_Penguin::AttackUpdate(float _Time)
 
 	if (Collision->Collision((int)CollisionType::RollerCoaster_Attack))
 	{
+		if (Sound_Death_Check == false)
+		{
+			Death_sound = GameEngineSound::Play("clown_penguin_death_01.wav");
+			Death_sound.SetVolume(1.5f);
+			Sound_Death_Check = true;
+		}
+
 		clown_ph3_penguin_clap->Off();
 		clown_ph3_penguin_idle->Off();
 		clown_ph3_penguin_roll_Jump->Off();

@@ -90,68 +90,9 @@ void Crown_Bepi_Level::Start()
 
 void Crown_Bepi_Level::LevelChangeStart()
 {
+	
 	{
-		GameEngineDirectory NewDir;
-		NewDir.MoveParentToDirectory("ContentResources");
-		NewDir.Move("ContentResources");
-		NewDir.Move("Sound");
-
-		GameEngineSound::Load(NewDir.GetPlusFileName("mus_dlc_title.wav").GetFullPath());
-
-		GameEngineSound::Load(NewDir.GetPlusFileName("cuphead-opening-theme.mp3").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_weapon_peashot_death_001.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_weapon_upshot_loop_01.wav").GetFullPath());
-
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_weapon_upshot_loop_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("MUS_Tutorial.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_jump_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_dash_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_weapon_crackshot_turret_parryexplode.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_parry_slap_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("bgm_map_world_1.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("a-good-day-for-a-swell-battle.mp3").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("cuphead-a-knockout.mp3").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_BulldogPlane_Loop.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("mus_dlc_dogfight_a.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_BulldogPlane_IntroFlyby.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_PlayerPlane_Loop.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_Bulldog_EjectUp.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_Bulldog_EjectDown.wav").GetFullPath());
-
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_TerrierPlane_Bark_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_DogFlexHugoVocal_02.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_DogFlexHugoVocal_04.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_Bulldog_Boneshot_01.wav").GetFullPath());
-
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_TerrierPlane_Baseball_Whistle_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_CatGun_Shoot_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P1_Bulldog_PlaneExplodes.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P2_TerrierJetpack_BarkShoot_06.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P2_TerrierJetpack_Loop.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P2_TerrierJetpack_Explosion_01.wav").GetFullPath());
-
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Intro.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Laser_BuildOut_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_03.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Settle_GrabScreen.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_Laser_Fire_03.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_ScreenRotate.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_DLC_Dogfight_P3_DogCopter_DogBowl_Fire_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("cuphead-a-knockout.mp3").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_hit_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_death_01.wav").GetFullPath());
-
-		GameEngineSound::Load(NewDir.GetPlusFileName("clown_dash_start_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_clown_clown_dash_end_03.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("Clown_Music.mp3").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("clown_bumper_death_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("clown_regular_duck_spin_01.wav").GetFullPath());
-
-		GameEngineSound::Load(NewDir.GetPlusFileName("clown_coaster_main_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_level_clown_warning_lights_loop_01.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_clown_coaster_ratchet_loop.wav").GetFullPath());
-		GameEngineSound::Load(NewDir.GetPlusFileName("clown_bumper_move_01.wav").GetFullPath());
+		timeFlow = CreateActor<TimeFlow>(10);
 	}
 	{
 		player = CreateActor<Player>();
@@ -162,9 +103,7 @@ void Crown_Bepi_Level::LevelChangeStart()
 	{
 		userInterface = CreateActor<UserInterface>();
 	}
-	{
-		std::shared_ptr<TimeFlow> Object = CreateActor<TimeFlow>(10);
-	}
+	
 
 	{
 		ph1_Bepi = CreateActor<Ph1_Bepi>();
@@ -192,13 +131,15 @@ void Crown_Bepi_Level::LevelChangeEnd()
 	Map.get()->Coaster.Stop();
 	Map.get()->Coaster_Light.Stop();
 
+	TimeFlow::Time = 0;
+	timeFlow->Death();
 
 	for (size_t i = 0; i < Crown_Bepi_Map::Rollercoasters.size(); i++)			
 	{			
 		Crown_Bepi_Map::Rollercoasters[i].get()->Death(); 	
 	}
 	Crown_Bepi_Map::Rollercoasters.clear(); 
-	TimeFlow::Time = 0; 
+
 	Map->Death(); 
 	Player::MainPlayer->Death();
 	Player::MainPlayer = nullptr;

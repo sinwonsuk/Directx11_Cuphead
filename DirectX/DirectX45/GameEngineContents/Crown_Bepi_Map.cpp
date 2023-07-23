@@ -181,13 +181,16 @@ void Crown_Bepi_Map::Update(float _Delta)
 
 	Rollercoaster_Time += _Delta; 
 	Rollercoaster_Time_BG += _Delta;
+	Crown_Bepi_Level* Level = (Crown_Bepi_Level*)GetLevel();
 
-	if (Ph4_Check == false)
+	if (Level->PaseCheck == Pase::Pase4)
 	{
-		Ph4_Rollercoaster_Time_BG += _Delta;
-		clown_bg_light_on->Off();
+		if (Ph4_Check == false)
+		{
+			Ph4_Rollercoaster_Time_BG += _Delta;
+			clown_bg_light_on->Off();
+		}
 	}
-	
 
 	if (Collision->Collision((int)CollisionType::Player,ColType::AABBBOX2D , ColType::AABBBOX2D))
 	{
@@ -202,13 +205,23 @@ void Crown_Bepi_Map::Update(float _Delta)
 	}
 
 
-	Crown_Bepi_Level* Level = (Crown_Bepi_Level*)GetLevel();
+	
 
 	if (Level->PaseCheck == Pase::Pase4 && sdasd > 9)
 	{
 		
 			if (Ph4_Rollercoaster_Time_BG > 4)
 			{
+				Sound_light_Check = false;
+				Coaster_Light.Stop();
+				if (Sound_Coaster_Check == false)
+				{
+					Coaster = GameEngineSound::Play("sfx_clown_coaster_ratchet_loop.wav");
+					Coaster.SetVolume(0.5f);
+					Coaster.SetLoop();
+					Sound_Coaster_Check = true;
+				}
+
 				if (Ph4_Bepi::ph4_Bepi->StateValue == Ph4_Bepi_State::BossIdle && Ph4_Check == false)
 				{
 					Rollercoasters[RollercoastersNumber]->On();
@@ -223,6 +236,16 @@ void Crown_Bepi_Map::Update(float _Delta)
 
 		if (Rollercoaster_Time > 20 && Ph4_Check == true)
 		{
+			Coaster.Stop();
+			Sound_Coaster_Check = false;
+
+			if (Sound_light_Check == false)
+			{
+				Coaster_Light = GameEngineSound::Play("sfx_level_clown_warning_lights_loop_01.wav");
+				Coaster_Light.SetLoop();
+				Sound_light_Check = true;
+			}
+
 			clown_bg_light_on->On();
 			Rollercoasters[RollercoastersNumber]->On();
 			Rollercoasters[RollercoastersNumber]->Speed = 700;

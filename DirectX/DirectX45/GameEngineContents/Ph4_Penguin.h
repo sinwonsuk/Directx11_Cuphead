@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class Ph4_Penguin_State
 {
 	Intro,
@@ -59,9 +59,17 @@ protected:
 	void Start();
 	void Update(float _Delta) override;
 	
+	
 
 
 private:
+	GameEngineSoundPlayer Attack;
+	GameEngineSoundPlayer Death_sound;
+	GameEngineSoundPlayer jump;
+
+	bool Sound_Jump_Check = false;
+	bool Sound_Attack_Check = false;
+	bool Sound_Death_Check = false;
 	bool AttackCheck = false;
 	Ph4_Penguin_State StateValue = Ph4_Penguin_State::Intro;
 	float StopPos = 0;

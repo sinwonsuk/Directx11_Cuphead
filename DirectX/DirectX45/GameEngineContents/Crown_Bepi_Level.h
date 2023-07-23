@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "UserInterface.h"
 #include "Crown_Bepi_Map.h"
+#include "TimeFlow.h"
 enum class Pase
 {
 	Pase1,
@@ -43,6 +44,8 @@ protected:
 
 
 private:
+
+	std::shared_ptr<TimeFlow> timeFlow;
 	std::shared_ptr<Crown_Bepi_Map> Map;
 	std::shared_ptr<Ph1_Bepi> ph1_Bepi;
 	std::shared_ptr<Ph2_Bepi> ph2_Bepi;

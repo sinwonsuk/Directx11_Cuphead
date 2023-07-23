@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 #include "Ph3_Bepi_Weapon.h"
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class Ph3_Bepi_State
 {
 	BossIntro,
@@ -66,6 +67,13 @@ private:
 	int Hp = 10; 
 	int RandomPos = 0;
 
+	GameEngineSoundPlayer Attack;
+	GameEngineSoundPlayer Attack2;
+	GameEngineSoundPlayer Death_Sound;
+	GameEngineSoundPlayer Fail;
+
+	
+
 	std::vector<std::shared_ptr<Ph3_Bepi_Weapon>> Bullets;
 
 	Ph3_Bepi_State StateValue = Ph3_Bepi_State::BossIntro;
@@ -100,5 +108,12 @@ private:
 	int Boss_Exploision_Number = 0; 
 	bool Boss_Exploision_Check = false;
 	float4 Boss_Exploision_Pos = {0,0};
+
+	bool Sound_Fail_Check = false;
+	bool Sound_Death_Check = false;
+	bool Sound_Attack_Check = false;
+	bool Sound_Attack_Check2 = false;
+
+
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
-
+#include <GameEnginePlatform/GameEngineSound.h>
 class Ph3_Bepi_Weapon : public GameEngineActor
 {
 public:
@@ -29,7 +29,8 @@ protected:
 	void Update(float _Delta) override;
 
 private:
-
+	GameEngineSoundPlayer Fail;
+	GameEngineSoundPlayer destory;
 	
 	float StopPos = 200;
 	std::shared_ptr<class GameEngineSpriteRenderer> Bullet;
@@ -40,5 +41,8 @@ private:
 	float Speed = 1200;
 	bool CoiisionCheck = false;
 	bool Stop = false;
+
+	bool Sound_Fail_Check = false;
+	bool Sound_destory_Check = false;
 };
 

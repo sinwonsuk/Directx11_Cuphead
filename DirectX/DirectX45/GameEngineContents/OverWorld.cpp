@@ -80,6 +80,5 @@ void OverWorld::LevelChangeEnd()
 	GameEngineSprite::UnLoad("Map");
 	GameEngineSprite::UnLoad("To_Tutorial_Fly.png");
 	GameEngineSprite::UnLoad("To_WaittingRoom.png");
-
 	GameEngineLevel::LevelChangeEnd();
 }

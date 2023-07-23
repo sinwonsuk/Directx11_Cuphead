@@ -372,7 +372,7 @@ void DogAirplaneLevel::LevelChangeEnd()
 	DogAirplane::Sound_BG_Check = false;
 	DogAirplane::BG.Stop();
 	Pase = 0;
-
+	
 	timeFlow->Death(); 
 	Ph1_DogAirplane->Death();
 	Ph2_DogAirpalne_Left->Death();

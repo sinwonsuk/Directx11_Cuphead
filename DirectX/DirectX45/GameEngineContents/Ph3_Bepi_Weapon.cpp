@@ -49,8 +49,15 @@ void Ph3_Bepi_Weapon::Update(float _Delta)
 	{
 		this->Death(); 
 	}
+
 	if (Collision->Collision((int)CollisionType::RollerCoaster) && CoiisionCheck == false)
 	{
+		if (Sound_destory_Check == false)
+		{
+			destory = GameEngineSound::Play("clown_horseshoe_land_01.wav");
+			Sound_destory_Check = true;
+		}
+
 		Bullet->Off(); 
 		Bullet_Destory->On(); 
 		Bullet_Sfx->On(); 
@@ -60,6 +67,12 @@ void Ph3_Bepi_Weapon::Update(float _Delta)
 
 	if (Collision->Collision((int)CollisionType::BepiMap) && CoiisionCheck == false)
 	{
+		if (Sound_destory_Check == false)
+		{
+			destory = GameEngineSound::Play("clown_horseshoe_land_01.wav"); 
+			Sound_destory_Check = true;
+		}
+
 		Bullet->Off();
 		Bullet_Destory->On();
 		Bullet_Sfx->On();
@@ -111,6 +124,11 @@ void Ph3_Bepi_Weapon::Update(float _Delta)
 			}
 			if (DownCheck == true)
 			{
+				if (Sound_Fail_Check == false)
+				{
+					Fail = GameEngineSound::Play("clown_horseshoe_drop_01.wav");
+					Sound_Fail_Check = true;
+				}
 				GetTransform()->AddLocalPosition({ float4::Down * Speed * _Delta });
 			}
 		}

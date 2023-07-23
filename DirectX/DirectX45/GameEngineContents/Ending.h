@@ -1,4 +1,7 @@
 #pragma once
+#include <GameEngineCore/GameEngineActor.h>
+#include <GameEnginePlatform/GameEngineSound.h>
+
 class Ending : public GameEngineActor
 {
 public:
@@ -24,7 +27,8 @@ protected:
 	float4 TestColor;
 
 private:
-
+	GameEngineSoundPlayer End;
+	bool Sound_End_Check = false;
 	bool Check = false;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> TitleRoge;

@@ -3,6 +3,7 @@
 #include "Boss_Finish.h"
 #include "Ph4_Swing_Platform.h"
 #include "Ph4_Penguin.h"
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class Ph4_Bepi_State
 {
 	BossIntro,
@@ -63,6 +64,16 @@ protected:
 	float4 TestColor;
 
 private:
+
+	GameEngineSoundPlayer intro;
+	GameEngineSoundPlayer swing_intro;
+	GameEngineSoundPlayer attack;
+
+	bool Sound_intro_Check = false;
+	bool Sound_swing_intro_Check = false;
+	bool Sound_attack_Check = false;
+
+
 	bool BossFinish = false;
 	int AttackNumber = 0; 
 	int RandomPos = 0;

@@ -103,6 +103,12 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 		{
 			if (Collision->Collision((int)CollisionType::RollerCoaster) && CollisionCheck == false)
 			{
+				if (Sound_Death_Check == false)
+				{
+					Death_Sound = GameEngineSound::Play("clown_dog_balloon_regular_death_01.wav");
+					Death_Sound.SetVolume(1.5f);
+					Sound_Death_Check = true;
+				}
 				Bullet_Destroy->On();
 				Bullet->Off();
 				Collision->Off();
@@ -111,6 +117,13 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 
 			if (Collision->Collision((int)CollisionType::BepiMap) && CollisionCheck == false)
 			{
+				if (Sound_Death_Check == false)
+				{
+					Death_Sound = GameEngineSound::Play("clown_dog_balloon_regular_death_01.wav");
+					Death_Sound.SetVolume(1.5f);
+					Sound_Death_Check = true;
+				}
+
 				Bullet_Destroy->On();
 				Bullet->Off();
 				Collision->Off();
@@ -122,6 +135,14 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 
 			if (Collision2->CollisionAll((int)CollisionType::Bullet, collision) && CollisionCheck == false)
 			{
+				if (Sound_Death_Check == false)
+				{
+					Death_Sound = GameEngineSound::Play("clown_dog_balloon_regular_death_01.wav");
+					Death_Sound.SetVolume(1.5f);
+					Sound_Death_Check = true;
+				}
+
+
 				Bullet_Destroy->On();
 				Bullet->Off();
 				Collision->Off();
@@ -275,6 +296,13 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 		{
 			if (Pink_Collision->Collision((int)CollisionType::RollerCoaster) && CollisionCheck == false)
 			{
+				if (Sound_Death_Check == false)
+				{
+					Death_Sound = GameEngineSound::Play("clown_dog_balloon_regular_death_01.wav");
+					Death_Sound.SetVolume(1.5f);
+					Sound_Death_Check = true;
+				}
+
 				Pink_Bullet_Destroy->On();
 				Pink_Bullet->Off();
 				Pink_Collision->Off();
@@ -283,6 +311,13 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 
 			if (Pink_Collision->Collision((int)CollisionType::BepiMap) && CollisionCheck == false)
 			{
+				if (Sound_Death_Check == false)
+				{
+					Death_Sound = GameEngineSound::Play("clown_dog_balloon_regular_death_01.wav");
+					Death_Sound.SetVolume(1.5f);
+					Sound_Death_Check = true;
+				}
+
 				Pink_Bullet_Destroy->On();
 				Pink_Bullet->Off();
 				Pink_Collision->Off();
@@ -294,6 +329,13 @@ void Ph2_Bepi_Weapon::Update(float _Delta)
 
 			if (Pink_Collision2->CollisionAll((int)CollisionType::Bullet, collision) && CollisionCheck == false)
 			{
+				if (Sound_Death_Check == false)
+				{
+					Death_Sound = GameEngineSound::Play("clown_dog_balloon_regular_death_01.wav");
+					Death_Sound.SetVolume(1.5f);
+					Sound_Death_Check = true;
+				}
+
 				Pink_Bullet_Destroy->On();
 				Pink_Bullet->Off();
 				Pink_Collision->Off();

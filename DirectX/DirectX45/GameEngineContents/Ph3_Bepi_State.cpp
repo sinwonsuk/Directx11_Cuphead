@@ -204,7 +204,12 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 		{
 			clown_ph3_horse_spit->On();
 
-			
+			/*if (Sound_Attack_Check == false)
+			{
+				Attack = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+				Attack.SetVolume(1.5f);
+				Sound_Attack_Check = true;
+			}*/
 		}
 
 
@@ -214,6 +219,13 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 		{
 			if (GetLiveTime() > 0.1 && BulletCheck < 7)
 			{
+				if (Sound_Attack_Check == false)
+				{
+					Attack = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack.SetVolume(3.0f);
+					Sound_Attack_Check = true;
+				}
+
 				Bullets[BulletNumber]->YellowPattern = 1;
 				Bullets[BulletNumber]->On();
 				Bullets[BulletNumber]->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 230.0f,GetTransform()->GetLocalPosition().y - 300.0f });
@@ -245,6 +257,12 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 		{
 			if (GetLiveTime() > 0.1 && BulletCheck < 4)
 			{
+				if (Sound_Attack_Check == false)
+				{
+					Attack = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack.SetVolume(3.0f);
+					Sound_Attack_Check = true;
+				}
 				Bullets[BulletNumber]->YellowPattern = 1;
 				Bullets[BulletNumber]->On();
 				Bullets[BulletNumber]->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 230.0f,GetTransform()->GetLocalPosition().y - 300.0f });
@@ -263,6 +281,12 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 			{
 				if (Time > 0.1)
 				{
+					if (Sound_Attack_Check2 == false)
+					{
+						Attack2 = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+						Attack2.SetVolume(3.0f);
+						Sound_Attack_Check2 = true;
+					}
 					Bullets[BulletNumber]->YellowPattern = 1;
 					Bullets[BulletNumber]->On();
 					Bullets[BulletNumber]->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 230.0f,GetTransform()->GetLocalPosition().y - 300.0f });
@@ -293,6 +317,13 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 		{
 			if (GetLiveTime() > 0.1 && BulletCheck < 2)
 			{
+				if (Sound_Attack_Check == false)
+				{
+					Attack = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack.SetVolume(3.0f);
+					Sound_Attack_Check = true;
+				}
+
 				Bullets[BulletNumber]->YellowPattern = 1;
 				Bullets[BulletNumber]->On();
 				Bullets[BulletNumber]->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x + 230.0f,GetTransform()->GetLocalPosition().y - 300.0f });
@@ -309,6 +340,13 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 			}
 			if (GetLiveTime() > 1.0 && BulletCheck < 7)
 			{
+				if (Sound_Attack_Check2 == false)
+				{
+					Attack2 = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack2.SetVolume(3.0f);
+					Sound_Attack_Check2 = true;
+				}
+
 				if (Time > 0.1)
 				{
 					Bullets[BulletNumber]->YellowPattern = 1;
@@ -400,8 +438,8 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 		}*/
 		if (GetLiveTime() > 4.0)
 		{
-
-			
+			Sound_Attack_Check = false;
+			Sound_Attack_Check2 = false;
 
 			clown_ph3_horse_spit->ChangeAnimation("clown_ph3_horse_spit");
 			clown_ph3_horse_spit->Off();
@@ -417,7 +455,7 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 
 				
 
-				YellowORGreenCheck = GameEngineRandom::MainRandom.RandomInt(1, 1);
+				YellowORGreenCheck = GameEngineRandom::MainRandom.RandomInt(0, 1);
 				LeftORRightCheck = GameEngineRandom::MainRandom.RandomInt(0, 1);
 
 				BulletStopPos = 200;
@@ -480,12 +518,22 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 			if (GreenBulletCheck == 1)
 			{
 				clown_ph3_horse_spit->On();
+
+				
+
 			}
 	
 
 
 		if (GetLiveTime() > 0.2  && GreenBulletCheck < 3)
 		{
+			if (Sound_Attack_Check == false)
+			{
+				Attack = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+				Attack.SetVolume(3.0f);
+				Sound_Attack_Check = true;
+			}
+
 			if (GreenBulletCheck == 1)
 			{
 				std::shared_ptr<Ph3_Bepi_Weapon_Green> Object = GetLevel()->CreateActor<Ph3_Bepi_Weapon_Green>();
@@ -514,6 +562,13 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 		}
 		if (GetLiveTime() > 1.0)
 		{
+			if (Sound_Attack_Check2 == false)
+			{
+				Attack2 = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+				Attack2.SetVolume(3.0f);
+				Sound_Attack_Check2 = true;
+			}
+
 			if (Time2 > 0.2 && GreenBulletCheck < 5)
 			{
 				std::shared_ptr<Ph3_Bepi_Weapon_Green> Object = GetLevel()->CreateActor<Ph3_Bepi_Weapon_Green>();
@@ -590,7 +645,6 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 
 		if (GetLiveTime() > 4.0)
 		{
-
 			
 
 			clown_ph3_horse_spit->ChangeAnimation("clown_ph3_horse_spit");
@@ -607,7 +661,7 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 
 			
 
-				YellowORGreenCheck = GameEngineRandom::MainRandom.RandomInt(1, 1);
+				YellowORGreenCheck = GameEngineRandom::MainRandom.RandomInt(0, 1);
 				LeftORRightCheck = GameEngineRandom::MainRandom.RandomInt(0, 1);
 
 				GreenBulletCheck = 0;
@@ -650,6 +704,8 @@ void Ph3_Bepi::LeftAttackUpdate(float _Time)
 					Green_Horse_Head->On();
 				}
 				ResetLiveTime();
+				Sound_Attack_Check2 = false;
+				Sound_Attack_Check = false;
 				ChangeState(Ph3_Bepi_State::BossIdle);
 
 				return;
@@ -681,7 +737,17 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 
 		if (BulletCheck == 3)
 		{
+			
+
 			clown_ph3_horse_spit->On();
+
+			/*if (Sound_Attack_Check == false)
+			{
+				Attack = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+				Attack.SetVolume(1.5f);
+				Sound_Attack_Check = true;
+			}*/
+
 		}
 
 		switch (YellowPattern)
@@ -691,6 +757,12 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 		{
 			if (GetLiveTime() > 0.1 && BulletCheck < 7)
 			{
+				if (Sound_Attack_Check == false)
+				{
+					Attack = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack.SetVolume(3.0f);
+					Sound_Attack_Check = true;
+				}
 				Bullets[BulletNumber]->On();
 				Bullets[BulletNumber]->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 230.0f,GetTransform()->GetLocalPosition().y - 300.0f });
 				Bullets[BulletNumber]->SetStopPos(BulletStopPos);
@@ -721,6 +793,13 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 		{
 			if (GetLiveTime() > 0.1 && BulletCheck < 4)
 			{
+				if (Sound_Attack_Check == false)
+				{
+					Attack = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack.SetVolume(3.0f);
+					Sound_Attack_Check = true;
+				}
+
 				Bullets[BulletNumber]->On();
 				Bullets[BulletNumber]->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 230.0f,GetTransform()->GetLocalPosition().y - 300.0f });
 				Bullets[BulletNumber]->SetStopPos(BulletStopPos);
@@ -736,6 +815,13 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 			}
 			if (GetLiveTime() > 1.0 && BulletCheck < 7)
 			{
+				if (Sound_Attack_Check2 == false)
+				{
+					Attack2 = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack2.SetVolume(3.0f);
+					Sound_Attack_Check2 = true;
+				}
+
 				if (Time > 0.1)
 				{
 					Bullets[BulletNumber]->On();
@@ -769,6 +855,14 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 		{
 			if (GetLiveTime() > 0.1 && BulletCheck < 2)
 			{
+				if (Sound_Attack_Check == false)
+				{
+					Attack = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack.SetVolume(3.0f);
+					Sound_Attack_Check = true;
+				}
+
+
 				Bullets[BulletNumber]->On();
 				Bullets[BulletNumber]->GetTransform()->SetLocalPosition({ GetTransform()->GetLocalPosition().x - 230.0f,GetTransform()->GetLocalPosition().y - 300.0f });
 				Bullets[BulletNumber]->SetStopPos(BulletStopPos);
@@ -786,6 +880,14 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 
 			if (GetLiveTime() > 1.0 && BulletCheck < 7)
 			{
+				if (Sound_Attack_Check2 == false)
+				{
+					Attack2 = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack2.SetVolume(3.0f);
+					Sound_Attack_Check2 = true;
+				}
+
+
 				if (Time > 0.1)
 				{
 					Bullets[BulletNumber]->On();
@@ -881,8 +983,8 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 
 		if (GetLiveTime() > 4.0)
 		{
-			
-
+			Sound_Attack_Check = false;
+			Sound_Attack_Check2 = false;
 			clown_ph3_horse_spit->ChangeAnimation("clown_ph3_horse_spit");
 			clown_ph3_horse_spit->Off();
 
@@ -893,9 +995,7 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 
 			if (GetTransform()->GetLocalPosition().y > 1000.0f)
 			{
-				
-
-				YellowORGreenCheck = GameEngineRandom::MainRandom.RandomInt(1, 1);
+				YellowORGreenCheck = GameEngineRandom::MainRandom.RandomInt(0, 1);
 				LeftORRightCheck = GameEngineRandom::MainRandom.RandomInt(0, 1);
 
 				BulletStopPos = 200;
@@ -924,7 +1024,7 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 					Green_Horse_Body->Off();
 					Green_Horse_Head->Off();
 				}
-				// Green 
+				
 
 				if (YellowORGreenCheck == 1)
 				{
@@ -956,10 +1056,18 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 			if (GreenBulletCheck == 1)
 			{
 				clown_ph3_horse_spit->On();
+
 			}
 		
 			if (GetLiveTime() > 0.2 && GreenBulletCheck < 3)
 			{
+				if (Sound_Attack_Check == false)
+				{
+					Attack = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack.SetVolume(3.0f);
+					Sound_Attack_Check = true;
+				}
+
 				if (GreenBulletCheck == 1)
 				{
 					std::shared_ptr<Ph3_Bepi_Weapon_Green> Object = GetLevel()->CreateActor<Ph3_Bepi_Weapon_Green>();
@@ -984,6 +1092,13 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 			}
 			if (GetLiveTime() > 1.0)
 			{
+				if (Sound_Attack_Check2 == false)
+				{
+					Attack2 = GameEngineSound::Play("clown_horse_head_spit_01.wav");
+					Attack2.SetVolume(3.0f);
+					Sound_Attack_Check2 = true;
+				}
+
 				if (Time2 > 0.2 && GreenBulletCheck < 5)
 				{
 					std::shared_ptr<Ph3_Bepi_Weapon_Green> Object = GetLevel()->CreateActor<Ph3_Bepi_Weapon_Green>();
@@ -1059,7 +1174,6 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 			if (GetLiveTime() > 4.0)
 			{
 				
-
 				clown_ph3_horse_spit->ChangeAnimation("clown_ph3_horse_spit");
 				clown_ph3_horse_spit->Off();
 
@@ -1072,7 +1186,7 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 				{
 					
 
-					YellowORGreenCheck = GameEngineRandom::MainRandom.RandomInt(1, 1);
+					YellowORGreenCheck = GameEngineRandom::MainRandom.RandomInt(0, 1);
 					LeftORRightCheck = GameEngineRandom::MainRandom.RandomInt(0, 1);
 
 					BulletStopPos = 200;
@@ -1114,6 +1228,9 @@ void Ph3_Bepi::RightAttackUpdate(float _Time)
 						Green_Horse_Head->On();
 					}
 					ResetLiveTime();
+					Sound_Attack_Check = false;
+					Sound_Attack_Check2 = false;
+
 					ChangeState(Ph3_Bepi_State::BossIdle);
 
 					return;
@@ -1140,6 +1257,14 @@ void Ph3_Bepi::BossFinishUpdate(float _Time)
 	
 		if (Phase3_Idle->GetLiveTime() > 0.03f)
 		{
+			if (Sound_Death_Check == false)
+			{
+				Death_Sound = GameEngineSound::Play("clown_horse_death_01.wav");
+				Death_Sound.SetVolume(1.2f);
+				Sound_Death_Check = true;
+			}
+
+
 			Boss_Exploision_Pos.x = GameEngineRandom::MainRandom.RandomFloat(-100.0f, 100.0f);
 			Boss_Exploision_Pos.y = GameEngineRandom::MainRandom.RandomFloat(-100.0f, 100.0f);
 
@@ -1214,6 +1339,12 @@ void Ph3_Bepi::BossFinish_Finish_Update(float _Time)
 	
 	if (GetLiveTime() > 2 && FinishCheck ==false)
 	{
+		if (Sound_Fail_Check == false)
+		{
+			Fail = GameEngineSound::Play("clown_horse_clown_fall_01.wav");
+			Sound_Fail_Check = true;
+		}
+
 		Phase3_Idle->GetTransform()->AddLocalPosition({ 0.0f,50.0f });
 		Phase3_Idle->ChangeAnimation("Phase3_End_Finish");
 		FinishCheck = true; 

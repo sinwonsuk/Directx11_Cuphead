@@ -86,7 +86,14 @@ void Ph2_Bepi::BossIntroUpdate(float _Time)
 		Phase2_Intro->On();
 		RightHeliumBottle->On();
 		LeftHeliumBottle->On();
-		
+
+		if (Sound_Intro_Check == false)
+		{
+			Intro = GameEngineSound::Play("clown_helium_intro_continue_01.wav");
+			Intro.SetVolume(5.0f);
+			Sound_Intro_Check = true;
+		}
+
 	}
 
 	if (Phase2_Intro->IsAnimationEnd())
@@ -188,7 +195,12 @@ void Ph2_Bepi::BossIdleUpdate(float _Time)
 		AttackCheck = GameEngineRandom::MainRandom.RandomInt(0, 5);
 		AttackColor = GameEngineRandom::MainRandom.RandomInt(0, 3);
 
-
+		if (Sound_Attack_Check == false)
+		{
+			Attack = GameEngineSound::Play("clown_dog_balloon_regular_intro_01.wav");
+			Attack.SetVolume(1.5f);
+			Sound_Attack_Check = true;
+		}
 
 
 		switch (AttackCheck)
@@ -306,7 +318,8 @@ void Ph2_Bepi::BossIdleUpdate(float _Time)
 	
 		default:
 			break;
-		}		
+		}	
+		Sound_Attack_Check = false;
 		ResetLiveTime(); 
 	}
 

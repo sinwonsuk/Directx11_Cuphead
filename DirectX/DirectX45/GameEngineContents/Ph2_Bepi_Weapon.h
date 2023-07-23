@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 enum class Color
 {
 	Idle,
@@ -54,6 +55,10 @@ protected:
 	void Update(float _Delta) override;
 
 private:
+	
+	GameEngineSoundPlayer Death_Sound;
+
+	bool Sound_Death_Check = false;
 
 	std::shared_ptr<class GameEngineCollision> Collision;
 	std::shared_ptr<class GameEngineCollision> Collision2;

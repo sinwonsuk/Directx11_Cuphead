@@ -81,7 +81,7 @@ private:
 	GameEngineSoundPlayer Intro_Start;
 	GameEngineSoundPlayer End;
 	GameEngineSoundPlayer Move;
-	
+	GameEngineSoundPlayer Intro;
 	bool FinishDown = false;
 	bool DuckStart = false;
 	float introFinish = 0;

@@ -30,7 +30,7 @@ protected:
 private:
 	
 
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Bepi;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Map;
 	std::shared_ptr<class GameEngineSpriteRenderer> House;

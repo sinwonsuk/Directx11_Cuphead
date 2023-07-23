@@ -171,6 +171,8 @@ void TitleLevel::LevelChangeStart()
 		GameEngineSound::Load(NewDir.GetPlusFileName("clown_penguin_death_01.wav").GetFullPath());
 		GameEngineSound::Load(NewDir.GetPlusFileName("clown_penguin_clap_01.wav").GetFullPath());
 		GameEngineSound::Load(NewDir.GetPlusFileName("sfx_player_weapon_peashoot_ex_impact_02.wav").GetFullPath());
+
+		GameEngineSound::Load(NewDir.GetPlusFileName("MUS_GoodEnding.wav").GetFullPath());
 	}
 	GameEngineLevel::LevelChangeStart();
 }

@@ -35,7 +35,7 @@ void PlayLevel::PlayerCreate(/*Playlevel* this*/)
 void PlayLevel::Start()
 {
 	
-	GameEngineLevel::IsDebugSwitch();
+	
 
 
 	{

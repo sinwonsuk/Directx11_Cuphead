@@ -127,6 +127,7 @@ void Ph3_Bepi_Weapon::Update(float _Delta)
 				if (Sound_Fail_Check == false)
 				{
 					Fail = GameEngineSound::Play("clown_horseshoe_drop_01.wav");
+					Fail.SetVolume(0.2f);
 					Sound_Fail_Check = true;
 				}
 				GetTransform()->AddLocalPosition({ float4::Down * Speed * _Delta });
@@ -158,6 +159,13 @@ void Ph3_Bepi_Weapon::Update(float _Delta)
 			}
 			if (DownCheck == true)
 			{
+				if (Sound_Fail_Check == false)
+				{
+					Fail = GameEngineSound::Play("clown_horseshoe_drop_01.wav");
+					Fail.SetVolume(0.2f);
+					Sound_Fail_Check = true;
+				}
+
 				GetTransform()->AddLocalPosition({ float4::Down * Speed * _Delta });
 			}
 		}

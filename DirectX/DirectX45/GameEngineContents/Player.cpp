@@ -254,10 +254,20 @@ void Player::Update(float _DeltaTime)
 	}
 	
 
-	
+	//GameEngineLevel::IsDebugSwitch();
 	 
-//	Collision->GetTransform()->SetLocalPosition(Render0->GetTransform()->GetWorldPosition());
-	
+	if (true == GameEngineInput::IsDown("PlayerDebugHp"))
+	{
+		Hp = 100;
+	}
+	if (true == GameEngineInput::IsDown("PlayerHp"))
+	{
+		Hp = 3;
+	}
+	if (true == GameEngineInput::IsDown("DebugCollision"))
+	{
+		GameEngineLevel::IsDebugSwitch();
+	}
 
 }
 
@@ -276,6 +286,9 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerMoveUp", VK_UP);
 		GameEngineInput::CreateKey("PlayerMoveDown", VK_DOWN);
 		GameEngineInput::CreateKey("PlayerMoveForward", 'W');
+		GameEngineInput::CreateKey("PlayerDebugHp", '1');
+		GameEngineInput::CreateKey("PlayerHp", '2');
+		GameEngineInput::CreateKey("DebugCollision", '3');
 		GameEngineInput::CreateKey("PlayerMoveBack", 'S');
 		GameEngineInput::CreateKey("PlayerJump", 'Z');
 		GameEngineInput::CreateKey("PlayerRock", 'C');

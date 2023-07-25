@@ -65,7 +65,7 @@ void OverHead_Player::Start()
 	Render1 = CreateComponent<GameEngineSpriteRenderer>();
 	Render1->SetScaleToTexture("Overworld_ColMap.png");
 	Render1->Off();
-
+	
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 100.0f });
@@ -89,10 +89,23 @@ void OverHead_Player::Update(float _Delta)
 			BG.SetLoop(); 
 			Sound_Check = true;
 		}
-	
-
 
 	}
+
+	/*if (GameEngineInput::IsDown("Tutorial"))
+	{
+		if (Colmap_Check == false)
+		{
+			Render1->On();
+			Colmap_Check = true;
+		}
+		else if (Colmap_Check == true)
+		{
+			Render1->Off();
+			Colmap_Check = false;
+		}
+
+	}*/
 
 	if (Collision->Collision((int)CollisionType::OverWorldAirPlane, ColType::OBBBOX2D, ColType::OBBBOX2D))
 	{

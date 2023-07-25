@@ -136,7 +136,7 @@ void TutorialObject::Start()
 
 
 	Exit = CreateComponent<GameEngineUIRenderer>();
-	Exit->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true, });
+	Exit->CreateAnimation({ .AnimationName = "Exit", .SpriteName = "Exit", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true, });
 	Exit->ChangeAnimation("Exit");
 	Exit->GetTransform()->AddLocalPosition({ 0.0f,0.0f,-200.0f });
 	Exit->Off();

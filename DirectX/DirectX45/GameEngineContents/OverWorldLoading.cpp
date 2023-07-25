@@ -21,8 +21,8 @@ void OverWorldLoading::Start()
 		NewDir.Move("ContentResources");
 		NewDir.Move("Texture");
 		
-
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Loading").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("BlackBG").GetFullPath());
 	}
 
 	BG = CreateComponent<GameEngineSpriteRenderer>();

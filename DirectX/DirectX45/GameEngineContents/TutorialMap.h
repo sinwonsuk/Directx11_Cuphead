@@ -29,9 +29,9 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Loading;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Render2;
+	std::shared_ptr<class GameEngineSpriteRenderer> Tutorial_ColMap;
 	
-	
-
+	bool Colmap_Check = false;
 	bool Sound_Check = false;
 
 	bool RightMove = false; 

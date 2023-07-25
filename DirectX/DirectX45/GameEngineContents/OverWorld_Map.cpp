@@ -3,6 +3,7 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include "EnumClass.h"
 #include <GameEngineCore/GameEngineCollision.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 OverWorld_Map::OverWorld_Map()
 {
 }
@@ -57,7 +58,9 @@ void OverWorld_Map::Start()
 	Left_Map_Layer->GetTransform()->AddLocalPosition({ -651,65,-55.0f });
 
 
-
+	Render1 = CreateComponent<GameEngineSpriteRenderer>();
+	Render1->SetScaleToTexture("Overworld_ColMap.png");
+	Render1->Off();
 
 
 
@@ -66,6 +69,21 @@ void OverWorld_Map::Start()
 
 void OverWorld_Map::Update(float _Delta)
 {
+	if (GameEngineInput::IsDown("Tutorial"))
+	{
+		if (Colmap_Check == false)
+		{
+			Render1->On();
+			Colmap_Check = true;
+		}
+		else if (Colmap_Check == true)
+		{
+			Render1->Off();
+			Colmap_Check = false;
+		}
+
+	}
+
 }
 
 void OverWorld_Map::Render(float _Delta)

@@ -96,6 +96,7 @@ void Crown_Bepi_Level::LevelChangeStart()
 	}
 	{
 		player = CreateActor<Player>();
+		player.get()->GetTransform()->AddLocalPosition({ -300.0f,0.0f });
 	}
 	{
 		Map = CreateActor<Crown_Bepi_Map>();

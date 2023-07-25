@@ -94,7 +94,6 @@ private:
 	//std::shared_ptr<class GameEngineSpriteRenderer> Exit;
 	//std::shared_ptr<class GameEngineSpriteRenderer> Exit2;
 	std::shared_ptr<class GameEngineCollision> Collision;
-
 	
 	int UpCheck = 0;
 	int GravityCheck = 0;
@@ -108,7 +107,7 @@ private:
 
 	
 
-
+	bool Colmap_Check = false;
 
 	bool Right_diagonal_Move= false;
 	bool Right_diagonal_Down_Move = false;

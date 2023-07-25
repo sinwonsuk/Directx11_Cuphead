@@ -2,7 +2,7 @@
 #include "TutorialMap.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineUIRenderer.h>
-
+#include <GameEnginePlatform/GameEngineInput.h>
 #include "Player.h"
 
 GameEngineSoundPlayer TutorialMap::BG;
@@ -44,11 +44,31 @@ void TutorialMap::Start()
 	Render2->SetScaleToTexture("Tutorial_Map.png");
 	Render2->GetTransform()->SetLocalPosition({ 2450.0f,0.0f });
 	
-
+	Tutorial_ColMap = CreateComponent<GameEngineSpriteRenderer>();
+	Tutorial_ColMap->SetScaleToTexture("Tutorial_ColMap.png");
+	Tutorial_ColMap->GetTransform()->SetLocalPosition({ 2450.0f,0.0f });
+	Tutorial_ColMap->Off(); 
 }
 
 void TutorialMap::Update(float _Delta)
 {
+	if (GameEngineInput::IsDown("Tutorial"))
+	{
+		if (Colmap_Check == false)
+		{
+			Tutorial_ColMap->On();
+			Colmap_Check = true;
+		}
+		else if (Colmap_Check == true)
+		{
+			Tutorial_ColMap->Off();
+			Colmap_Check = false;
+		}
+
+	}
+
+
+
 	if (Loading->IsAnimationEnd())
 	{
 		Loading->Off();

@@ -283,9 +283,9 @@ void Bpei_Loading::Start()
 		NewDir.MoveParentToDirectory("ContentResources");
 		NewDir.Move("ContentResources");
 		NewDir.Move("Texture");
-		//NewDir.Move("Loading");
 
 		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("Loading").GetFullPath());
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("BlackBG").GetFullPath());
 	}
 
 	BG = CreateComponent<GameEngineSpriteRenderer>();

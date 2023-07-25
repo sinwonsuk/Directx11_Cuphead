@@ -289,6 +289,7 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerDebugHp", '1');
 		GameEngineInput::CreateKey("PlayerHp", '2');
 		GameEngineInput::CreateKey("DebugCollision", '3');
+		GameEngineInput::CreateKey("Tutorial", '4');
 		GameEngineInput::CreateKey("PlayerMoveBack", 'S');
 		GameEngineInput::CreateKey("PlayerJump", 'Z');
 		GameEngineInput::CreateKey("PlayerRock", 'C');

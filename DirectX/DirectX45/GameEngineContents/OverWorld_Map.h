@@ -31,7 +31,7 @@ private:
 	
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Bepi;
-
+	std::shared_ptr<class GameEngineSpriteRenderer> Render1;
 	std::shared_ptr<class GameEngineSpriteRenderer> Map;
 	std::shared_ptr<class GameEngineSpriteRenderer> House;
 	std::shared_ptr<class GameEngineSpriteRenderer> AirPlane;
@@ -39,7 +39,7 @@ private:
 	std::shared_ptr<class GameEngineCollision> AirPlane_Collision;
 	std::shared_ptr<class GameEngineCollision> Bepi_Collision;
 
-
+	bool Colmap_Check = false;
 
 
 };

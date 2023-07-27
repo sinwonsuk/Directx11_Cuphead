@@ -49,7 +49,7 @@ public:
 	void BossAttackMiddleUpdate(float _Time);
 	void BossAttackEndUpdate(float _Time);
 	Ph4_Bepi_State StateValue = Ph4_Bepi_State::BossIntro;
-	int Hp = 20;
+	int Hp = 50;
 
 
 	std::shared_ptr<class Boss_Finish> Finish;

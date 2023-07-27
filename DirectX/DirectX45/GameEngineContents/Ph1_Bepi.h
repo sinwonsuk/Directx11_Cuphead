@@ -61,7 +61,7 @@ public:
 
 	void BossFinsihUpdate(float _Time);
 	void UnloadUpdate(float _Time);
-	static int Hp;
+
 	static bool Finish;
 
 

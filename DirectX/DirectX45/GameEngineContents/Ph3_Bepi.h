@@ -64,7 +64,7 @@ protected:
 	float4 TestColor;
 
 private:
-	int Hp = 10; 
+	int Hp = 50; 
 	int RandomPos = 0;
 
 	GameEngineSoundPlayer Attack;

@@ -46,24 +46,24 @@ void NpcAirplane::Start()
 	Npc_Airplane_Back = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Back->CreateAnimation({ .AnimationName = "Npc_Airplane_Back", .SpriteName = "Npc_Airplane_Back", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Back->ChangeAnimation("Npc_Airplane_Back");
-	Npc_Airplane_Back->GetTransform()->AddLocalPosition({ 0,-230,-7.0f });// -7
+	Npc_Airplane_Back->GetTransform()->AddLocalPosition({ 0,-230,-37.0f });// -7
 
 	Npc_Airplane_Reg = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Reg->CreateAnimation({ .AnimationName = "Npc_Airplane_Reg", .SpriteName = "Npc_Airplane_Reg", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Reg->ChangeAnimation("Npc_Airplane_Reg");
-	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ 0,-230,10.0f }); //-7
+	Npc_Airplane_Reg->GetTransform()->AddLocalPosition({ 0,-230,-20.0f }); //-7
 
 	Npc_Airplane_Front = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Front->CreateAnimation({ .AnimationName = "Npc_Airplane_Front", .SpriteName = "Npc_Airplane_Front", .FrameInter = 0.1f,.Loop = true, .ScaleToTexture = true, });
 	Npc_Airplane_Front->ChangeAnimation("Npc_Airplane_Front");
-	Npc_Airplane_Front->GetTransform()->AddLocalPosition({ 0,-230,-9.0f}); // -9
+	Npc_Airplane_Front->GetTransform()->AddLocalPosition({ 0,-230,-39.0f}); // -9
 
 	
 
 	Npc_Airplane_Spin = CreateComponent<GameEngineSpriteRenderer>();
 	Npc_Airplane_Spin->CreateAnimation({ .AnimationName = "Npc_Airplane_Spin", .SpriteName = "Npc_Airplane_Spin", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 	Npc_Airplane_Spin->ChangeAnimation("Npc_Airplane_Spin");
-	Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ 0,-230,-10.0f }); // -10
+	Npc_Airplane_Spin->GetTransform()->AddLocalPosition({ 0,-230,-40.0f }); // -10
 
 
 	Npc = CreateComponent<GameEngineSpriteRenderer>();
@@ -71,7 +71,7 @@ void NpcAirplane::Start()
 	Npc->CreateAnimation({ .AnimationName = "Npc_Intro2", .SpriteName = "Npc_Intro2", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 	Npc->CreateAnimation({ .AnimationName = "Npc_Idle", .SpriteName = "Npc_Idle", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 	Npc->ChangeAnimation("NpcIntro");
-	Npc->GetTransform()->AddLocalPosition({ 0,-230,-8.0f });  // -8
+	Npc->GetTransform()->AddLocalPosition({ 0,-230,-38.0f });  // -8
 
 	Collision = CreateComponent<GameEngineCollision>();
 	Collision->GetTransform()->SetLocalScale({ 450.0f, 100.0f, 100.0f });

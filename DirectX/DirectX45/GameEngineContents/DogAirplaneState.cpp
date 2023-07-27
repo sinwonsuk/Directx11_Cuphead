@@ -335,7 +335,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 				Object->GetPinkCollision()->On();
 			}
 
-			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y+40 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y+40,-200.0f });
 			Object->SetCheck(0);
 		}
 		if (bulldogIdle->GetCurrentFrame() == 51 && BoneCheck == 1)
@@ -356,7 +356,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 				Object->GetCollision()->Off();
 				Object->GetPinkCollision()->On();
 			}
-			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 80,-200.0f });
 			Object->SetCheck(0);
 		}
 		if (bulldogIdle->GetCurrentFrame() == 67 && BoneCheck == 2)
@@ -376,7 +376,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 				Object->GetPinkCollision()->On();
 			}
 			Object->SetTime(0.3f);
-			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 190 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x + 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 190,-200.0f });
 			Object->SetCheck(0);
 			BoneCheck = 0;
 		}
@@ -409,7 +409,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 				Object->GetPinkCollision()->On();
 			}
 
-			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y+40 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y+40,-200.0f  });
 			Object->SetCheck(1);
 		}
 		if (bulldogIdle->GetCurrentFrame() == 51 && BoneCheck == 1)
@@ -430,7 +430,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 				Object->GetPinkCollision()->On();
 			}
 
-			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 80 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 80,-200.0f });
 			Object->SetCheck(1);
 		}
 		if (bulldogIdle->GetCurrentFrame() == 68 && BoneCheck == 2)
@@ -452,7 +452,7 @@ void DogAirplane::BossAttackPase1Update(float _Time)
 
 			}
 			Object->SetTime(0.3f);
-			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 190 });
+			Object->GetBullet()->GetTransform()->SetLocalPosition({ bulldogIdle->GetTransform()->GetLocalPosition().x - 30,bulldogIdle->GetTransform()->GetLocalPosition().y - 190 ,-200.0f });
 			Object->SetCheck(1);
 			BoneCheck = 0;
 		}

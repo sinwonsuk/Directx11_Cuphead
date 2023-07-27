@@ -119,21 +119,21 @@ void ph3_Laser::Start()
 		ph3_laser_Right_warning_aura_low = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_laser_Right_warning_aura_low->CreateAnimation({ .AnimationName = "ph3_laser_warning_aura_Low", .SpriteName = "ph3_laser_warning_aura_Low", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph3_laser_Right_warning_aura_low->ChangeAnimation("ph3_laser_warning_aura_Low");
-		ph3_laser_Right_warning_aura_low->GetTransform()->AddLocalPosition({ 390,-220 });
+		ph3_laser_Right_warning_aura_low->GetTransform()->AddLocalPosition({ 390,-220,-98.0f });
 		ph3_laser_Right_warning_aura_low->Off(); 
 
 
 		ph3_laser_Left__warning_aura_low = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_laser_Left__warning_aura_low->CreateAnimation({ .AnimationName = "ph3_laser_warning_aura_Low", .SpriteName = "ph3_laser_warning_aura_Low", .FrameInter = 0.05f,.Loop = false, .ScaleToTexture = true });
 		ph3_laser_Left__warning_aura_low->ChangeAnimation("ph3_laser_warning_aura_Low");
-		ph3_laser_Left__warning_aura_low->GetTransform()->AddLocalPosition({ -390,-220 });
+		ph3_laser_Left__warning_aura_low->GetTransform()->AddLocalPosition({ -390,-220,-99.0f });
 		ph3_laser_Left__warning_aura_low->Off(); 
 
 
 		ph3_laser_warning_low = CreateComponent<GameEngineSpriteRenderer>();
 		ph3_laser_warning_low->CreateAnimation({ .AnimationName = "ph3_laser_warning_low", .SpriteName = "ph3_laser_warning_low", .FrameInter = 0.05f,.Loop = true, .ScaleToTexture = true });
 		ph3_laser_warning_low->ChangeAnimation("ph3_laser_warning_low");
-		ph3_laser_warning_low->GetTransform()->AddLocalPosition({ 0,-220,-10 });
+		ph3_laser_warning_low->GetTransform()->AddLocalPosition({ 0,-220,-100.0f });
 		ph3_laser_warning_low->Off(); 
 	}
 
@@ -145,12 +145,14 @@ void ph3_Laser::Start()
 	PinkCollision = CreateComponent<GameEngineCollision>();
 	PinkCollision->GetTransform()->SetLocalScale({ 0.0f, 0.0f, 300.0f });
 	PinkCollision->SetOrder((int)CollisionType::Ph3_Dog_Boss_Pink_Bullet);
+	PinkCollision->GetTransform()->AddLocalPosition({ 0.0f,0.0f,-100.0f }); 
 	PinkCollision->Off(); 
 
 
 	
 	ParryEffect = CreateComponent<GameEngineSpriteRenderer>();
 	ParryEffect->CreateAnimation({ .AnimationName = "ParryEffect", .SpriteName = "ParryEffect", .FrameInter = 0.08f, .Loop = false, .ScaleToTexture = true, });
+	ParryEffect->GetTransform()->AddLocalPosition({ 0.0f,0.0f,-100.0f }); 
 	ParryEffect->ChangeAnimation("ParryEffect");
 	ParryEffect->Off();
 

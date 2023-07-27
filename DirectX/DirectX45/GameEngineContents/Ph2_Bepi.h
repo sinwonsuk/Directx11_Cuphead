@@ -54,7 +54,7 @@ protected:
 	float4 TestColor;
 
 private:
-	int Hp = 10;
+	int Hp = 50;
 	
 	int AttackCheck = 0;
 	int AttackColor = 0; 

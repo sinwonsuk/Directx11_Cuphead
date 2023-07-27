@@ -32,14 +32,14 @@ void BoneWeapon::Start()
 	Bullet = CreateComponent<GameEngineSpriteRenderer>();
 	Bullet->CreateAnimation({ .AnimationName = "PinkBone", .SpriteName = "PinkBone", .FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true, });
 	Bullet->CreateAnimation({ .AnimationName = "WhiteBone", .SpriteName = "WhiteBone", .FrameInter = 0.1f, .Loop = true, .ScaleToTexture = true, });
-
+	Bullet->GetTransform()->AddLocalPosition({ 0.0f,0.0f,-500.0f });
 	Bullet->ChangeAnimation("WhiteBone");
 	
 
 	ParryEffect = CreateComponent<GameEngineSpriteRenderer>();
 	ParryEffect->CreateAnimation({ .AnimationName = "ParryEffect", .SpriteName = "ParryEffect", .FrameInter = 0.08f, .Loop = false, .ScaleToTexture = true, });
 	ParryEffect->ChangeAnimation("ParryEffect");
-
+	ParryEffect->GetTransform()->AddLocalPosition({ 0.0f,0.0f,-500.0f });
 	ParryEffect->Off(); 
 
 

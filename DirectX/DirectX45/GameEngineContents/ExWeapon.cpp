@@ -146,7 +146,7 @@ void ExWeapon::Update(float _Delta)
 
 		if (Collision->Collision((int)CollisionType::Ph4_Beppi_Body))
 		{
-			Ph4_Bepi::ph4_Bepi->Hp -= 1;
+			Ph4_Bepi::ph4_Bepi->Hp -= 5;
 
 			if (CollisionCheck == false)
 			{

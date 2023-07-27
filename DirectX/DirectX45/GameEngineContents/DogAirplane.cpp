@@ -11,7 +11,7 @@
 #include "EnumClass.h"
 #include "IdleWeapon.h"
 #include "Dog_ball.h"
-int DogAirplane::Hp = 20;
+int DogAirplane::Hp = 50;
 bool DogAirplane::Finish = false;
 bool DogAirplane::Sound_BG_Check = false;
 GameEngineSoundPlayer DogAirplane::BG;
@@ -305,7 +305,7 @@ void DogAirplane::Update(float _Delta)
 
 
 
-		/*if (Hp == 50)
+		if (Hp == 30)
 		{
 			dogcopter_hydrant->On();
 		}
@@ -313,7 +313,7 @@ void DogAirplane::Update(float _Delta)
 		if (dogcopter_hydrant->IsAnimationEnd())
 		{
 			dogcopter_hydrant->Death();
-		}*/
+		}
 
 		Ball_Monster_Time += _Delta;
 

@@ -362,12 +362,12 @@ void DogAirplaneLevel::LevelChangeEnd()
 		Ph3_DogAirplane::ph3_mainBoss->Death();
 	}
 	Ph3_DogAirplane::ph3_mainBoss = nullptr;
-	DogAirplane::Hp = 20;
+	DogAirplane::Hp = 50;
 	TimeFlow::Time = 0; 
 	Ph3_DogAirpalne->Off(); 
 	Player::MainPlayer->Death(); 
 	Player::MainPlayer = nullptr;
-	Ph3_DogAirplane::Hp = 20;
+	Ph3_DogAirplane::Hp = 50;
 	DogAirplane::Finish = false;
 	DogAirplane::Sound_BG_Check = false;
 	DogAirplane::BG.Stop();

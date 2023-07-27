@@ -55,6 +55,7 @@ void Ph3_Bepi_Weapon::Update(float _Delta)
 		if (Sound_destory_Check == false)
 		{
 			destory = GameEngineSound::Play("clown_horseshoe_land_01.wav");
+			destory.SetVolume(0.3f); 
 			Sound_destory_Check = true;
 		}
 
@@ -70,6 +71,7 @@ void Ph3_Bepi_Weapon::Update(float _Delta)
 		if (Sound_destory_Check == false)
 		{
 			destory = GameEngineSound::Play("clown_horseshoe_land_01.wav"); 
+			destory.SetVolume(0.3f);
 			Sound_destory_Check = true;
 		}
 

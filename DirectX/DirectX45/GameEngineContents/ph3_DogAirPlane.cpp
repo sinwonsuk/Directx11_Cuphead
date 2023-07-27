@@ -8,7 +8,7 @@
 #include "EnumClass.h"
 #include "IdleWeapon.h"
 Ph3_DogAirplane* Ph3_DogAirplane::ph3_mainBoss;
-int Ph3_DogAirplane::Hp = 20;
+int Ph3_DogAirplane::Hp = 50;
 Ph3_DogAirplane::Ph3_DogAirplane()
 {
 }

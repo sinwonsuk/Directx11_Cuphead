@@ -1,6 +1,7 @@
 #include "PrecompileHeader.h"
 #include "GameEngineTexture.h"
 #include "GameEngineLevel.h"
+#include <GameEngineCore/ThirdParty/DirectXTex/inc/DirectXTex.h>
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\GameEngineCore\\ThirdParty\\DirectXTex\\lib\\x64\\Debug\\DirectXTex.lib")
@@ -95,6 +96,10 @@ void GameEngineTexture::ResLoad(const std::string_view& _Path)
 	std::string Ext = GameEngineString::ToUpper(NewPath.GetExtension());
 
 	std::wstring Path = GameEngineString::AnsiToUniCode(NewPath.GetFullPath());
+	
+	
+	
+
 
 	if (Ext == ".TGA")
 	{
@@ -110,11 +115,57 @@ void GameEngineTexture::ResLoad(const std::string_view& _Path)
 			MsgAssert("DDS 포맷 로드 실패." + std::string(_Path.data()));
 		}
 	}
-	else if (S_OK != DirectX::LoadFromWICFile(Path.c_str(), DirectX::WIC_FLAGS_NONE, &Data, Image))
+	else
 	{
-		MsgAssert("텍스처 로드에 실패했습니다." + std::string(_Path.data()));
-	}
+		HRESULT hr = DirectX::LoadFromWICFile(Path.c_str(), DirectX::WIC_FLAGS_NONE, &Data, Image);
+		if (FAILED(hr))
+		{
+			MsgAssert("텍스처 로드 실패: " + std::to_string(hr));
+			return;
+		}
 
+		auto format = Image.GetMetadata().format;
+
+		// 압축 가능한 포맷으로 변환
+		if (format != DXGI_FORMAT_R8G8B8A8_UNORM && format != DXGI_FORMAT_B8G8R8A8_UNORM)
+		{
+			DirectX::ScratchImage convertedImage;
+
+			hr = DirectX::Convert(Image.GetImages(), Image.GetImageCount(), Data, DXGI_FORMAT_R8G8B8A8_UNORM, DirectX::TEX_FILTER_DEFAULT, DirectX::TEX_THRESHOLD_DEFAULT, convertedImage);
+			if (FAILED(hr))
+			{
+				MsgAssert("포맷 변환 실패: " + std::to_string(hr));
+				return;
+			}
+
+			// 변환된 이미지를 사용해 압축
+			hr = DirectX::Compress(convertedImage.GetImages(), convertedImage.GetImageCount(), convertedImage.GetMetadata(), DXGI_FORMAT_BC1_UNORM, DirectX::TEX_COMPRESS_DEFAULT,1.0f, Image);
+			if (FAILED(hr))
+			{
+				MsgAssert("압축 실패: " + std::to_string(hr));
+				return;
+			}
+
+			if (S_OK != DirectX::CreateShaderResourceView
+			(
+				GameEngineDevice::GetDevice(),
+				convertedImage.GetImages(),
+				convertedImage.GetImageCount(),
+				convertedImage.GetMetadata(),
+				&SRV
+			))
+			{
+				MsgAssert("쉐이더 리소스 뷰 생성에 실패했습니다." + std::string(_Path.data()));
+			}
+
+			Desc.Width = static_cast<UINT>(Data.width);
+			Desc.Height = static_cast<UINT>(Data.height);
+			return;
+		}
+		
+		
+	}
+	
 	if (S_OK != DirectX::CreateShaderResourceView
 	(
 		GameEngineDevice::GetDevice(),
@@ -173,6 +224,25 @@ void GameEngineTexture::ResCreate(const D3D11_TEXTURE2D_DESC& _Value)
 	Desc = _Value;
 
 	GameEngineDevice::GetDevice()->CreateTexture2D(&Desc, nullptr, &Texture2D);
+
+
+
+	if (D3D11_BIND_FLAG::D3D11_BIND_RENDER_TARGET & Desc.BindFlags)
+	{
+		
+	}
+
+	if (D3D11_BIND_FLAG::D3D11_BIND_SHADER_RESOURCE & Desc.BindFlags)
+	{
+		Desc.Format = DXGI_FORMAT_BC1_UNORM;
+	}
+
+	if (D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL & Desc.BindFlags)
+	{
+		
+	}
+
+
 
 	if (D3D11_BIND_FLAG::D3D11_BIND_RENDER_TARGET & Desc.BindFlags)
 	{

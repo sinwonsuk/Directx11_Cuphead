@@ -2,6 +2,7 @@
 #include "GameEngineResource.h"
 #include <GameEngineCore/ThirdParty/DirectXTex/inc/DirectXTex.h>
 
+
 class GameEnginePixelColor 
 {
 public:
